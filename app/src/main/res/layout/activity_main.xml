@@ -1,300 +1,602 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+    <!--  Header Welcome  -->
+    <TextView
+        android:id="@+id/tvWelcome"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/constraintLayout"
-        android:layout_marginTop="20dp">
+        android:text="Selamat Datang"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_semibold"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
 
-        <TextView
-            android:id="@+id/man2Name"
-            android:layout_width="0dp"
-            android:layout_height="42dp"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="40dp"
-            android:fontFamily="@font/poppins_semibold"
-            android:text="MAN 2 PKU"
-            android:textColor="@color/lavender"
-            android:textSize="40sp"
-            app:layout_constraintEnd_toStartOf="@+id/man2Image"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <!--  Username  -->
+    <TextView
+        android:id="@+id/tvUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Shodiq"
+        android:textSize="20sp"
+        android:fontFamily="@font/poppins_semibold"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@+id/tvWelcome"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="16dp"/>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/man2desc"
-            android:text="Pusat pelayanan digital MAN 2"
-            android:textSize="14sp"
-            android:layout_marginStart="18dp"
-            android:textColor="@color/lavender"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/man2Name"
-            app:layout_constraintEnd_toStartOf="@+id/man2Image"/>
+    <!-- Ikon Bell -->
+    <ImageView
+        android:id="@+id/iconBell"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/bell"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <!-- Carousel/Slider Image -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/sliderCard"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintTop_toBottomOf="@id/tvUserName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:id="@+id/man2Image"
-            android:src="@drawable/logo_man2"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintStart_toEndOf="@+id/man2Name"/>
+            android:id="@+id/sliderImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/slidersample"
+            android:scaleType="centerCrop" />
 
+        <!-- Teks di dalam Slider -->
+        <TextView
+            android:id="@+id/sliderTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kemenag Rilis Buku tentang Konsep Masjid Ramah"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:layout_gravity="bottom|start"
+            android:layout_margin="16dp"/>
+
+        <!-- Tombol 'Selengkapnya' -->
+        <Button
+            android:id="@+id/btnSelengkapnya"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selengkapnya"
+            android:backgroundTint="@color/mangold"
+            android:textColor="@android:color/white"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"/>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Dot Navigation (Slider Indicator) -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/sliderCard"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <View
+            android:layout_width="20dp"
+            android:layout_height="8dp"
+            android:background="@drawable/dotactive"
+            android:layout_margin="4dp"/>
+
+        <View
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:background="@drawable/dotinactive"
+            android:layout_margin="4dp"/>
+
+        <View
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:background="@drawable/dotinactive"
+            android:layout_margin="4dp"/>
+    </LinearLayout>
+
+    <!-- Label 'Layanan' -->
+    <TextView
+        android:id="@+id/tvLayanan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Layanan"
+        android:textSize="18sp"
+        android:fontFamily="@font/poppins_semibold"
+        android:textColor="@android:color/black"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/sliderCard"
+        app:layout_constraintStart_toStartOf="parent"/>
+    
+    <!-- Grid Layout for Layanan -->
+    <GridLayout
+        android:id="@+id/gridLayoutLayanan"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:rowCount="2"
+        android:alignmentMode="alignBounds"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tvLayanan"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Layanan 1: E-Kinerja -->
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="175dp"
-            android:id="@+id/row1"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            android:padding="10dp"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/man2Image">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginBottom="75px">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/e_kinerja" />
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/ekinCard"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                app:cardElevation="20dp"
-                app:cardCornerRadius="20dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/ekinName"
-                        android:text="E-Kinerja"
-                        android:textSize="15sp"
-                        android:textColor="@color/lavender"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:layout_marginTop="10dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_below="@+id/ekinImage"/>
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:id="@+id/ekinImage"
-                        android:src="@drawable/e_kinerja"
-                        android:layout_marginTop="15dp"
-                        android:layout_centerHorizontal="true"/>
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/jurnalCard"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                app:cardElevation="20dp"
-                app:cardCornerRadius="20dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/jurnalName"
-                        android:text="Jurnal Guru"
-                        android:textSize="15sp"
-                        android:textColor="@color/lavender"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:layout_marginTop="10dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_below="@+id/jurnalImage"/>
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:id="@+id/jurnalImage"
-                        android:src="@drawable/jurnal_guru"
-                        android:layout_marginTop="15dp"
-                        android:layout_centerHorizontal="true"/>
-
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/songketCard"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                app:cardElevation="20dp"
-                app:cardCornerRadius="20dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/songketName"
-                        android:text="Songket Emak"
-                        android:textSize="15sp"
-                        android:textColor="@color/lavender"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:layout_marginTop="10dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_below="@+id/songketImage"/>
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:id="@+id/songketImage"
-                        android:src="@drawable/songket_emak"
-                        android:layout_marginTop="15dp"
-                        android:layout_centerHorizontal="true"/>
-
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-
-
+                android:text="E-Kinerja"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:maxLines="2"/>
         </LinearLayout>
 
+        <!-- Layanan 2: Jurnal Guru -->
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="175dp"
-            android:id="@+id/row2"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            android:padding="10dp"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/row1">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginBottom="75px">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/jurnal_guru" />
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/etatibCard"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                app:cardElevation="20dp"
-                app:cardCornerRadius="20dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/etatibName"
-                        android:text="E-Tatib"
-                        android:textSize="15sp"
-                        android:textColor="@color/lavender"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:layout_marginTop="10dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_below="@+id/etatibImage"/>
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:id="@+id/etatibImage"
-                        android:src="@drawable/e_tatib"
-                        android:layout_marginTop="15dp"
-                        android:layout_centerHorizontal="true"/>
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/wbsCard"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                app:cardElevation="20dp"
-                app:cardCornerRadius="20dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/wbsName"
-                        android:text="WBS"
-                        android:textSize="15sp"
-                        android:textColor="@color/lavender"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:layout_marginTop="10dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_below="@+id/wbsImage"/>
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:id="@+id/wbsImage"
-                        android:src="@drawable/wbs"
-                        android:layout_marginTop="15dp"
-                        android:layout_centerHorizontal="true"/>
-
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/pelajarCard"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                app:cardElevation="20dp"
-                app:cardCornerRadius="20dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/pelajarName"
-                        android:text="Kartu Pelajar"
-                        android:textSize="15sp"
-                        android:textColor="@color/lavender"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:layout_marginTop="10dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_below="@+id/pelajarImage"/>
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:id="@+id/pelajarImage"
-                        android:src="@drawable/kartu_pelajar"
-                        android:layout_marginTop="15dp"
-                        android:layout_centerHorizontal="true"/>
-
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-
-
+                android:text="Jurnal Guru"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:maxLines="2"/>
         </LinearLayout>
 
+        <!-- Layanan 3: Songket Emak -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginBottom="75px">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/songket_emak" />
 
-</ScrollView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Songket Emak"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:maxLines="2"/>
+        </LinearLayout>
+
+        <!-- Layanan 4: E-Tatib -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginBottom="75px">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/e_tatib" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="E-Tatib"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:maxLines="2"/>
+        </LinearLayout>
+
+        <!-- Layanan 5: WBS -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginBottom="75px">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/wbs" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="WBS"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:maxLines="2"/>
+        </LinearLayout>
+
+        <!-- Layanan 6: Kartu Pelajar -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/kartu_pelajar" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kartu Pelajar"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:maxLines="2"/>
+        </LinearLayout>
+    </GridLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/manblue"
+        android:background="@drawable/bottom_nav_background"
+        android:elevation="8dp"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        app:menu="@menu/bottom_nav_menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="15dp"
+        app:itemIconSize="30dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<ScrollView-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:id="@+id/main"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    tools:context=".MainActivity">-->
+
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/constraintLayout"-->
+<!--        android:layout_marginTop="20dp">-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/man2Name"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="42dp"-->
+<!--            android:layout_marginStart="18dp"-->
+<!--            android:layout_marginTop="40dp"-->
+<!--            android:fontFamily="@font/poppins_semibold"-->
+<!--            android:text="MAN 2 PKU"-->
+<!--            android:textColor="@color/lavender"-->
+<!--            android:textSize="40sp"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/man2Image"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--        <TextView-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/man2desc"-->
+<!--            android:text="Pusat pelayanan digital MAN 2"-->
+<!--            android:textSize="14sp"-->
+<!--            android:layout_marginStart="18dp"-->
+<!--            android:textColor="@color/lavender"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/man2Name"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/man2Image"/>-->
+
+<!--        <ImageView-->
+<!--            android:layout_width="150dp"-->
+<!--            android:layout_height="150dp"-->
+<!--            android:id="@+id/man2Image"-->
+<!--            android:src="@drawable/logo_man2"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/man2Name"/>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="175dp"-->
+<!--            android:id="@+id/row1"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:padding="10dp"-->
+<!--            app:layout_constraintHorizontal_bias="0.0"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/man2Image">-->
+
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:id="@+id/ekinCard"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:layout_weight="1"-->
+<!--                app:cardElevation="20dp"-->
+<!--                app:cardCornerRadius="20dp">-->
+
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent">-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:id="@+id/ekinName"-->
+<!--                        android:text="E-Kinerja"-->
+<!--                        android:textSize="15sp"-->
+<!--                        android:textColor="@color/lavender"-->
+<!--                        android:fontFamily="@font/poppins_semibold"-->
+<!--                        android:layout_marginTop="10dp"-->
+<!--                        android:layout_centerHorizontal="true"-->
+<!--                        android:layout_below="@+id/ekinImage"/>-->
+
+<!--                    <ImageView-->
+<!--                        android:layout_width="50dp"-->
+<!--                        android:layout_height="50dp"-->
+<!--                        android:id="@+id/ekinImage"-->
+<!--                        android:src="@drawable/e_kinerja"-->
+<!--                        android:layout_marginTop="15dp"-->
+<!--                        android:layout_centerHorizontal="true"/>-->
+<!--                </RelativeLayout>-->
+<!--            </androidx.cardview.widget.CardView>-->
+
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:id="@+id/jurnalCard"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:layout_weight="1"-->
+<!--                app:cardElevation="20dp"-->
+<!--                app:cardCornerRadius="20dp">-->
+
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent">-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:id="@+id/jurnalName"-->
+<!--                        android:text="Jurnal Guru"-->
+<!--                        android:textSize="15sp"-->
+<!--                        android:textColor="@color/lavender"-->
+<!--                        android:fontFamily="@font/poppins_semibold"-->
+<!--                        android:layout_marginTop="10dp"-->
+<!--                        android:layout_centerHorizontal="true"-->
+<!--                        android:layout_below="@+id/jurnalImage"/>-->
+
+<!--                    <ImageView-->
+<!--                        android:layout_width="50dp"-->
+<!--                        android:layout_height="50dp"-->
+<!--                        android:id="@+id/jurnalImage"-->
+<!--                        android:src="@drawable/jurnal_guru"-->
+<!--                        android:layout_marginTop="15dp"-->
+<!--                        android:layout_centerHorizontal="true"/>-->
+
+<!--                </RelativeLayout>-->
+<!--            </androidx.cardview.widget.CardView>-->
+
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:id="@+id/songketCard"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:layout_weight="1"-->
+<!--                app:cardElevation="20dp"-->
+<!--                app:cardCornerRadius="20dp">-->
+
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent">-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:id="@+id/songketName"-->
+<!--                        android:text="Songket Emak"-->
+<!--                        android:textSize="15sp"-->
+<!--                        android:textColor="@color/lavender"-->
+<!--                        android:fontFamily="@font/poppins_semibold"-->
+<!--                        android:layout_marginTop="10dp"-->
+<!--                        android:layout_centerHorizontal="true"-->
+<!--                        android:layout_below="@+id/songketImage"/>-->
+
+<!--                    <ImageView-->
+<!--                        android:layout_width="50dp"-->
+<!--                        android:layout_height="50dp"-->
+<!--                        android:id="@+id/songketImage"-->
+<!--                        android:src="@drawable/songket_emak"-->
+<!--                        android:layout_marginTop="15dp"-->
+<!--                        android:layout_centerHorizontal="true"/>-->
+
+<!--                </RelativeLayout>-->
+<!--            </androidx.cardview.widget.CardView>-->
+
+
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="175dp"-->
+<!--            android:id="@+id/row2"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:padding="10dp"-->
+<!--            app:layout_constraintHorizontal_bias="0.0"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/row1">-->
+
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:id="@+id/etatibCard"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:layout_weight="1"-->
+<!--                app:cardElevation="20dp"-->
+<!--                app:cardCornerRadius="20dp">-->
+
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent">-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:id="@+id/etatibName"-->
+<!--                        android:text="E-Tatib"-->
+<!--                        android:textSize="15sp"-->
+<!--                        android:textColor="@color/lavender"-->
+<!--                        android:fontFamily="@font/poppins_semibold"-->
+<!--                        android:layout_marginTop="10dp"-->
+<!--                        android:layout_centerHorizontal="true"-->
+<!--                        android:layout_below="@+id/etatibImage"/>-->
+
+<!--                    <ImageView-->
+<!--                        android:layout_width="50dp"-->
+<!--                        android:layout_height="50dp"-->
+<!--                        android:id="@+id/etatibImage"-->
+<!--                        android:src="@drawable/e_tatib"-->
+<!--                        android:layout_marginTop="15dp"-->
+<!--                        android:layout_centerHorizontal="true"/>-->
+<!--                </RelativeLayout>-->
+<!--            </androidx.cardview.widget.CardView>-->
+
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:id="@+id/wbsCard"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:layout_weight="1"-->
+<!--                app:cardElevation="20dp"-->
+<!--                app:cardCornerRadius="20dp">-->
+
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent">-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:id="@+id/wbsName"-->
+<!--                        android:text="WBS"-->
+<!--                        android:textSize="15sp"-->
+<!--                        android:textColor="@color/lavender"-->
+<!--                        android:fontFamily="@font/poppins_semibold"-->
+<!--                        android:layout_marginTop="10dp"-->
+<!--                        android:layout_centerHorizontal="true"-->
+<!--                        android:layout_below="@+id/wbsImage"/>-->
+
+<!--                    <ImageView-->
+<!--                        android:layout_width="50dp"-->
+<!--                        android:layout_height="50dp"-->
+<!--                        android:id="@+id/wbsImage"-->
+<!--                        android:src="@drawable/wbs"-->
+<!--                        android:layout_marginTop="15dp"-->
+<!--                        android:layout_centerHorizontal="true"/>-->
+
+<!--                </RelativeLayout>-->
+<!--            </androidx.cardview.widget.CardView>-->
+
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:id="@+id/pelajarCard"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:layout_weight="1"-->
+<!--                app:cardElevation="20dp"-->
+<!--                app:cardCornerRadius="20dp">-->
+
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent">-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:id="@+id/pelajarName"-->
+<!--                        android:text="Kartu Pelajar"-->
+<!--                        android:textSize="15sp"-->
+<!--                        android:textColor="@color/lavender"-->
+<!--                        android:fontFamily="@font/poppins_semibold"-->
+<!--                        android:layout_marginTop="10dp"-->
+<!--                        android:layout_centerHorizontal="true"-->
+<!--                        android:layout_below="@+id/pelajarImage"/>-->
+
+<!--                    <ImageView-->
+<!--                        android:layout_width="50dp"-->
+<!--                        android:layout_height="50dp"-->
+<!--                        android:id="@+id/pelajarImage"-->
+<!--                        android:src="@drawable/kartu_pelajar"-->
+<!--                        android:layout_marginTop="15dp"-->
+<!--                        android:layout_centerHorizontal="true"/>-->
+
+<!--                </RelativeLayout>-->
+<!--            </androidx.cardview.widget.CardView>-->
+
+
+<!--        </LinearLayout>-->
+
+
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--</ScrollView>-->

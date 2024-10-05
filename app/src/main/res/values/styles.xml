@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="BottomNavigationActiveText" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:paddingTop">-2dp</item>
+    </style>
+
+    <style name="BottomNavigationInactiveText" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/gray</item> <!-- Warna abu-abu untuk teks tidak aktif -->
+        <item name="android:paddingTop">-2dp</item>
+    </style>
+</resources>
