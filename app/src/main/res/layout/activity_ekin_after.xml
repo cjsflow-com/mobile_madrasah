@@ -57,40 +57,39 @@
     </LinearLayout>
 
     <!-- Rencana Kerja Bulanan -->
-    <TextView
-        android:id="@+id/tvRencanaKerja"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="50dp"
-        android:fontFamily="@font/montserrat_medium"
-        android:text="Rencana kerja Oktober 2024"
-        android:textColor="@color/text_default"
-        android:textSize="20sp"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tabLayout" />
+
 
     <!-- List Rencana (Berisi Nama Tugas) -->
     <LinearLayout
         android:id="@+id/listRencana"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="12dp"
-        android:visibility="gone"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvRencanaKerja">
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout">
+
+        <TextView
+            android:id="@+id/tvRencanaKerja"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="Rencana kerja Oktober 2024"
+            android:textColor="@color/text_default"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/tabLayout" />
 
         <!-- Card untuk Rencana -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
             app:cardCornerRadius="20dp"
             app:cardElevation="4dp">
 
@@ -126,8 +125,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="36dp"
             android:orientation="vertical">
 
             <EditText
@@ -137,43 +135,52 @@
                 android:hint="Nama Tugas"
                 android:textSize="16sp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tupoksi :"
+                android:textSize="16sp"
+                android:textColor="@color/gray"
+                android:layout_marginEnd="8dp"/>
+
             <Spinner
                 android:id="@+id/spinnerTupoksi"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp" />
+                android:background="@drawable/spinner_background"/>
         </LinearLayout>
     </LinearLayout>
 
     <!-- Tab Harian -->
-    <TextView
-        android:id="@+id/tvKerjaHarian"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="50dp"
-        android:fontFamily="@font/montserrat_medium"
-        android:text="Rencana kerja"
-        android:textColor="@color/text_default"
-        android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <LinearLayout
         android:id="@+id/harianLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/tvKerjaHarian"
+        android:layout_marginTop="50dp"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvKerjaHarian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="14dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="Rencana kerja"
+            android:textColor="@color/text_default"
+            android:textSize="20sp" />
 
         <Spinner
             android:id="@+id/spinnerRencanaKerja"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"/>
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="25dp"/>
 
         <EditText
             android:id="@+id/etDeskripsi"
@@ -186,27 +193,30 @@
 
         <!-- Tombol Upload dan Selesai -->
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_margin="16dp">
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp">
 
             <Button
                 android:id="@+id/btnUploadDokumentasi"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:backgroundTint="@color/mangold"
+                android:fontFamily="@font/montserrat_medium"
                 android:text="Upload Dokumentasi"
-                android:backgroundTint="@color/mangold"/>
+                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/btnSelesai"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_marginStart="11dp"
+                android:fontFamily="@font/montserrat_medium"
                 android:text="Selesai"
-                android:layout_marginStart="8dp"
-                android:backgroundTint="@color/manblue"/>
+                android:textSize="16sp" />
         </LinearLayout>
 
         <!-- Tambah Kegiatan -->
