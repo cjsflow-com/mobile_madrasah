@@ -18,10 +18,10 @@
         android:text="Rabu, 9 Oktober"
         android:textColor="@color/text_default"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/tabLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/tabLayout"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Tab Rencana dan Harian -->
     <LinearLayout

@@ -137,238 +137,238 @@
         app:layout_constraintTop_toBottomOf="@id/sliderCard"
         app:layout_constraintStart_toStartOf="parent"/>
 
-            <!-- Grid Layout for Layanan -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="135dp"
-                android:id="@+id/row1"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                android:padding="10dp"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvLayanan">
+    <!-- Grid Layout for Layanan -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="135dp"
+        android:id="@+id/row1"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvLayanan">
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/ekinCard"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            app:cardCornerRadius="20dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/ekinCard"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    app:cardCornerRadius="20dp">
+                    android:id="@+id/ekinName"
+                    android:text="E-Kinerja"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:layout_marginTop="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/ekinImage"/>
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/ekinImage"
+                    android:src="@drawable/e_kinerja"
+                    android:layout_marginTop="15dp"
+                    android:layout_centerHorizontal="true"/>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/ekinName"
-                            android:text="E-Kinerja"
-                            android:textSize="15sp"
-                            android:fontFamily="@font/poppins_semibold"
-                            android:layout_marginTop="5dp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_below="@+id/ekinImage"/>
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/jurnalCard"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            app:cardCornerRadius="20dp">
 
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:id="@+id/ekinImage"
-                            android:src="@drawable/e_kinerja"
-                            android:layout_marginTop="15dp"
-                            android:layout_centerHorizontal="true"/>
-                    </RelativeLayout>
-                </androidx.cardview.widget.CardView>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/jurnalCard"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    app:cardCornerRadius="20dp">
+                    android:id="@+id/jurnalName"
+                    android:text="Jurnal Guru"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:layout_marginTop="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/jurnalImage"/>
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/jurnalImage"
+                    android:src="@drawable/jurnal_guru"
+                    android:layout_marginTop="15dp"
+                    android:layout_centerHorizontal="true"/>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/jurnalName"
-                            android:text="Jurnal Guru"
-                            android:textSize="15sp"
-                            android:fontFamily="@font/poppins_semibold"
-                            android:layout_marginTop="5dp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_below="@+id/jurnalImage"/>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
 
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:id="@+id/jurnalImage"
-                            android:src="@drawable/jurnal_guru"
-                            android:layout_marginTop="15dp"
-                            android:layout_centerHorizontal="true"/>
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/songketCard"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            app:cardCornerRadius="20dp">
 
-                    </RelativeLayout>
-                </androidx.cardview.widget.CardView>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/songketCard"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    app:cardCornerRadius="20dp">
+                    android:id="@+id/songketName"
+                    android:text="Songket Emak"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:layout_marginTop="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/songketImage"/>
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/songketImage"
+                    android:src="@drawable/songket_emak"
+                    android:layout_marginTop="15dp"
+                    android:layout_centerHorizontal="true"/>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/songketName"
-                            android:text="Songket Emak"
-                            android:textSize="14sp"
-                            android:fontFamily="@font/poppins_semibold"
-                            android:layout_marginTop="5dp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_below="@+id/songketImage"/>
-
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:id="@+id/songketImage"
-                            android:src="@drawable/songket_emak"
-                            android:layout_marginTop="15dp"
-                            android:layout_centerHorizontal="true"/>
-
-                    </RelativeLayout>
-                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
 
 
-            </LinearLayout>
+    </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="135dp"
-                android:id="@+id/row2"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                android:padding="10dp"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/row1">
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="135dp"
+        android:id="@+id/row2"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/row1">
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/etatibCard"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            app:cardCornerRadius="20dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/etatibCard"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    app:cardCornerRadius="20dp">
+                    android:id="@+id/etatibName"
+                    android:text="E-Tatib"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:layout_marginTop="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/etatibImage"/>
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/etatibImage"
+                    android:src="@drawable/e_tatib"
+                    android:layout_marginTop="15dp"
+                    android:layout_centerHorizontal="true"/>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/etatibName"
-                            android:text="E-Tatib"
-                            android:textSize="15sp"
-                            android:fontFamily="@font/poppins_semibold"
-                            android:layout_marginTop="5dp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_below="@+id/etatibImage"/>
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/wbsCard"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            app:cardCornerRadius="20dp">
 
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:id="@+id/etatibImage"
-                            android:src="@drawable/e_tatib"
-                            android:layout_marginTop="15dp"
-                            android:layout_centerHorizontal="true"/>
-                    </RelativeLayout>
-                </androidx.cardview.widget.CardView>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/wbsCard"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    app:cardCornerRadius="20dp">
+                    android:id="@+id/wbsName"
+                    android:text="WBS"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:layout_marginTop="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/wbsImage"/>
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/wbsImage"
+                    android:src="@drawable/wbs"
+                    android:layout_marginTop="15dp"
+                    android:layout_centerHorizontal="true"/>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/wbsName"
-                            android:text="WBS"
-                            android:textSize="15sp"
-                            android:fontFamily="@font/poppins_semibold"
-                            android:layout_marginTop="5dp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_below="@+id/wbsImage"/>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
 
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:id="@+id/wbsImage"
-                            android:src="@drawable/wbs"
-                            android:layout_marginTop="15dp"
-                            android:layout_centerHorizontal="true"/>
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/pelajarCard"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            app:cardCornerRadius="20dp">
 
-                    </RelativeLayout>
-                </androidx.cardview.widget.CardView>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/pelajarCard"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    app:cardCornerRadius="20dp">
+                    android:id="@+id/pelajarName"
+                    android:text="Kartu Pelajar"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:layout_marginTop="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/pelajarImage"/>
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/pelajarImage"
+                    android:src="@drawable/kartu_pelajar"
+                    android:layout_marginTop="15dp"
+                    android:layout_centerHorizontal="true"/>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/pelajarName"
-                            android:text="Kartu Pelajar"
-                            android:textSize="15sp"
-                            android:fontFamily="@font/poppins_semibold"
-                            android:layout_marginTop="5dp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_below="@+id/pelajarImage"/>
-
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:id="@+id/pelajarImage"
-                            android:src="@drawable/kartu_pelajar"
-                            android:layout_marginTop="15dp"
-                            android:layout_centerHorizontal="true"/>
-
-                    </RelativeLayout>
-                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
 
 
-            </LinearLayout>
+    </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
