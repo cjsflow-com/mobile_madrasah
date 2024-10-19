@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".wbs">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/medium_logo" />
+
+    <TextView
+        android:id="@+id/tvWbs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/montserrat_semibold"
+        android:text="Whisleblowing System"
+        android:textColor="@color/text_default"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvMan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/tvMan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="MAN 2 Pekanbaru"
+        android:textColor="@color/text_default"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvWbs"
+        tools:layout_editor_absoluteY="169dp"
+        tools:ignore="MissingConstraints" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvMan"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="Topik Pengaduan"
+                android:textColor="@color/text_default"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/etTopikPengaduan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="@font/montserrat"
+                android:inputType="text"
+                android:hint="Topik Pengaduan"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="Tanggal Perkiraan Kejadian"
+                android:textColor="@color/text_default"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/etTanggalKejadian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="@font/montserrat"
+                android:inputType="datetime"
+                android:hint="Tanggal"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="Pejabat Diduga Terlibat"
+                android:textColor="@color/text_default"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/etPejabat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="@font/montserrat"
+                android:inputType="text"
+                android:hint="Pejabat"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="Unit Kerja Diduga Terlibat"
+                android:textColor="@color/text_default"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/etUnitKerja"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="@font/montserrat"
+                android:inputType="text"
+                android:hint="Unit Kerja"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="Lokasi Kejadian"
+                android:textColor="@color/text_default"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/etLokasi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="@font/montserrat"
+                android:inputType="text"
+                android:hint="Lokasi"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="Uraian Pengaduan"
+                android:textColor="@color/text_default"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/editTextTextMultiLine"
+                android:layout_width="match_parent"
+                android:layout_height="77dp"
+                android:hint="Uraian lengkap"
+                android:ems="10"
+                android:gravity="start|top"
+                android:inputType="textMultiLine" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Upload Bukti"/>
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
