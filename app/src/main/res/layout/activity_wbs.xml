@@ -26,7 +26,6 @@
         android:text="Whisleblowing System"
         android:textColor="@color/text_default"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvMan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -69,15 +68,19 @@
                 android:textColor="@color/text_default"
                 android:textSize="16sp" />
 
-            <EditText
-                android:id="@+id/etTopikPengaduan"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:fontFamily="@font/montserrat"
-                android:inputType="text"
-                android:hint="Topik Pengaduan"
-                android:textSize="14sp" />
+                android:hint="Topik Pengaduan">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etTopikPengaduan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
+                    android:inputType="text"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -88,15 +91,19 @@
                 android:textColor="@color/text_default"
                 android:textSize="16sp" />
 
-            <EditText
-                android:id="@+id/etTanggalKejadian"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:fontFamily="@font/montserrat"
-                android:inputType="datetime"
-                android:hint="Tanggal"
-                android:textSize="14sp" />
+                android:hint="Tanggal">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etTanggalKejadian"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
+                    android:focusable="false"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -107,15 +114,18 @@
                 android:textColor="@color/text_default"
                 android:textSize="16sp" />
 
-            <EditText
-                android:id="@+id/etPejabat"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:fontFamily="@font/montserrat"
-                android:inputType="text"
-                android:hint="Pejabat"
-                android:textSize="14sp" />
+                android:hint="Pejabat">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPejabat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -126,15 +136,18 @@
                 android:textColor="@color/text_default"
                 android:textSize="16sp" />
 
-            <EditText
-                android:id="@+id/etUnitKerja"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:fontFamily="@font/montserrat"
-                android:inputType="text"
-                android:hint="Unit Kerja"
-                android:textSize="14sp" />
+                android:hint="Unit Kerja">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etUnitKerja"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -145,15 +158,18 @@
                 android:textColor="@color/text_default"
                 android:textSize="16sp" />
 
-            <EditText
-                android:id="@+id/etLokasi"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:fontFamily="@font/montserrat"
-                android:inputType="text"
-                android:hint="Lokasi"
-                android:textSize="14sp" />
+                android:hint="Lokasi">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etLokasi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -164,16 +180,20 @@
                 android:textColor="@color/text_default"
                 android:textSize="16sp" />
 
-            <EditText
-                android:id="@+id/editTextTextMultiLine"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="77dp"
-                android:hint="Uraian lengkap"
-                android:ems="10"
-                android:gravity="start|top"
-                android:inputType="textMultiLine" />
+                android:layout_height="wrap_content"
+                android:hint="Uraian Lengkap">
 
-            <Button
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextTextMultiLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|top"
+                    android:inputType="textMultiLine" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
