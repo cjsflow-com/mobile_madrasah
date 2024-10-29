@@ -33,6 +33,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        jurnalCard.setOnClickListener {
+            val intent = Intent(this, JurnalActivity::class.java)
+            startActivity(intent)
+        }
+
         songketCard.setOnClickListener {
             val intent = Intent(this, SongketActivity::class.java)
             startActivity(intent)
