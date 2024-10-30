@@ -12,14 +12,7 @@ import com.google.android.material.textfield.TextInputEditText
 class wbs : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_wbs)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-
         // Mengakses field TextInputEditText untuk tanggal
         val etTanggalKejadian = findViewById<TextInputEditText>(R.id.etTanggalKejadian)
 

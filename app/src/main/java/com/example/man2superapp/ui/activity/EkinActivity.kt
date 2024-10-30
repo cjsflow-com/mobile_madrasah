@@ -1,10 +1,11 @@
-package com.example.man2superapp
+package com.example.man2superapp.ui.activity
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.man2superapp.R
 
 class EkinActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
