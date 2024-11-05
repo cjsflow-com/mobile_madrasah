@@ -58,7 +58,7 @@ class RemoteDataSource @Inject constructor(
 
     fun createWbs(complainTopic: RequestBody, estimatedOfDateOfOccurrence: RequestBody, relatedOfficialsId: RequestBody,
                   workUnit: RequestBody, workLocation: RequestBody,
-                  complainDescription: RequestBody, documentation: MultipartBody.Part) = flow<States<CreateWbsResponse>>
+                  complainDescription: RequestBody, documentation: MultipartBody.Part?) = flow<States<CreateWbsResponse>>
     {
         emit(States.loading())
         apiService.createWbs(complainTopic,estimatedOfDateOfOccurrence,relatedOfficialsId,workUnit,

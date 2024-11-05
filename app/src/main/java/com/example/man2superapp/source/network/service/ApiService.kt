@@ -29,7 +29,7 @@ interface ApiService {
         @Part("work_unit") workUnit: RequestBody,
         @Part("work_location") workLocation: RequestBody,
         @Part("complain_description") complainDescription: RequestBody,
-        @Part documentation: MultipartBody.Part,
+        @Part documentation: MultipartBody.Part?,
     ): Response<CreateWbsResponse>
 
 

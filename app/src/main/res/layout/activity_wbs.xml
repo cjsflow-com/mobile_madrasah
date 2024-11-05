@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".wbs">
+    tools:context=".ui.activity.wbs">
 
     <ImageView
         android:id="@+id/imageView"
@@ -70,6 +70,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
+                android:id="@+id/parent_pengaduan"
                 android:layout_height="wrap_content"
                 android:hint="Topik Pengaduan">
 
@@ -93,6 +94,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
+                android:id="@+id/parentTanggalKejadian"
                 android:layout_height="wrap_content"
                 android:hint="Tanggal">
 
@@ -116,15 +118,25 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                 android:layout_height="wrap_content"
+                app:boxCornerRadiusBottomEnd="5dp"
+                app:boxCornerRadiusBottomStart="5dp"
+                app:boxCornerRadiusTopEnd="5dp"
+                android:id="@+id/parent_et_pejabat"
+                app:boxStrokeColor="@android:color/black"
+                app:boxCornerRadiusTopStart="5dp"
                 android:hint="Pejabat">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
                     android:id="@+id/etPejabat"
+                    android:textSize="15sp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:inputType="none"
+                    tools:ignore="LabelFor"
                     android:fontFamily="@font/montserrat"
-                    android:textSize="14sp" />
+                     />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -138,6 +150,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
+                android:id="@+id/parent_unit_kerja"
                 android:layout_height="wrap_content"
                 android:hint="Unit Kerja">
 
@@ -160,6 +173,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
+                android:id="@+id/parent_lokasi"
                 android:layout_height="wrap_content"
                 android:hint="Lokasi">
 
@@ -183,6 +197,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/parent_uraian"
                 android:hint="Uraian Lengkap">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -193,11 +208,45 @@
                     android:inputType="textMultiLine" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="wrap_content"
+
+            <ImageView
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:id="@+id/image_bukti"
+                android:contentDescription="Gambar bukti"
+                android:src="@drawable/baseline_image_24" />
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Upload Bukti"/>
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/upload_bukti"
+                    android:backgroundTint="@android:color/holo_orange_light"
+                    android:layout_marginEnd="5dp"
+                    android:text="Upload Bukti"/>
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_send"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="@android:color/holo_red_dark"
+                    android:layout_marginStart="5dp"
+                    android:text="Kirim"/>
+
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

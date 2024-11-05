@@ -13,7 +13,7 @@ class Repository @Inject constructor(
     fun getAllWbs(token: String) = remoteDataSource.getALlWbs(token)
     fun createWbs(complainTopic: RequestBody, estimatedOfDateOfOccurrence: RequestBody, relatedOfficialsId: RequestBody,
                   workUnit: RequestBody, workLocation: RequestBody,
-                  complainDescription: RequestBody, documentation: MultipartBody.Part)
+                  complainDescription: RequestBody, documentation: MultipartBody.Part?)
             = remoteDataSource.createWbs(complainTopic,estimatedOfDateOfOccurrence,
         relatedOfficialsId,workUnit,workLocation,complainDescription,documentation)
     fun logoutEmployee() = remoteDataSource.logoutEmployee()
