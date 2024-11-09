@@ -24,12 +24,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Man2SuperApp"
         tools:targetApi="31">
+        <activity android:name=".ui.activity.RegisterActivity" android:exported="false" />
         <activity
             android:name=".ui.activity.JurnalActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.wbs"
             android:exported="false"/>
+
+        <activity android:name=".ui.activity.LoginStudent"
+            android:exported="false" />
         <activity
             android:name=".ui.activity.SongketActivity"
             android:exported="false" />

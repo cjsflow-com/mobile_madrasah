@@ -99,12 +99,23 @@
             android:drawablePadding="8dp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <ProgressBar
+        android:backgroundTint="@color/manblue"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/passwordInputLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/progress_bar_login" />
+
     <!-- Tombol login -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/loginButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Login"
+        android:visibility="gone"
         android:textAllCaps="false"
         android:backgroundTint="@color/manblue"
         android:textColor="@android:color/white"

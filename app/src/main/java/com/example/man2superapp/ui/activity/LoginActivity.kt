@@ -2,17 +2,24 @@ package com.example.man2superapp.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.ThemedSpinnerAdapter.Helper
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.man2superapp.R
 import com.example.man2superapp.databinding.ActivityLoginBinding
 import com.example.man2superapp.source.LoginTemp
+import com.example.man2superapp.source.local.model.LoginModel
+import com.example.man2superapp.source.network.States
 import com.example.man2superapp.ui.presenter.AllViewModel
 import com.example.man2superapp.utils.Help
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -31,9 +38,13 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         loginBinding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(loginBinding.root)
-
+        isShowProgressBar(false)
+        loginBinding.backButton.setOnClickListener {
+            startActivity(Intent(this@LoginActivity,MainActivity::class.java))
+                .also { finish() }
+        }
         loginBinding.loginButton.setOnClickListener {
-            startActivity(Intent(this@LoginActivity,MainActivity::class.java)).also { finish() }
+            action()
         }
     }
 
@@ -49,9 +60,39 @@ class LoginActivity : AppCompatActivity() {
                 Help.showToast(this@LoginActivity,"Email dan Password tidak boleh kosong")
             }else{
                 loginViewModel.loginEmployee(email,password).observe(this@LoginActivity){state ->
-
+                    when(state)
+                    {
+                        is States.Loading -> {
+                            isShowProgressBar(true)
+                        }
+                        is States.Success -> {
+                            lifecycleScope.launch {
+                                Help.showToast(this@LoginActivity,state.data.messages)
+                                Log.d(TAG, "action: ${state.data.messages}")
+                                localStore.putToken(
+                                    LoginModel(state.data.name,state.data.email,state.data.gender,state.data.token,state.data.profile,
+                                        state.data.role).also {
+                                            startActivity(Intent(this@LoginActivity,MainActivity::class.java)).also { finish() }
+                                    }
+                                )
+                                isShowProgressBar(false)
+                            }
+                        }
+                        is States.Failed -> {
+                            Help.showToast(this@LoginActivity,state.message)
+                            isShowProgressBar(false)
+                        }
+                    }
                 }
             }
+        }
+    }
+
+    private fun isShowProgressBar(isShow: Boolean)
+    {
+        loginBinding.apply {
+            progressBarLogin.visibility = if (isShow) View.VISIBLE else View.GONE
+            loginButton.visibility = if (isShow) View.GONE else View.VISIBLE
         }
     }
 }

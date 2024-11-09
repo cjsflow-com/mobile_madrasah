@@ -11,5 +11,7 @@ class LoginStudent: AppCompatActivity()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        loginStudentBinding = ActivityLoginStudentBinding.inflate(layoutInflater)
+        setContentView(loginStudentBinding.root)
     }
 }
