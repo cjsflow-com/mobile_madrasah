@@ -52,6 +52,7 @@ class wbs : AppCompatActivity() {
         wbsBinding.etTanggalKejadian.setOnClickListener {
             showDatePickerDialog(wbsBinding.etTanggalKejadian)
         }
+        showProgressBar(false)
         showImage(false)
         allViewModel.fetchAllUsers(this@wbs)
         clickButtonUploadBukti()
@@ -80,6 +81,15 @@ class wbs : AppCompatActivity() {
             }
         }
     }
+
+    private fun showProgressBar(isShow: Boolean)
+    {
+        wbsBinding.apply {
+            progressBarWbs.visibility = if (isShow) View.VISIBLE else View.GONE
+            scrollFormWbs.visibility = if (isShow) View.GONE else View.VISIBLE
+        }
+    }
+
 
     private fun checkGallery()
     {
@@ -203,15 +213,17 @@ class wbs : AppCompatActivity() {
                                 imageData).observe(this@wbs) { state ->
                                 when (state) {
                                     is States.Loading -> {
-
+                                        showProgressBar(true)
                                     }
 
                                     is States.Success -> {
+                                        showProgressBar(false)
                                         Log.d("postWBS", "postWbs: ${state.data.message}")
                                         Help.showToast(this@wbs, state.data.message)
                                             .also { startActivity(Intent(this@wbs, MainActivity::class.java)).also { finish() } }
                                     }
                                     is States.Failed -> {
+                                        showProgressBar(false)
                                         Log.d("TAG", "postWbs: error => ${state.message}")
                                         Help.showToast(this@wbs,state.message)
                                     }
