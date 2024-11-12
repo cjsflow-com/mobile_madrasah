@@ -2,6 +2,11 @@ package com.example.man2superapp.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
+import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.View
 import androidx.activity.enableEdgeToEdge
@@ -39,6 +44,9 @@ class LoginActivity : AppCompatActivity() {
         loginBinding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(loginBinding.root)
         isShowProgressBar(false)
+
+        setupRegisterText()
+
         loginBinding.backButton.setOnClickListener {
             startActivity(Intent(this@LoginActivity,MainActivity::class.java))
                 .also { finish() }
@@ -46,6 +54,36 @@ class LoginActivity : AppCompatActivity() {
         loginBinding.loginButton.setOnClickListener {
             action()
         }
+    }
+
+    private fun setupRegisterText() {
+        val text = "Belum punya akun? Daftar"
+        val spannableString = SpannableString(text)
+
+        // Mengatur warna abu abu untuk "Belum punya akun?"
+        spannableString.setSpan(
+            ForegroundColorSpan(getColor(R.color.gray)),
+            0, 16,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        // Mengatur warna biru dan klik untuk "Daftar"
+        spannableString.setSpan(object : ClickableSpan() {
+            override fun onClick(widget: View) {
+                // Menuju halaman pendaftaran
+                startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
+            }
+        }, 17, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        spannableString.setSpan(
+            ForegroundColorSpan(getColor(R.color.manblue)), // Warna biru
+            17, text.length,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        // Set text dan aktifkan LinkMovementMethod
+        loginBinding.registeredTextView.text = spannableString
+        loginBinding.registeredTextView.movementMethod = LinkMovementMethod.getInstance()
     }
 
     private fun action()

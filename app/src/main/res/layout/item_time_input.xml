@@ -11,8 +11,10 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:hint="__:__"
-        android:inputType="time"
-        android:maxLength="5"/>
+        android:textColor="@color/text_default"
+        android:gravity="center"
+        android:background="?attr/selectableItemBackground"
+        android:padding="8dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -25,8 +27,10 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:hint="__:__"
-        android:inputType="time"
-        android:maxLength="5" />
+        android:textColor="@color/text_default"
+        android:gravity="center"
+        android:background="?attr/selectableItemBackground"
+        android:padding="8dp"/>
 
     <TextView
         android:layout_width="wrap_content"

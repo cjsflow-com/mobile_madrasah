@@ -4,42 +4,54 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
     android:padding="16dp"
     android:id="@+id/main"
     tools:context=".ui.activity.LoginActivity">
 
     <!-- Logo atau gambar header -->
 
-    <ImageButton
+<!--    <ImageButton-->
+<!--        android:id="@+id/back_button"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:padding="10dp"-->
+<!--        android:src="@drawable/baseline_arrow_back_24"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <TextView
         android:id="@+id/back_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:src="@drawable/baseline_arrow_back_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="Kembali"
+        android:textColor="@color/gray"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.button.MaterialButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="Daftar"
-        android:id="@+id/register_button"
-        android:backgroundTint="@color/manblue"
-        android:textColor="@android:color/white"/>
+<!--    <com.google.android.material.button.MaterialButton-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        android:text="Daftar"-->
+<!--        android:id="@+id/register_button"-->
+<!--        android:backgroundTint="@color/manblue"-->
+<!--        android:textColor="@android:color/white"/>-->
 
     <ImageView
         android:id="@+id/logoImage"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginBottom="32dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="26dp"
         android:src="@drawable/logo_man2"
         android:contentDescription="App Logo"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/back_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
     <!-- Judul aplikasi atau deskripsi login -->
@@ -47,21 +59,34 @@
         android:id="@+id/titleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to MyApp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/montserrat_semibold"
+        android:text="Masuk ke Akun Anda"
+        android:textColor="@color/text_default"
         android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/logoImage"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="24dp"/>
-    <!-- Input untuk username -->
+        app:layout_constraintTop_toBottomOf="@id/logoImage" />
+
+    <TextView
+        android:id="@+id/deskripsiText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/montserrat_semibold"
+        android:text="Masukkan Email dan Password"
+        android:textColor="@color/gray"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleText"/>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Email"
-        app:layout_constraintTop_toBottomOf="@id/titleText"
+        android:textColorHint="@color/gray"
+        app:boxBackgroundMode="filled"
+        app:layout_constraintTop_toBottomOf="@id/deskripsiText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="16dp"
@@ -71,10 +96,11 @@
             android:id="@+id/emailEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
             android:drawableStart="@drawable/small_user"
-            android:paddingStart="8dp"
-            android:drawablePadding="8dp"/>
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:inputType="textEmailAddress"
+            android:paddingStart="8dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Input untuk password -->
@@ -82,28 +108,55 @@
         android:id="@+id/passwordInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:hint="Password"
-        app:passwordToggleEnabled="true"
-        app:layout_constraintTop_toBottomOf="@id/emailInputLayout"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColorHint="@color/gray"
+        app:boxBackgroundMode="filled"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/emailInputLayout"
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
             android:drawableStart="@drawable/small_password"
-            android:paddingStart="8dp"
-            android:drawablePadding="8dp"/>
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:inputType="textPassword"
+            android:paddingStart="8dp" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <CheckBox
+        android:id="@+id/rememberMeCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="Remember me"
+        android:textColor="@color/text_default"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordInputLayout" />
+
+    <TextView
+        android:id="@+id/forgotPasswordText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="Forgot Password?"
+        android:textColor="@color/manblue"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/rememberMeCheckBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rememberMeCheckBox" />
 
     <ProgressBar
         android:backgroundTint="@color/manblue"
         android:layout_width="wrap_content"
         android:layout_marginTop="40dp"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/passwordInputLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -114,16 +167,17 @@
         android:id="@+id/loginButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Login"
-        android:visibility="gone"
-        android:textAllCaps="false"
-        android:backgroundTint="@color/manblue"
-        android:textColor="@android:color/white"
         android:layout_marginTop="24dp"
+        android:backgroundTint="@color/manblue"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="Masuk"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
         android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/passwordInputLayout"
+        app:cornerRadius="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/rememberMeCheckBox" />
 
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="0dp"
@@ -137,16 +191,31 @@
         android:text="Atau" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/login_as_student"
         android:layout_width="0dp"
-        android:layout_marginTop="5dp"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:backgroundTint="@color/manblue"
-        android:textColor="@android:color/white"
-        app:layout_constraintTop_toBottomOf="@id/mtv_or"
-        app:layout_constraintStart_toStartOf="@id/mtv_or"
-        app:layout_constraintEnd_toEndOf="@id/mtv_or"
+        android:layout_marginTop="5dp"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/montserrat_medium"
         android:text="Login sebagai Siswa"
         android:textAllCaps="false"
-        android:id="@+id/login_as_student" />
+        android:textColor="@color/text_default"
+        android:textSize="18sp"
+        app:cornerRadius="8dp"
+        app:layout_constraintEnd_toEndOf="@id/mtv_or"
+        app:layout_constraintStart_toStartOf="@id/mtv_or"
+        app:layout_constraintTop_toBottomOf="@id/mtv_or" />
+
+    <TextView
+        android:id="@+id/registeredTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Belum punya akun? Daftar"
+        android:textColor="@color/gray"
+        android:textSize="14sp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
