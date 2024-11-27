@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
                 Log.d("TAG", "checkToken: ${data.token}")
                 mainBinding.tvUserName.text = data.name
                 data.token?.let { handleCardActions(it) }
+                data.role?.let{checkRoleLogin(it)}
             }
         }
         mainBinding.btnLogout.setOnClickListener {
@@ -46,10 +47,36 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun checkRoleLogin(role: String)
+    {
+        mainBinding.apply {
+            if(role == "siswa")
+            {
+                songketCard.visibility = View.VISIBLE
+                wbsCard.visibility = View.VISIBLE
+                ekinCard.visibility = View.GONE
+                pelajarCard.visibility = View.VISIBLE
+                etatibCard.visibility = View.VISIBLE
+            }else if (role == "kepala_madrasah"){
+                ekinCard.visibility = View.VISIBLE
+                wbsCard.visibility = View.VISIBLE
+                songketCard.visibility = View.GONE
+                pelajarCard.visibility = View.GONE
+                etatibCard.visibility = View.GONE
+            }else if (role == "super_admin"){
+                ekinCard.visibility = View.VISIBLE
+                wbsCard.visibility = View.VISIBLE
+                songketCard.visibility = View.GONE
+                pelajarCard.visibility = View.GONE
+                etatibCard.visibility = View.GONE
+            }
+        }
+    }
+
     private fun logoutEmployee()
     {
         lifecycleScope.launch {
-            localStore.putToken(LoginModel("","",0,"","","")).also {
+            localStore.putToken(LoginModel("",0,"","","",0,"","","")).also {
                 startActivity(Intent(this@MainActivity,LoginActivity::class.java))
                     .also { finish() }
             }
@@ -76,8 +103,17 @@ class MainActivity : AppCompatActivity() {
             }
 
             jurnalCard.setOnClickListener {
-                val target = if (token.isEmpty()) LoginActivity::class.java else JurnalActivity::class.java
-                startActivity(Intent(this@MainActivity,target))
+                Help.showToast(this@MainActivity,"Fitur masih dalam tahap pengembangan")
+//                val target = if (token.isEmpty()) LoginActivity::class.java else JurnalActivity::class.java
+//                startActivity(Intent(this@MainActivity,target))
+            }
+
+            etatibCard.setOnClickListener {
+                Help.showToast(this@MainActivity,"Fitur masih dalam tahap pengembangan")
+            }
+
+            pelajarCard.setOnClickListener {
+                Help.showToast(this@MainActivity,"Fitur masih dalam tahap pengembangan")
             }
 
             songketCard.setOnClickListener {

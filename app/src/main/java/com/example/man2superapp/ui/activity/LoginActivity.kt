@@ -47,12 +47,18 @@ class LoginActivity : AppCompatActivity() {
 
         setupRegisterText()
 
-        loginBinding.backButton.setOnClickListener {
-            startActivity(Intent(this@LoginActivity,MainActivity::class.java))
-                .also { finish() }
-        }
-        loginBinding.loginButton.setOnClickListener {
-            action()
+        loginBinding.apply {
+            backButton.setOnClickListener {
+                startActivity(Intent(this@LoginActivity,MainActivity::class.java))
+                    .also { finish() }
+            }
+            loginButton.setOnClickListener {
+                action()
+            }
+            loginAsStudent.setOnClickListener {
+                startActivity(Intent(this@LoginActivity,LoginStudent::class.java))
+                    .also { finish() }
+            }
         }
     }
 
@@ -108,7 +114,7 @@ class LoginActivity : AppCompatActivity() {
                                 Help.showToast(this@LoginActivity,state.data.messages)
                                 Log.d(TAG, "action: ${state.data.messages}")
                                 localStore.putToken(
-                                    LoginModel(state.data.name,state.data.email,state.data.gender,state.data.token,state.data.profile,
+                                    LoginModel(state.data.name,state.data.id,state.data.email,"","",state.data.gender,state.data.token,state.data.profile,
                                         state.data.role).also {
                                             startActivity(Intent(this@LoginActivity,MainActivity::class.java)).also { finish() }
                                     }

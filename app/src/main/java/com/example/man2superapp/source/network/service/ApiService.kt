@@ -1,10 +1,15 @@
 package com.example.man2superapp.source.network.service
 
 import com.example.man2superapp.source.network.response.login.LoginResponse
+import com.example.man2superapp.source.network.response.login.LoginStudentResponse
 import com.example.man2superapp.source.network.response.login.LogoutResponse
+import com.example.man2superapp.source.network.response.songket_emak.CreateSongketMother
+import com.example.man2superapp.source.network.response.songket_emak.ListSongketEmakResponse
+import com.example.man2superapp.source.network.response.songket_emak.StatusResponse
 import com.example.man2superapp.source.network.response.wbs.AllWbsResponse
 import com.example.man2superapp.source.network.response.wbs.CreateWbsResponse
 import com.example.man2superapp.source.network.response.wbs.GetAllUserResponse
+import com.example.man2superapp.ui.activity.LoginStudent
 import com.example.man2superapp.utils.Constant
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -16,6 +21,7 @@ import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
+import retrofit2.http.Query
 
 interface ApiService {
 
@@ -48,8 +54,36 @@ interface ApiService {
         @Field("password") password: String,
     ): Response<LoginResponse>
 
+    @FormUrlEncoded
+    @POST(Constant.LOGIN_STUDENT)
+    suspend fun loginStudent(
+        @Field("nisn") nisn: String,
+        @Field("password") password: String,
+    ): Response<LoginStudentResponse>
+
     @POST(Constant.LOGOUT)
     suspend fun logoutUser(): Response<LogoutResponse>
 
+    @GET(Constant.LIST_BY_STATUS_SONGKET_MOTHER)
+    suspend fun getListByStatusSongketMother(
+        @Query("status") status: String,
+        @Query("id") id: Int
+    ): Response<ListSongketEmakResponse>
+
+    @FormUrlEncoded
+    @POST(Constant.CREATE_SONGKET_MOTHER)
+    suspend fun createSongketMother(
+        @Field("letter_statement") letterStatement: Int,
+        @Field("name_activity_completition")nameActivityCompletition: String,
+        @Field("organizer_completition") organizerCompletition: String,
+        @Field("name_extracurricular") nameEksul: String,
+        @Field("name_club") nameClub: String,
+        @Field("student_id") studentId: Int,
+    ): Response<CreateSongketMother>
+
+    @GET(Constant.STATUS_LETTER)
+    suspend fun getCountStatus(
+        @Query("id") id: Int
+    ): Response<StatusResponse>
 
 }

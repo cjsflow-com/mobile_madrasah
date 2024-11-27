@@ -17,6 +17,9 @@ class LoginTemp constructor(private val context: Context) {
     private val GENDER_KEY = intPreferencesKey("gender")
     private val PROFILE_KEY = stringPreferencesKey("profile")
     private val ROLE_KEY = stringPreferencesKey("role")
+    private val NISN = stringPreferencesKey("nisn")
+    private val ClASS_NAME = stringPreferencesKey("class_name")
+    private val ID = intPreferencesKey("id")
 
     suspend fun getToken() = flow{
         val token = context.userStore.data.first()[TOKEN_KEY]?: ""
@@ -25,7 +28,10 @@ class LoginTemp constructor(private val context: Context) {
         val gender = context.userStore.data.first()[GENDER_KEY]?: 0
         val profile = context.userStore.data.first()[PROFILE_KEY]?: ""
         val role = context.userStore.data.first()[ROLE_KEY]?: ""
-        emit(LoginModel(name, email, gender, token, profile, role))
+        val nisn = context.userStore.data.first()[NISN]?: ""
+        val id = context.userStore.data.first()[ID]?: 0
+        val class_name = context.userStore.data.first()[ClASS_NAME]?: ""
+        emit(LoginModel(name,id, email,nisn,class_name,gender, token, profile, role))
     }
 
     suspend fun putToken(loginModel: LoginModel)
@@ -33,7 +39,10 @@ class LoginTemp constructor(private val context: Context) {
         context.userStore.edit { preferences ->
             loginModel.token?.let { preferences[TOKEN_KEY] = it }
             loginModel.name?.let { preferences[NAME_KEY] = it }
+            loginModel.id?.let { preferences[ID] = it}
             loginModel.email?.let { preferences[EMAIL_KEY] = it }
+            loginModel.nisn?.let { preferences[NISN] = it }
+            loginModel.class_name?.let { preferences[ClASS_NAME] = it }
             loginModel.gender?.let { preferences[GENDER_KEY] = it }
             loginModel.profile?.let { preferences[PROFILE_KEY] = it }
             loginModel.role?.let { preferences[ROLE_KEY] = it }
