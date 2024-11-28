@@ -39,32 +39,38 @@
             android:layout_width="150dp"
             android:layout_height="95dp"
             android:layout_margin="15dp"
+            android:id="@+id/cardAccepted"
             app:cardBackgroundColor="#2FC5C5"
             app:cardCornerRadius="16dp">
 
-            <RelativeLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <ImageView
                     android:id="@+id/ivSelesai"
                     android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_height="40dp"
                     android:src="@drawable/selesai" />
 
                 <TextView
+                    android:id="@+id/tvAccepted"
                     android:layout_width="wrap_content"
+                    android:layout_marginStart="40dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
+                    app:layout_constraintBottom_toBottomOf="@id/ivSelesai"
+                    app:layout_constraintStart_toEndOf="@id/ivSelesai"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/ivSelesai"
                     android:layout_marginEnd="10dp"
                     android:text="8"
                     android:textColor="#FFFFFF"
                     android:textSize="24sp" />
-            </RelativeLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
         <!-- Card Antrian -->
@@ -72,10 +78,12 @@
             android:layout_width="150dp"
             android:layout_height="95dp"
             android:layout_margin="15dp"
+            android:id="@+id/cardQueue"
+            android:layout_marginBottom="15dp"
             app:cardBackgroundColor="#fd855b"
             app:cardCornerRadius="16dp">
 
-            <RelativeLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -83,32 +91,38 @@
                     android:id="@+id/ivAntrian"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginStart="10dp"
                     android:src="@drawable/proses" />
 
                 <TextView
+                    android:id="@+id/tvQueue"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
                     android:layout_marginEnd="10dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/ivAntrian"
+                    app:layout_constraintBottom_toBottomOf="@id/ivAntrian"
+                    app:layout_constraintStart_toEndOf="@id/ivAntrian"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginStart="20dp"
                     android:text="2"
                     android:textColor="#FFFFFF"
                     android:textSize="24sp" />
-            </RelativeLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
         <!-- Card Ditolak -->
         <androidx.cardview.widget.CardView
             android:layout_width="150dp"
             android:layout_height="95dp"
+            android:id="@+id/cardRejected"
             android:layout_margin="15dp"
             app:cardBackgroundColor="#fb7593"
             app:cardCornerRadius="16dp">
 
-            <RelativeLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -116,54 +130,26 @@
                     android:id="@+id/ivDitolak"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
+                    android:contentDescription="Gambar Tolak"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginStart="10dp"
-                    android:src="@drawable/ditolak" />
+                    android:src="@drawable/ditolak"
+                    tools:ignore="HardcodedText" />
 
                 <TextView
+                    android:id="@+id/tvRejected"
+                    app:layout_constraintTop_toTopOf="@id/ivDitolak"
+                    android:layout_marginStart="40dp"
+                    app:layout_constraintStart_toEndOf="@id/ivDitolak"
+                    app:layout_constraintEnd_toEndOf="parent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="10dp"
                     android:text="8"
                     android:textColor="#FFFFFF"
                     android:textSize="24sp" />
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- Card Disetujui -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="150dp"
-            android:layout_height="95dp"
-            android:layout_margin="15dp"
-            app:cardBackgroundColor="#988afd"
-            app:cardCornerRadius="16dp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/ivDisetujui"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="10dp"
-                    android:src="@drawable/thumb_up" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="10dp"
-                    android:text="1"
-                    android:textColor="#FFFFFF"
-                    android:textSize="24sp" />
-            </RelativeLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
     </androidx.gridlayout.widget.GridLayout>
 
@@ -312,6 +298,7 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
+            android:visibility="gone"
             android:layout_height="wrap_content"
             android:id="@+id/lomba"
             android:layout_margin="10dp"

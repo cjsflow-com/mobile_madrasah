@@ -35,7 +35,19 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
         repository.createWbs(complainTopic,estimatedOfDateOfOccurrence,relatedOfficialsId,workUnit,
             workLocation,complainDescription,documentation).asLiveData()
 
-    fun logoutEmployee() = repository.logoutEmployee().asLiveData()
+    fun listSongketMotherByStatus(studentId: Int, status: String) = repository.listSongketMotherByStatus(studentId,status)
+        .asLiveData()
+
+    fun createSongketMother(letterStatement: Int, nameActivityCompletition: String,
+                            organizerCompletition: String, nameEskul: String,
+                            nameClub: String,
+                            studentId: Int) =
+        repository.createSongketMother(letterStatement, nameActivityCompletition, organizerCompletition, nameEskul, nameClub, studentId)
+            .asLiveData()
+
+    fun loginStudent(nisn: String,password: String) = repository.loginStudent(nisn,password).asLiveData()
+
+    fun getCountStatus(id: Int) = repository.getCountStatus(id).asLiveData()
 
     fun fetchAllUsers(context: Context)
     {

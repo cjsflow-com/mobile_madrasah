@@ -17,4 +17,25 @@ class Repository @Inject constructor(
             = remoteDataSource.createWbs(complainTopic,estimatedOfDateOfOccurrence,
         relatedOfficialsId,workUnit,workLocation,complainDescription,documentation)
     fun logoutEmployee() = remoteDataSource.logoutEmployee()
+
+    fun loginStudent(nisn: String, password: String) = remoteDataSource.loginStudent(nisn,password)
+
+    fun listSongketMotherByStatus(studentId: Int,status: String) = remoteDataSource.listSongketMotherByStatus(status,studentId)
+
+    fun createSongketMother(
+        letterStatement: Int,
+        nameActivityCompletition: String,
+        organizerCompletition: String,
+        nameEskul: String,
+        nameClub: String,
+        studentId: Int
+    ) = remoteDataSource.createSongketMother(letterStatement,
+        nameActivityCompletition,
+        organizerCompletition,
+        nameEskul,
+        nameClub,
+        studentId
+    )
+
+    fun getCountStatus(id: Int) = remoteDataSource.getCountStatusSongketEmak(id)
 }

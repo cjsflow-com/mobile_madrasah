@@ -1,8 +1,13 @@
 package com.example.man2superapp.source.network
 
 import android.util.Log
+import com.example.man2superapp.source.local.model.toGenerateListSongketMother
 import com.example.man2superapp.source.network.response.login.LoginResponse
+import com.example.man2superapp.source.network.response.login.LoginStudentResponse
 import com.example.man2superapp.source.network.response.login.LogoutResponse
+import com.example.man2superapp.source.network.response.songket_emak.CreateSongketMother
+import com.example.man2superapp.source.network.response.songket_emak.ListSongketEmakResponse
+import com.example.man2superapp.source.network.response.songket_emak.StatusResponse
 import com.example.man2superapp.source.network.response.wbs.AllWbsResponse
 import com.example.man2superapp.source.network.response.wbs.CreateWbsResponse
 import com.example.man2superapp.source.network.response.wbs.GetAllUserResponse
@@ -45,6 +50,17 @@ class RemoteDataSource @Inject constructor(
         emit(States.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
 
+    fun loginStudent(nisn: String, password: String) = flow<States<LoginStudentResponse>> {
+        emit(States.loading())
+        apiService.loginStudent(nisn,password).let {
+            if (it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message()))
+        }
+    }.catch {
+        Log.d(TAG, "loginStudent: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
     fun getALlWbs(token: String) = flow<States<AllWbsResponse>> {
         emit(States.loading())
         apiService.getAllWbs(Constant.BEARER + token).let {
@@ -79,6 +95,39 @@ class RemoteDataSource @Inject constructor(
         }
     }.catch {
         Log.d(TAG, "logoutEmployee: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+    fun createSongketMother(letterStatement: Int,nameActivityCompletition: String,organizerCompletition: String,
+                            nameEskul: String,nameClub: String, studentId: Int) = flow<States<CreateSongketMother>> {
+        emit(States.loading())
+        apiService.createSongketMother(letterStatement,nameActivityCompletition,organizerCompletition,nameEskul,nameClub,studentId)
+            .let { if(it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message()))}
+    }.catch {
+        Log.d(TAG, "createSongketMother: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+    fun listSongketMotherByStatus(status: String,studentId: Int) = flow<States<ListSongketEmakResponse>> {
+        emit(States.loading())
+        apiService.getListByStatusSongketMother(status,studentId).let {
+            if(it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message()))
+        }
+    }.catch {
+        Log.d(TAG, "listSongketMotherByStatus: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+    fun getCountStatusSongketEmak(studentId: Int) = flow<States<StatusResponse>> {
+        emit(States.loading())
+        apiService.getCountStatus(studentId).let {
+            if(it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "getCountStatusSongketEmak: ${it.message.toString()}")
         emit(States.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
 

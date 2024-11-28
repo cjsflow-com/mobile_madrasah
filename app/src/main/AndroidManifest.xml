@@ -30,6 +30,8 @@
         <activity
             android:name=".ui.activity.JurnalActivity"
             android:exported="false" />
+        <activity android:name=".ui.activity.CreateSongket"
+            android:exported="false"/>
         <activity
             android:name=".ui.activity.wbs"
             android:exported="false"/>
