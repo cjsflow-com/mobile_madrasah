@@ -179,7 +179,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/ekinName"
                     android:text="E-Kinerja"
-                    android:textSize="15sp"
+                    android:textSize="12sp"
                     android:fontFamily="@font/poppins_semibold"
                     android:layout_marginTop="5dp"
                     android:layout_centerHorizontal="true"
@@ -212,7 +212,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/jurnalName"
                     android:text="Jurnal Guru"
-                    android:textSize="15sp"
+                    android:textSize="12sp"
                     android:fontFamily="@font/poppins_semibold"
                     android:layout_marginTop="5dp"
                     android:layout_centerHorizontal="true"
@@ -242,15 +242,15 @@
                 android:layout_height="match_parent">
 
                 <TextView
+                    android:id="@+id/songketName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/songketName"
-                    android:text="Songket Emak"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/songketImage"
                     android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/songketImage"/>
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Songket Emak"
+                    android:textSize="12sp" />
 
                 <ImageView
                     android:layout_width="50dp"
@@ -295,7 +295,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/etatibName"
                     android:text="E-Tatib"
-                    android:textSize="15sp"
+                    android:textSize="12sp"
                     android:fontFamily="@font/poppins_semibold"
                     android:layout_marginTop="5dp"
                     android:layout_centerHorizontal="true"
@@ -328,7 +328,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/wbsName"
                     android:text="WBS"
-                    android:textSize="15sp"
+                    android:textSize="12sp"
                     android:fontFamily="@font/poppins_semibold"
                     android:layout_marginTop="5dp"
                     android:layout_centerHorizontal="true"
@@ -362,7 +362,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/pelajarName"
                     android:text="Kartu Pelajar"
-                    android:textSize="15sp"
+                    android:textSize="12sp"
                     android:fontFamily="@font/poppins_semibold"
                     android:layout_marginTop="5dp"
                     android:layout_centerHorizontal="true"
@@ -373,7 +373,7 @@
                     android:layout_height="50dp"
                     android:id="@+id/pelajarImage"
                     android:src="@drawable/kartu_pelajar"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="12dp"
                     android:layout_centerHorizontal="true"/>
 
             </RelativeLayout>

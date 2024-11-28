@@ -2,7 +2,7 @@ package com.example.man2superapp.utils
 
 object Constant {
 
-    const val BASE_URL = "http://192.168.100.8:5000/api/"
+    const val BASE_URL = "https://bedelau.m2mpekanbaru.sch.id/api/"
     const val AUTHORIZATION = "Authorization"
     const val TOKEN = "token"
     const val WBS = "wbs"
