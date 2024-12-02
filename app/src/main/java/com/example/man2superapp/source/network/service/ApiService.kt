@@ -1,5 +1,6 @@
 package com.example.man2superapp.source.network.service
 
+import com.example.man2superapp.source.local.model.Article
 import com.example.man2superapp.source.network.response.login.LoginResponse
 import com.example.man2superapp.source.network.response.login.LoginStudentResponse
 import com.example.man2superapp.source.network.response.login.LogoutResponse
@@ -85,5 +86,8 @@ interface ApiService {
     suspend fun getCountStatus(
         @Query("id") id: Int
     ): Response<StatusResponse>
+
+    @GET(Constant. GET_ARTICLES)
+    suspend fun getArticles(): Response<List<Article>>
 
 }

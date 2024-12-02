@@ -19,4 +19,5 @@ object Constant {
     const val UPDATE_SONGKET_MOTHER = "$SONGKET_MOTHER/update/"
     const val STATUS_LETTER = "$SONGKET_MOTHER/count_status"
     const val LOGOUT = "auth/employee/logout"
+    const val GET_ARTICLES = "api/news"
 }

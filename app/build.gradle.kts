@@ -67,6 +67,7 @@ dependencies {
     kapt(libs.hilt.android.compiler)
     kapt(libs.hilt.compiler)
     implementation(libs.dexter)
+    implementation(libs.picasso)
 }
 
 kapt {
