@@ -9,8 +9,12 @@ data class ListSongketMother(
     var nameExtracurricular : String,
     var organizerCompletition: String,
     var status: Int,
-    var rankingSemester: String,
-    var universityAndMajor: String,
+    var nameUniversity: String,
+    var major: String,
+    var ranking: String,
+    var semester: String,
+    var totalStudent: String,
+    var averageValue: Double,
     var numberLetter: String
 )
 
@@ -28,8 +32,12 @@ fun SongketEmak.toSongketMother(): ListSongketMother{
         nameExtracurricular = this.nameExtracurricular?: "?",
         organizerCompletition = this.organizerCompletition?: "?",
         status = this.status?: 0,
-        rankingSemester = this.rankingSemester?: "?",
-        universityAndMajor = this.universityAndMajor?: "?",
+        nameUniversity = this.nameUniversity?: "",
+        major = this.major?: "",
+        ranking = this.ranking?: "",
+        semester = this.semester?: "",
+        totalStudent = this.totalStudent?: "",
+        averageValue = this.averageValue?: 0.0,
         numberLetter = this.numberLetter?: "?",
     )
 }

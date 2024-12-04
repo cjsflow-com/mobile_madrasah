@@ -85,12 +85,63 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:textSize="15sp"
+            android:id="@+id/total_student"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:text="Total Siswa"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:text="Semester"
+            android:fontFamily="@font/montserrat_medium"
+            android:textSize="15sp"
+            android:id="@+id/semester"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:textSize="15sp"
+            android:id="@+id/average_value"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:text="Nilai Rata Rata"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
             android:textSize="15sp"
             android:id="@+id/university_and_major"
             android:layout_marginEnd="10dp"
             android:layout_marginStart="10dp"
             android:fontFamily="@font/montserrat_medium"
-            android:text="university_and_major"
+            android:text="Nama Universitas"
+            android:layout_marginTop="5dp"/>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:textSize="15sp"
+            android:id="@+id/major"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="Jurusan"
             android:layout_marginTop="5dp"/>
 
 
@@ -117,6 +168,19 @@
             android:fontFamily="@font/montserrat_medium"
             android:text="Name Club"
             android:layout_marginTop="5dp"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:textSize="15sp"
+            android:id="@+id/number_letter"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="Nomor Surat"
+            android:layout_marginTop="5dp"/>
+
 
         <com.google.android.material.button.MaterialButton
             android:layout_width="match_parent"

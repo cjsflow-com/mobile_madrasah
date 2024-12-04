@@ -16,10 +16,18 @@ data class SongketEmak(
     val organizerCompletition: String,
     @SerializedName("status")
     val status: Int,
-    @SerializedName("ranking_semester")
-    val rankingSemester: String,
-    @SerializedName("university_and_major")
-    val universityAndMajor: String,
+    @SerializedName("name_university")
+    val nameUniversity: String,
+    @SerializedName("major")
+    val major: String,
+    @SerializedName("ranking")
+    val ranking: String,
+    @SerializedName("semester")
+    val semester: String,
+    @SerializedName("total_student")
+    val totalStudent: String,
+    @SerializedName("average_value")
+    val averageValue: Double,
     @SerializedName("number_letter")
     val numberLetter: String,
 )

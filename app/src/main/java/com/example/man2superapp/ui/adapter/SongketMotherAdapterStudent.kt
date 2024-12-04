@@ -58,7 +58,8 @@ class SongketMotherAdapterStudent: RecyclerView.Adapter<SongketMotherAdapterStud
                             organizerCompletition,
                             nameClub,
                             nameExtracurricular,
-                            universityAndMajor
+                            universityAndMajor,
+                            major,
                         )
                     ),
                     6 to Pair(
@@ -67,7 +68,10 @@ class SongketMotherAdapterStudent: RecyclerView.Adapter<SongketMotherAdapterStud
                             organizerCompletition,
                             nameClub,
                             nameExtracurricular,
-                            rankingSemester
+                            rankingSemester,
+                            semester,
+                            totalStudent,
+                            averageValue,
                         )
                     )
                 )
@@ -82,7 +86,8 @@ class SongketMotherAdapterStudent: RecyclerView.Adapter<SongketMotherAdapterStud
                 val elementsToHide = config?.second ?: emptyList()
                 listOf(
                     nameActivityCompletition, organizerCompletition, rankingSemester,
-                    universityAndMajor, nameClub, nameExtracurricular
+                    universityAndMajor, nameClub, nameExtracurricular, totalStudent, averageValue,
+
                 ).forEach { view ->
                     view.visibility = if (view in elementsToHide) View.GONE else View.VISIBLE
                 }
@@ -111,10 +116,16 @@ class SongketMotherAdapterStudent: RecyclerView.Adapter<SongketMotherAdapterStud
                 mtvStatus.setTextColor(statusColor)
                 nameActivityCompletition.text = data.nameActivityCompletition
                 organizerCompletition.text = data.organizerCompletition
-                rankingSemester.text = data.rankingSemester
-                universityAndMajor.text = data.universityAndMajor
+                rankingSemester.text = data.semester
+                universityAndMajor.text = data.nameUniversity
                 nameExtracurricular.text = data.nameExtracurricular
                 nameClub.text = data.nameClub
+                major.text = data.major
+                universityAndMajor.text = data.nameUniversity
+                semester.text = data.semester
+                averageValue.text = data.averageValue.toString()
+                totalStudent.text = data.totalStudent
+                rankingSemester.text = data.ranking
             }
         }
     }
