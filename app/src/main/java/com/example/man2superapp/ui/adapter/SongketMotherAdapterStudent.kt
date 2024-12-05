@@ -23,20 +23,28 @@ class SongketMotherAdapterStudent: RecyclerView.Adapter<SongketMotherAdapterStud
                         "Surat Keterangan Aktif Sekolah", listOf(
                             nameActivityCompletition,
                             organizerCompletition,
-                            rankingSemester,
                             universityAndMajor,
+                            majorStudent,
                             nameClub,
-                            nameExtracurricular
+                            nameExtracurricular,
+                            rankingSemester,
+                            averageValue,
+                            totalStudent,
+                            semester,
                         )
                     ),
                     2 to Pair(
                         "Surat Keterangan Berkelakuan Baik", listOf(
                             nameActivityCompletition,
                             organizerCompletition,
-                            rankingSemester,
                             universityAndMajor,
+                            majorStudent,
                             nameClub,
-                            nameExtracurricular
+                            nameExtracurricular,
+                            rankingSemester,
+                            averageValue,
+                            totalStudent,
+                            semester,
                         )
                     ),
                     3 to Pair(
@@ -44,12 +52,17 @@ class SongketMotherAdapterStudent: RecyclerView.Adapter<SongketMotherAdapterStud
                             nameActivityCompletition,
                             organizerCompletition,
                             rankingSemester,
-                            universityAndMajor
+                            universityAndMajor,
+                            averageValue,
+                            majorStudent,
+                            semester,
+                            totalStudent
                         )
                     ),
                     4 to Pair(
                         "Surat Keterangan Lomba", listOf(
-                            rankingSemester, universityAndMajor, nameClub, nameExtracurricular
+                            rankingSemester, universityAndMajor, nameClub, nameExtracurricular,
+                            majorStudent,semester,totalStudent,averageValue
                         )
                     ),
                     5 to Pair(
@@ -59,7 +72,7 @@ class SongketMotherAdapterStudent: RecyclerView.Adapter<SongketMotherAdapterStud
                             nameClub,
                             nameExtracurricular,
                             universityAndMajor,
-                            major,
+                            majorStudent,
                         )
                     ),
                     6 to Pair(
@@ -87,6 +100,7 @@ class SongketMotherAdapterStudent: RecyclerView.Adapter<SongketMotherAdapterStud
                 listOf(
                     nameActivityCompletition, organizerCompletition, rankingSemester,
                     universityAndMajor, nameClub, nameExtracurricular, totalStudent, averageValue,
+                    majorStudent,
 
                 ).forEach { view ->
                     view.visibility = if (view in elementsToHide) View.GONE else View.VISIBLE
@@ -112,20 +126,19 @@ class SongketMotherAdapterStudent: RecyclerView.Adapter<SongketMotherAdapterStud
                     nameClub.visibility = View.GONE
                     nameExtracurricular.visibility = View.GONE
                 }
-                mtvStatus.text = statusText
+                mtvStatus.text = "Status: $statusText"
                 mtvStatus.setTextColor(statusColor)
-                nameActivityCompletition.text = data.nameActivityCompletition
-                organizerCompletition.text = data.organizerCompletition
-                rankingSemester.text = data.semester
-                universityAndMajor.text = data.nameUniversity
-                nameExtracurricular.text = data.nameExtracurricular
-                nameClub.text = data.nameClub
-                major.text = data.major
-                universityAndMajor.text = data.nameUniversity
-                semester.text = data.semester
-                averageValue.text = data.averageValue.toString()
-                totalStudent.text = data.totalStudent
-                rankingSemester.text = data.ranking
+                nameActivityCompletition.text = "Nama Lomba: ${data.nameActivityCompletition}"
+                organizerCompletition.text = "Penyelenggara: ${data.organizerCompletition}"
+                rankingSemester.text = "Semester: ${data.ranking}"
+                universityAndMajor.text = "Nama Universitas: ${data.nameUniversity}"
+                nameExtracurricular.text = "Ekstrakurikuller: ${data.nameExtracurricular}"
+                nameClub.text = "Klub : ${data.nameClub}"
+                majorStudent.text = "Jurusan: ${data.major}"
+                semester.text = "Semester : ${data.semester}"
+                averageValue.text = "Nilai Rata Rata: ${data.averageValue.toString()}"
+                totalStudent.text = "Total Siswa: ${data.totalStudent}"
+                numberLetter.text = "Nomor Surat: ${data.numberLetter?: "?"}"
             }
         }
     }

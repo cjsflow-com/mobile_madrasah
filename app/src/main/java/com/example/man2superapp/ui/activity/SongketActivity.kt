@@ -213,10 +213,26 @@ class SongketActivity : AppCompatActivity() {
             club.setOnClickListener {
                 Intent(this@SongketActivity,CreateSongket::class.java).apply {
                     Intent(this@SongketActivity,CreateSongket::class.java).apply {
+                        putExtra(Constant.LETTER_TYPE,3)
                         putExtra(Constant.LETTER_STATEMENT,"Surat Keterangan Ekskul/Club")
                     }.also { startActivity(it)}.also { finish() }
                 }
             }
+
+            peringkat.setOnClickListener {
+                Intent(this@SongketActivity,CreateSongket::class.java).apply {
+                    putExtra(Constant.LETTER_TYPE,5)
+                    putExtra(Constant.LETTER_STATEMENT,"Surat Keterangan Peringkat")
+                }.also { startActivity(it)}.also { finish() }
+            }
+
+            univ.setOnClickListener {
+                Intent(this@SongketActivity,CreateSongket::class.java).apply {
+                    putExtra(Constant.LETTER_TYPE,6)
+                    putExtra(Constant.LETTER_STATEMENT,"Surat Keterangan Rekomendasi Universitas")
+                }.also { startActivity(it) }.also { finish() }
+            }
+
             BBaik.setOnClickListener {
                 showAlertDialog("Konfirmasi buat Surat Keterangan Berkelakuan Baik",
                     "Apakah anda yakin ingin membuat surat keterangan berkelakuan baik",2,

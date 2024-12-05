@@ -7,6 +7,17 @@
     tools:context=".ui.activity.CreateSongket"
     android:layout_height="match_parent">
 
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Kembali"
+        android:textSize="15sp"
+        android:padding="10dp"
+        android:fontFamily="@font/montserrat_medium"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/back_button"/>
+
 
     <ImageView
         android:id="@+id/imageView"
@@ -15,7 +26,7 @@
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/back_button"
         app:srcCompat="@drawable/medium_logo" />
 
     <TextView
@@ -64,6 +75,7 @@
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:id="@+id/tvEskul"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_medium"
                 android:text="Nama Ekskul"
@@ -75,6 +87,7 @@
                 app:boxCornerRadiusBottomEnd="5dp"
                 android:id="@+id/parent_Extracurricular"
                 app:boxCornerRadiusBottomStart="5dp"
+                android:visibility="gone"
                 app:boxCornerRadiusTopEnd="5dp"
                 app:boxCornerRadiusTopStart="5dp"
                 android:layout_height="match_parent"
@@ -93,6 +106,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvClub"
+                android:visibility="gone"
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/montserrat_medium"
                 android:text="Nama Klub"
@@ -102,6 +116,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:id="@+id/parentNameClub"
+                android:visibility="gone"
                 app:boxCornerRadiusBottomEnd="5dp"
                 app:boxCornerRadiusBottomStart="5dp"
                 app:boxCornerRadiusTopEnd="5dp"
@@ -123,6 +138,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvNameUnversity"
+                android:visibility="gone"
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/montserrat_medium"
                 android:text="Nama Universitas"
@@ -132,6 +148,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:id="@+id/parentNameUniversity"
+                android:visibility="gone"
                 app:boxCornerRadiusBottomEnd="5dp"
                 app:boxCornerRadiusBottomStart="5dp"
                 app:boxCornerRadiusTopEnd="5dp"
@@ -154,6 +171,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tvMajor"
                 android:layout_marginTop="12dp"
+                android:visibility="gone"
                 android:fontFamily="@font/montserrat_medium"
                 android:text="Jurusan Yang Di ambil"
                 android:textColor="@color/text_default"
@@ -163,6 +181,7 @@
                 android:layout_width="match_parent"
                 android:id="@+id/parentMajor"
                 app:boxCornerRadiusBottomEnd="5dp"
+                android:visibility="gone"
                 app:boxCornerRadiusBottomStart="5dp"
                 app:boxCornerRadiusTopEnd="5dp"
                 app:boxCornerRadiusTopStart="5dp"
@@ -181,6 +200,7 @@
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:id="@+id/tvRanking"
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/montserrat_medium"
@@ -195,6 +215,7 @@
                 app:boxCornerRadiusBottomStart="5dp"
                 app:boxCornerRadiusTopEnd="5dp"
                 app:boxCornerRadiusTopStart="5dp"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:hint="Ranking Anda">
 
@@ -210,6 +231,7 @@
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:id="@+id/tvSemester"
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/montserrat_medium"
@@ -222,6 +244,7 @@
                 android:id="@+id/parentSemester"
                 app:boxCornerRadiusBottomEnd="5dp"
                 app:boxCornerRadiusBottomStart="5dp"
+                android:visibility="gone"
                 app:boxCornerRadiusTopEnd="5dp"
                 app:boxCornerRadiusTopStart="5dp"
                 android:layout_height="wrap_content"
@@ -239,6 +262,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvTotalStudents"
                 android:layout_marginTop="12dp"
@@ -250,6 +274,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:id="@+id/parentTotalStudents"
+                android:visibility="gone"
                 app:boxCornerRadiusBottomEnd="5dp"
                 app:boxCornerRadiusBottomStart="5dp"
                 app:boxCornerRadiusTopEnd="5dp"
@@ -272,6 +297,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tvAverageValue"
                 android:layout_marginTop="12dp"
+                android:visibility="gone"
                 android:fontFamily="@font/montserrat_medium"
                 android:text="Nilai Rata Rata anda"
                 android:textColor="@color/text_default"
@@ -282,6 +308,7 @@
                 android:id="@+id/parentAverageValue"
                 app:boxCornerRadiusBottomEnd="5dp"
                 app:boxCornerRadiusBottomStart="5dp"
+                android:visibility="gone"
                 app:boxCornerRadiusTopEnd="5dp"
                 app:boxCornerRadiusTopStart="5dp"
                 android:layout_height="wrap_content"

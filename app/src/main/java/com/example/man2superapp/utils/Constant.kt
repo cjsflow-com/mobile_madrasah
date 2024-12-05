@@ -3,6 +3,7 @@ package com.example.man2superapp.utils
 object Constant {
 
     const val BASE_URL = "https://bedelau.m2mpekanbaru.sch.id/api/"
+    const val BASE_URL_DEPLOYMENT = "http://192.168.100.8:5000/api/"
     const val AUTHORIZATION = "Authorization"
     const val WBS = "wbs"
     const val AUTH = "auth"
@@ -20,4 +21,8 @@ object Constant {
     const val STATUS_LETTER = "$SONGKET_MOTHER/count_status"
     const val LOGOUT = "auth/employee/logout"
     const val GET_ARTICLES = "api/news"
+    const val LETTER_TYPE = "TYPE_LETTER"
+
+//    TAG FOR API
+    const val TAG_CREATE_SONGKET = "CreateSongketActivity"
 }
