@@ -105,7 +105,7 @@ class SongketActivity : AppCompatActivity() {
             .setMessage(message)
             .setPositiveButton("Ya"){dialog, _ ->
                     allViewModel.createSongketMother(letterStatement,"","","","",
-                        id
+                        id,"","","","","",0.0
                     ).observe(this@SongketActivity){state ->
                         when(state){
                             is States.Loading -> {}

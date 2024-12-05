@@ -28,13 +28,25 @@ class Repository @Inject constructor(
         organizerCompletition: String,
         nameEskul: String,
         nameClub: String,
-        studentId: Int
+        studentId: Int,
+        nameUniversity: String,
+        major: String,
+        ranking: String,
+        semester: String,
+        totalStudent: String,
+        averageValue: Double,
     ) = remoteDataSource.createSongketMother(letterStatement,
         nameActivityCompletition,
         organizerCompletition,
         nameEskul,
         nameClub,
-        studentId
+        studentId,
+        nameUniversity,
+        major,
+        ranking,
+        semester,
+        totalStudent,
+        averageValue
     )
 
     fun getCountStatus(id: Int) = remoteDataSource.getCountStatusSongketEmak(id)

@@ -80,6 +80,12 @@ interface ApiService {
         @Field("name_extracurricular") nameEksul: String,
         @Field("name_club") nameClub: String,
         @Field("student_id") studentId: Int,
+        @Field("name_university") nameUniversity: String,
+        @Field("major") major: String,
+        @Field("ranking") ranking: String,
+        @Field("semester") semester: String,
+        @Field("total_student") totalStudent: String,
+        @Field("average_value") averageValue: Double,
     ): Response<CreateSongketMother>
 
     @GET(Constant.STATUS_LETTER)

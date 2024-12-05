@@ -99,9 +99,12 @@ class RemoteDataSource @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
     fun createSongketMother(letterStatement: Int,nameActivityCompletition: String,organizerCompletition: String,
-                            nameEskul: String,nameClub: String, studentId: Int) = flow<States<CreateSongketMother>> {
+                            nameEskul: String,nameClub: String, studentId: Int,
+                            nameUniversity: String, major: String, ranking: String, semester: String,
+                            totalStudent: String,averageValue: Double) = flow<States<CreateSongketMother>> {
         emit(States.loading())
-        apiService.createSongketMother(letterStatement,nameActivityCompletition,organizerCompletition,nameEskul,nameClub,studentId)
+        apiService.createSongketMother(letterStatement,nameActivityCompletition,organizerCompletition,nameEskul,nameClub,studentId,
+            nameUniversity,major,ranking,semester,totalStudent,averageValue)
             .let { if(it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
             else emit(States.failed(it.message()))}
     }.catch {

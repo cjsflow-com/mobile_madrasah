@@ -41,8 +41,10 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
     fun createSongketMother(letterStatement: Int, nameActivityCompletition: String,
                             organizerCompletition: String, nameEskul: String,
                             nameClub: String,
-                            studentId: Int) =
-        repository.createSongketMother(letterStatement, nameActivityCompletition, organizerCompletition, nameEskul, nameClub, studentId)
+                            studentId: Int,nameUniversity: String,major: String,ranking: String,
+                            semester: String,totalStudent: String,averageValue: Double ) =
+        repository.createSongketMother(letterStatement, nameActivityCompletition, organizerCompletition, nameEskul, nameClub, studentId,
+            nameUniversity,major, ranking, semester, totalStudent, averageValue)
             .asLiveData()
 
     fun loginStudent(nisn: String,password: String) = repository.loginStudent(nisn,password).asLiveData()
