@@ -49,5 +49,31 @@ class Repository @Inject constructor(
         averageValue
     )
 
+    fun updatePassword(token: String, password: String) = remoteDataSource.updatePasswordStudent(token,password)
+
+    fun updateSongketMother(id: Int,nameActivityCompletition: String,
+                            organizerCompletition: String,
+                            nameEskul: String,
+                            nameClub: String,
+                            nameUniversity: String,
+                            major: String,
+                            ranking: String,
+                            semester: String,
+                            totalStudent: String,
+                            averageValue: Double) =
+        remoteDataSource.updateSonkgetMother(
+                                id,
+                                nameActivityCompletition,
+                                organizerCompletition,
+                                nameEskul,
+                                nameClub,
+                                nameUniversity,
+                                major,
+                                ranking,
+                                semester,
+                                totalStudent,
+                                averageValue
+                        )
+
     fun getCountStatus(id: Int) = remoteDataSource.getCountStatusSongketEmak(id)
 }

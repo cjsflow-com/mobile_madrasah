@@ -8,6 +8,8 @@ import com.example.man2superapp.source.network.response.login.LogoutResponse
 import com.example.man2superapp.source.network.response.songket_emak.CreateSongketMother
 import com.example.man2superapp.source.network.response.songket_emak.ListSongketEmakResponse
 import com.example.man2superapp.source.network.response.songket_emak.StatusResponse
+import com.example.man2superapp.source.network.response.songket_emak.UpdateSongketMother
+import com.example.man2superapp.source.network.response.student.UpdatePasswordStudent
 import com.example.man2superapp.source.network.response.wbs.AllWbsResponse
 import com.example.man2superapp.source.network.response.wbs.CreateWbsResponse
 import com.example.man2superapp.source.network.response.wbs.GetAllUserResponse
@@ -131,6 +133,34 @@ class RemoteDataSource @Inject constructor(
         }
     }.catch {
         Log.d(TAG, "getCountStatusSongketEmak: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+    fun updateSonkgetMother(id: Int,nameActivityCompletition: String,organizerCompletition: String,
+                            nameEskul: String,nameClub: String,
+                            nameUniversity: String, major: String, ranking: String, semester: String,
+                            totalStudent: String,averageValue: Double) = flow<States<UpdateSongketMother>>
+    {
+        emit(States.loading())
+        apiService.updateSongketMother(id,nameActivityCompletition,organizerCompletition,nameEskul,nameClub,
+            nameUniversity,major,ranking,semester,totalStudent,averageValue).let {
+                if(it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+                else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "updateSonkgetMother: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+
+    fun updatePasswordStudent(token: String,password: String) = flow<States<UpdatePasswordStudent>> {
+        emit(States.loading())
+        apiService.updatePassword(Constant.BEARER + token,password).let {
+            if(it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "updatePasswordStudent: ${it.message.toString()}")
         emit(States.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
 

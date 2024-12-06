@@ -7,6 +7,8 @@ import com.example.man2superapp.source.network.response.login.LogoutResponse
 import com.example.man2superapp.source.network.response.songket_emak.CreateSongketMother
 import com.example.man2superapp.source.network.response.songket_emak.ListSongketEmakResponse
 import com.example.man2superapp.source.network.response.songket_emak.StatusResponse
+import com.example.man2superapp.source.network.response.songket_emak.UpdateSongketMother
+import com.example.man2superapp.source.network.response.student.UpdatePasswordStudent
 import com.example.man2superapp.source.network.response.wbs.AllWbsResponse
 import com.example.man2superapp.source.network.response.wbs.CreateWbsResponse
 import com.example.man2superapp.source.network.response.wbs.GetAllUserResponse
@@ -21,7 +23,9 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Part
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
@@ -87,6 +91,30 @@ interface ApiService {
         @Field("total_student") totalStudent: String,
         @Field("average_value") averageValue: Double,
     ): Response<CreateSongketMother>
+
+
+    @FormUrlEncoded
+    @PUT(Constant.UPDATE_SONGKET_MOTHER)
+    suspend fun updateSongketMother(
+        @Path("id") id: Int,
+        @Field("name_activity_completition") nameActivityCompletition: String,
+        @Field("organizer_completition") organizerCompletition: String,
+        @Field("name_extracurricular") nameEskul: String,
+        @Field("name_club") nameClub: String,
+        @Field("name_university") nameUniversity: String,
+        @Field("major") major: String,
+        @Field("ranking") ranking: String,
+        @Field("semester") semester: String,
+        @Field("total_student") totalStudent: String,
+        @Field("average_value") averageValue: Double,
+    ): Response<UpdateSongketMother>
+
+    @FormUrlEncoded
+    @PUT(Constant.UPDATE_PASSWORD)
+    suspend fun updatePassword(
+        @Header(Constant.AUTHORIZATION) token: String,
+        @Field("password") password: String
+    ): Response<UpdatePasswordStudent>
 
     @GET(Constant.STATUS_LETTER)
     suspend fun getCountStatus(

@@ -51,6 +51,17 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
 
     fun getCountStatus(id: Int) = repository.getCountStatus(id).asLiveData()
 
+    fun updatePasswordStudent(token: String, password: String) = repository.updatePassword(token,password).asLiveData()
+
+    fun updateSongketMother(
+        id: Int,
+        nameActivityCompletition: String,
+        organizerCompletition: String, nameEskul: String,
+        nameClub: String,
+        nameUniversity: String,major: String,ranking: String,
+        semester: String,totalStudent: String,averageValue: Double
+    ) = repository.updateSongketMother(id,nameActivityCompletition,organizerCompletition,nameEskul,nameClub,nameUniversity,major,ranking,semester,totalStudent,averageValue,)
+
     fun fetchAllUsers(context: Context)
     {
         viewModelScope.launch {
