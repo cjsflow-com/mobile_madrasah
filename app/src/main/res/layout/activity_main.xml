@@ -42,14 +42,26 @@
         android:layout_height="wrap_content"
         android:contentDescription="Tombol keluar"
         android:src="@drawable/baseline_logout_24"
-        app:layout_constraintEnd_toStartOf="@id/iconBell"
-        app:layout_constraintTop_toTopOf="@id/iconBell"
-        app:layout_constraintBottom_toBottomOf="@id/iconBell"
+        app:layout_constraintEnd_toStartOf="@id/imProfile"
+        app:layout_constraintTop_toTopOf="@id/imProfile"
+        app:layout_constraintBottom_toBottomOf="@id/imProfile"
         android:layout_marginEnd="15dp"
         android:id="@+id/btn_logout"
         tools:ignore="ContentDescription" />
 
     <!-- Ikon Bell -->
+    <ImageView
+        android:id="@+id/imProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@android:color/white"
+        android:contentDescription="Profile"
+        android:src="@drawable/baseline_account_circle_24"
+        app:layout_constraintBottom_toBottomOf="@id/iconBell"
+        app:layout_constraintEnd_toStartOf="@id/iconBell"
+        app:layout_constraintTop_toTopOf="@id/iconBell" />
+
     <ImageView
         android:id="@+id/iconBell"
         android:layout_width="24dp"
@@ -381,23 +393,5 @@
 
 
     </LinearLayout>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/manblue"
-        android:background="@drawable/bottom_nav_background"
-        android:elevation="8dp"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"
-        app:menu="@menu/bottom_nav_menu"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/row2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        app:itemIconSize="30dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

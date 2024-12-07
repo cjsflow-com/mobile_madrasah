@@ -4,16 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.man2superapp.databinding.ActivityMainBinding
 import com.example.man2superapp.source.LoginTemp
 import com.example.man2superapp.source.local.model.LoginModel
-import com.example.man2superapp.source.network.States
-import com.example.man2superapp.ui.presenter.AllViewModel
+import com.example.man2superapp.ui.fragment.ProfilePopUpFragment
 import com.example.man2superapp.utils.Help
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,13 +23,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mainBinding: ActivityMainBinding
     @Inject
     lateinit var localStore: LoginTemp
-    private val allViewModel by viewModels<AllViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mainBinding.root)
         cardAction()
+        actionToProfile(mainBinding.imProfile)
     }
 
     private fun cardAction() {
@@ -83,11 +82,30 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun actionToProfile(imageView:ImageView)
+    {
+        imageView.setOnClickListener {
+            popUpToProfile()
+        }
+    }
+
     private fun showMaterialTextViewName(isShow: Boolean)
     {
         mainBinding.tvUserName.visibility = if (isShow) View.VISIBLE else View.GONE
         mainBinding.btnLogout.visibility = if(isShow) View.VISIBLE else View.GONE
+        mainBinding.imProfile.visibility = if(isShow) View.VISIBLE else View.GONE
     }
+
+    private fun popUpToProfile()
+    {
+        lifecycleScope.launch {
+            localStore.getToken().collect{ data ->
+              val fragment =  ProfilePopUpFragment(data.role,data.name,data.email,data.nisn,data.class_name,data.gender,this@MainActivity)
+               fragment.show(supportFragmentManager,"ProfilePopupFragment")
+            }
+        }
+    }
+
 
     private fun handleCardActions(token: String) {
         if(token.isEmpty())
