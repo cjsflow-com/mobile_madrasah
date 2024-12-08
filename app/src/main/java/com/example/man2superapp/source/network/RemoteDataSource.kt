@@ -164,4 +164,15 @@ class RemoteDataSource @Inject constructor(
         emit(States.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
 
+    fun updatePasswordEmployee(token: String, password: String) = flow<States<String>> {
+        emit(States.loading())
+        apiService.updatePasswordUser(Constant.BEARER + token,password).let {
+            if(it.isSuccessful && it.body() != null) emit(States.success(it.body()!!.message))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "updatePasswordEmployee: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
 }

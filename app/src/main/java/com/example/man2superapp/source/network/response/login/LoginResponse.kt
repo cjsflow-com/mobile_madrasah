@@ -21,6 +21,10 @@ data class LoginResponse(
     val role: String,
     @SerializedName("status")
     val status: Int,
+    @SerializedName("number_phone")
+    val numberPhone: String,
+    @SerializedName("position")
+    val position: String,
     @SerializedName("success")
     val success: Boolean,
     @SerializedName("token")

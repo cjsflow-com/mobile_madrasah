@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.man2superapp.databinding.ItemSongketMotherStatusBinding
 import com.example.man2superapp.source.local.model.ListSongketMother
 
-class SongketMotherAdapterStudent: RecyclerView.Adapter<SongketMotherAdapterStudent.ViewHolder>()
+class SongketMotherAdapterStudent(
+    private val onEdit: (ListSongketMother) -> Unit
+): RecyclerView.Adapter<SongketMotherAdapterStudent.ViewHolder>()
 {
 
     private val listSongketMother = ArrayList<ListSongketMother>()
@@ -17,6 +19,9 @@ class SongketMotherAdapterStudent: RecyclerView.Adapter<SongketMotherAdapterStud
     inner class ViewHolder(private val binding: ItemSongketMotherStatusBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ListSongketMother) {
             with(binding) {
+                changeSongketMother.setOnClickListener {
+                    onEdit(data)
+                }
                 // Map konfigurasi berdasarkan letterStatement
                 val letterConfig = mapOf(
                     1 to Pair(

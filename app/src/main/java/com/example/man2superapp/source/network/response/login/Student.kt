@@ -10,6 +10,8 @@ data class Student(
     val className: String,
     @SerializedName("date_birthday")
     val dateBirthday: String,
+    @SerializedName("place_birthday")
+    val placeBirthday: String,
     @SerializedName("email")
     val email: String,
     @SerializedName("id")

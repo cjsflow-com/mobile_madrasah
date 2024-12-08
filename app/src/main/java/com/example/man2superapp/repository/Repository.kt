@@ -51,6 +51,8 @@ class Repository @Inject constructor(
 
     fun updatePassword(token: String, password: String) = remoteDataSource.updatePasswordStudent(token,password)
 
+    fun updatePasswordEmployee(token: String,password: String) = remoteDataSource.updatePasswordEmployee(token,password)
+
     fun updateSongketMother(id: Int,nameActivityCompletition: String,
                             organizerCompletition: String,
                             nameEskul: String,

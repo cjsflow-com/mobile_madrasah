@@ -4,6 +4,8 @@ package com.example.man2superapp.source.network.response.songket_emak
 import com.google.gson.annotations.SerializedName
 
 data class SongketEmak(
+    @SerializedName("id")
+    val id: Int,
     @SerializedName("letter_statement")
     val letterStatement: Int,
     @SerializedName("name_activity_completition")

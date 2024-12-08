@@ -9,5 +9,12 @@ data class LoginModel(
     val gender: Int? = null,
     val token: String? = null,
     val profile: String? = null,
+    val mother: String? = null,
+    val father: String? = null,
+    val number_phone: String? = null,
+    val posititon: String? = null,
+    val address: String? = null,
+    val dateBirthday: String? = null,
+    val placeBirthday: String? = null,
     val role: String? = null,
 )

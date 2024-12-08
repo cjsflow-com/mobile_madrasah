@@ -1,5 +1,6 @@
 package com.example.man2superapp.utils
 
+import android.app.Activity
 import android.content.ContentResolver
 import android.content.Context
 import android.graphics.Bitmap
@@ -7,6 +8,8 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Environment
 import android.widget.Toast
+import androidx.core.app.ActivityCompat.finishAffinity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -67,6 +70,18 @@ object Help {
         return File.createTempFile(timeStamp,".jpg",storageDir)
     }
 
-
+     fun alertDialog(context: Activity)
+    {
+        MaterialAlertDialogBuilder(context)
+            .setTitle("Keluar Aplikasi")
+            .setMessage("Apakah Anda yakin ingin keluar?")
+            .setPositiveButton("Ya"){_,_ ->
+                context.finishAffinity()
+            }
+            .setNegativeButton("Tidak"){dialog,_ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
 
 }

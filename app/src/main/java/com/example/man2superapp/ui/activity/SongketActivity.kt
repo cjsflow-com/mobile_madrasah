@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -43,13 +44,19 @@ class SongketActivity : AppCompatActivity() {
     @Inject
     lateinit var localStore: LoginTemp
     private val allViewModel by viewModels<AllViewModel>()
-    private val adapterSongketList by lazy { SongketMotherAdapterStudent() }
+    private val adapterSongketList by lazy { SongketMotherAdapterStudent(::onEdit) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         songketBinding = ActivitySongketBinding.inflate(layoutInflater)
         setContentView(songketBinding.root)
         setCurrentDate()
+        onBackPressedDispatcher.addCallback(this@SongketActivity,object: OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                Help.alertDialog(this@SongketActivity)
+            }
+
+        })
         lifecycleScope.launch {
             localStore.getToken().collect{data ->
                 data.id?.let {
@@ -143,6 +150,15 @@ class SongketActivity : AppCompatActivity() {
                 showBottomDialogShow("tolak",id)
             }
         }
+    }
+
+    private fun onEdit(songketMother: ListSongketMother)
+    {
+        Intent(this@SongketActivity,EditSongketActivity::class.java).apply {
+            putExtra(Constant.LETTER_TYPE,songketMother.letterStatement)
+            putExtra(Constant.TYPE,songketMother.id)
+            putExtra(Constant.LIST_SONGKET_MOTHER,songketMother)
+        }.also { startActivity(it) }
     }
 
     private fun showBottomDialogShow(status: String,id: Int)

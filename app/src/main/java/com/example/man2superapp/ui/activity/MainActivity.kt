@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.OnBackPressedDispatcher
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -13,6 +15,7 @@ import com.example.man2superapp.source.LoginTemp
 import com.example.man2superapp.source.local.model.LoginModel
 import com.example.man2superapp.ui.fragment.ProfilePopUpFragment
 import com.example.man2superapp.utils.Help
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -30,6 +33,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(mainBinding.root)
         cardAction()
         actionToProfile(mainBinding.imProfile)
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                Help.alertDialog(this@MainActivity)
+            }
+        })
+
     }
 
     private fun cardAction() {
@@ -75,7 +84,8 @@ class MainActivity : AppCompatActivity() {
     private fun logoutEmployee()
     {
         lifecycleScope.launch {
-            localStore.putToken(LoginModel("",0,"","","",0,"","","")).also {
+            localStore.putToken(LoginModel("",0,"","","",0,"","","","","",
+                "","","","","")).also {
                 startActivity(Intent(this@MainActivity,LoginActivity::class.java))
                     .also { finish() }
             }
@@ -100,7 +110,8 @@ class MainActivity : AppCompatActivity() {
     {
         lifecycleScope.launch {
             localStore.getToken().collect{ data ->
-              val fragment =  ProfilePopUpFragment(data.role,data.name,data.email,data.nisn,data.class_name,data.gender,this@MainActivity)
+              val fragment =  ProfilePopUpFragment(data.role,data.name,data.email,data.nisn,data.class_name,data.number_phone,data.mother,data.father,
+                  data.address,data.posititon,data.dateBirthday,data.placeBirthday,data.gender,this@MainActivity)
                fragment.show(supportFragmentManager,"ProfilePopupFragment")
             }
         }
@@ -144,6 +155,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+
 }
 
 //    private fun showMaterialDialog()

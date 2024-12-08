@@ -53,6 +53,8 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
 
     fun updatePasswordStudent(token: String, password: String) = repository.updatePassword(token,password).asLiveData()
 
+    fun updatePasswordEmployee(token: String,password: String) = repository.updatePasswordEmployee(token,password).asLiveData()
+
     fun updateSongketMother(
         id: Int,
         nameActivityCompletition: String,
@@ -60,7 +62,8 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
         nameClub: String,
         nameUniversity: String,major: String,ranking: String,
         semester: String,totalStudent: String,averageValue: Double
-    ) = repository.updateSongketMother(id,nameActivityCompletition,organizerCompletition,nameEskul,nameClub,nameUniversity,major,ranking,semester,totalStudent,averageValue,)
+    ) = repository.updateSongketMother(id,nameActivityCompletition,organizerCompletition,nameEskul,nameClub,nameUniversity,major,ranking,semester,totalStudent,averageValue)
+        .asLiveData()
 
     fun fetchAllUsers(context: Context)
     {

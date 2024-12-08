@@ -116,6 +116,13 @@ interface ApiService {
         @Field("password") password: String
     ): Response<UpdatePasswordStudent>
 
+    @FormUrlEncoded
+    @PUT(Constant.UPDATE_PASSWORD_EMPLOYEE)
+    suspend fun updatePasswordUser(
+        @Header(Constant.AUTHORIZATION) token: String,
+        @Field("password") password: String
+    ): Response<UpdatePasswordStudent>
+
     @GET(Constant.STATUS_LETTER)
     suspend fun getCountStatus(
         @Query("id") id: Int

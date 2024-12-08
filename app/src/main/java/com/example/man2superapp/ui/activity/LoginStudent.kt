@@ -3,6 +3,7 @@ package com.example.man2superapp.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -34,6 +35,12 @@ class LoginStudent: AppCompatActivity()
         super.onCreate(savedInstanceState)
         loginStudentBinding = ActivityLoginStudentBinding.inflate(layoutInflater)
         setContentView(loginStudentBinding.root)
+
+        onBackPressedDispatcher.addCallback(this@LoginStudent,object: OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                Help.alertDialog(this@LoginStudent)
+            }
+        })
 
         with(loginStudentBinding){
             backButton.setOnClickListener {
@@ -68,7 +75,7 @@ class LoginStudent: AppCompatActivity()
                                 localStore.putToken(
                                     LoginModel(state.data.student.name,state.data.student.id,state.data.student.email
                                     ,state.data.student.nisn,state.data.student.className,state.data.student.gender,
-                                        state.data.token,state.data.student.profile,"siswa")
+                                        state.data.token,state.data.student.profile,state.data.student.nameMother,state.data.student.nameFather,state.data.student.numberHandphone,"",state.data.student.address,state.data.student.dateBirthday,state.data.student.placeBirthday,"siswa")
                                         .also { startActivity(Intent(this@LoginStudent,MainActivity::class.java))
                                             .also { finish() }}
                                 )

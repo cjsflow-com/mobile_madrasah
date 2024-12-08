@@ -9,6 +9,7 @@ import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -44,7 +45,12 @@ class LoginActivity : AppCompatActivity() {
         loginBinding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(loginBinding.root)
         isShowProgressBar(false)
+        onBackPressedDispatcher.addCallback(this@LoginActivity,object: OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                Help.alertDialog(this@LoginActivity)
+            }
 
+        })
         setupRegisterText()
 
         loginBinding.apply {
@@ -115,7 +121,7 @@ class LoginActivity : AppCompatActivity() {
                                 Log.d(TAG, "action: ${state.data.messages}")
                                 localStore.putToken(
                                     LoginModel(state.data.name,state.data.id,state.data.email,"","",state.data.gender,state.data.token,state.data.profile,
-                                        state.data.role).also {
+                                        "","",state.data.numberPhone,state.data.numberPhone,"","","",state.data.role).also {
                                             startActivity(Intent(this@LoginActivity,MainActivity::class.java)).also { finish() }
                                     }
                                 )

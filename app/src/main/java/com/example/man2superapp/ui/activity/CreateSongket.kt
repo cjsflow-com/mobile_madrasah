@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -36,6 +37,13 @@ class CreateSongket : AppCompatActivity()
         setContentView(createSongketBinding.root)
         val letterStatement = intent.getStringExtra(Constant.LETTER_STATEMENT)
         letterType = intent.getIntExtra(Constant.LETTER_TYPE,-1)
+
+        onBackPressedDispatcher.addCallback(this@CreateSongket,object: OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                Help.alertDialog(this@CreateSongket)
+            }
+
+        })
 
         createSongketBinding.apply {
             tvMan.text = letterStatement

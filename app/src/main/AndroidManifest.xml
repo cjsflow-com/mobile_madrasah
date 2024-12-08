@@ -44,6 +44,10 @@
         <activity
             android:name=".EkinAfter"
             android:exported="false" />
+        <activity android:name=".ui.activity.UpdateStudent"
+            android:exported="false"/>
+        <activity android:name=".ui.activity.EditSongketActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.activity.EkinActivity"
             android:exported="false" />
