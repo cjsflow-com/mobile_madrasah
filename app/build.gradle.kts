@@ -68,6 +68,7 @@ dependencies {
     kapt(libs.hilt.compiler)
     implementation(libs.dexter)
     implementation(libs.picasso)
+    implementation(libs.glide)
 }
 
 kapt {

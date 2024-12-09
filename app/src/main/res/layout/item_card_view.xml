@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    app:cardCornerRadius="10dp">
+
+    <ImageView
+        android:id="@+id/sliderImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/slidersample"
+        android:scaleType="centerCrop" />
+
+    <!-- Teks di dalam Slider -->
+    <TextView
+        android:id="@+id/sliderTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kemenag Rilis Buku tentang Konsep Masjid Ramah"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:fontFamily="@font/poppins_semibold"
+        android:layout_gravity="top|start"
+        android:layout_margin="16dp"/>
+
+    <!-- Tombol 'Selengkapnya' -->
+    <Button
+        android:id="@+id/btnSelengkapnya"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selengkapnya"
+        android:backgroundTint="@color/mangold"
+        android:textColor="@android:color/white"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="16dp"/>
+</androidx.cardview.widget.CardView>

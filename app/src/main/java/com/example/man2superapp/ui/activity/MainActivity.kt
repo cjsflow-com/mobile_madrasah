@@ -1,6 +1,8 @@
 package com.example.man2superapp.ui.activity
 
+import ArticleAdapter
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,10 +12,12 @@ import androidx.activity.OnBackPressedDispatcher
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.man2superapp.databinding.ActivityMainBinding
 import com.example.man2superapp.source.LoginTemp
 import com.example.man2superapp.source.local.model.LoginModel
-import com.example.man2superapp.ui.fragment.ProfilePopUpFragment
+import com.example.man2superapp.source.network.States
+import com.example.man2superapp.ui.presenter.AllViewModel
 import com.example.man2superapp.utils.Help
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,6 +30,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mainBinding: ActivityMainBinding
     @Inject
     lateinit var localStore: LoginTemp
+    private val allViewModel by viewModels<AllViewModel>()
+
+    private lateinit var articleAdapter: ArticleAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -35,4 +35,8 @@ object Constant {
 
 //    TAG FOR API
     const val TAG_CREATE_SONGKET = "CreateSongketActivity"
+
+    // Pastikan URL diakhiri dengan '/'
+    const val ARTICLE_BASE_URL = "https://m2mpekanbaru.sch.id/api/"
+    const val GET_ARTICLES = "news"
 }
