@@ -9,7 +9,9 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.man2superapp.repository.Repository
 import com.example.man2superapp.source.local.model.GetAllUserWbs
+import com.example.man2superapp.source.local.model.GetClassStudent
 import com.example.man2superapp.source.local.model.toGenerateAllUserWbs
+import com.example.man2superapp.source.local.model.toGenerateClassStudent
 import com.example.man2superapp.source.network.States
 import com.example.man2superapp.source.network.response.wbs.DataUser
 import com.example.man2superapp.source.network.response.wbs.GetAllUserResponse
@@ -23,8 +25,10 @@ import javax.inject.Inject
 class AllViewModel @Inject constructor(private val repository: Repository): ViewModel()
 {
     private val _userList = MutableLiveData<List<GetAllUserWbs>>()
+    private val _clasList = MutableLiveData<List<GetClassStudent>>()
 
     val userList: LiveData<List<GetAllUserWbs>> get() = _userList
+    val classList: LiveData<List<GetClassStudent>> = _clasList
 
     fun loginEmployee(email: String, password: String) = repository.loginEmployee(email, password).asLiveData()
     fun getAllWbs(token: String) = repository.getAllWbs(token).asLiveData()
@@ -65,6 +69,24 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
     ) = repository.updateSongketMother(id,nameActivityCompletition,organizerCompletition,nameEskul,nameClub,nameUniversity,major,ranking,semester,totalStudent,averageValue)
         .asLiveData()
 
+    fun fetchAllClassStudent(context: Context){
+        viewModelScope.launch {
+            repository.getAllClassStudent().collect{ state ->
+                when(state){
+                    is States.Loading -> {}
+                    is States.Success -> {
+                        _clasList.value = state.data.data.toGenerateClassStudent()
+                        Log.d("AllViewModel", "fetchAllClassStudent: ${state.data.message}")
+                    }
+                    is States.Failed -> {
+                        Help.showToast(context,state.message)
+                        Log.d("AllViewModel", "fetchAllClassStudent: ${state.message}")
+                    }
+                }
+            }
+        }
+    }
+
     fun fetchAllUsers(context: Context)
     {
         viewModelScope.launch {
@@ -87,4 +109,10 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
             }
         }
     }
+
+    fun updateProfileStudent(token: String, name: String, email: String, placeBirthday: String, nisn: String, phoneNumber: String, classStudentId: Int, gender: Int, nameFather: String, nameMother: String, address: String, dateBirthday: String)
+        = repository.updateProfileStudent(token,name,email,placeBirthday,nisn,phoneNumber,classStudentId,gender,nameFather,nameMother,address,dateBirthday).asLiveData()
+
+    fun updateProfileEmployee(token: String,name: String,email: String,phoneNumber: String,gender: Int,position: String)
+        = repository.updateProfileEmployee(token, name, email, phoneNumber, gender, position).asLiveData()
 }

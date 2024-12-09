@@ -10,6 +10,8 @@ import com.example.man2superapp.source.network.response.songket_emak.ListSongket
 import com.example.man2superapp.source.network.response.songket_emak.StatusResponse
 import com.example.man2superapp.source.network.response.songket_emak.UpdateSongketMother
 import com.example.man2superapp.source.network.response.student.UpdatePasswordStudent
+import com.example.man2superapp.source.network.response.student.classses.GetAllClassStudentResponse
+import com.example.man2superapp.source.network.response.users.UpdateProfileResponse
 import com.example.man2superapp.source.network.response.wbs.AllWbsResponse
 import com.example.man2superapp.source.network.response.wbs.CreateWbsResponse
 import com.example.man2superapp.source.network.response.wbs.GetAllUserResponse
@@ -175,4 +177,39 @@ class RemoteDataSource @Inject constructor(
         emit(States.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
 
+    fun getClassAllStudent() = flow<States<GetAllClassStudentResponse>> {
+        emit(States.loading())
+        apiService.getClass().let {
+            if(it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "getClassAllStudent: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+    fun updateProfileEmployee(token: String,name: String,email: String,phoneNumber: String,gender: Int,position: String) = flow<States<String>> {
+        emit(States.loading())
+        apiService.updateProfileEmployee(Constant.BEARER + token,name,email,phoneNumber,gender,position).let {
+            if(it.isSuccessful && it.body() != null) emit(States.success(it.body()!!.message))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "updateProfileEmployee: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+    fun updateProfileStudent(token: String, name: String, email: String, placeBirthday: String, nisn: String, phoneNumber: String, classStudentId: Int, gender: Int, nameFather: String, nameMother: String, address: String, dateBirthday: String) = flow<States<String>>
+    {
+        emit(States.loading())
+        apiService.updateProfileStudent(Constant.BEARER + token,
+            name,email,placeBirthday,nisn,phoneNumber,classStudentId,gender,
+            nameFather,nameMother,address,dateBirthday).let {
+            if(it.isSuccessful && it.body() != null) emit(States.success(it.body()!!.message))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "updateProfileStudent: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
 }

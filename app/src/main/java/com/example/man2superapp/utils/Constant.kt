@@ -27,8 +27,11 @@ object Constant {
     const val LETTER_TYPE = "TYPE_LETTER"
     const val UPDATE_PASSWORD = "$STUDENT/update_password"
     const val UPDATE_PASSWORD_EMPLOYEE = "$AUTH/update_password"
+    const val UPDATE_PROFILE_EMPLOYEE = "$AUTH/user/update"
+    const val UPDATE_PROFILE_STUDENT = "$STUDENT/profile"
     const val LIST_SONGKET_MOTHER = "songket_mother"
     const val TAG_UPDATE_SONGKET_MOTHER = "update_songket_mother"
+    const val GET_STUDENT_CLASS = "get_all_class"
 
 //    TAG FOR API
     const val TAG_CREATE_SONGKET = "CreateSongketActivity"

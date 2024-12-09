@@ -89,6 +89,13 @@ class ProfilePopUpFragment(
                         putExtra(Constant.TYPE_ROLE,role)
                     }.also { startActivity(it) }.also { requireActivity().finish() }
                 }
+
+                btnUpdateProfile.setOnClickListener {
+                    Intent(context,UpdateStudent::class.java).apply {
+                        putExtra(Constant.TYPE,2)
+                        putExtra(Constant.TYPE_ROLE,role)
+                    }.also { startActivity(it) }.also { requireActivity().finish() }
+                }
             }
         }
         return dialog

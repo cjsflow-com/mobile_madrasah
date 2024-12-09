@@ -9,6 +9,8 @@ import com.example.man2superapp.source.network.response.songket_emak.ListSongket
 import com.example.man2superapp.source.network.response.songket_emak.StatusResponse
 import com.example.man2superapp.source.network.response.songket_emak.UpdateSongketMother
 import com.example.man2superapp.source.network.response.student.UpdatePasswordStudent
+import com.example.man2superapp.source.network.response.student.classses.GetAllClassStudentResponse
+import com.example.man2superapp.source.network.response.users.UpdateProfileResponse
 import com.example.man2superapp.source.network.response.wbs.AllWbsResponse
 import com.example.man2superapp.source.network.response.wbs.CreateWbsResponse
 import com.example.man2superapp.source.network.response.wbs.GetAllUserResponse
@@ -116,6 +118,9 @@ interface ApiService {
         @Field("password") password: String
     ): Response<UpdatePasswordStudent>
 
+    @GET(Constant.GET_STUDENT_CLASS)
+    suspend fun getClass(): Response<GetAllClassStudentResponse>
+
     @FormUrlEncoded
     @PUT(Constant.UPDATE_PASSWORD_EMPLOYEE)
     suspend fun updatePasswordUser(
@@ -127,6 +132,33 @@ interface ApiService {
     suspend fun getCountStatus(
         @Query("id") id: Int
     ): Response<StatusResponse>
+
+    @FormUrlEncoded
+    @PUT(Constant.UPDATE_PROFILE_EMPLOYEE)
+    suspend fun updateProfileEmployee(
+        @Header(Constant.AUTHORIZATION) token: String,
+        @Field("name") name: String,
+        @Field("email") email: String,
+        @Field("number_handphone") phoneNumber: String,
+        @Field("gender") gender: Int,
+        @Field("position") position: String,
+    ): Response<UpdateProfileResponse>
+
+    @PUT(Constant.UPDATE_PROFILE_STUDENT)
+    suspend fun updateProfileStudent(
+        @Header(Constant.AUTHORIZATION) token: String,
+        @Field("name") name: String,
+        @Field("email") email: String,
+        @Field("place_birthday") placeBirthday: String,
+        @Field("nisn") nisn: String,
+        @Field("number_handphone") phoneNumber: String,
+        @Field("class_student_id") classStudentId: Int,
+        @Field("gender") gender: Int,
+        @Field("name_father") nameFather: String,
+        @Field("name_mother") nameMother: String,
+        @Field("address") address: String,
+        @Field("date_birthday") dateBirthday: String,
+    ): Response<UpdateProfileResponse>
 
     @GET(Constant. GET_ARTICLES)
     suspend fun getArticles(): Response<List<Article>>
