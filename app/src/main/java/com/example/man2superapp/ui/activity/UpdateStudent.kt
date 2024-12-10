@@ -74,7 +74,12 @@ class UpdateStudent : AppCompatActivity()
                     }
                 }else if(type == 2)
                 {
-
+                    if(role == "siswa")
+                    {
+                        data.token?.let {  }
+                    }else{
+                        data.token?.let {  }
+                    }
                 }
             }
         }
