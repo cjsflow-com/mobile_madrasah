@@ -47,6 +47,13 @@ object Constant {
     const val TAG_UPDATE_SONGKET_MOTHER = "update_songket_mother"
     const val GET_STUDENT_CLASS = "get_all_class"
 
+    // Songket Emak GTK/Karyawan
+    const val CREATE_SONGKET_MOTHER_GTK = "$SONGKET_MOTHER/gtk/create"
+    const val GET_BY_STATUS = "$SONGKET_MOTHER/gtk/get_by_status"
+    const val COUNT_STATUS_SONGKET_MOTHER_GTK = "$SONGKET_MOTHER/gtk/count_status"
+    const val UPDATE_SONGKET_MOTHER_GTK = "$SONGKET_MOTHER/gtk/update_songket/{id}"
+    const val ALL_LIST_SONGKET_MOTHER_GTK = "$SONGKET_MOTHER/gtk/all_list_songket_mother_employee"
+
 //    TAG FOR API
     const val TAG_CREATE_SONGKET = "CreateSongketActivity"
 }

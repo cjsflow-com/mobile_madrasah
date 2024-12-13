@@ -9,6 +9,8 @@ import com.example.man2superapp.source.network.response.songket_emak.CreateSongk
 import com.example.man2superapp.source.network.response.songket_emak.ListSongketEmakResponse
 import com.example.man2superapp.source.network.response.songket_emak.StatusResponse
 import com.example.man2superapp.source.network.response.songket_emak.UpdateSongketMother
+import com.example.man2superapp.source.network.response.songket_emak.gtk.AllSongketEmakByStatusResponse
+import com.example.man2superapp.source.network.response.songket_emak.gtk.CountStatusResponse
 import com.example.man2superapp.source.network.response.student.UpdatePasswordStudent
 import com.example.man2superapp.source.network.response.student.classses.GetAllClassStudentResponse
 import com.example.man2superapp.source.network.response.users.UpdateProfileResponse
@@ -18,11 +20,13 @@ import com.example.man2superapp.source.network.response.wbs.GetAllUserResponse
 import com.example.man2superapp.source.network.service.ApiService
 import com.example.man2superapp.utils.Constant
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.Response
 import javax.inject.Inject
 
 class RemoteDataSource @Inject constructor(
@@ -212,4 +216,66 @@ class RemoteDataSource @Inject constructor(
         Log.d(TAG, "updateProfileStudent: ${it.message.toString()}")
         emit(States.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
+
+    fun getCountStatusSongketMotherGtk() = flow<States<CountStatusResponse>>{
+        emit(States.loading())
+        apiService.getCountStatus().let {
+            if (it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "getCountStatusSongketMotherGtk: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+    fun getByStatusSongketMotherGTK(status: String) = flow<States<AllSongketEmakByStatusResponse>> {
+        emit(States.loading())
+        apiService.getAllListSongketMotherByStatus(status).let {
+            if(it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "getByStatusSongketMotherGTK: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+    fun getAllListSongketMotherGTK() = flow<States<AllSongketEmakByStatusResponse>> {
+        emit(States.loading())
+        apiService.getALlListSongketMother().let {
+            if (it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "getAllListSongketMotherGTK: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+    fun createSongketMotherGTK(letterStatement: Int,rankOrGrade: String,nip: String,
+                               nuptk: String, fieldStudy: String, haveYourEverTaughtSubject: String,
+                               startHoliday: String, endHoliday: String, recommendation_title: String)
+    = flow<States<CreateSongketMother>> {
+        emit(States.loading())
+        apiService.createSongketMotherGTK(letterStatement,rankOrGrade,nip,nuptk,fieldStudy,
+            haveYourEverTaughtSubject,startHoliday,endHoliday,recommendation_title).let {
+                if(it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+                emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "createSongketMotherGTK: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+    fun updateSongketMotherGTK(id: Int, rankOrGrade: String, nip: String, status: Int,
+                               fieldStudy: String, haveYourEverTaughtSubject: String, startHoliday: String,
+                               endHoliday: String, numberLetter: String) =
+        flow<States<UpdateSongketMother>> {
+            apiService.updateSongketMotherGtk(id,rankOrGrade,nip,status,fieldStudy,haveYourEverTaughtSubject,startHoliday,
+                endHoliday,numberLetter).let {
+                    if(it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+                    else emit(States.failed(it.message().toString()))
+            }
+        }.catch {
+            Log.d(TAG, "updateSongketMotherGTK: ${it.message.toString()}")
+            emit(States.failed(it.message.toString()))
+        }.flowOn(Dispatchers.IO)
 }

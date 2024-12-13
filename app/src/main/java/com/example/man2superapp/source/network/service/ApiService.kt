@@ -8,6 +8,8 @@ import com.example.man2superapp.source.network.response.songket_emak.CreateSongk
 import com.example.man2superapp.source.network.response.songket_emak.ListSongketEmakResponse
 import com.example.man2superapp.source.network.response.songket_emak.StatusResponse
 import com.example.man2superapp.source.network.response.songket_emak.UpdateSongketMother
+import com.example.man2superapp.source.network.response.songket_emak.gtk.AllSongketEmakByStatusResponse
+import com.example.man2superapp.source.network.response.songket_emak.gtk.CountStatusResponse
 import com.example.man2superapp.source.network.response.student.UpdatePasswordStudent
 import com.example.man2superapp.source.network.response.student.classses.GetAllClassStudentResponse
 import com.example.man2superapp.source.network.response.users.UpdateProfileResponse
@@ -144,6 +146,7 @@ interface ApiService {
         @Field("position") position: String,
     ): Response<UpdateProfileResponse>
 
+    @FormUrlEncoded
     @PUT(Constant.UPDATE_PROFILE_STUDENT)
     suspend fun updateProfileStudent(
         @Header(Constant.AUTHORIZATION) token: String,
@@ -159,6 +162,45 @@ interface ApiService {
         @Field("address") address: String,
         @Field("date_birthday") dateBirthday: String,
     ): Response<UpdateProfileResponse>
+
+    @GET(Constant.COUNT_STATUS_SONGKET_MOTHER_GTK)
+    suspend fun getCountStatus(): Response<CountStatusResponse>
+
+    @GET(Constant.GET_BY_STATUS)
+    suspend fun getAllListSongketMotherByStatus(
+        @Query("status") status: String
+    ): Response<AllSongketEmakByStatusResponse>
+
+    @GET(Constant.ALL_LIST_SONGKET_MOTHER_GTK)
+    suspend fun getALlListSongketMother(): Response<AllSongketEmakByStatusResponse>
+
+    @FormUrlEncoded
+    @POST(Constant.CREATE_SONGKET_MOTHER_GTK)
+    suspend fun createSongketMotherGTK(
+        @Field("letter_statement") letterStatement: Int,
+        @Field("rank_or_grade") rankOrGrade: String,
+        @Field("nip") nip: String,
+        @Field("nuptk") nuptk: String,
+        @Field("field_study") fieldStudy: String,
+        @Field("have_your_ever_taught_subject") haveYourEverTaughtSubject: String,
+        @Field("start_holiday") startHoliday: String,
+        @Field("end_holiday") endHoliday: String,
+        @Field("recommendation_title") recomendationTitle: String
+    ): Response<CreateSongketMother>
+
+    @FormUrlEncoded
+    @PUT(Constant.UPDATE_SONGKET_MOTHER_GTK)
+    suspend fun updateSongketMotherGtk(
+        @Path("id") id: Int,
+        @Field("rank_or_grade") rankOrGrade: String,
+        @Field("nip") nip: String,
+        @Field("status") status: Int,
+        @Field("field_study") fieldStudy: String,
+        @Field("have_your_ever_taught_subject") haveYourEverTaughtSubject: String,
+        @Field("start_holiday") startHoliday: String,
+        @Field("end_holiday") endHoliday: String,
+        @Field("number_letter")numberLetter: String,
+    ): Response<UpdateSongketMother>
 
     @GET(Constant. GET_ARTICLES)
     suspend fun getArticles(): Response<List<Article>>
