@@ -59,36 +59,63 @@ class SongketActivity : AppCompatActivity() {
         })
         lifecycleScope.launch {
             localStore.getToken().collect{data ->
-                data.id?.let {
-                    cardAction(it)
-                    setCountStatus(it)
-                    clickCard(it)
-                }
+                cardAction(data.id!!)
+                setCountStatus(data.id,data.role!!,data.token!!)
+                clickCard(data.id)
+//                data.id?.let {
+//                    cardAction(it)
+//                    setCountStatus(it)
+//                    clickCard(it)
+//                }
             }
         }
     }
 
-    private fun setCountStatus(id: Int)
+    private fun setCountStatus(id: Int,role: String,token: String)
     {
         songketBinding.apply {
-            allViewModel.getCountStatus(id).observe(this@SongketActivity){
-                state ->
-                when(state){
-                    is States.Loading -> {
-                        tvAccepted.text = "--/--"
-                        tvQueue.text = "--/--"
-                        tvRejected.text = "--/--"
+            if (role == "siswa") {
+                allViewModel.getCountStatus(id).observe(this@SongketActivity) { state ->
+                    when (state) {
+                        is States.Loading -> {
+                            tvAccepted.text = "--/--"
+                            tvQueue.text = "--/--"
+                            tvRejected.text = "--/--"
+                        }
+
+                        is States.Success -> {
+                            tvAccepted.text = state.data.accepted.toString()
+                            tvQueue.text = state.data.queue.toString()
+                            tvRejected.text = state.data.reject.toString()
+                        }
+
+                        is States.Failed -> {
+                            tvAccepted.text = "Tidak ada data"
+                            tvQueue.text = "Tidak ada data"
+                            tvRejected.text = "Tidak ada data"
+                            Help.showToast(this@SongketActivity, state.message)
+                        }
                     }
-                    is States.Success -> {
-                        tvAccepted.text = state.data.accepted.toString()
-                        tvQueue.text = state.data.queue.toString()
-                        tvRejected.text = state.data.reject.toString()
-                    }
-                    is States.Failed -> {
-                        tvAccepted.text = "Tidak ada data"
-                        tvQueue.text = "Tidak ada data"
-                        tvRejected.text = "Tidak ada data"
-                        Help.showToast(this@SongketActivity,state.message)
+                }
+            }else{
+                allViewModel.getCountStatusSongketMotherGtk(token).observe(this@SongketActivity){ state ->
+                    when(state)
+                    {
+                        is States.Loading -> {
+                            tvAccepted.text = "--/--"
+                            tvQueue.text = "--/--"
+                            tvRejected.text = "--/--"
+                        }
+                        is States.Success -> {
+                            tvAccepted.text = state.data.acceptedLeaderMadrasah.toString()
+                            tvQueue.text = state.data.queue.toString()
+                            tvRejected.text = state.data.rejected.toString()
+                        }
+                        is States.Failed -> {
+                            tvAccepted.text = "0"
+                            tvQueue.text = "0"
+                            tvRejected.text = "0"
+                        }
                     }
                 }
             }

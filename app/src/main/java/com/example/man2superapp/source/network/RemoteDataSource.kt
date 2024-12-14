@@ -217,9 +217,9 @@ class RemoteDataSource @Inject constructor(
         emit(States.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
 
-    fun getCountStatusSongketMotherGtk() = flow<States<CountStatusResponse>>{
+    fun getCountStatusSongketMotherGtk(token: String) = flow<States<CountStatusResponse>>{
         emit(States.loading())
-        apiService.getCountStatus().let {
+        apiService.getCountStatus(Constant.BEARER + token).let {
             if (it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
             else emit(States.failed(it.message().toString()))
         }
@@ -228,9 +228,9 @@ class RemoteDataSource @Inject constructor(
         emit(States.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
 
-    fun getByStatusSongketMotherGTK(status: String) = flow<States<AllSongketEmakByStatusResponse>> {
+    fun getByStatusSongketMotherGTK(status: String,token: String) = flow<States<AllSongketEmakByStatusResponse>> {
         emit(States.loading())
-        apiService.getAllListSongketMotherByStatus(status).let {
+        apiService.getAllListSongketMotherByStatus(Constant.BEARER + token,status).let {
             if(it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
             else emit(States.failed(it.message().toString()))
         }
@@ -239,9 +239,9 @@ class RemoteDataSource @Inject constructor(
         emit(States.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
 
-    fun getAllListSongketMotherGTK() = flow<States<AllSongketEmakByStatusResponse>> {
+    fun getAllListSongketMotherGTK(token: String) = flow<States<AllSongketEmakByStatusResponse>> {
         emit(States.loading())
-        apiService.getALlListSongketMother().let {
+        apiService.getALlListSongketMother(Constant.BEARER + token).let {
             if (it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
             else emit(States.failed(it.message().toString()))
         }
@@ -250,12 +250,12 @@ class RemoteDataSource @Inject constructor(
         emit(States.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
 
-    fun createSongketMotherGTK(letterStatement: Int,rankOrGrade: String,nip: String,
+    fun createSongketMotherGTK(token: String,letterStatement: Int,rankOrGrade: String,nip: String,
                                nuptk: String, fieldStudy: String, haveYourEverTaughtSubject: String,
                                startHoliday: String, endHoliday: String, recommendation_title: String)
     = flow<States<CreateSongketMother>> {
         emit(States.loading())
-        apiService.createSongketMotherGTK(letterStatement,rankOrGrade,nip,nuptk,fieldStudy,
+        apiService.createSongketMotherGTK(Constant.BEARER + token,letterStatement,rankOrGrade,nip,nuptk,fieldStudy,
             haveYourEverTaughtSubject,startHoliday,endHoliday,recommendation_title).let {
                 if(it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
                 emit(States.failed(it.message().toString()))
@@ -265,11 +265,11 @@ class RemoteDataSource @Inject constructor(
         emit(States.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
 
-    fun updateSongketMotherGTK(id: Int, rankOrGrade: String, nip: String, status: Int,
+    fun updateSongketMotherGTK(token: String,id: Int, rankOrGrade: String, nip: String,nuptk: String, status: Int,
                                fieldStudy: String, haveYourEverTaughtSubject: String, startHoliday: String,
                                endHoliday: String, numberLetter: String) =
         flow<States<UpdateSongketMother>> {
-            apiService.updateSongketMotherGtk(id,rankOrGrade,nip,status,fieldStudy,haveYourEverTaughtSubject,startHoliday,
+            apiService.updateSongketMotherGtk(Constant.BEARER + token,id,rankOrGrade,nip,nuptk,status,fieldStudy,haveYourEverTaughtSubject,startHoliday,
                 endHoliday,numberLetter).let {
                     if(it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
                     else emit(States.failed(it.message().toString()))

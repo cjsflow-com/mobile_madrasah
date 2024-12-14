@@ -164,19 +164,25 @@ interface ApiService {
     ): Response<UpdateProfileResponse>
 
     @GET(Constant.COUNT_STATUS_SONGKET_MOTHER_GTK)
-    suspend fun getCountStatus(): Response<CountStatusResponse>
+    suspend fun getCountStatus(
+        @Header(Constant.AUTHORIZATION) token: String
+    ): Response<CountStatusResponse>
 
     @GET(Constant.GET_BY_STATUS)
     suspend fun getAllListSongketMotherByStatus(
+        @Header(Constant.AUTHORIZATION)token: String,
         @Query("status") status: String
     ): Response<AllSongketEmakByStatusResponse>
 
     @GET(Constant.ALL_LIST_SONGKET_MOTHER_GTK)
-    suspend fun getALlListSongketMother(): Response<AllSongketEmakByStatusResponse>
+    suspend fun getALlListSongketMother(
+        @Header(Constant.AUTHORIZATION) token: String
+    ): Response<AllSongketEmakByStatusResponse>
 
     @FormUrlEncoded
     @POST(Constant.CREATE_SONGKET_MOTHER_GTK)
     suspend fun createSongketMotherGTK(
+        @Header(Constant.AUTHORIZATION) token: String,
         @Field("letter_statement") letterStatement: Int,
         @Field("rank_or_grade") rankOrGrade: String,
         @Field("nip") nip: String,
@@ -191,9 +197,11 @@ interface ApiService {
     @FormUrlEncoded
     @PUT(Constant.UPDATE_SONGKET_MOTHER_GTK)
     suspend fun updateSongketMotherGtk(
+        @Header(Constant.AUTHORIZATION) token: String,
         @Path("id") id: Int,
         @Field("rank_or_grade") rankOrGrade: String,
         @Field("nip") nip: String,
+        @Field("nuptk") nuptk: String,
         @Field("status") status: Int,
         @Field("field_study") fieldStudy: String,
         @Field("have_your_ever_taught_subject") haveYourEverTaughtSubject: String,

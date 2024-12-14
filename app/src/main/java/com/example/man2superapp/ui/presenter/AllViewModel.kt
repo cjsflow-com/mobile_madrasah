@@ -115,4 +115,21 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
 
     fun updateProfileEmployee(token: String,name: String,email: String,phoneNumber: String,gender: Int,position: String)
         = repository.updateProfileEmployee(token, name, email, phoneNumber, gender, position).asLiveData()
+
+    fun getCountStatusSongketMotherGtk(token: String) = repository.getCountStatusSongketMotherGtk(token).asLiveData()
+
+    fun getByStatusSongketMotherGtk(token: String,status: String) = repository.getByStatusSongketMotherGtk(token,status).asLiveData()
+
+    fun getAllListSongketMotherGTK(token: String) = repository.getAllListSongketMotherGTK(token).asLiveData()
+
+    fun createSongketMotherGtk(token: String,letterStatement: Int, rankOrGrade: String,nip: String, nuptk: String,
+                               fielStudy: String, haveYourEverTaughtSubject: String,startHoliday: String,
+                               endHoliday: String, recommendationTitle: String) =
+        repository.createSongketMotherGtk(token,letterStatement,rankOrGrade,nip,nuptk,fielStudy,haveYourEverTaughtSubject,
+            startHoliday,endHoliday,recommendationTitle).asLiveData()
+
+    fun updateSongketMotherGtk(token: String,id: Int, rankOrGrade: String, nip: String, nuptk: String, status: Int,
+                               fieldStudy: String, haveYourEverTaughtSubject: String,startHoliday: String,endHoliday: String,numberLetter: String)
+    = repository.updateSongketMotherGtk(token,id, rankOrGrade, nip, nuptk, status, fieldStudy, haveYourEverTaughtSubject, startHoliday, endHoliday, numberLetter)
+        .asLiveData()
 }

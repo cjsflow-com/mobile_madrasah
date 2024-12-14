@@ -49,6 +49,8 @@ class UpdateStudent : AppCompatActivity()
         val address = intent.getStringExtra(Constant.ADDRESS)
         val dateBirthday = intent.getStringExtra(Constant.DATE_BIRTHDAY)
 
+        allViewModel.fetchAllClassStudent(this@UpdateStudent)
+
         onBackPressedDispatcher.addCallback(this@UpdateStudent,object: OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
                 Help.alertDialog(this@UpdateStudent)
