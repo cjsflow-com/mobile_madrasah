@@ -197,17 +197,15 @@ interface ApiService {
     @FormUrlEncoded
     @PUT(Constant.UPDATE_SONGKET_MOTHER_GTK)
     suspend fun updateSongketMotherGtk(
-        @Header(Constant.AUTHORIZATION) token: String,
         @Path("id") id: Int,
         @Field("rank_or_grade") rankOrGrade: String,
         @Field("nip") nip: String,
         @Field("nuptk") nuptk: String,
-        @Field("status") status: Int,
         @Field("field_study") fieldStudy: String,
         @Field("have_your_ever_taught_subject") haveYourEverTaughtSubject: String,
         @Field("start_holiday") startHoliday: String,
         @Field("end_holiday") endHoliday: String,
-        @Field("number_letter")numberLetter: String,
+        @Field("recommendation_title") titleRecomendation: String
     ): Response<UpdateSongketMother>
 
     @GET(Constant. GET_ARTICLES)

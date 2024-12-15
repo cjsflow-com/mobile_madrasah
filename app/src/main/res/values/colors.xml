@@ -10,7 +10,10 @@
     <color name="purple_700">#ff3700b3</color>
     <color name="teal_200">#FF03dac5</color>
     <color name="teal_700">#FF018786</color>
-
+    <color name="card_accepted">#2FC5C5</color>
+    <color name="card_queue">#fd855b</color>
+    <color name="card_rejected">#fb7593</color>
+    <color name="card_accepted_leader">#198754</color>
     <color name="text_default">#44567F</color>
     <color name="text_shadow">#7f000000</color>
 </resources>

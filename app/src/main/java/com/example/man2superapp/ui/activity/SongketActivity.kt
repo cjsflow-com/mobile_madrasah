@@ -20,8 +20,11 @@ import com.example.man2superapp.databinding.ActivitySongketBinding
 import com.example.man2superapp.databinding.BottomSheetDialogSongketMotherBinding
 import com.example.man2superapp.source.LoginTemp
 import com.example.man2superapp.source.local.model.ListSongketMother
+import com.example.man2superapp.source.local.model.SongketMotherGTK
 import com.example.man2superapp.source.local.model.toGenerateListSongketMother
+import com.example.man2superapp.source.local.model.toGenerateListSongketMotherGtk
 import com.example.man2superapp.source.network.States
+import com.example.man2superapp.ui.adapter.SongketMotherAdapterGtk
 import com.example.man2superapp.ui.adapter.SongketMotherAdapterStudent
 import com.example.man2superapp.ui.presenter.AllViewModel
 import com.example.man2superapp.utils.Constant
@@ -45,6 +48,7 @@ class SongketActivity : AppCompatActivity() {
     lateinit var localStore: LoginTemp
     private val allViewModel by viewModels<AllViewModel>()
     private val adapterSongketList by lazy { SongketMotherAdapterStudent(::onEdit) }
+    private val adapterSongketListGtk by lazy { SongketMotherAdapterGtk(::onEditGtk) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,20 +59,44 @@ class SongketActivity : AppCompatActivity() {
             override fun handleOnBackPressed() {
                 Help.alertDialog(this@SongketActivity)
             }
-
         })
         lifecycleScope.launch {
             localStore.getToken().collect{data ->
                 cardAction(data.id!!)
-                setCountStatus(data.id,data.role!!,data.token!!)
-                clickCard(data.id)
-//                data.id?.let {
-//                    cardAction(it)
-//                    setCountStatus(it)
-//                    clickCard(it)
-//                }
+                setCountStatus(data.id, data.role!!,data.token!!)
+                clickCard(data.id,data.role,data.token)
+                isShowGtk(data.role)
             }
         }
+        songketBinding.apply {
+            ivBack.setOnClickListener {
+                startActivity(Intent(this@SongketActivity,MainActivity::class.java))
+                finish()
+            }
+        }
+    }
+
+    private fun isShowGtk(role: String)
+    {
+        songketBinding.apply {
+            if(role == "siswa")
+            {
+                ekinCard.visibility = View.VISIBLE
+                BBaik.visibility = View.VISIBLE
+                club.visibility = View.VISIBLE
+                univ.visibility = View.VISIBLE
+                peringkat.visibility = View.VISIBLE
+                cardAcceptedLeader.visibility  = View.GONE
+                cardSendLetter.visibility = View.GONE
+            }else{
+                eHolidayYear.visibility = View.VISIBLE
+                eActivateTeaching.visibility = View.VISIBLE
+                eRecomendation.visibility = View.VISIBLE
+                eTask.visibility = View.VISIBLE
+                univ.visibility = View.GONE
+            }
+        }
+
     }
 
     private fun setCountStatus(id: Int,role: String,token: String)
@@ -90,9 +118,9 @@ class SongketActivity : AppCompatActivity() {
                         }
 
                         is States.Failed -> {
-                            tvAccepted.text = "Tidak ada data"
-                            tvQueue.text = "Tidak ada data"
-                            tvRejected.text = "Tidak ada data"
+                            tvAccepted.text = "0"
+                            tvQueue.text = "0"
+                            tvRejected.text = "0"
                             Help.showToast(this@SongketActivity, state.message)
                         }
                     }
@@ -105,14 +133,21 @@ class SongketActivity : AppCompatActivity() {
                             tvAccepted.text = "--/--"
                             tvQueue.text = "--/--"
                             tvRejected.text = "--/--"
+                            tvAcceptedLeader.text = "--/--"
+                            tvSendLetter.text = "--/--"
                         }
                         is States.Success -> {
                             tvAccepted.text = state.data.acceptedLeaderMadrasah.toString()
                             tvQueue.text = state.data.queue.toString()
                             tvRejected.text = state.data.rejected.toString()
+                            tvAcceptedLeader.text = state.data.done.toString()
+                            tvSendLetter.text = state.data.requestLeaderMadrasah.toString()
+
                         }
                         is States.Failed -> {
                             tvAccepted.text = "0"
+                            tvAcceptedLeader.text = "0"
+                            tvSendLetter.text = "0"
                             tvQueue.text = "0"
                             tvRejected.text = "0"
                         }
@@ -163,18 +198,23 @@ class SongketActivity : AppCompatActivity() {
             .show()
     }
 
-    private fun clickCard(id: Int)
+    private fun clickCard(id: Int,role: String, token: String)
     {
         songketBinding.apply {
             cardAccepted.setOnClickListener {
-                showBottomDialogShow("setuju",id)
+                showBottomDialogShow("setuju",id,role,token)
             }
             cardQueue.setOnClickListener {
-                showBottomDialogShow("antrian",id)
+                showBottomDialogShow("antrian",id,role,token)
             }
-
             cardRejected.setOnClickListener {
-                showBottomDialogShow("tolak",id)
+                showBottomDialogShow("tolak",id,role,token)
+            }
+            cardAcceptedLeader.setOnClickListener {
+                showBottomDialogShow("selesai",id,role,token)
+            }
+            cardSendLetter.setOnClickListener {
+                showBottomDialogShow("ajukan",id,role,token)
             }
         }
     }
@@ -188,7 +228,16 @@ class SongketActivity : AppCompatActivity() {
         }.also { startActivity(it) }
     }
 
-    private fun showBottomDialogShow(status: String,id: Int)
+    private fun onEditGtk(songketMotherGtk: SongketMotherGTK)
+    {
+        Intent(this@SongketActivity,EditSongketGtkActivity::class.java).apply {
+            putExtra(Constant.LETTER_TYPE,songketMotherGtk.letterStatement)
+            putExtra(Constant.TYPE,songketMotherGtk.id)
+            putExtra(Constant.LIST_SONGKET_MOTHER,songketMotherGtk)
+        }.also { startActivity(it) }
+    }
+
+    private fun showBottomDialogShow(status: String,id: Int,role: String,token: String)
     {
         val dialog = BottomSheetDialog(this@SongketActivity)
         val view = layoutInflater.inflate(R.layout.bottom_sheet_dialog_songket_mother,null)
@@ -200,33 +249,62 @@ class SongketActivity : AppCompatActivity() {
         val progresBar = view.findViewById<ProgressBar>(R.id.progressBarSongket)
         val tvError = view.findViewById<MaterialTextView>(R.id.tvError)
 
-        allViewModel.listSongketMotherByStatus(id,status).observe(this@SongketActivity){ state ->
-            when(state){
-                is States.Loading -> {
-                    progresBar.visibility = View.VISIBLE
-                    rvSongketMotherStatus.visibility = View.GONE
-                }
-                is States.Success -> {
-                    val songketList = state.data.songketEmak.toGenerateListSongketMother()
-                    if(songketList.isEmpty())
-                    {
+        if(role == "siswa")
+        {
+            allViewModel.listSongketMotherByStatus(id,status).observe(this@SongketActivity){ state ->
+                when(state){
+                    is States.Loading -> {
+                        isShowProgressBar(true,rvSongketMotherStatus,progresBar)
+                    }
+                    is States.Success -> {
+                        val songketList = state.data.songketEmak.toGenerateListSongketMother()
+                        if(songketList.isEmpty())
+                        {
+                            progresBar.visibility = View.GONE
+                            rvSongketMotherStatus.visibility = View.GONE
+                            tvError.visibility = View.VISIBLE
+                            tvError.text = "Tidak ada data sama sekali"
+                        }
+                        rvSongketMotherStatus.layoutManager = LinearLayoutManager(this@SongketActivity)
+                        rvSongketMotherStatus.adapter = adapterSongketList
+                        adapterSongketList.submitListData(songketList)
+                        isShowProgressBar(false,rvSongketMotherStatus,progresBar)
+                    }
+                    is States.Failed -> {
                         progresBar.visibility = View.GONE
                         rvSongketMotherStatus.visibility = View.GONE
                         tvError.visibility = View.VISIBLE
-                        tvError.text = "Tidak ada data sama sekali"
+                        tvError.text = "Terjadi kesalahan pada sistem"
+                        Help.showToast(this@SongketActivity,state.message)
                     }
-                    rvSongketMotherStatus.layoutManager = LinearLayoutManager(this@SongketActivity)
-                    rvSongketMotherStatus.adapter = adapterSongketList
-                    adapterSongketList.submitListData(songketList)
-                    progresBar.visibility = View.GONE
-                    rvSongketMotherStatus.visibility = View.VISIBLE
                 }
-                is States.Failed -> {
-                    progresBar.visibility = View.GONE
-                    rvSongketMotherStatus.visibility = View.GONE
-                    tvError.visibility = View.VISIBLE
-                    tvError.text = "Terjadi kesalahan pada sistem"
-                    Help.showToast(this@SongketActivity,state.message)
+            }
+        }else{
+            allViewModel.getByStatusSongketMotherGtk(token,status).observe(this@SongketActivity){ state ->
+                when(state)
+                {
+                    is States.Loading -> {isShowProgressBar(true,rvSongketMotherStatus,progresBar)}
+                    is States.Success -> {
+                        val dataSongketMotherGkt = state.data.songketEmak.toGenerateListSongketMotherGtk()
+                        if(dataSongketMotherGkt.isEmpty())
+                        {
+                            progresBar.visibility = View.GONE
+                            rvSongketMotherStatus.visibility = View.GONE
+                            tvError.visibility = View.VISIBLE
+                            tvError.text = "Tidak ada data sama sekali"
+                        }
+                        rvSongketMotherStatus.layoutManager = LinearLayoutManager(this@SongketActivity)
+                        rvSongketMotherStatus.adapter = adapterSongketListGtk
+                        adapterSongketListGtk.submitListData(dataSongketMotherGkt)
+                        isShowProgressBar(false,rvSongketMotherStatus,progresBar)
+                    }
+                    is States.Failed -> {
+                        progresBar.visibility = View.GONE
+                        rvSongketMotherStatus.visibility = View.GONE
+                        tvError.visibility = View.VISIBLE
+                        tvError.text = "Terjadi kesalahan pada sistem"
+                        Help.showToast(this@SongketActivity,state.message)
+                    }
                 }
             }
         }
@@ -240,7 +318,12 @@ class SongketActivity : AppCompatActivity() {
         }
 
         dialog.show()
+    }
 
+    private fun isShowProgressBar(isShow: Boolean,rv: RecyclerView, progressBar: ProgressBar)
+    {
+        progressBar.visibility = if (isShow) View.VISIBLE else View.GONE
+        rv.visibility = if(isShow) View.GONE else View.VISIBLE
     }
 
 
@@ -280,6 +363,27 @@ class SongketActivity : AppCompatActivity() {
                 showAlertDialog("Konfirmasi buat Surat Keterangan Berkelakuan Baik",
                     "Apakah anda yakin ingin membuat surat keterangan berkelakuan baik",2,
                     id)
+            }
+            eHolidayYear.setOnClickListener {
+                Intent(this@SongketActivity,CreateSongketGtk::class.java)
+                    .apply {
+                        putExtra(Constant.LETTER_TYPE,1)
+                        putExtra(Constant.LETTER_STATEMENT,"Surat Keterangan Cuti Tahunan")
+                    }.also { startActivity(it) }.also { finish() }
+            }
+            eActivateTeaching.setOnClickListener {
+                Intent(this@SongketActivity,CreateSongketGtk::class.java)
+                    .apply {
+                        putExtra(Constant.LETTER_TYPE,2)
+                        putExtra(Constant.LETTER_STATEMENT,"Surat Keterangan Aktif Mengajar")
+                    }.also { startActivity(it) }.also { finish() }
+            }
+            eRecomendation.setOnClickListener {
+                Intent(this@SongketActivity,CreateSongketGtk::class.java)
+                    .apply {
+                        putExtra(Constant.LETTER_TYPE,3)
+                        putExtra(Constant.LETTER_STATEMENT,"Surat Rekomendasi")
+                    }.also { startActivity(it) }.also { finish() }
             }
         }
     }

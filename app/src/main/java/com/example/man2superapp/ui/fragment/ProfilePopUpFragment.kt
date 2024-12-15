@@ -103,6 +103,7 @@ class ProfilePopUpFragment(
                         putExtra(Constant.NAME_FATHER,nameFather)
                         putExtra(Constant.NAME_MOTHER,nameMother)
                         putExtra(Constant.ADDRESS,address)
+                        putExtra(Constant.DATE_BIRTHDAY,dateBirthday)
                         putExtra(Constant.PLACE_BIRTHDAY,placeBirthday)
                         putExtra(Constant.POSITION,position)
                     }.also { startActivity(it) }.also { requireActivity().finish() }

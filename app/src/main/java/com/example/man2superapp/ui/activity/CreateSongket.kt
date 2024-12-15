@@ -37,7 +37,6 @@ class CreateSongket : AppCompatActivity()
         setContentView(createSongketBinding.root)
         val letterStatement = intent.getStringExtra(Constant.LETTER_STATEMENT)
         letterType = intent.getIntExtra(Constant.LETTER_TYPE,-1)
-
         onBackPressedDispatcher.addCallback(this@CreateSongket,object: OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
                 Help.alertDialog(this@CreateSongket)
@@ -53,29 +52,29 @@ class CreateSongket : AppCompatActivity()
                     .also { finish() }
             }
 
-            when(letterType){
-                3 -> {
-                     tvEskul.visibility = View.VISIBLE
-                     parentNameClub.visibility = View.VISIBLE
-                     tvClub.visibility = View.VISIBLE
-                     parentExtracurricular.visibility = View.VISIBLE
-                }
-                5 -> {
-                    tvSemester.visibility = View.VISIBLE
-                    tvRanking.visibility = View.VISIBLE
-                    tvAverageValue.visibility = View.VISIBLE
-                    tvTotalStudents.visibility = View.VISIBLE
-                    parentSemester.visibility = View.VISIBLE
-                    parentAverageValue.visibility = View.VISIBLE
-                    parentRanking.visibility = View.VISIBLE
-                    parentTotalStudents.visibility = View.VISIBLE
-                }
-                6 -> {
-                    tvNameUnversity.visibility = View.VISIBLE
-                    tvMajor.visibility = View.VISIBLE
-                    parentMajor.visibility = View.VISIBLE
-                    parentNameUniversity.visibility = View.VISIBLE
-                }
+                when(letterType){
+                    3 -> {
+                        tvEskul.visibility = View.VISIBLE
+                        parentNameClub.visibility = View.VISIBLE
+                        tvClub.visibility = View.VISIBLE
+                        parentExtracurricular.visibility = View.VISIBLE
+                    }
+                    5 -> {
+                        tvSemester.visibility = View.VISIBLE
+                        tvRanking.visibility = View.VISIBLE
+                        tvAverageValue.visibility = View.VISIBLE
+                        tvTotalStudents.visibility = View.VISIBLE
+                        parentSemester.visibility = View.VISIBLE
+                        parentAverageValue.visibility = View.VISIBLE
+                        parentRanking.visibility = View.VISIBLE
+                        parentTotalStudents.visibility = View.VISIBLE
+                    }
+                    6 -> {
+                        tvNameUnversity.visibility = View.VISIBLE
+                        tvMajor.visibility = View.VISIBLE
+                        parentMajor.visibility = View.VISIBLE
+                        parentNameUniversity.visibility = View.VISIBLE
+                    }
             }
 
             btnCreate.setOnClickListener {

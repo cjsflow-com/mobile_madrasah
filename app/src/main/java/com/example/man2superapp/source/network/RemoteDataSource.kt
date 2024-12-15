@@ -265,12 +265,12 @@ class RemoteDataSource @Inject constructor(
         emit(States.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
 
-    fun updateSongketMotherGTK(token: String,id: Int, rankOrGrade: String, nip: String,nuptk: String, status: Int,
+    fun updateSongketMotherGTK(id: Int, rankOrGrade: String, nip: String,nuptk: String,
                                fieldStudy: String, haveYourEverTaughtSubject: String, startHoliday: String,
-                               endHoliday: String, numberLetter: String) =
+                               endHoliday: String,titleRecomendation: String) =
         flow<States<UpdateSongketMother>> {
-            apiService.updateSongketMotherGtk(Constant.BEARER + token,id,rankOrGrade,nip,nuptk,status,fieldStudy,haveYourEverTaughtSubject,startHoliday,
-                endHoliday,numberLetter).let {
+            apiService.updateSongketMotherGtk(id,rankOrGrade,nip,nuptk,fieldStudy,haveYourEverTaughtSubject,startHoliday,
+                endHoliday,titleRecomendation).let {
                     if(it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
                     else emit(States.failed(it.message().toString()))
             }

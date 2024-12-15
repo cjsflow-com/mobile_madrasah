@@ -45,7 +45,7 @@ object Constant {
     const val UPDATE_PROFILE_STUDENT = "$STUDENT/profile"
     const val LIST_SONGKET_MOTHER = "songket_mother"
     const val TAG_UPDATE_SONGKET_MOTHER = "update_songket_mother"
-    const val GET_STUDENT_CLASS = "get_all_class"
+    const val GET_STUDENT_CLASS = "$STUDENT/get_all_class"
 
     // Songket Emak GTK/Karyawan
     const val CREATE_SONGKET_MOTHER_GTK = "$SONGKET_MOTHER/gtk/create"

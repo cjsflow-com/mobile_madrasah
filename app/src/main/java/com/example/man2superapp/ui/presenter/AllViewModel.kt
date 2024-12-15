@@ -128,8 +128,8 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
         repository.createSongketMotherGtk(token,letterStatement,rankOrGrade,nip,nuptk,fielStudy,haveYourEverTaughtSubject,
             startHoliday,endHoliday,recommendationTitle).asLiveData()
 
-    fun updateSongketMotherGtk(token: String,id: Int, rankOrGrade: String, nip: String, nuptk: String, status: Int,
-                               fieldStudy: String, haveYourEverTaughtSubject: String,startHoliday: String,endHoliday: String,numberLetter: String)
-    = repository.updateSongketMotherGtk(token,id, rankOrGrade, nip, nuptk, status, fieldStudy, haveYourEverTaughtSubject, startHoliday, endHoliday, numberLetter)
+    fun updateSongketMotherGtk(id: Int, rankOrGrade: String, nip: String, nuptk: String,
+                               fieldStudy: String, haveYourEverTaughtSubject: String,startHoliday: String,endHoliday: String,titleRecomendation: String)
+    = repository.updateSongketMotherGtk(id, rankOrGrade, nip, nuptk,fieldStudy, haveYourEverTaughtSubject, startHoliday, endHoliday,titleRecomendation)
         .asLiveData()
 }

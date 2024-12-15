@@ -57,6 +57,14 @@ class UpdateStudent : AppCompatActivity()
             }
         })
 
+        if(type == 1)
+        {
+            showUpdatePassword(true)
+        }else{
+            role?.let { checkRoleForView(it) }
+            showUpdatePassword(false)
+        }
+
         setAdapterGender()
 
         allViewModel.classList.observe(this@UpdateStudent){ classesList ->
@@ -96,15 +104,21 @@ class UpdateStudent : AppCompatActivity()
                 startActivity(Intent(this@UpdateStudent,MainActivity::class.java))
                 finish()
             }
-            btnSavePassword.setOnClickListener {
-                val textPassword = updateBinding.tilPassword.editText?.text.toString().trim()
-                if(textPassword.isEmpty())
-                {
-                    Help.showToast(this@UpdateStudent,"Password tidak boleh kosong")
-                }else{
-                    role?.let { it1 -> action(type, it1, password =textPassword ) }
+            lifecycleScope.launch {
+                localStore.getToken().collect{ data ->
+                    data.token?.let { tokens ->
+                        role?.let { roles ->
+                            btnSavePassword.setOnClickListener {
+                                action(roles,tokens)
+                            }
+                            btnChangeProfile.setOnClickListener {
+                                actionUpdateProfile(roles,tokens)
+                            }
+                        }
+                    }
                 }
             }
+
             progressBar.visibility = View.GONE
             btnSavePassword.visibility = View.VISIBLE
         }
@@ -117,65 +131,61 @@ class UpdateStudent : AppCompatActivity()
         }
     }
 
-    private fun action(type: Int,role: String,password: String)
+    private fun actionUpdateProfile(role: String,token: String)
     {
-        lifecycleScope.launch {
-            localStore.getToken().collect{ data ->
-                if(type == 1)
-                {
-                    showUpdatePassword(true)
-                    if (role == "siswa")
-                    {
-                        data.token?.let { actionUpdatePasswordStudent(it,password) }
-                    }else{
-                        data.token?.let { actionUpdatePasswordEmployee(it,password) }
-                    }
-                }else if(type == 2)
-                {
-                    updateBinding.apply {
-                        val name = parentName.editText?.text.toString().trim()
-                        val email = parentEmail.editText?.text.toString().trim()
-                        val placeBirthDay = parentPlaceBirthday.editText?.text.toString().trim()
-                        val position = parentPosition.editText?.text.toString().trim()
-                        val address = parentAddress.editText?.text.toString().trim()
-                        val phoneNumber = parentNumberHandphone.editText?.text.toString().trim()
-                        val nameFather = parentNameFather.editText?.text.toString().trim()
-                        val nameMother = parentNameFather.editText?.text.toString().trim()
-                        val nisn = parentNisn.editText?.text.toString().trim()
-                        val dateBirthday = parentDateBirthday.editText?.text.toString().trim()
-                        val gender = parentGender.editText?.text.toString()
-                        val genderValue = when(gender)
-                        {
-                            "Laki-Laki" -> 1
-                            "Perempuan" -> 2
-                            else -> -1
-                        }
-                        val classes = parentClasses.editText?.text.toString().trim()
-                        showUpdatePassword(false)
-                        if(role == "siswa")
-                        {
-                            parentPosition.visibility = View.GONE
-                            val takeClass = classesMap?.get(classes)
-                            data.token?.let { updateProfileStudent(
-                                it,name,email,phoneNumber,genderValue,address,nisn,takeClass,
-                                placeBirthDay,dateBirthday,nameFather,nameMother,
-                            ) }
-                        }else{
-                            parentNisn.visibility = View.GONE
-                            parentClasses.visibility = View.GONE
-                            parentPlaceBirthday.visibility = View.GONE
-                            parentDateBirthday.visibility = View.GONE
-                            parentNameFather.visibility = View.GONE
-                            parentNameMother.visibility = View.GONE
-                            parentAddress.visibility = View.GONE
-                            parentDateBirthday.visibility = View.GONE
-                            data.token?.let { updateProfileEmployee(it,name,email,phoneNumber,genderValue,position) }
-                        }
-                    }
-                }
+        updateBinding.apply {
+            val name = parentName.editText?.text.toString().trim()
+            val email = parentEmail.editText?.text.toString().trim()
+            val placeBirthDay = parentPlaceBirthday.editText?.text.toString().trim()
+            val position = parentPosition.editText?.text.toString().trim()
+            val address = parentAddress.editText?.text.toString().trim()
+            val phoneNumber = parentNumberHandphone.editText?.text.toString().trim()
+            val nameFather = parentNameFather.editText?.text.toString().trim()
+            val nameMother = parentNameMother.editText?.text.toString().trim()
+            val nisn = parentNisn.editText?.text.toString().trim()
+            val dateBirthday = parentDateBirthday.editText?.text.toString().trim()
+            val gender = parentGender.editText?.text.toString()
+            val genderValue = when(gender)
+            {
+                "Laki-Laki" -> 1
+                "Perempuan" -> 2
+                else -> -1
+            }
+            val classes = parentClasses.editText?.text.toString().trim()
+            lifecycleScope.launch {  }
+            if(role == "siswa")
+            {
+                val takeClass = classesMap?.get(classes)
+                 updateProfileStudent(
+                    token,name,email,phoneNumber,genderValue,address,nisn,takeClass,
+                    placeBirthDay,dateBirthday,nameFather,nameMother,
+                )
+            }else{
+                updateProfileEmployee(token,name,email,phoneNumber,genderValue,position)
             }
         }
     }
+
+    private fun action(role: String,token: String)
+    {
+                    val textPassword = updateBinding.tilPassword.editText?.text.toString().trim()
+                    if (role == "siswa")
+                    {
+                        if(textPassword.isEmpty())
+                        {
+                            Help.showToast(this@UpdateStudent,"Password tidak boleh kosong")
+                        }else{
+                           actionUpdatePasswordStudent(token,textPassword)
+                        }
+                    }else{
+                        if(textPassword.isEmpty()){
+                            Help.showToast(this@UpdateStudent,"Password tidak boleh kosong")
+                        }else{
+                          actionUpdatePasswordEmployee(token,textPassword)
+                        }
+                    }
+
+        }
 
     private fun setAdapterGender()
     {
@@ -207,6 +217,26 @@ class UpdateStudent : AppCompatActivity()
                 }
             }
         }
+    }
+
+    private fun checkRoleForView(role: String)
+    {
+        updateBinding.apply {
+            if(role == "siswa")
+            {
+                parentPosition.visibility = View.GONE
+            }else{
+                parentNisn.visibility = View.GONE
+                parentClasses.visibility = View.GONE
+                parentPlaceBirthday.visibility = View.GONE
+                parentDateBirthday.visibility = View.GONE
+                parentNameFather.visibility = View.GONE
+                parentNameMother.visibility = View.GONE
+                parentAddress.visibility = View.GONE
+                parentDateBirthday.visibility = View.GONE
+            }
+        }
+
     }
 
     private fun updateProfileStudent(token: String,name: String,email: String,number_phone: String,gender: Int,

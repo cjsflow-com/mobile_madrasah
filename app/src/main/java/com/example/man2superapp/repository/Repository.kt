@@ -89,7 +89,7 @@ class Repository @Inject constructor(
 
     fun getCountStatusSongketMotherGtk(token: String) = remoteDataSource.getCountStatusSongketMotherGtk(token)
 
-    fun getByStatusSongketMotherGtk(token: String,status: String) = remoteDataSource.getByStatusSongketMotherGTK(token,status)
+    fun getByStatusSongketMotherGtk(token: String,status: String) = remoteDataSource.getByStatusSongketMotherGTK(status,token)
 
     fun getAllListSongketMotherGTK(token: String) = remoteDataSource.getAllListSongketMotherGTK(token)
 
@@ -98,8 +98,8 @@ class Repository @Inject constructor(
                                endHoliday: String, recommendationTitle: String) =
         remoteDataSource.createSongketMotherGTK(token,letterStatement,rankOrGrade,nip,nuptk,fielStudy,haveYourEverTaughtSubject,
             startHoliday,endHoliday,recommendationTitle)
-    fun updateSongketMotherGtk(token: String,id: Int,rankOrGrade: String, nip: String, nuptk: String,status: Int,
-                               fieldStudy: String, haveYourEverTaughtSubject: String,startHoliday: String,endHoliday: String,numberLetter: String)
-    = remoteDataSource.updateSongketMotherGTK(token,id,rankOrGrade,nip,nuptk,status, fieldStudy,haveYourEverTaughtSubject,startHoliday,endHoliday,numberLetter)
+    fun updateSongketMotherGtk(id: Int,rankOrGrade: String, nip: String, nuptk: String,
+                               fieldStudy: String, haveYourEverTaughtSubject: String,startHoliday: String,endHoliday: String,titleRecomendation: String)
+    = remoteDataSource.updateSongketMotherGTK(id,rankOrGrade,nip,nuptk,fieldStudy,haveYourEverTaughtSubject,startHoliday,endHoliday,titleRecomendation)
 
 }

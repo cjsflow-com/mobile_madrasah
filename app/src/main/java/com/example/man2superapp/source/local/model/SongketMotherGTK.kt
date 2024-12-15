@@ -1,7 +1,10 @@
 package com.example.man2superapp.source.local.model
 
+import android.os.Parcelable
 import com.example.man2superapp.source.network.response.songket_emak.gtk.SongketEmak
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class SongketMotherGTK(
     var id: Int,
     var letterStatement: Int,
@@ -16,7 +19,7 @@ data class SongketMotherGTK(
     var startHoliday: String,
     var endHoliday: String,
     var userId: Int
-)
+): Parcelable
 
 fun List<SongketEmak>.toGenerateListSongketMotherGtk(): MutableList<SongketMotherGTK>{
     val listSongketMotherGtk = mutableListOf<SongketMotherGTK>()
