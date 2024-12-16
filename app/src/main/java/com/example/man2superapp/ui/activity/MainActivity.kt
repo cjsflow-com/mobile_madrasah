@@ -81,9 +81,14 @@ class MainActivity : AppCompatActivity() {
             }else if (role == "super_admin"){
                 ekinCard.visibility = View.VISIBLE
                 wbsCard.visibility = View.VISIBLE
-                songketCard.visibility = View.GONE
+                jurnalCard.visibility = View.GONE
+                songketCard.visibility = View.VISIBLE
                 pelajarCard.visibility = View.GONE
                 etatibCard.visibility = View.GONE
+            }else{
+                ekinCard.visibility = View.VISIBLE
+                wbsCard.visibility = View.VISIBLE
+                songketCard.visibility = View.VISIBLE
             }
         }
     }

@@ -94,6 +94,18 @@ class ProfilePopUpFragment(
                     Intent(context,UpdateStudent::class.java).apply {
                         putExtra(Constant.TYPE,2)
                         putExtra(Constant.TYPE_ROLE,role)
+                        putExtra(Constant.NAME,name)
+                        putExtra(Constant.EMAIL,email)
+                        putExtra(Constant.NISN,nisn)
+                        putExtra(Constant.CLASS,className)
+                        putExtra(Constant.GENDER,gender)
+                        putExtra(Constant.PHONE,numberHandphone)
+                        putExtra(Constant.NAME_FATHER,nameFather)
+                        putExtra(Constant.NAME_MOTHER,nameMother)
+                        putExtra(Constant.ADDRESS,address)
+                        putExtra(Constant.DATE_BIRTHDAY,dateBirthday)
+                        putExtra(Constant.PLACE_BIRTHDAY,placeBirthday)
+                        putExtra(Constant.POSITION,position)
                     }.also { startActivity(it) }.also { requireActivity().finish() }
                 }
             }

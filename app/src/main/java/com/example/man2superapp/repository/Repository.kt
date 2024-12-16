@@ -1,5 +1,6 @@
 package com.example.man2superapp.repository
 
+import androidx.lifecycle.asLiveData
 import com.example.man2superapp.source.network.RemoteDataSource
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -85,4 +86,20 @@ class Repository @Inject constructor(
 
     fun updateProfileStudent(token: String, name: String, email: String, placeBirthday: String, nisn: String, phoneNumber: String, classStudentId: Int, gender: Int, nameFather: String, nameMother: String, address: String, dateBirthday: String) =
         remoteDataSource.updateProfileStudent(token,name,email,placeBirthday,nisn,phoneNumber,classStudentId,gender,nameFather,nameMother,address,dateBirthday)
+
+    fun getCountStatusSongketMotherGtk(token: String) = remoteDataSource.getCountStatusSongketMotherGtk(token)
+
+    fun getByStatusSongketMotherGtk(token: String,status: String) = remoteDataSource.getByStatusSongketMotherGTK(status,token)
+
+    fun getAllListSongketMotherGTK(token: String) = remoteDataSource.getAllListSongketMotherGTK(token)
+
+    fun createSongketMotherGtk(token: String,letterStatement: Int, rankOrGrade: String, nip: String, nuptk: String,
+                               fielStudy: String, haveYourEverTaughtSubject: String,startHoliday: String,
+                               endHoliday: String, recommendationTitle: String) =
+        remoteDataSource.createSongketMotherGTK(token,letterStatement,rankOrGrade,nip,nuptk,fielStudy,haveYourEverTaughtSubject,
+            startHoliday,endHoliday,recommendationTitle)
+    fun updateSongketMotherGtk(id: Int,rankOrGrade: String, nip: String, nuptk: String,
+                               fieldStudy: String, haveYourEverTaughtSubject: String,startHoliday: String,endHoliday: String,titleRecomendation: String)
+    = remoteDataSource.updateSongketMotherGTK(id,rankOrGrade,nip,nuptk,fieldStudy,haveYourEverTaughtSubject,startHoliday,endHoliday,titleRecomendation)
+
 }

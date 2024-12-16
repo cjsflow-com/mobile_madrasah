@@ -33,7 +33,6 @@ class EditSongketActivity : AppCompatActivity()
             override fun handleOnBackPressed() {
                 Help.alertDialog(this@EditSongketActivity)
             }
-
         })
         val typeLetter = intent.getIntExtra(Constant.LETTER_TYPE,-1)
         val type = intent.getIntExtra(Constant.TYPE,-1)
@@ -44,6 +43,9 @@ class EditSongketActivity : AppCompatActivity()
     {
         editBinding.apply {
             btnCreate.text = "Update Songket Emak"
+            backButton.setOnClickListener {
+                backToSongket()
+            }
             btnCreate.setOnClickListener {
                 validationAnActionUpdate(letterType,type)
             }

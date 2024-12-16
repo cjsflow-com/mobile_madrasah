@@ -48,6 +48,10 @@
             android:exported="false"/>
         <activity android:name=".ui.activity.EditSongketActivity"
             android:exported="false" />
+        <activity android:name=".ui.activity.CreateSongketGtk"
+            android:exported="false" />
+        <activity android:name=".ui.activity.EditSongketGtkActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.activity.EkinActivity"
             android:exported="false" />
