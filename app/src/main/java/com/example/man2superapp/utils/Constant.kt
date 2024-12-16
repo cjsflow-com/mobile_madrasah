@@ -37,6 +37,7 @@ object Constant {
     const val NAME_MOTHER = "name_mother"
     const val ADDRESS = "address"
     const val DATE_BIRTHDAY = "date_birthday"
+    const val ID = "id"
 
     const val LETTER_TYPE = "TYPE_LETTER"
     const val UPDATE_PASSWORD = "$STUDENT/update_password"
@@ -46,6 +47,8 @@ object Constant {
     const val LIST_SONGKET_MOTHER = "songket_mother"
     const val TAG_UPDATE_SONGKET_MOTHER = "update_songket_mother"
     const val GET_STUDENT_CLASS = "$STUDENT/get_all_class"
+    const val SHOW_PROFILE_EMPLOYEE = "$AUTH/show_employee/{id}"
+    const val SHOW_PROFILE_STUDENT = "$AUTH/show_student/{id}"
 
     // Songket Emak GTK/Karyawan
     const val CREATE_SONGKET_MOTHER_GTK = "$SONGKET_MOTHER/gtk/create"

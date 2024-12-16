@@ -132,4 +132,8 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
                                fieldStudy: String, haveYourEverTaughtSubject: String,startHoliday: String,endHoliday: String,titleRecomendation: String)
     = repository.updateSongketMotherGtk(id, rankOrGrade, nip, nuptk,fieldStudy, haveYourEverTaughtSubject, startHoliday, endHoliday,titleRecomendation)
         .asLiveData()
+
+    fun showProfileEmployee(id: Int) = repository.showProfileEmployee(id).asLiveData()
+
+    fun showProfileStudent(id: Int) = repository.showProfileStudent(id).asLiveData()
 }

@@ -13,7 +13,9 @@ import androidx.lifecycle.lifecycleScope
 import com.example.man2superapp.databinding.ActivityMainBinding
 import com.example.man2superapp.source.LoginTemp
 import com.example.man2superapp.source.local.model.LoginModel
+import com.example.man2superapp.source.network.States
 import com.example.man2superapp.ui.fragment.ProfilePopUpFragment
+import com.example.man2superapp.ui.presenter.AllViewModel
 import com.example.man2superapp.utils.Help
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mainBinding: ActivityMainBinding
     @Inject
     lateinit var localStore: LoginTemp
+    private val allViewModel by viewModels<AllViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -115,11 +118,52 @@ class MainActivity : AppCompatActivity() {
     {
         lifecycleScope.launch {
             localStore.getToken().collect{ data ->
-              val fragment =  ProfilePopUpFragment(data.role,data.name,data.email,data.nisn,data.class_name,data.number_phone,data.mother,data.father,
-                  data.address,data.posititon,data.dateBirthday,data.placeBirthday,data.gender,this@MainActivity)
-               fragment.show(supportFragmentManager,"ProfilePopupFragment")
+                data.id?.let {
+                    if(data.role == "siswa")
+                    {
+                        allViewModel.showProfileStudent(data.id).observe(this@MainActivity){ state ->
+                            when(state){
+                                is States.Loading -> {}
+                                is States.Success -> {
+                                    fragmentShow(data.role,state.data.data.name,state.data.data.email,state.data.data.nisn,state.data.data.classX.nameClass,state.data.data.numberHandphone,
+                                        state.data.data.mother,state.data.data.father,state.data.data.address,"",state.data.data.dateBirthday,
+                                        state.data.data.placeBirthday,state.data.data.gender,state.data.data.classX.id)
+                                }
+                                is States.Failed -> {
+                                    Help.showToast(this@MainActivity,state.message)
+                                }
+                            }
+                        }
+                    }else{
+                        allViewModel.showProfileEmployee(data.id).observe(this@MainActivity){ state ->
+                            when(state)
+                            {
+                                is States.Loading -> {}
+                                is States.Success -> {
+                                    data.role?.let { it1 ->
+                                        fragmentShow(
+                                            it1,state.data.data.name,state.data.data.email,"","",state.data.data.numberHandphone,"","","",state.data.data.position,
+                                            "","",state.data.data.gender,0)
+                                    }
+                                }
+                                is States.Failed -> {
+                                    Help.showToast(this@MainActivity,state.message)
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
+    }
+
+    private fun fragmentShow(role: String,name: String,email: String,nisn: String,className: String,numberPhone: String,
+                              mother: String,father: String,address: String,posititon: String,dateBirthday: String,
+                             placeBirthday: String, gender: Int,classId: Int)
+    {
+        val fragment =  ProfilePopUpFragment(role,name,email,nisn,className,numberPhone,mother,father,
+            address,posititon,dateBirthday,placeBirthday,gender,classId,this@MainActivity)
+        fragment.show(supportFragmentManager,"ProfilePopupFragment")
     }
 
 

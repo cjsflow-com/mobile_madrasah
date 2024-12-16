@@ -12,6 +12,7 @@ import com.example.man2superapp.source.network.response.songket_emak.gtk.AllSong
 import com.example.man2superapp.source.network.response.songket_emak.gtk.CountStatusResponse
 import com.example.man2superapp.source.network.response.student.UpdatePasswordStudent
 import com.example.man2superapp.source.network.response.student.classses.GetAllClassStudentResponse
+import com.example.man2superapp.source.network.response.users.BiodataUserResponse
 import com.example.man2superapp.source.network.response.users.UpdateProfileResponse
 import com.example.man2superapp.source.network.response.wbs.AllWbsResponse
 import com.example.man2superapp.source.network.response.wbs.CreateWbsResponse
@@ -193,6 +194,16 @@ interface ApiService {
         @Field("end_holiday") endHoliday: String,
         @Field("recommendation_title") recomendationTitle: String
     ): Response<CreateSongketMother>
+
+    @GET(Constant.SHOW_PROFILE_EMPLOYEE)
+    suspend fun getProfileEmployee(
+        @Path(Constant.ID) id: Int
+    ): Response<BiodataUserResponse>
+
+    @GET(Constant.SHOW_PROFILE_STUDENT)
+    suspend fun getProfileStudent(
+        @Path(Constant.ID) id: Int
+    ): Response<BiodataStudentResponse>
 
     @FormUrlEncoded
     @PUT(Constant.UPDATE_SONGKET_MOTHER_GTK)
