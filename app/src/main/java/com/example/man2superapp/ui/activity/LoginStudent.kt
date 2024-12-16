@@ -3,6 +3,7 @@ package com.example.man2superapp.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -66,27 +67,42 @@ class LoginStudent: AppCompatActivity()
                     when(state)
                     {
                         is States.Loading -> {
-
+                            isShoProgressBar(true)
                         }
                         is States.Success -> {
+                            isShoProgressBar(false)
                             lifecycleScope.launch {
                                 Help.showToast(this@LoginStudent,state.data.message)
                                 Log.d(TAG, "action: ${state.data.message}")
-                                localStore.putToken(
-                                    LoginModel(state.data.student.name,state.data.student.id,state.data.student.email
-                                    ,state.data.student.nisn,state.data.student.className,state.data.student.gender,
-                                        state.data.token,state.data.student.profile,state.data.student.nameMother,state.data.student.nameFather,state.data.student.numberHandphone,"",state.data.student.address,state.data.student.dateBirthday,state.data.student.placeBirthday,"siswa")
-                                        .also { startActivity(Intent(this@LoginStudent,MainActivity::class.java))
-                                            .also { finish() }}
-                                )
+                                if(state.data.success)
+                                {
+                                    localStore.putToken(
+                                        LoginModel(state.data.student?.name,state.data.student?.id,state.data.student?.email
+                                            ,state.data.student?.nisn,state.data.student?.className,state.data.student?.gender,
+                                            state.data.token,state.data.student?.profile,state.data.student?.nameMother,state.data.student?.nameFather,state.data.student?.numberHandphone,"",state.data.student?.address,state.data.student?.dateBirthday,state.data.student?.placeBirthday,"siswa")
+                                            .also { startActivity(Intent(this@LoginStudent,MainActivity::class.java))
+                                                .also { finish() }}
+                                    )
+                                }else{
+                                    Help.showToast(this@LoginStudent,state.data.message)
+                                }
                             }
                         }
                         is States.Failed -> {
+                            isShoProgressBar(false)
                             Help.showToast(this@LoginStudent,state.message)
                         }
                     }
                 }
             }
+        }
+    }
+
+    private fun isShoProgressBar(isShow: Boolean)
+    {
+        loginStudentBinding.apply {
+            loginButton.visibility = if(isShow) View.GONE else View.VISIBLE
+            progressBar.visibility = if(isShow) View.VISIBLE else View.GONE
         }
     }
 }

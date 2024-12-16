@@ -10,6 +10,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.man2superapp.repository.Repository
 import com.example.man2superapp.source.local.model.GetAllUserWbs
 import com.example.man2superapp.source.local.model.GetClassStudent
+import com.example.man2superapp.source.local.model.NewsArticle
+import com.example.man2superapp.source.local.model.toGenerateAllListArticle
 import com.example.man2superapp.source.local.model.toGenerateAllUserWbs
 import com.example.man2superapp.source.local.model.toGenerateClassStudent
 import com.example.man2superapp.source.network.States
@@ -26,9 +28,16 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
 {
     private val _userList = MutableLiveData<List<GetAllUserWbs>>()
     private val _clasList = MutableLiveData<List<GetClassStudent>>()
+    private val _article = MutableLiveData<List<NewsArticle>>()
+    private val _loading = MutableLiveData<Boolean>()
+    private val _textError = MutableLiveData<String>()
 
     val userList: LiveData<List<GetAllUserWbs>> get() = _userList
-    val classList: LiveData<List<GetClassStudent>> = _clasList
+    val classList: LiveData<List<GetClassStudent>> get() = _clasList
+    val article: LiveData<List<NewsArticle>> get() = _article
+    val loading: LiveData<Boolean> get() = _loading
+    val textError: LiveData<String> get() = _textError
+
 
     fun loginEmployee(email: String, password: String) = repository.loginEmployee(email, password).asLiveData()
     fun getAllWbs(token: String) = repository.getAllWbs(token).asLiveData()
@@ -132,4 +141,28 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
                                fieldStudy: String, haveYourEverTaughtSubject: String,startHoliday: String,endHoliday: String,titleRecomendation: String)
     = repository.updateSongketMotherGtk(id, rankOrGrade, nip, nuptk,fieldStudy, haveYourEverTaughtSubject, startHoliday, endHoliday,titleRecomendation)
         .asLiveData()
+
+    fun showProfileEmployee(id: Int) = repository.showProfileEmployee(id).asLiveData()
+
+    fun showProfileStudent(id: Int) = repository.showProfileStudent(id).asLiveData()
+
+    fun getAllArticle(){
+        viewModelScope.launch {
+            repository.getAllArticle().collect{ state ->
+                when(state){
+                    is States.Loading -> {
+                        _loading.value = true
+                    }
+                    is States.Success -> {
+                        _loading.value = false
+                        _article.value = state.data.article.toGenerateAllListArticle()
+                    }
+                    is States.Failed -> {
+                        _loading.value = false
+                        _textError.value = "Terjadi kesalahan pada sistem => ${state.message}"
+                    }
+                }
+            }
+        }
+    }
 }

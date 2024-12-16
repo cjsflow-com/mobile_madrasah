@@ -83,7 +83,8 @@ class LoginActivity : AppCompatActivity() {
         spannableString.setSpan(object : ClickableSpan() {
             override fun onClick(widget: View) {
                 // Menuju halaman pendaftaran
-                startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
+//                startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
+                Help.showToast(this@LoginActivity,"Fitur masih dalam tahap pengembangan")
             }
         }, 17, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 

@@ -7,7 +7,7 @@ data class LoginStudentResponse(
     @SerializedName("message")
     val message: String,
     @SerializedName("student")
-    val student: Student,
+    val student: Student?,
     @SerializedName("success")
     val success: Boolean,
     @SerializedName("token")

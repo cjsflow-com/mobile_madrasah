@@ -1,5 +1,6 @@
 package com.example.man2superapp.ui.activity
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -15,8 +16,10 @@ import com.example.man2superapp.source.network.States
 import com.example.man2superapp.ui.presenter.AllViewModel
 import com.example.man2superapp.utils.Constant
 import com.example.man2superapp.utils.Help
+import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.util.Calendar
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -40,8 +43,8 @@ class UpdateStudent : AppCompatActivity()
         val email = intent.getStringExtra(Constant.EMAIL)
         val position = intent.getStringExtra(Constant.POSITION)
         val nisn = intent.getStringExtra(Constant.NISN)
-        val gender = intent.getIntExtra(Constant.GENDER,-1)
-        val className = intent.getStringExtra(Constant.CLASS)
+        val gender = intent.getIntExtra(Constant.GENDER,0)
+        val className = intent.getIntExtra(Constant.CLASS,-1)
         val numberHandphone = intent.getStringExtra(Constant.PHONE)
         val placeBirthday = intent.getStringExtra(Constant.PLACE_BIRTHDAY)
         val nameFather = intent.getStringExtra(Constant.NAME_FATHER)
@@ -65,7 +68,9 @@ class UpdateStudent : AppCompatActivity()
             showUpdatePassword(false)
         }
 
-        setAdapterGender()
+        updateBinding.etBirthday.setOnClickListener {
+            showDatePickerDialog(updateBinding.etBirthday)
+        }
 
         allViewModel.classList.observe(this@UpdateStudent){ classesList ->
             val classMap = classesList.associateBy({it.name_class},{it.id})
@@ -74,13 +79,13 @@ class UpdateStudent : AppCompatActivity()
                 this@UpdateStudent,
                 android.R.layout.simple_dropdown_item_1line,
                 classesList.map { it.name_class })
-            updateBinding.etClasses.setAdapter(adapter)
 
-            val matchingClass = classesList.find { it.name_class == className}
+            val matchingClass = classesList.find { it.id == className}
             matchingClass.let {
-                updateBinding.etClasses.setText(it?.name_class,false)
+                updateBinding.etClasses.setText(it?.name_class)
             }
             this@UpdateStudent.classesMap = classMap
+            updateBinding.etClasses.setAdapter(adapter)
         }
 
         updateBinding.apply {
@@ -98,7 +103,10 @@ class UpdateStudent : AppCompatActivity()
                 2 -> "Perempuan"
                 else -> "Tidak ada"
             }
+            setAdapterGender()
+
             etGender.setText(genderText)
+
             etNumberHandphone.setText(numberHandphone)
             tvBack.setOnClickListener {
                 startActivity(Intent(this@UpdateStudent,MainActivity::class.java))
@@ -187,13 +195,33 @@ class UpdateStudent : AppCompatActivity()
 
         }
 
+
+    private fun showDatePickerDialog(etTanggalKejadian: TextInputEditText) {
+        // Mendapatkan tanggal saat ini
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        // Membuat DatePickerDialog
+        val datePickerDialog = DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
+            // Mengatur tanggal yang dipilih pada TextInputEditText
+            val formattedNewDate = "$selectedYear-${selectedMonth + 1}-$selectedDay"
+//            val formattedDate = "$selectedDay-${selectedMonth + 1}-$selectedYear"
+            etTanggalKejadian.setText(formattedNewDate)
+        }, year, month, day)
+
+        // Menampilkan dialog
+        datePickerDialog.show()
+    }
+
     private fun setAdapterGender()
     {
-        val genderOptions = listOf("Laki-Laki","Perempuan")
+        val genderOptions = listOf("Laki-Laki","Perempuan","Tidak ada")
         val adapter = ArrayAdapter(
             this@UpdateStudent,
             android.R.layout.simple_dropdown_item_1line,
-            genderOptions
+            genderOptions,
         )
         updateBinding.etGender.setAdapter(adapter)
     }
@@ -205,12 +233,16 @@ class UpdateStudent : AppCompatActivity()
             allViewModel.updateProfileEmployee(token,name,email,number_phone,gender,position).observe(this@UpdateStudent){ state ->
                 when(state)
                 {
-                    is States.Loading -> {}
+                    is States.Loading -> {
+                        isShowProgress(true)
+                    }
                     is States.Success -> {
+                        isShowProgress(false)
                         Help.showToast(this@UpdateStudent,state.data)
                         actionBackToHome()
                     }
                     is States.Failed -> {
+                        isShowProgress(false)
                         Help.showToast(this@UpdateStudent,state.message)
                         actionBackToHome()
                     }
@@ -248,15 +280,19 @@ class UpdateStudent : AppCompatActivity()
                 it,gender,
                 name_father,name_mother,address,date_birthday).observe(this@UpdateStudent){ state ->
                 when(state) {
-                    is States.Loading -> {}
+                    is States.Loading -> {
+                        isShowProgress(true)
+                    }
                     is States.Success -> {
                         Help.showToast(this@UpdateStudent,state.data)
                         actionBackToHome()
+                        isShowProgress(false)
                     }
 
                     is States.Failed -> {
                         Help.showToast(this@UpdateStudent,state.message)
                         actionBackToHome()
+                        isShowProgress(false)
                     }
                 }
             }
@@ -316,6 +352,7 @@ class UpdateStudent : AppCompatActivity()
     {
         updateBinding.apply {
             progressBar.visibility = if (isShow) View.VISIBLE else View.GONE
+            btnChangeProfile.visibility = if(isShow) View.GONE else View.VISIBLE
             btnSavePassword.visibility = if(isShow) View.GONE else View.VISIBLE
         }
     }

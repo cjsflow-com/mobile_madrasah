@@ -29,6 +29,7 @@ class ProfilePopUpFragment(
     private val dateBirthday: String?,
     private val placeBirthday: String?,
     private val gender: Int?,
+    private val classId: Int,
     private val context: Context
 ) : DialogFragment()
 {
@@ -40,7 +41,7 @@ class ProfilePopUpFragment(
         _binding = ProfilePopupBinding.inflate(layoutInflater)
         dialog.setContentView(binding.root)
 
-        dialog?.window?.apply {
+        dialog.window?.apply {
             attributes.windowAnimations = R.style.DialogAnimation
             setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT)
             setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -62,20 +63,24 @@ class ProfilePopUpFragment(
                     tvNameMother.visibility = View.VISIBLE
                     tvDateBirthday.visibility = View.VISIBLE
                     tvPlaceBirthday.visibility = View.VISIBLE
+                    tvNumberHandphone.visibility = View.VISIBLE
                     tvAddress.visibility = View.VISIBLE
                     tvPosition.visibility = View.GONE
-                    tvNameFather.text = "Nama Ayah $nameFather"
-                    tvNameMother.text = "Nama Ibu $nameMother"
+                    tvNameFather.text = "Nama Ayah: $nameFather"
+                    tvNameMother.text = "Nama Ibu:  $nameMother"
                     tvDateBirthday.text = "Tanggal lahir: $dateBirthday"
                     tvPlaceBirthday.text = "Tempat Lahir: $placeBirthday"
                     tvAddress.text = "Alamat: $address"
                     tvNisn.text = "NISN: $nisn"
+                    tvNumberHandphone.visibility = View.VISIBLE
+                    tvNumberHandphone.text = "Nomor Handphone: $numberHandphone"
                     tvClassName.text = "Kelas: $className"
                 }else{
                     tvNisn.visibility = View.GONE
                     tvClassName.visibility = View.GONE
                     tvNameFather.visibility = View.GONE
                     tvNameMother.visibility = View.GONE
+                    tvNumberHandphone.visibility = View.VISIBLE
                     tvDateBirthday.visibility = View.GONE
                     tvPlaceBirthday.visibility = View.GONE
                     tvAddress.visibility = View.GONE
@@ -97,7 +102,7 @@ class ProfilePopUpFragment(
                         putExtra(Constant.NAME,name)
                         putExtra(Constant.EMAIL,email)
                         putExtra(Constant.NISN,nisn)
-                        putExtra(Constant.CLASS,className)
+                        putExtra(Constant.CLASS,classId)
                         putExtra(Constant.GENDER,gender)
                         putExtra(Constant.PHONE,numberHandphone)
                         putExtra(Constant.NAME_FATHER,nameFather)

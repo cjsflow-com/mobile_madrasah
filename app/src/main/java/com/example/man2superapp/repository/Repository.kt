@@ -102,4 +102,10 @@ class Repository @Inject constructor(
                                fieldStudy: String, haveYourEverTaughtSubject: String,startHoliday: String,endHoliday: String,titleRecomendation: String)
     = remoteDataSource.updateSongketMotherGTK(id,rankOrGrade,nip,nuptk,fieldStudy,haveYourEverTaughtSubject,startHoliday,endHoliday,titleRecomendation)
 
+    fun showProfileEmployee(id: Int) = remoteDataSource.showProfileEmployee(id)
+
+    fun showProfileStudent(id: Int) = remoteDataSource.showProfileStudent(id)
+
+    fun getAllArticle() = remoteDataSource.getAllArticle()
+
 }

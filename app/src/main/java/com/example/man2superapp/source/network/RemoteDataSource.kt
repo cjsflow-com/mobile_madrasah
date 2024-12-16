@@ -2,6 +2,7 @@ package com.example.man2superapp.source.network
 
 import android.util.Log
 import com.example.man2superapp.source.local.model.toGenerateListSongketMother
+import com.example.man2superapp.source.network.response.ArticleNewsResponse
 import com.example.man2superapp.source.network.response.login.LoginResponse
 import com.example.man2superapp.source.network.response.login.LoginStudentResponse
 import com.example.man2superapp.source.network.response.login.LogoutResponse
@@ -11,8 +12,10 @@ import com.example.man2superapp.source.network.response.songket_emak.StatusRespo
 import com.example.man2superapp.source.network.response.songket_emak.UpdateSongketMother
 import com.example.man2superapp.source.network.response.songket_emak.gtk.AllSongketEmakByStatusResponse
 import com.example.man2superapp.source.network.response.songket_emak.gtk.CountStatusResponse
+import com.example.man2superapp.source.network.response.student.BiodataStudentResponse
 import com.example.man2superapp.source.network.response.student.UpdatePasswordStudent
 import com.example.man2superapp.source.network.response.student.classses.GetAllClassStudentResponse
+import com.example.man2superapp.source.network.response.users.BiodataUserResponse
 import com.example.man2superapp.source.network.response.users.UpdateProfileResponse
 import com.example.man2superapp.source.network.response.wbs.AllWbsResponse
 import com.example.man2superapp.source.network.response.wbs.CreateWbsResponse
@@ -278,4 +281,35 @@ class RemoteDataSource @Inject constructor(
             Log.d(TAG, "updateSongketMotherGTK: ${it.message.toString()}")
             emit(States.failed(it.message.toString()))
         }.flowOn(Dispatchers.IO)
+
+    fun showProfileStudent(id: Int) = flow<States<BiodataStudentResponse>>{
+        apiService.getProfileStudent(id).let {
+            if(it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "showProfileStudent: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+    fun showProfileEmployee(id: Int) = flow<States<BiodataUserResponse>> {
+        apiService.getProfileEmployee(id).let {
+            if (it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "showProfileEmployee: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+    fun getAllArticle() = flow<States<ArticleNewsResponse>> {
+        emit(States.loading())
+        apiService.getArticle().let {
+            if(it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "getAllArticle: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }
 }
