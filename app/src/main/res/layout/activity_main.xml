@@ -74,78 +74,75 @@
 
 
     <!-- Carousel/Slider Image -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/sliderCard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:cardCornerRadius="10dp"
-        app:layout_constraintTop_toBottomOf="@id/tvUserName"
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:id="@+id/sliderCard"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        app:cardCornerRadius="10dp"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/tvUserName"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent">-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/sliderImage"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:src="@drawable/slidersample"-->
+<!--            android:scaleType="centerCrop" />-->
+
+<!--        &lt;!&ndash; Teks di dalam Slider &ndash;&gt;-->
+<!--        <TextView-->
+<!--            android:id="@+id/sliderTitle"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Kemenag Rilis Buku tentang Konsep Masjid Ramah"-->
+<!--            android:textColor="@android:color/white"-->
+<!--            android:textSize="24sp"-->
+<!--            android:fontFamily="@font/poppins_semibold"-->
+<!--            android:layout_gravity="top|start"-->
+<!--            android:layout_margin="16dp"/>-->
+
+<!--        &lt;!&ndash; Tombol 'Selengkapnya' &ndash;&gt;-->
+<!--        <Button-->
+<!--            android:id="@+id/btnSelengkapnya"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Selengkapnya"-->
+<!--            android:backgroundTint="@color/mangold"-->
+<!--            android:textColor="@android:color/white"-->
+<!--            android:layout_gravity="bottom|start"-->
+<!--            android:layout_margin="16dp"/>-->
+<!--    </androidx.cardview.widget.CardView>-->
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvUserName"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        app:layout_constraintBottom_toTopOf="@id/tvLayanan"/>
 
-        <ImageView
-            android:id="@+id/sliderImage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/slidersample"
-            android:scaleType="centerCrop" />
-
-        <!-- Teks di dalam Slider -->
-        <TextView
-            android:id="@+id/sliderTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Kemenag Rilis Buku tentang Konsep Masjid Ramah"
-            android:textColor="@android:color/white"
-            android:textSize="24sp"
-            android:fontFamily="@font/poppins_semibold"
-            android:layout_gravity="top|start"
-            android:layout_margin="16dp"/>
-
-        <!-- Tombol 'Selengkapnya' -->
-        <Button
-            android:id="@+id/btnSelengkapnya"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Selengkapnya"
-            android:backgroundTint="@color/mangold"
-            android:textColor="@android:color/white"
-            android:layout_gravity="bottom|start"
-            android:layout_margin="16dp"/>
-    </androidx.cardview.widget.CardView>
+    <com.denzcoskun.imageslider.ImageSlider
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:id="@+id/sliderCard"
+        app:layout_constraintStart_toStartOf="parent"
+        app:iss_period="1000"
+        app:iss_auto_cycle="true"
+        app:layout_constraintBottom_toTopOf="@id/tvLayanan"
+        app:iss_delay="1000"
+        app:iss_text_align="center"
+        app:iss_selected_dot="@drawable/dotactive"
+        app:iss_unselected_dot="@drawable/dotinactive"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvUserName" />
 
     <!-- Dot Navigation (Slider Indicator) -->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/sliderCard"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <View
-            android:layout_width="20dp"
-            android:layout_height="8dp"
-            android:background="@drawable/dotactive"
-            android:layout_margin="4dp"/>
-
-        <View
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:background="@drawable/dotinactive"
-            android:layout_margin="4dp"/>
-
-        <View
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:background="@drawable/dotinactive"
-            android:layout_margin="4dp"/>
-    </LinearLayout>
 
     <!-- Label 'Layanan' -->
     <TextView

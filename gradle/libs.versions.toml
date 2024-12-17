@@ -25,6 +25,7 @@ activityKtx = "1.9.3"
 kotlinxCoroutine = "1.7.3"
 retrofit = "2.9.0"
 picasso = "2.8"
+imageSlideShow = "0.1.2"
 
 
 
@@ -52,6 +53,7 @@ coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
 datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 dexter = { module = "com.karumi:dexter", version.ref = "dexterVersion" }
+slider = {module = "com.github.denzcoskun:ImageSlideshow", version.ref = "imageSlideShow"}
 hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hiltCompilerVersion" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
 

@@ -106,4 +106,6 @@ class Repository @Inject constructor(
 
     fun showProfileStudent(id: Int) = remoteDataSource.showProfileStudent(id)
 
+    fun getAllArticle() = remoteDataSource.getAllArticle()
+
 }

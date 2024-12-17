@@ -10,12 +10,15 @@ import androidx.activity.OnBackPressedDispatcher
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.denzcoskun.imageslider.constants.ScaleTypes
+import com.denzcoskun.imageslider.models.SlideModel
 import com.example.man2superapp.databinding.ActivityMainBinding
 import com.example.man2superapp.source.LoginTemp
 import com.example.man2superapp.source.local.model.LoginModel
 import com.example.man2superapp.source.network.States
 import com.example.man2superapp.ui.fragment.ProfilePopUpFragment
 import com.example.man2superapp.ui.presenter.AllViewModel
+import com.example.man2superapp.utils.Constant
 import com.example.man2superapp.utils.Help
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,7 +44,34 @@ class MainActivity : AppCompatActivity() {
                 Help.alertDialog(this@MainActivity)
             }
         })
+        allViewModel.getAllArticle()
+        observerView()
+        setUpSlider()
+    }
 
+    private fun observerView()
+    {
+        allViewModel.loading.observe(this@MainActivity){ loading ->
+            mainBinding.apply {
+                progressBar.visibility = if(loading) View.VISIBLE else View.GONE
+                sliderCard.visibility = if(loading) View.GONE else View.VISIBLE
+            }
+        }
+    }
+
+    private fun setUpSlider()
+    {
+        val imageSlider = mainBinding.sliderCard
+        val slideModels = mutableListOf<SlideModel>()
+        allViewModel.article.observe(this@MainActivity){ articles ->
+            articles.let {
+                for(article in it){
+                    val contentImage = Constant.IMAGE_URL_NEWS + article.image
+                    slideModels.add(SlideModel(contentImage,article.title,ScaleTypes.CENTER_CROP))
+                }
+                imageSlider.setImageList(slideModels, ScaleTypes.FIT)
+            }
+        }
     }
 
     private fun cardAction() {

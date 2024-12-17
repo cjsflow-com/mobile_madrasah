@@ -1,6 +1,6 @@
 package com.example.man2superapp.source.network.service
 
-import com.example.man2superapp.source.local.model.Article
+import com.example.man2superapp.source.network.response.ArticleNewsResponse
 import com.example.man2superapp.source.network.response.login.LoginResponse
 import com.example.man2superapp.source.network.response.login.LoginStudentResponse
 import com.example.man2superapp.source.network.response.login.LogoutResponse
@@ -10,6 +10,7 @@ import com.example.man2superapp.source.network.response.songket_emak.StatusRespo
 import com.example.man2superapp.source.network.response.songket_emak.UpdateSongketMother
 import com.example.man2superapp.source.network.response.songket_emak.gtk.AllSongketEmakByStatusResponse
 import com.example.man2superapp.source.network.response.songket_emak.gtk.CountStatusResponse
+import com.example.man2superapp.source.network.response.student.BiodataStudentResponse
 import com.example.man2superapp.source.network.response.student.UpdatePasswordStudent
 import com.example.man2superapp.source.network.response.student.classses.GetAllClassStudentResponse
 import com.example.man2superapp.source.network.response.users.BiodataUserResponse
@@ -17,7 +18,6 @@ import com.example.man2superapp.source.network.response.users.UpdateProfileRespo
 import com.example.man2superapp.source.network.response.wbs.AllWbsResponse
 import com.example.man2superapp.source.network.response.wbs.CreateWbsResponse
 import com.example.man2superapp.source.network.response.wbs.GetAllUserResponse
-import com.example.man2superapp.ui.activity.LoginStudent
 import com.example.man2superapp.utils.Constant
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -205,6 +205,11 @@ interface ApiService {
         @Path(Constant.ID) id: Int
     ): Response<BiodataStudentResponse>
 
+
+    @GET(Constant.GET_ARTICLE)
+    suspend fun getArticle(): Response<ArticleNewsResponse>
+
+
     @FormUrlEncoded
     @PUT(Constant.UPDATE_SONGKET_MOTHER_GTK)
     suspend fun updateSongketMotherGtk(
@@ -218,8 +223,5 @@ interface ApiService {
         @Field("end_holiday") endHoliday: String,
         @Field("recommendation_title") titleRecomendation: String
     ): Response<UpdateSongketMother>
-
-    @GET(Constant. GET_ARTICLES)
-    suspend fun getArticles(): Response<List<Article>>
 
 }

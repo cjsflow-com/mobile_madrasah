@@ -2,6 +2,7 @@ package com.example.man2superapp.source.network
 
 import android.util.Log
 import com.example.man2superapp.source.local.model.toGenerateListSongketMother
+import com.example.man2superapp.source.network.response.ArticleNewsResponse
 import com.example.man2superapp.source.network.response.login.LoginResponse
 import com.example.man2superapp.source.network.response.login.LoginStudentResponse
 import com.example.man2superapp.source.network.response.login.LogoutResponse
@@ -300,4 +301,15 @@ class RemoteDataSource @Inject constructor(
         Log.d(TAG, "showProfileEmployee: ${it.message.toString()}")
         emit(States.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
+
+    fun getAllArticle() = flow<States<ArticleNewsResponse>> {
+        emit(States.loading())
+        apiService.getArticle().let {
+            if(it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "getAllArticle: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }
 }
