@@ -40,8 +40,8 @@ class UpdateStudent : AppCompatActivity()
         val email = intent.getStringExtra(Constant.EMAIL)
         val position = intent.getStringExtra(Constant.POSITION)
         val nisn = intent.getStringExtra(Constant.NISN)
-        val gender = intent.getIntExtra(Constant.GENDER,-1)
-        val className = intent.getStringExtra(Constant.CLASS)
+        val gender = intent.getIntExtra(Constant.GENDER,0)
+        val className = intent.getIntExtra(Constant.CLASS,-1)
         val numberHandphone = intent.getStringExtra(Constant.PHONE)
         val placeBirthday = intent.getStringExtra(Constant.PLACE_BIRTHDAY)
         val nameFather = intent.getStringExtra(Constant.NAME_FATHER)
@@ -65,7 +65,6 @@ class UpdateStudent : AppCompatActivity()
             showUpdatePassword(false)
         }
 
-        setAdapterGender()
 
         allViewModel.classList.observe(this@UpdateStudent){ classesList ->
             val classMap = classesList.associateBy({it.name_class},{it.id})
@@ -74,13 +73,13 @@ class UpdateStudent : AppCompatActivity()
                 this@UpdateStudent,
                 android.R.layout.simple_dropdown_item_1line,
                 classesList.map { it.name_class })
-            updateBinding.etClasses.setAdapter(adapter)
 
-            val matchingClass = classesList.find { it.name_class == className}
+            val matchingClass = classesList.find { it.id == className}
             matchingClass.let {
-                updateBinding.etClasses.setText(it?.name_class,false)
+                updateBinding.etClasses.setText(it?.name_class)
             }
             this@UpdateStudent.classesMap = classMap
+            updateBinding.etClasses.setAdapter(adapter)
         }
 
         updateBinding.apply {
@@ -98,7 +97,10 @@ class UpdateStudent : AppCompatActivity()
                 2 -> "Perempuan"
                 else -> "Tidak ada"
             }
+            setAdapterGender()
+
             etGender.setText(genderText)
+
             etNumberHandphone.setText(numberHandphone)
             tvBack.setOnClickListener {
                 startActivity(Intent(this@UpdateStudent,MainActivity::class.java))
@@ -189,11 +191,11 @@ class UpdateStudent : AppCompatActivity()
 
     private fun setAdapterGender()
     {
-        val genderOptions = listOf("Laki-Laki","Perempuan")
+        val genderOptions = listOf("Laki-Laki","Perempuan","Tidak ada")
         val adapter = ArrayAdapter(
             this@UpdateStudent,
             android.R.layout.simple_dropdown_item_1line,
-            genderOptions
+            genderOptions,
         )
         updateBinding.etGender.setAdapter(adapter)
     }
