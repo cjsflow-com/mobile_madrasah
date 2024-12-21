@@ -1,6 +1,9 @@
 package com.example.man2superapp.source.network.service
 
 import com.example.man2superapp.source.network.response.ArticleNewsResponse
+import com.example.man2superapp.source.network.response.e_kinerja.GetTaskResponse
+import com.example.man2superapp.source.network.response.e_kinerja.HasApprovedTaskResponse
+import com.example.man2superapp.source.network.response.e_kinerja.IndexResponse
 import com.example.man2superapp.source.network.response.login.LoginResponse
 import com.example.man2superapp.source.network.response.login.LoginStudentResponse
 import com.example.man2superapp.source.network.response.login.LogoutResponse
@@ -223,5 +226,20 @@ interface ApiService {
         @Field("end_holiday") endHoliday: String,
         @Field("recommendation_title") titleRecomendation: String
     ): Response<UpdateSongketMother>
+
+    @GET(Constant.SHOW_ALL_EMPLOYEE_PERFORMANCE)
+    suspend fun getAllEmployeePerformance(
+        @Header(Constant.AUTHORIZATION) token: String
+    ): Response<IndexResponse>
+
+    @GET(Constant.HAS_APPROVED_TASK)
+    suspend fun hasApprovedTask(
+        @Header(Constant.AUTHORIZATION) token: String
+    ): Response<HasApprovedTaskResponse>
+
+    @GET(Constant.GET_TASK)
+    suspend fun getAllTaskEmployee(
+        @Header(Constant.AUTHORIZATION) token: String
+    ): Response<GetTaskResponse>
 
 }

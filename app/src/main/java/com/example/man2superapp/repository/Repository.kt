@@ -108,4 +108,10 @@ class Repository @Inject constructor(
 
     fun getAllArticle() = remoteDataSource.getAllArticle()
 
+    fun getAllTaskEmployee(token: String) = remoteDataSource.getAllTask(token)
+
+    fun getAllEmployeePerformance(token: String) = remoteDataSource.getAllEmployeePerformance(token)
+
+    fun hasApprovedTask(token: String) = remoteDataSource.getApprovedTask(token)
+
 }

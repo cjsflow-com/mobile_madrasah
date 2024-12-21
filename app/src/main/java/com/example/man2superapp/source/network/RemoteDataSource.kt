@@ -3,6 +3,9 @@ package com.example.man2superapp.source.network
 import android.util.Log
 import com.example.man2superapp.source.local.model.toGenerateListSongketMother
 import com.example.man2superapp.source.network.response.ArticleNewsResponse
+import com.example.man2superapp.source.network.response.e_kinerja.GetTaskResponse
+import com.example.man2superapp.source.network.response.e_kinerja.HasApprovedTaskResponse
+import com.example.man2superapp.source.network.response.e_kinerja.IndexResponse
 import com.example.man2superapp.source.network.response.login.LoginResponse
 import com.example.man2superapp.source.network.response.login.LoginStudentResponse
 import com.example.man2superapp.source.network.response.login.LogoutResponse
@@ -311,5 +314,38 @@ class RemoteDataSource @Inject constructor(
     }.catch {
         Log.d(TAG, "getAllArticle: ${it.message.toString()}")
         emit(States.failed(it.message.toString()))
-    }
+    }.flowOn(Dispatchers.IO)
+
+    fun getAllEmployeePerformance(token: String) = flow<States<IndexResponse>> {
+        emit(States.loading())
+        apiService.getAllEmployeePerformance(Constant.BEARER + token).let {
+            if (it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "getAllEmployeePerformance: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+    fun getAllTask(token: String) = flow<States<GetTaskResponse>> {
+        emit(States.loading())
+        apiService.getAllTaskEmployee(Constant.BEARER + token).let {
+            if (it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "getALlUser: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+    fun getApprovedTask(token: String) = flow<States<HasApprovedTaskResponse>> {
+        emit(States.loading())
+        apiService.hasApprovedTask(Constant.BEARER + token).let {
+            if(it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "getApprovedTask: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
 }

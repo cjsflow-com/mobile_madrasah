@@ -9,6 +9,7 @@ object Constant {
     const val WBS = "wbs"
     const val AUTH = "auth"
     const val SONGKET_MOTHER = "songket-mother"
+    const val E_KINERJA = "employee_performance"
     const val CREATE_WBS = "$WBS/create"
     const val GET_ALL_WBS = "$WBS/index"
     const val LETTER_STATEMENT = "letter_statement"
@@ -58,6 +59,14 @@ object Constant {
     const val UPDATE_SONGKET_MOTHER_GTK = "$SONGKET_MOTHER/gtk/update_songket/{id}"
     const val ALL_LIST_SONGKET_MOTHER_GTK = "$SONGKET_MOTHER/gtk/all_list_songket_mother_employee"
     const val GET_ARTICLE = "$AUTH/get_article"
+
+    // E-Kinerja
+    const val SHOW_ALL_EMPLOYEE_PERFORMANCE = "$E_KINERJA/index"
+    const val CREATE_EMPLOYEE_PERFORMANCE = "$E_KINERJA/create"
+    const val UPDATE_EMPLOYEE_PERFORMANCE = "$E_KINERJA/update"
+    const val CREATE_REALITATION = "$E_KINERJA/create_realitation"
+    const val HAS_APPROVED_TASK = "$E_KINERJA/has-approved-task"
+    const val GET_TASK = "$E_KINERJA/task"
 
 //    TAG FOR API
     const val TAG_CREATE_SONGKET = "CreateSongketActivity"
