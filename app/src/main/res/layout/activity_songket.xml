@@ -170,6 +170,45 @@
         <androidx.cardview.widget.CardView
             android:layout_width="150dp"
             android:layout_height="95dp"
+            android:id="@+id/cardAcceptedLeader"
+            android:layout_margin="15dp"
+            app:cardBackgroundColor="@color/card_accepted_leader"
+            app:cardCornerRadius="16dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/ivAcceptedLeader"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:contentDescription="Gambar Di Setujui Kepala Madrasah"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/baseline_done_outline_24"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/tvAcceptedLeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:text="8"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivAcceptedLeader"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ivAcceptedLeader"
+                    app:layout_constraintTop_toTopOf="@id/ivAcceptedLeader" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="150dp"
+            android:layout_height="95dp"
             android:layout_margin="15dp"
             android:id="@+id/cardSendLetter"
             android:layout_marginBottom="15dp"
@@ -207,44 +246,7 @@
         </androidx.cardview.widget.CardView>
 
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="150dp"
-            android:layout_height="95dp"
-            android:id="@+id/cardAcceptedLeader"
-            android:layout_margin="15dp"
-            app:cardBackgroundColor="@color/card_accepted_leader"
-            app:cardCornerRadius="16dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/ivAcceptedLeader"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:contentDescription="Gambar Di Setujui Kepala Madrasah"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginStart="10dp"
-                    android:src="@drawable/baseline_done_outline_24"
-                    tools:ignore="HardcodedText" />
-
-                <TextView
-                    android:id="@+id/tvAcceptedLeader"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
-                    android:text="8"
-                    android:textColor="#FFFFFF"
-                    android:textSize="24sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/ivAcceptedLeader"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/ivAcceptedLeader"
-                    app:layout_constraintTop_toTopOf="@id/ivAcceptedLeader" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
 
     </androidx.gridlayout.widget.GridLayout>
 
@@ -293,7 +295,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/tvAktif"
                     android:text="Aktif Sekolah"
-                    android:textSize="15sp"
+                    android:textSize="10sp"
                     android:fontFamily="@font/poppins_semibold"
                     android:layout_marginTop="5dp"
                     android:layout_centerHorizontal="true"
@@ -333,7 +335,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/tvBaik"
                     android:text="SKB"
-                    android:textSize="15sp"
+                    android:textSize="10sp"
                     android:fontFamily="@font/poppins_semibold"
                     android:layout_marginTop="10dp"
                     android:layout_centerHorizontal="true"
@@ -371,7 +373,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/tvClub"
                     android:text="Ekskul/Club"
-                    android:textSize="14sp"
+                    android:textSize="10sp"
                     android:fontFamily="@font/poppins_semibold"
                     android:layout_marginTop="5dp"
                     android:layout_centerHorizontal="true"
@@ -407,7 +409,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/tvHolidayYear"
                     android:text="Cuti Tahunan"
-                    android:textSize="15sp"
+                    android:textSize="10sp"
                     android:fontFamily="@font/poppins_semibold"
                     android:layout_marginTop="5dp"
                     android:layout_centerHorizontal="true"
@@ -441,7 +443,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/tvActivateTeaching"
                     android:text="Surat Aktif Mengajar"
-                    android:textSize="15sp"
+                    android:textSize="10sp"
                     android:fontFamily="@font/poppins_semibold"
                     android:layout_marginTop="5dp"
                     android:layout_centerHorizontal="true"
@@ -490,7 +492,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/tvLomba"
                     android:text="Lomba"
-                    android:textSize="15sp"
+                    android:textSize="10sp"
                     android:fontFamily="@font/poppins_semibold"
                     android:layout_marginTop="5dp"
                     android:layout_centerHorizontal="true"
@@ -526,7 +528,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/tvPeringkat"
                     android:text="Peringkat"
-                    android:textSize="15sp"
+                    android:textSize="10sp"
                     android:fontFamily="@font/poppins_semibold"
                     android:layout_marginTop="5dp"
                     android:layout_centerHorizontal="true"
@@ -561,7 +563,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/tvUniv"
                     android:text="Rekom Univ"
-                    android:textSize="15sp"
+                    android:textSize="10sp"
                     android:fontFamily="@font/poppins_semibold"
                     android:layout_marginTop="5dp"
                     android:layout_centerHorizontal="true"
@@ -596,7 +598,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/tvRecomenadtion"
                     android:text="Rekomendasi"
-                    android:textSize="15sp"
+                    android:textSize="10sp"
                     android:fontFamily="@font/poppins_semibold"
                     android:layout_marginTop="5dp"
                     android:layout_centerHorizontal="true"
@@ -631,7 +633,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/tvTask"
                     android:text="Tugas"
-                    android:textSize="15sp"
+                    android:textSize="10sp"
                     android:fontFamily="@font/poppins_semibold"
                     android:layout_marginTop="5dp"
                     android:layout_centerHorizontal="true"

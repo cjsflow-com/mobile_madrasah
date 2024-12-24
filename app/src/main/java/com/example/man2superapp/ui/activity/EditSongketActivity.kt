@@ -58,7 +58,7 @@ class EditSongketActivity : AppCompatActivity()
             listSongketMother?.let { data ->
                 when(data.letterStatement){
                     3 -> {
-                        tvMan.text = "Surat Keterangan Aktif Sekolah"
+                        tvMan.text = "Surat Keterangan Ekskul/Club"
                         parentExtracurricular.visibility = View.VISIBLE
                         parentNameClub.visibility = View.VISIBLE
                         tvClub.visibility = View.VISIBLE
@@ -83,6 +83,7 @@ class EditSongketActivity : AppCompatActivity()
                         etTotalStudents.setText(data.totalStudent)
                     }
                     6 -> {
+                        tvMan.text = "Surat Rekomendasi Universitas"
                         tvNameUnversity.visibility = View.VISIBLE
                         tvMajor.visibility = View.VISIBLE
                         parentMajor.visibility = View.VISIBLE

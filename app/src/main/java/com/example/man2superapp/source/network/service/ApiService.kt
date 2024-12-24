@@ -237,6 +237,22 @@ interface ApiService {
         @Header(Constant.AUTHORIZATION) token: String
     ): Response<HasApprovedTaskResponse>
 
+    @FormUrlEncoded
+    @PUT(Constant.CREATE_SERVICE_SONGKET_MOTHER)
+    suspend fun createServiceSongketMother(
+        @Path("id") id: Int,
+        @Field("employee_id") employeeService: Int,
+        @Field("rating_service") ratingService: Int,
+    ): Response<UpdateSongketMother>
+
+    @FormUrlEncoded
+    @PUT(Constant.CREATE_SERVICE_SONGKET_MOTHER_GTK)
+    suspend fun createServiceSongketMotherGtk(
+        @Path("id") id: Int,
+        @Field("employee_id") employeeService: Int,
+        @Field("rating_service") ratingService: Int,
+    ): Response<UpdateSongketMother>
+
     @GET(Constant.GET_TASK)
     suspend fun getAllTaskEmployee(
         @Header(Constant.AUTHORIZATION) token: String

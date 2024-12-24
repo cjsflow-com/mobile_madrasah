@@ -13,7 +13,8 @@ import com.example.man2superapp.databinding.ItemSongketMotherStatusBinding
 import com.example.man2superapp.source.local.model.SongketMotherGTK
 
 class SongketMotherAdapterGtk(
-    private val onEdit: (SongketMotherGTK) -> Unit
+    private val onEdit: (SongketMotherGTK) -> Unit,
+    private val onAddGtk: (SongketMotherGTK) -> Unit
 ): RecyclerView.Adapter<SongketMotherAdapterGtk.ViewHolder>()
 {
 
@@ -27,6 +28,10 @@ class SongketMotherAdapterGtk(
             {
                 changeSongketMother.setOnClickListener {
                     onEdit(data)
+                }
+
+                addService.setOnClickListener {
+                    onAddGtk(data)
                 }
 
                 val letterConfig = mapOf(
@@ -83,6 +88,11 @@ class SongketMotherAdapterGtk(
                 if(data.status == 99)
                 {
                     changeSongketMother.visibility = View.VISIBLE
+                }
+
+                if(data.status == 3)
+                {
+                    addService.visibility = View.VISIBLE
                 }
 
                 val statusColor = when(data.status){

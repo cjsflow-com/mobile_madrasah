@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Kembali"
+        android:textSize="15sp"
+        android:padding="10dp"
+        android:fontFamily="@font/montserrat_medium"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/back_button"/>
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/back_button"
+        app:srcCompat="@drawable/medium_logo" />
+
+    <TextView
+        android:id="@+id/tvWbs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/montserrat_semibold"
+        android:text="Songket Emak"
+        android:textColor="@color/text_default"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/tvMan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="Surat Keterangan "
+        android:textColor="@color/text_default"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvWbs"
+        tools:layout_editor_absoluteY="169dp" />
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/tvMan"
+        android:layout_width="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:id="@+id/tvServiceEmployee"
+            android:visibility="visible"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="Nama Petugas Pelayanan"
+            android:textColor="@color/text_default"
+            android:textSize="16sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            app:boxCornerRadiusBottomEnd="5dp"
+            android:elevation="4dp"
+            android:layout_marginEnd="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_marginStart="10dp"
+            android:id="@+id/parentServiceEmployee"
+            app:boxCornerRadiusBottomStart="5dp"
+            android:visibility="visible"
+            app:boxCornerRadiusTopEnd="5dp"
+            app:boxCornerRadiusTopStart="5dp"
+            android:layout_height="match_parent"
+            android:hint="Nama Petugas Pelayanan">
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/etNameServiceEmployee"
+                android:layout_width="match_parent"
+                android:backgroundTint="@color/white"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/montserrat"
+                android:inputType="none"
+                android:textSize="15sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvRatingService"
+            android:visibility="visible"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="Rating Layanan"
+            android:textColor="@color/text_default"
+            android:textSize="16sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:id="@+id/parentRatingService"
+            android:visibility="visible"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:boxCornerRadiusBottomEnd="5dp"
+            app:boxCornerRadiusBottomStart="5dp"
+            android:elevation="4dp"
+            app:boxCornerRadiusTopEnd="5dp"
+            app:boxCornerRadiusTopStart="5dp"
+            android:layout_height="wrap_content"
+            android:hint="Nama Universitas">
+
+            <AutoCompleteTextView
+                android:id="@+id/etRatingService"
+                android:backgroundTint="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/montserrat"
+                android:inputType="none"
+                android:textSize="15sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginTop="10dp"
+            android:id="@+id/progressBar" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:text="Tambah Pelayanan"
+            app:cornerRadius="10dp"
+            android:id="@+id/btn_add_service" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

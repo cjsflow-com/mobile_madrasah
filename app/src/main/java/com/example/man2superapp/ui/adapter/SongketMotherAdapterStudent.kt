@@ -10,7 +10,8 @@ import com.example.man2superapp.databinding.ItemSongketMotherStatusBinding
 import com.example.man2superapp.source.local.model.ListSongketMother
 
 class SongketMotherAdapterStudent(
-    private val onEdit: (ListSongketMother) -> Unit
+    private val onEdit: (ListSongketMother) -> Unit,
+    private val onAdd: (ListSongketMother) -> Unit,
 ): RecyclerView.Adapter<SongketMotherAdapterStudent.ViewHolder>()
 {
 
@@ -21,6 +22,9 @@ class SongketMotherAdapterStudent(
             with(binding) {
                 changeSongketMother.setOnClickListener {
                     onEdit(data)
+                }
+                addService.setOnClickListener {
+                    onAdd(data)
                 }
                 // Map konfigurasi berdasarkan letterStatement
                 val letterConfig = mapOf(
@@ -113,17 +117,33 @@ class SongketMotherAdapterStudent(
                 val statusText = when(data.status){
                     1 -> "Antrian"
                     2 -> "Setuju"
+                    3 -> "Selesai"
                     99 -> "Tolak"
                     else -> "Status tidak diketahui"
                 }
 
                 if(data.status == 99){
                     changeSongketMother.visibility = View.VISIBLE
+                    addService.visibility = View.GONE
+                }
+
+                if((data.letterStatement == 4 && data.status == 99) || (data.letterStatement == 1 && data.status == 99) ||
+                    (data.letterStatement == 2 && data.status == 99))
+                {
+                    changeSongketMother.visibility = View.GONE
+                    addService.visibility = View.VISIBLE
+                }
+
+                if(data.status == 2)
+                {
+                    addService.visibility = View.VISIBLE
+                    changeSongketMother.visibility = View.GONE
                 }
 
                 val statusColor = when(data.status){
                     1 -> android.graphics.Color.YELLOW
                     2 -> android.graphics.Color.GREEN
+                    3 -> android.graphics.Color.GREEN
                     99 -> android.graphics.Color.RED
                     else -> android.graphics.Color.GRAY
                 }

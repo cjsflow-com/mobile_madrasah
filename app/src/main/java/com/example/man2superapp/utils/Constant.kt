@@ -18,10 +18,6 @@ object Constant {
     const val LOGIN_STUDENT = "$AUTH/student/login"
     const val BEARER = "Bearer "
     const val STUDENT = "student"
-    const val CREATE_SONGKET_MOTHER = "$SONGKET_MOTHER/store"
-    const val LIST_BY_STATUS_SONGKET_MOTHER = "$SONGKET_MOTHER/filter_by_status"
-    const val UPDATE_SONGKET_MOTHER = "$SONGKET_MOTHER/update_songket/{id}"
-    const val STATUS_LETTER = "$SONGKET_MOTHER/count_status"
     const val LOGOUT = "auth/employee/logout"
     const val TYPE = "type"
     const val TYPE_ROLE  = "role"
@@ -58,6 +54,16 @@ object Constant {
     const val COUNT_STATUS_SONGKET_MOTHER_GTK = "$SONGKET_MOTHER/gtk/count_status"
     const val UPDATE_SONGKET_MOTHER_GTK = "$SONGKET_MOTHER/gtk/update_songket/{id}"
     const val ALL_LIST_SONGKET_MOTHER_GTK = "$SONGKET_MOTHER/gtk/all_list_songket_mother_employee"
+    const val CREATE_SERVICE_SONGKET_MOTHER_GTK = "$SONGKET_MOTHER/gtk/create_service_songket_mother_gtk/{id}"
+
+    // Songket Emak Student
+    const val CREATE_SONGKET_MOTHER = "$SONGKET_MOTHER/store"
+    const val LIST_BY_STATUS_SONGKET_MOTHER = "$SONGKET_MOTHER/filter_by_status"
+    const val UPDATE_SONGKET_MOTHER = "$SONGKET_MOTHER/update_songket/{id}"
+    const val STATUS_LETTER = "$SONGKET_MOTHER/count_status"
+    const val CREATE_SERVICE_SONGKET_MOTHER = "$SONGKET_MOTHER/create_service_songket_mother/{id}"
+
+    // Get All Article For Slider
     const val GET_ARTICLE = "$AUTH/get_article"
 
     // E-Kinerja

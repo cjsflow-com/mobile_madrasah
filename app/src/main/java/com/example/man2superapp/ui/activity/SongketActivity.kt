@@ -47,8 +47,8 @@ class SongketActivity : AppCompatActivity() {
     @Inject
     lateinit var localStore: LoginTemp
     private val allViewModel by viewModels<AllViewModel>()
-    private val adapterSongketList by lazy { SongketMotherAdapterStudent(::onEdit) }
-    private val adapterSongketListGtk by lazy { SongketMotherAdapterGtk(::onEditGtk) }
+    private val adapterSongketList by lazy { SongketMotherAdapterStudent(::onEdit,::onAdd) }
+    private val adapterSongketListGtk by lazy { SongketMotherAdapterGtk(::onEditGtk, ::onAddServiceGtk) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,7 +86,7 @@ class SongketActivity : AppCompatActivity() {
                 club.visibility = View.VISIBLE
                 univ.visibility = View.VISIBLE
                 peringkat.visibility = View.VISIBLE
-                cardAcceptedLeader.visibility  = View.GONE
+                cardAcceptedLeader.visibility  = View.VISIBLE
                 cardSendLetter.visibility = View.GONE
             }else{
                 eHolidayYear.visibility = View.VISIBLE
@@ -109,15 +109,18 @@ class SongketActivity : AppCompatActivity() {
                             tvAccepted.text = "--/--"
                             tvQueue.text = "--/--"
                             tvRejected.text = "--/--"
+                            tvAcceptedLeader.text = "--/--"
                         }
 
                         is States.Success -> {
+                            tvAcceptedLeader.text = state.data.completed.toString()
                             tvAccepted.text = state.data.accepted.toString()
                             tvQueue.text = state.data.queue.toString()
                             tvRejected.text = state.data.reject.toString()
                         }
 
                         is States.Failed -> {
+                            tvAcceptedLeader.text = "0"
                             tvAccepted.text = "0"
                             tvQueue.text = "0"
                             tvRejected.text = "0"
@@ -156,7 +159,6 @@ class SongketActivity : AppCompatActivity() {
             }
         }
     }
-
 
     private fun setCurrentDate() {
         // Format tanggal: "EEEE, d MMMM" (Contoh: "Rabu, 9 Oktober")
@@ -227,6 +229,24 @@ class SongketActivity : AppCompatActivity() {
             putExtra(Constant.LIST_SONGKET_MOTHER,songketMother)
         }.also { startActivity(it) }
     }
+
+    private fun onAdd(songketMother: ListSongketMother)
+    {
+        Intent(this@SongketActivity,AddServiceActivity::class.java).apply {
+            putExtra(Constant.LETTER_TYPE,songketMother.letterStatement)
+            putExtra(Constant.TYPE,songketMother.id)
+        }.also { startActivity(it) }
+    }
+
+    private fun onAddServiceGtk(songketMotherGtk: SongketMotherGTK)
+    {
+        Intent(this@SongketActivity,AddServiceActivity::class.java).apply {
+            putExtra(Constant.LETTER_TYPE,songketMotherGtk.letterStatement)
+            putExtra(Constant.TYPE,songketMotherGtk.id)
+        }.also { startActivity(it) }
+    }
+
+
 
     private fun onEditGtk(songketMotherGtk: SongketMotherGTK)
     {

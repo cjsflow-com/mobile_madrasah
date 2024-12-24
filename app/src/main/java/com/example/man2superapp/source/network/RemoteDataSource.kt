@@ -348,4 +348,26 @@ class RemoteDataSource @Inject constructor(
         Log.d(TAG, "getApprovedTask: ${it.message.toString()}")
         emit(States.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
+
+    fun createServiceSongketMother(id: Int,employeeId: Int, ratingService: Int) = flow<States<UpdateSongketMother>> {
+        emit(States.loading())
+        apiService.createServiceSongketMother(id,employeeId,ratingService).let {
+            if (it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "createSongketMother: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+    fun createServiceSongketMotherGtk(id: Int, employeeId: Int, ratingService: Int) = flow<States<UpdateSongketMother>> {
+        emit(States.loading())
+        apiService.createServiceSongketMotherGtk(id,employeeId,ratingService).let {
+            if (it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "createSongketMotherGtk: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
 }

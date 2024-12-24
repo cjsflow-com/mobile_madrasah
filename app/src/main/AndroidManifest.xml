@@ -52,6 +52,8 @@
             android:exported="false" />
         <activity android:name=".ui.activity.EditSongketGtkActivity"
             android:exported="false" />
+        <activity android:name=".ui.activity.AddServiceActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.activity.EkinActivity"
             android:exported="false" />

@@ -165,4 +165,10 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
             }
         }
     }
+
+    fun createServiceSongketMother(id: Int, employeeId: Int, ratingService: Int) =
+        repository.createServiceSongketMother(id,employeeId,ratingService).asLiveData()
+
+    fun createServiceSongketMotherGtk(id: Int, employeeId: Int, ratingService: Int) =
+        repository.createServiceSongketMotherGtk(id,employeeId,ratingService).asLiveData()
 }

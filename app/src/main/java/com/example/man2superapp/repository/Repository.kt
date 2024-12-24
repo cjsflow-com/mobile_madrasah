@@ -114,4 +114,8 @@ class Repository @Inject constructor(
 
     fun hasApprovedTask(token: String) = remoteDataSource.getApprovedTask(token)
 
+    fun createServiceSongketMother(id: Int, employeeId: Int, ratingService: Int) = remoteDataSource.createServiceSongketMother(id,employeeId,ratingService)
+
+    fun createServiceSongketMotherGtk(id: Int, employeeId: Int, ratingService: Int) = remoteDataSource.createServiceSongketMotherGtk(id,employeeId,ratingService)
+
 }
