@@ -44,35 +44,35 @@ class MainActivity : AppCompatActivity() {
                 Help.alertDialog(this@MainActivity)
             }
         })
-        allViewModel.getAllArticle()
-        observerView()
-        setUpSlider()
+//        allViewModel.getAllArticle()
+//        observerView()
+//        setUpSlider()
     }
 
-    private fun observerView()
-    {
-        allViewModel.loading.observe(this@MainActivity){ loading ->
-            mainBinding.apply {
-                progressBar.visibility = if(loading) View.VISIBLE else View.GONE
-                sliderCard.visibility = if(loading) View.GONE else View.VISIBLE
-            }
-        }
-    }
+//    private fun observerView()
+//    {
+//        allViewModel.loading.observe(this@MainActivity){ loading ->
+//            mainBinding.apply {
+//                progressBar.visibility = if(loading) View.VISIBLE else View.GONE
+//                sliderCard.visibility = if(loading) View.GONE else View.VISIBLE
+//            }
+//        }
+//    }
 
-    private fun setUpSlider()
-    {
-        val imageSlider = mainBinding.sliderCard
-        val slideModels = mutableListOf<SlideModel>()
-        allViewModel.article.observe(this@MainActivity){ articles ->
-            articles.let {
-                for(article in it){
-                    val contentImage = Constant.IMAGE_URL_NEWS + article.image
-                    slideModels.add(SlideModel(contentImage,article.title,ScaleTypes.CENTER_CROP))
-                }
-                imageSlider.setImageList(slideModels, ScaleTypes.FIT)
-            }
-        }
-    }
+//    private fun setUpSlider()
+//    {
+//        val imageSlider = mainBinding.sliderCard
+//        val slideModels = mutableListOf<SlideModel>()
+//        allViewModel.article.observe(this@MainActivity){ articles ->
+//            articles.let {
+//                for(article in it){
+//                    val contentImage = Constant.IMAGE_URL_NEWS + article.image
+//                    slideModels.add(SlideModel(contentImage,article.title,ScaleTypes.CENTER_CROP))
+//                }
+//                imageSlider.setImageList(slideModels, ScaleTypes.FIT)
+//            }
+//        }
+//    }
 
     private fun cardAction() {
         lifecycleScope.launch {

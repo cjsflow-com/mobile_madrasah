@@ -125,7 +125,7 @@
             app:boxCornerRadiusTopEnd="5dp"
             app:boxCornerRadiusTopStart="5dp"
             android:layout_height="wrap_content"
-            android:hint="Nama Universitas">
+            android:hint="Rating Layanan">
 
             <AutoCompleteTextView
                 android:id="@+id/etRatingService"
@@ -138,7 +138,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <ProgressBar
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
             android:layout_marginTop="10dp"

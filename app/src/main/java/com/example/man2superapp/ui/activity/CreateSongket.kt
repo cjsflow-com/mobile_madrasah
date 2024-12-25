@@ -121,7 +121,7 @@ class CreateSongket : AppCompatActivity()
 
             when(letterType){
                 3 -> {
-                    if(extracurricular.isBlank() || parentClub.isBlank())
+                    if(extracurricular.isBlank() && parentClub.isBlank())
                     {
                         Help.showToast(this@CreateSongket,getString(R.string.validation_letter_club))
                     }else{
@@ -132,7 +132,7 @@ class CreateSongket : AppCompatActivity()
                     }
                 }
                 5 -> {
-                   if(semester.isBlank() && ranking.isBlank() && totalStudent.isBlank() && averageValue.isBlank())
+                   if(semester.isBlank() || ranking.isBlank() || totalStudent.isBlank() || averageValue.isBlank())
                    {
                        Help.showToast(this@CreateSongket,getString(R.string.validation_form))
                    }else{
@@ -142,7 +142,7 @@ class CreateSongket : AppCompatActivity()
                    }
                 }
                 6 -> {
-                    if(nameUniversity.isBlank() && major.isBlank())
+                    if(nameUniversity.isBlank() || major.isBlank())
                     {
                         Help.showToast(this@CreateSongket,getString(R.string.validation_form))
                     }else{

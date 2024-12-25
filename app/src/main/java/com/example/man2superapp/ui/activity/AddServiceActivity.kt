@@ -97,7 +97,7 @@ class AddServiceActivity: AppCompatActivity()
 
             val relatedOfficialsId = useMap?.get(employee)
 
-           if(employee.isEmpty() && ratingService.isEmpty())
+           if(employee.isEmpty() || ratingService.isEmpty())
            {
                Help.showToast(this@AddServiceActivity,getString(R.string.validation_form))
            }else{
@@ -129,13 +129,13 @@ class AddServiceActivity: AppCompatActivity()
                    5 -> {
                        relatedOfficialsId?.let {
                            allViewModel.createServiceSongketMother(id,
-                               it,ratingService.toInt()).observe(this@AddServiceActivity){handLeResponse(it)}
+                               it,ratingService.toInt()).observe(this@AddServiceActivity){data -> handLeResponse(data)}
                        }
                    }
                    6 -> {
                        relatedOfficialsId?.let {
                            allViewModel.createServiceSongketMother(id,
-                               it,ratingService.toInt()).observe(this@AddServiceActivity){handLeResponse(it)}
+                               it,ratingService.toInt()).observe(this@AddServiceActivity){data -> handLeResponse(data)}
                        }
                    }
                }

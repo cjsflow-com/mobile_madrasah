@@ -112,15 +112,15 @@ class EditSongketActivity : AppCompatActivity()
             when(letterType){
                 3 -> {
                     if(extracurricular.isBlank() || parentClub.isBlank()){
-                        Help.showToast(this@EditSongketActivity,getString(R.string.validation_letter_club))
-                    }else{
                         alLViewModel.updateSongketMother(id,"","",extracurricular,parentClub,
                             "","","","","",0.0)
                             .observe(this@EditSongketActivity){handleResponse(it)}
+                    }else{
+                        Help.showToast(this@EditSongketActivity,getString(R.string.validation_letter_club))
                     }
                 }
                 5 -> {
-                    if(semester.isBlank() && ranking.isBlank() && totalStudent.isBlank() && averageValue.isBlank())
+                    if(semester.isBlank() || ranking.isBlank() || totalStudent.isBlank() || averageValue.isBlank())
                     {
                         Help.showToast(this@EditSongketActivity,getString(R.string.validation_form))
                     }else{
@@ -131,7 +131,7 @@ class EditSongketActivity : AppCompatActivity()
                     }
                 }
                 6 ->{
-                    if (nameUniversity.isBlank() && major.isBlank())
+                    if (nameUniversity.isBlank() || major.isBlank())
                     {
                         Help.showToast(this@EditSongketActivity,getString(R.string.validation_form))
                     }else{

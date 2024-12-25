@@ -136,10 +136,10 @@ class CreateSongketGtk: AppCompatActivity()
                 1 -> {
                     if(startHoliday.isBlank() && endHoliday.isBlank())
                     {
-                        Help.showToast(this@CreateSongketGtk,"Mulai Cuti dan Akhir Cuti tidak boleh kosong")
-                    }else{
                         allViewModel.createSongketMotherGtk(token,letterType,ranKOrGrade,nip,"","","",startHoliday,endHoliday,"")
                             .observe(this@CreateSongketGtk){state -> handleResponse(state)}
+                    }else{
+                        Help.showToast(this@CreateSongketGtk,"Mulai Cuti dan Akhir Cuti tidak boleh kosong")
                     }
                 }
                 2 -> {
