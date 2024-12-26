@@ -62,6 +62,7 @@ object Constant {
     const val UPDATE_SONGKET_MOTHER = "$SONGKET_MOTHER/update_songket/{id}"
     const val STATUS_LETTER = "$SONGKET_MOTHER/count_status"
     const val CREATE_SERVICE_SONGKET_MOTHER = "$SONGKET_MOTHER/create_service_songket_mother/{id}"
+    const val OFFICER_SERVICE_SONGKET_MOTHER = "$SONGKET_MOTHER/service_officer"
 
     // Get All Article For Slider
     const val GET_ARTICLE = "$AUTH/get_article"

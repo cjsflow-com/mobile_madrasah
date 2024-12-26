@@ -33,6 +33,7 @@ import kotlinx.coroutines.flow.flowOn
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.Response
+import java.lang.Thread.State
 import javax.inject.Inject
 
 class RemoteDataSource @Inject constructor(
@@ -368,6 +369,17 @@ class RemoteDataSource @Inject constructor(
         }
     }.catch {
         Log.d(TAG, "createSongketMotherGtk: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+    fun getOfficerServiceSongketMother() = flow<States<GetAllUserResponse>> {
+        emit(States.loading())
+        apiService.getOfficerServiceSongketMother().let {
+            if(it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "getOfficerServiceSongketMother: ${it.message.toString()}")
         emit(States.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
 }

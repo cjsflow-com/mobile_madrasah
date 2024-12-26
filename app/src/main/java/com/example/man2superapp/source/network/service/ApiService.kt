@@ -258,4 +258,7 @@ interface ApiService {
         @Header(Constant.AUTHORIZATION) token: String
     ): Response<GetTaskResponse>
 
+    @GET(Constant.OFFICER_SERVICE_SONGKET_MOTHER)
+    suspend fun getOfficerServiceSongketMother(): Response<GetAllUserResponse>
+
 }

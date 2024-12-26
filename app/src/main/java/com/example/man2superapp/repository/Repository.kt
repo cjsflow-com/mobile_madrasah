@@ -118,4 +118,6 @@ class Repository @Inject constructor(
 
     fun createServiceSongketMotherGtk(id: Int, employeeId: Int, ratingService: Int) = remoteDataSource.createServiceSongketMotherGtk(id,employeeId,ratingService)
 
+    fun getOfficerServiceSongketMother() = remoteDataSource.getOfficerServiceSongketMother()
+
 }

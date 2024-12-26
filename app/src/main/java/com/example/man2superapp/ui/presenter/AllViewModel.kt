@@ -119,6 +119,24 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
         }
     }
 
+    fun fetchAllOfficerService(context: Context){
+        viewModelScope.launch {
+            repository.getOfficerServiceSongketMother().collect{ state ->
+                when(state)
+                {
+                    is States.Loading -> {}
+                    is States.Success -> {
+                        _userList.value = state.data.data.toGenerateAllUserWbs()
+                    }
+                    is States.Failed -> {
+                        Help.showToast(context,state.message)
+                        Log.d("AllViewModel", "fetchAllOfficerService: ${state.message}")
+                    }
+                }
+            }
+        }
+    }
+
     fun updateProfileStudent(token: String, name: String, email: String, placeBirthday: String, nisn: String, phoneNumber: String, classStudentId: Int, gender: Int, nameFather: String, nameMother: String, address: String, dateBirthday: String)
         = repository.updateProfileStudent(token,name,email,placeBirthday,nisn,phoneNumber,classStudentId,gender,nameFather,nameMother,address,dateBirthday).asLiveData()
 

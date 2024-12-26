@@ -56,7 +56,7 @@ class AddServiceActivity: AppCompatActivity()
             }
         }
 
-        allViewModel.fetchAllUsers(this@AddServiceActivity)
+        allViewModel.fetchAllOfficerService(this@AddServiceActivity)
     }
 
     private fun base(letterTye: Int, type: Int,role: String)
