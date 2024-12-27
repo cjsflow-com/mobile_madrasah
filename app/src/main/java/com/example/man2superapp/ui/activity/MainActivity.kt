@@ -2,6 +2,7 @@ package com.example.man2superapp.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Contacts.Intents
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
@@ -11,6 +12,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.denzcoskun.imageslider.constants.ScaleTypes
+import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.denzcoskun.imageslider.models.SlideModel
 import com.example.man2superapp.databinding.ActivityMainBinding
 import com.example.man2superapp.source.LoginTemp
@@ -70,8 +72,24 @@ class MainActivity : AppCompatActivity() {
                     slideModels.add(SlideModel(contentImage,article.title,ScaleTypes.CENTER_CROP))
                 }
                 imageSlider.setImageList(slideModels, ScaleTypes.FIT)
+                imageSlider.setItemClickListener(object: ItemClickListener{
+                    override fun doubleClick(position: Int) {
+                        openWebView("https://www.m2mpekanbaru.sch.id/berita")
+                    }
+                    override fun onItemSelected(position: Int) {
+                        openWebView("https://www.m2mpekanbaru.sch.id/berita")
+                    }
+                })
             }
         }
+    }
+
+    private fun openWebView(url: String)
+    {
+        Intent(this@MainActivity,WebViewActivity::class.java).apply {
+            putExtra("URL",url)
+        }.also { startActivity(it) }
+
     }
 
     private fun cardAction() {
