@@ -54,6 +54,8 @@
             android:exported="false" />
         <activity android:name=".ui.activity.AddServiceActivity"
             android:exported="false" />
+        <activity android:name=".ui.activity.WebViewActivity"
+            android:exported="false"/>
         <activity
             android:name=".ui.activity.EkinActivity"
             android:exported="false" />
