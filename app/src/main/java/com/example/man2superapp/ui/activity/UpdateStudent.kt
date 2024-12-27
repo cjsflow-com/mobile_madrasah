@@ -31,6 +31,8 @@ class UpdateStudent : AppCompatActivity()
     lateinit var localStore: LoginTemp
     private val allViewModel by viewModels<AllViewModel>()
     private var classesMap: Map<String,Int>? = null
+    private var selectGenderValue: Int = -1
+    private val genderOptions = listOf("Laki-Laki","Perempuan")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +61,10 @@ class UpdateStudent : AppCompatActivity()
                 Help.alertDialog(this@UpdateStudent)
             }
         })
+
+        setAdapterGender()
+
+        setUpDefaultGender(gender)
 
         if(type == 1)
         {
@@ -98,15 +104,6 @@ class UpdateStudent : AppCompatActivity()
             etAddress.setText(address)
             etPlaceBirthday.setText(placeBirthday)
             etBirthday.setText(dateBirthday)
-            val genderText = when(gender){
-                1 -> "Laki-Laki"
-                2 -> "Perempuan"
-                else -> "Tidak ada"
-            }
-            setAdapterGender()
-
-            etGender.setText(genderText)
-
             etNumberHandphone.setText(numberHandphone)
             tvBack.setOnClickListener {
                 startActivity(Intent(this@UpdateStudent,MainActivity::class.java))
@@ -152,46 +149,39 @@ class UpdateStudent : AppCompatActivity()
             val nameMother = parentNameMother.editText?.text.toString().trim()
             val nisn = parentNisn.editText?.text.toString().trim()
             val dateBirthday = parentDateBirthday.editText?.text.toString().trim()
-            val gender = parentGender.editText?.text.toString()
-            val genderValue = when(gender)
-            {
-                "Laki-Laki" -> 1
-                "Perempuan" -> 2
-                else -> -1
-            }
             val classes = parentClasses.editText?.text.toString().trim()
             lifecycleScope.launch {  }
             if(role == "siswa")
             {
                 val takeClass = classesMap?.get(classes)
                  updateProfileStudent(
-                    token,name,email,phoneNumber,genderValue,address,nisn,takeClass,
+                    token,name,email,phoneNumber,selectGenderValue,address,nisn,takeClass,
                     placeBirthDay,dateBirthday,nameFather,nameMother,
                 )
             }else{
-                updateProfileEmployee(token,name,email,phoneNumber,genderValue,position)
+                updateProfileEmployee(token,name,email,phoneNumber,selectGenderValue,position)
             }
         }
     }
 
     private fun action(role: String,token: String)
     {
-                    val textPassword = updateBinding.tilPassword.editText?.text.toString().trim()
-                    if (role == "siswa")
-                    {
-                        if(textPassword.isEmpty())
-                        {
-                            Help.showToast(this@UpdateStudent,"Password tidak boleh kosong")
-                        }else{
-                           actionUpdatePasswordStudent(token,textPassword)
-                        }
-                    }else{
-                        if(textPassword.isEmpty()){
-                            Help.showToast(this@UpdateStudent,"Password tidak boleh kosong")
-                        }else{
-                          actionUpdatePasswordEmployee(token,textPassword)
-                        }
-                    }
+            val textPassword = updateBinding.tilPassword.editText?.text.toString().trim()
+            if (role == "siswa")
+            {
+                if(textPassword.isEmpty())
+                {
+                    Help.showToast(this@UpdateStudent,"Password tidak boleh kosong")
+                }else{
+                   actionUpdatePasswordStudent(token,textPassword)
+                }
+            }else{
+                if(textPassword.isEmpty()){
+                    Help.showToast(this@UpdateStudent,"Password tidak boleh kosong")
+                }else{
+                  actionUpdatePasswordEmployee(token,textPassword)
+                }
+            }
 
         }
 
@@ -217,13 +207,32 @@ class UpdateStudent : AppCompatActivity()
 
     private fun setAdapterGender()
     {
-        val genderOptions = listOf("Laki-Laki","Perempuan","Tidak ada")
         val adapter = ArrayAdapter(
             this@UpdateStudent,
             android.R.layout.simple_dropdown_item_1line,
             genderOptions,
         )
-        updateBinding.etGender.setAdapter(adapter)
+        updateBinding.apply {
+            etGender.setAdapter(adapter)
+            etGender.setOnItemClickListener{_,_,position,_ ->
+                selectGenderValue = when(genderOptions[position]){
+                    "Laki-Laki" -> 1
+                    "Perempuan" -> 2
+                    else -> -1
+                }
+            }
+        }
+    }
+
+    private fun setUpDefaultGender(gender: Int){
+        updateBinding.etGender.setText(
+            when(gender){
+                1 -> "Laki-Laki"
+                2 -> "Perempuan"
+                else -> ""
+            },false
+        )
+        selectGenderValue = gender
     }
 
     private fun updateProfileEmployee(token: String,name: String,email: String, number_phone: String,
@@ -351,6 +360,7 @@ class UpdateStudent : AppCompatActivity()
     private fun isShowProgress(isShow: Boolean)
     {
         updateBinding.apply {
+            progressBarUpdate.visibility = if(isShow) View.VISIBLE else View.GONE
             progressBar.visibility = if (isShow) View.VISIBLE else View.GONE
             btnChangeProfile.visibility = if(isShow) View.GONE else View.VISIBLE
             btnSavePassword.visibility = if(isShow) View.GONE else View.VISIBLE
