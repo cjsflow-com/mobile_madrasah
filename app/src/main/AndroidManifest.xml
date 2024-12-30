@@ -7,36 +7,45 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
+
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="32"
         tools:ignore="ScopedStorage" />
 
     <application
+        android:name=".source.network.di.MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:name=".source.network.di.MyApplication"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.Man2SuperApp"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        <activity android:name=".ui.activity.RegisterActivity" android:exported="false" />
+        <activity
+            android:name=".ui.activity.EditEKinerjaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.RegisterActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.activity.JurnalActivity"
             android:exported="false" />
-        <activity android:name=".ui.activity.CreateSongket"
-            android:exported="false"/>
+        <activity
+            android:name=".ui.activity.CreateSongket"
+            android:exported="false" />
         <activity
             android:name=".ui.activity.wbs"
-            android:exported="false"/>
-
-        <activity android:name=".ui.activity.LoginStudent"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.LoginStudent"
             android:exported="false" />
         <activity
             android:name=".ui.activity.SongketActivity"
@@ -44,23 +53,32 @@
         <activity
             android:name=".EkinAfter"
             android:exported="false" />
-        <activity android:name=".ui.activity.UpdateStudent"
-            android:exported="false"/>
-        <activity android:name=".ui.activity.EditSongketActivity"
+        <activity
+            android:name=".ui.activity.UpdateStudent"
             android:exported="false" />
-        <activity android:name=".ui.activity.CreateSongketGtk"
+        <activity
+            android:name=".ui.activity.EditSongketActivity"
             android:exported="false" />
-        <activity android:name=".ui.activity.EditSongketGtkActivity"
+        <activity
+            android:name=".ui.activity.CreateSongketGtk"
             android:exported="false" />
-        <activity android:name=".ui.activity.AddServiceActivity"
+        <activity
+            android:name=".ui.activity.EditSongketGtkActivity"
             android:exported="false" />
-        <activity android:name=".ui.activity.WebViewActivity"
-            android:exported="false"/>
+        <activity
+            android:name=".ui.activity.AddServiceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.WebViewActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.activity.EkinActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.AddActivityEkinerja"
             android:exported="false" />
         <activity
             android:name=".ui.activity.MainActivity"

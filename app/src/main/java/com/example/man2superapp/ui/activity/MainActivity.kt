@@ -14,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.denzcoskun.imageslider.models.SlideModel
+import com.example.man2superapp.EkinAfter
 import com.example.man2superapp.databinding.ActivityMainBinding
 import com.example.man2superapp.source.LoginTemp
 import com.example.man2superapp.source.local.model.LoginModel
@@ -46,43 +47,43 @@ class MainActivity : AppCompatActivity() {
                 Help.alertDialog(this@MainActivity)
             }
         })
-        allViewModel.getAllArticle()
-        observerView()
-        setUpSlider()
+//        allViewModel.getAllArticle()
+//        observerView()
+//        setUpSlider()
     }
 
-    private fun observerView()
-    {
-        allViewModel.loading.observe(this@MainActivity){ loading ->
-            mainBinding.apply {
-                progressBar.visibility = if(loading) View.VISIBLE else View.GONE
-                sliderCard.visibility = if(loading) View.GONE else View.VISIBLE
-            }
-        }
-    }
+//    private fun observerView()
+//    {
+//        allViewModel.loading.observe(this@MainActivity){ loading ->
+//            mainBinding.apply {
+//                progressBar.visibility = if(loading) View.VISIBLE else View.GONE
+//                sliderCard.visibility = if(loading) View.GONE else View.VISIBLE
+//            }
+//        }
+//    }
 
-    private fun setUpSlider()
-    {
-        val imageSlider = mainBinding.sliderCard
-        val slideModels = mutableListOf<SlideModel>()
-        allViewModel.article.observe(this@MainActivity){ articles ->
-            articles.let {
-                for(article in it){
-                    val contentImage = Constant.IMAGE_URL_NEWS + article.image
-                    slideModels.add(SlideModel(contentImage,article.title,ScaleTypes.CENTER_CROP))
-                }
-                imageSlider.setImageList(slideModels, ScaleTypes.FIT)
-                imageSlider.setItemClickListener(object: ItemClickListener{
-                    override fun doubleClick(position: Int) {
-                        openWebView("https://www.m2mpekanbaru.sch.id/berita")
-                    }
-                    override fun onItemSelected(position: Int) {
-                        openWebView("https://www.m2mpekanbaru.sch.id/berita")
-                    }
-                })
-            }
-        }
-    }
+//    private fun setUpSlider()
+//    {
+//        val imageSlider = mainBinding.sliderCard
+//        val slideModels = mutableListOf<SlideModel>()
+//        allViewModel.article.observe(this@MainActivity){ articles ->
+//            articles.let {
+//                for(article in it){
+//                    val contentImage = Constant.IMAGE_URL_NEWS + article.image
+//                    slideModels.add(SlideModel(contentImage,article.title,ScaleTypes.CENTER_CROP))
+//                }
+//                imageSlider.setImageList(slideModels, ScaleTypes.FIT)
+//                imageSlider.setItemClickListener(object: ItemClickListener{
+//                    override fun doubleClick(position: Int) {
+//                        openWebView("https://www.m2mpekanbaru.sch.id/berita")
+//                    }
+//                    override fun onItemSelected(position: Int) {
+//                        openWebView("https://www.m2mpekanbaru.sch.id/berita")
+//                    }
+//                })
+//            }
+//        }
+//    }
 
     private fun openWebView(url: String)
     {
@@ -224,7 +225,7 @@ class MainActivity : AppCompatActivity() {
         }
         mainBinding.apply {
             ekinCard.setOnClickListener {
-                val target = if (token.isEmpty()) LoginActivity::class.java else EkinActivity::class.java
+                val target = if (token.isEmpty()) LoginActivity::class.java else EkinAfter::class.java
                 startActivity(Intent(this@MainActivity,target))
             }
 

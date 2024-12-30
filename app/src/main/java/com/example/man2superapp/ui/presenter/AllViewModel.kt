@@ -11,7 +11,11 @@ import com.example.man2superapp.repository.Repository
 import com.example.man2superapp.source.local.model.GetAllUserWbs
 import com.example.man2superapp.source.local.model.GetClassStudent
 import com.example.man2superapp.source.local.model.NewsArticle
+import com.example.man2superapp.source.local.model.ResutlEmployeePerformance
+import com.example.man2superapp.source.local.model.TaskUser
 import com.example.man2superapp.source.local.model.toGenerateAllListArticle
+import com.example.man2superapp.source.local.model.toGenerateAllResult
+import com.example.man2superapp.source.local.model.toGenerateAllTask
 import com.example.man2superapp.source.local.model.toGenerateAllUserWbs
 import com.example.man2superapp.source.local.model.toGenerateClassStudent
 import com.example.man2superapp.source.network.States
@@ -31,11 +35,17 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
     private val _article = MutableLiveData<List<NewsArticle>>()
     private val _loading = MutableLiveData<Boolean>()
     private val _textError = MutableLiveData<String>()
+    private val _listEkinerja = MutableLiveData<List<ResutlEmployeePerformance>>()
+    private val _hasApprovedTask = MutableLiveData<Boolean>()
+    private val _listTask = MutableLiveData<List<TaskUser>>()
 
     val userList: LiveData<List<GetAllUserWbs>> get() = _userList
     val classList: LiveData<List<GetClassStudent>> get() = _clasList
     val article: LiveData<List<NewsArticle>> get() = _article
     val loading: LiveData<Boolean> get() = _loading
+    val hasApprovedTask: LiveData<Boolean> get() = _hasApprovedTask
+    val listTask: LiveData<List<TaskUser>> get() = _listTask
+    val listEkinerja: LiveData<List<ResutlEmployeePerformance>> get() = _listEkinerja
     val textError: LiveData<String> get() = _textError
 
 
@@ -95,6 +105,71 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
             }
         }
     }
+
+    fun fetchTask(token: String,context: Context)
+    {
+        viewModelScope.launch {
+            repository.getAllTaskEmployee(token).collect{
+                when(it)
+                {
+                    is States.Loading -> {}
+                    is States.Success -> {
+                        _listTask.value = it.data.task.toGenerateAllTask()
+                    }
+                    is States.Failed -> {
+                        Help.showToast(context,it.toString())
+                    }
+                }
+            }
+        }
+    }
+
+    fun fetchApprovedTask(token: String,context: Context)
+    {
+        viewModelScope.launch {
+            repository.hasApprovedTask(token).collect{
+                when(it)
+                {
+                    is States.Loading -> {}
+                    is States.Success -> {
+                        _hasApprovedTask.value = it.data.hasApproved
+                    }
+                    is States.Failed -> {Help.showToast(context,it.toString())}
+                }
+            }
+        }
+    }
+
+    fun fetchResultEmployeePerformance(token: String,context: Context)
+    {
+        viewModelScope.launch {
+            repository.getAllEmployeePerformance(token).collect{state ->
+                when(state)
+                {
+                    is States.Loading -> {
+                        _loading.value = true
+                    }
+                    is States.Success -> {
+                        _loading.value = false
+                        _listEkinerja.value = state.data.result.toGenerateAllResult()
+                    }
+                    is States.Failed -> {
+                        _loading.value = false
+                        Help.showToast(context,state.message)
+                    }
+                }
+            }
+        }
+    }
+
+    fun createRealitation(token: String,id: Int, nameDataSupport: String, linkGoogleDrive: String)
+        = repository.createRealitation(token,id,nameDataSupport,linkGoogleDrive).asLiveData()
+
+    fun updateEmployeePerformance(token: String,id: Int,performanceEvaluationPlan: String, performanceTargetEvaluation: Int,
+                                  nameDataSupport: String, linkGoogleDrive: String) = repository.updateEmployeePerformance(token,id,performanceEvaluationPlan,performanceTargetEvaluation,nameDataSupport,linkGoogleDrive).asLiveData()
+
+    fun createEmployeePerformance(token: String, id: Int, performanceEvaluationPlan: String, performanceTargetEvaluation: Int)
+     = repository.createEmployeePerformance(token,id,performanceEvaluationPlan,performanceTargetEvaluation).asLiveData()
 
     fun fetchAllUsers(context: Context)
     {

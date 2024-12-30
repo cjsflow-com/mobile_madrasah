@@ -120,4 +120,12 @@ class Repository @Inject constructor(
 
     fun getOfficerServiceSongketMother() = remoteDataSource.getOfficerServiceSongketMother()
 
+    fun updateEmployeePerformance(token: String, id: Int, performanceEvaluationPlan: String,performanceTargetEvaluation: Int,
+                                  nameDataSupport: String, linkGoogleDrive: String) =
+        remoteDataSource.updateEKinerja(token,id,performanceEvaluationPlan,performanceTargetEvaluation,nameDataSupport,linkGoogleDrive)
+
+    fun createRealitation(token: String,id: Int,nameDataSupport: String,linkGoogleDrive: String) = remoteDataSource.createRealitation(token, id, nameDataSupport, linkGoogleDrive)
+
+    fun createEmployeePerformance(token: String,id: Int,performanceEvaluationPlan: String,performanceTargetEvaluation: Int)
+        = remoteDataSource.createEmployeePerformance(token,id,performanceEvaluationPlan,performanceTargetEvaluation)
 }

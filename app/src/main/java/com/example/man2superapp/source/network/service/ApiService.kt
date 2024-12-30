@@ -238,6 +238,35 @@ interface ApiService {
     ): Response<HasApprovedTaskResponse>
 
     @FormUrlEncoded
+    @PUT(Constant.CREATE_REALITATION)
+    suspend fun createRealitation(
+        @Header(Constant.AUTHORIZATION) token: String,
+        @Path("id") id: Int,
+        @Field("name_data_support") nameDataSupport: String,
+        @Field("link_google_drive") linkGoogleDrive: String,
+    ): Response<UpdateSongketMother>
+
+    @FormUrlEncoded
+    @PUT(Constant.UPDATE_EMPLOYEE_PERFORMANCE)
+    suspend fun updateEmployeePerformance(
+        @Header(Constant.AUTHORIZATION) token: String,
+        @Path("id") id: Int,
+        @Field("performance_evaluation_plan") performanceEvaluationPlan: String,
+        @Field("performance_target_evaluation") performanceTargetEvaluation: Int,
+        @Field("name_data_support") nameDataSupport: String,
+        @Field("link_google_drive") linkGoogleDrive: String,
+    ): Response<UpdateSongketMother>
+
+    @FormUrlEncoded
+    @POST(Constant.CREATE_EMPLOYEE_PERFORMANCE)
+    suspend fun createEmployeePerformance(
+        @Header(Constant.AUTHORIZATION) token: String,
+        @Field("task_id") taskId: Int,
+        @Field("performance_evaluation_plan") performanceEvaluationPlain: String,
+        @Field("performance_target_evaluation") performanceTargetEvaluation: Int,
+    ): Response<UpdateSongketMother>
+
+    @FormUrlEncoded
     @PUT(Constant.CREATE_SERVICE_SONGKET_MOTHER)
     suspend fun createServiceSongketMother(
         @Path("id") id: Int,

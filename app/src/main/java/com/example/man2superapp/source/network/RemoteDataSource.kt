@@ -350,6 +350,45 @@ class RemoteDataSource @Inject constructor(
         emit(States.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
 
+    fun createRealitation(token: String,id: Int,nameDataSupport: String, linkGoogleDrive: String) = flow<States<UpdateSongketMother>> {
+        emit(States.loading())
+        apiService.createRealitation(Constant.BEARER + token,id,nameDataSupport,linkGoogleDrive).let {
+            if(it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "createRealitation: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+    fun updateEKinerja(token: String, id: Int,performanceEvaluationPlan: String, performanceTargetEvaluation: Int,
+                       nameDataSupport: String, linkGoogleDrive: String) = flow<States<UpdateSongketMother>>
+    {
+        emit(States.loading())
+        apiService.updateEmployeePerformance(Constant.BEARER + token,id,performanceEvaluationPlan,performanceTargetEvaluation,nameDataSupport,linkGoogleDrive)
+            .let {
+                if(it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+                else emit(States.failed(it.message().toString()))
+            }
+    }.catch {
+        Log.d(TAG, "updateEKinerja: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+    fun createEmployeePerformance(token: String,taskId: Int, performanceEvaluationPlan: String,
+                                  performanceTargetEvaluation: Int) = flow<States<UpdateSongketMother>>
+    {
+        emit(States.loading())
+        apiService.createEmployeePerformance(Constant.BEARER + token,taskId,performanceEvaluationPlan,performanceTargetEvaluation)
+            .let {
+                if (it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+                else emit(States.failed(it.message().toString()))
+            }
+    }.catch {
+        Log.d(TAG, "createEmployeePerformance: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
     fun createServiceSongketMother(id: Int,employeeId: Int, ratingService: Int) = flow<States<UpdateSongketMother>> {
         emit(States.loading())
         apiService.createServiceSongketMother(id,employeeId,ratingService).let {

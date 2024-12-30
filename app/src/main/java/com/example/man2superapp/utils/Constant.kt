@@ -21,6 +21,7 @@ object Constant {
     const val LOGOUT = "auth/employee/logout"
     const val TYPE = "type"
     const val TYPE_ROLE  = "role"
+    const val TYPE_EKINERJA = "E-Kinerja"
 
     const val NAME = "name"
     const val EMAIL = "email"
@@ -70,8 +71,8 @@ object Constant {
     // E-Kinerja
     const val SHOW_ALL_EMPLOYEE_PERFORMANCE = "$E_KINERJA/index"
     const val CREATE_EMPLOYEE_PERFORMANCE = "$E_KINERJA/create"
-    const val UPDATE_EMPLOYEE_PERFORMANCE = "$E_KINERJA/update"
-    const val CREATE_REALITATION = "$E_KINERJA/create_realitation"
+    const val UPDATE_EMPLOYEE_PERFORMANCE = "$E_KINERJA/update/{id}"
+    const val CREATE_REALITATION = "$E_KINERJA/create_realitation/{id}"
     const val HAS_APPROVED_TASK = "$E_KINERJA/has-approved-task"
     const val GET_TASK = "$E_KINERJA/task"
 
