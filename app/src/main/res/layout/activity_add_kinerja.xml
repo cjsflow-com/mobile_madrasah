@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageButton
+        android:contentDescription="Tombol Kembali"
+        android:layout_width="wrap_content"
+        android:background="@android:color/transparent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_arrow_back_24"
+        android:padding="15dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/back_button"/>
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="Logo Man 2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/back_button"
+        app:srcCompat="@drawable/medium_logo" />
+
+    <TextView
+        android:id="@+id/tvWbs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/montserrat_semibold"
+        android:text="E-Kinerja"
+        android:textColor="@color/text_default"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/tvMan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="Surat Keterangan "
+        android:textColor="@color/text_default"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvWbs"
+        tools:layout_editor_absoluteY="169dp" />
+
+    <LinearLayout
+        app:layout_constraintTop_toBottomOf="@id/tvMan"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            app:boxCornerRadiusBottomEnd="5dp"
+            android:elevation="4dp"
+            android:layout_marginEnd="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_marginStart="10dp"
+            android:id="@+id/parentNameTupoksi"
+            app:boxCornerRadiusBottomStart="5dp"
+            app:boxCornerRadiusTopEnd="5dp"
+            app:boxCornerRadiusTopStart="5dp"
+            android:layout_height="match_parent"
+            android:hint="Nama Tupoksi">
+
+            <AutoCompleteTextView
+                android:id="@+id/etNameTupoksi"
+                android:layout_width="match_parent"
+                android:backgroundTint="@color/white"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/montserrat"
+                android:inputType="none"
+                android:textSize="15sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            app:boxCornerRadiusBottomEnd="5dp"
+            android:layout_marginTop="10dp"
+            android:elevation="4dp"
+            android:layout_marginEnd="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_marginStart="10dp"
+            android:id="@+id/parentPerformanceEvaluationPlan"
+            app:boxCornerRadiusBottomStart="5dp"
+            app:boxCornerRadiusTopEnd="5dp"
+            app:boxCornerRadiusTopStart="5dp"
+            android:layout_height="match_parent"
+            android:hint="Rencana Aksi">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPerformanceEvaluationPlan"
+                android:layout_width="match_parent"
+                android:backgroundTint="@color/white"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/montserrat"
+                android:inputType="textMultiLine"
+                android:textSize="15sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            app:boxCornerRadiusBottomEnd="5dp"
+            android:layout_marginTop="10dp"
+            android:elevation="4dp"
+            android:layout_marginEnd="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_marginStart="10dp"
+            android:id="@+id/parentPerformanceTargetEvaluation"
+            app:boxCornerRadiusBottomStart="5dp"
+            app:boxCornerRadiusTopEnd="5dp"
+            app:boxCornerRadiusTopStart="5dp"
+            android:layout_height="match_parent"
+            android:hint="Target Laporan Triwulan">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPerformanceTargetEvaluation"
+                android:layout_width="match_parent"
+                android:backgroundTint="@color/white"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/montserrat"
+                android:inputType="number"
+                android:textSize="15sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            app:boxCornerRadiusBottomEnd="5dp"
+            android:layout_marginTop="10dp"
+            android:elevation="4dp"
+            android:layout_marginEnd="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_marginStart="10dp"
+            android:id="@+id/parentNameDataSupport"
+            app:boxCornerRadiusBottomStart="5dp"
+            app:boxCornerRadiusTopEnd="5dp"
+            app:boxCornerRadiusTopStart="5dp"
+            android:layout_height="match_parent"
+            android:hint="Nama Data Pendukung">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etNameDataSupport"
+                android:layout_width="match_parent"
+                android:backgroundTint="@color/white"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/montserrat"
+                android:inputType="text"
+                android:textSize="15sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            app:boxCornerRadiusBottomEnd="5dp"
+            android:layout_marginTop="10dp"
+            android:elevation="4dp"
+            android:layout_marginEnd="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_marginStart="10dp"
+            android:id="@+id/parentLinkGoogleDrive"
+            app:boxCornerRadiusBottomStart="5dp"
+            app:boxCornerRadiusTopEnd="5dp"
+            app:boxCornerRadiusTopStart="5dp"
+            android:layout_height="match_parent"
+            android:hint="Link Google Drive Data Dukung">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etLinkGoogleDrive"
+                android:layout_width="match_parent"
+                android:backgroundTint="@color/white"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/montserrat"
+                android:inputType="textUri"
+                android:layout_marginBottom="10dp"
+                android:textSize="15sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ProgressBar
+            android:visibility="gone"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBar" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:layout_marginTop="5dp"
+            android:id="@+id/btnSubmit"
+            android:backgroundTint="@color/mangold"
+            app:cornerRadius="11dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp" />
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

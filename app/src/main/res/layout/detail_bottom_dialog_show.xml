@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp"
+        android:textSize="15sp"
+        android:id="@+id/tvTitleStatus"
+        android:fontFamily="@font/montserrat_medium"
+        android:text=""
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textAllCaps="true" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/tvTitleStatus"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:paddingEnd="16dp"
+        android:paddingBottom="20dp">
+
+        <TextView
+            android:id="@+id/nameTask"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_rectangle"
+            android:text="Manajemen Web"
+            android:textColor="@color/manblue"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/nameAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semibold"
+            android:paddingTop="10dp"
+            android:text="Membangun aplikasi SuperApp ZI WBK MAN 2"
+            android:textColor="@color/text_default"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/period"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semibold"
+            android:paddingTop="10dp"
+            android:text="Target Laporan Triwulan: 8 Laporan"
+            android:textColor="@color/text_default"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semibold"
+            android:paddingTop="10dp"
+            android:textColor="@color/text_default"
+            android:textSize="14sp"
+            android:text="Triwulan: 1"
+            android:id="@+id/triwulanEkinerja" />
+
+        <TextView
+            android:fontFamily="@font/montserrat_semibold"
+            android:layout_width="wrap_content"
+            android:paddingTop="12dp"
+            android:id="@+id/tvRealitation"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_default"
+            android:textSize="14sp"
+            android:text="Realisasi: " />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:textAlignment="center"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="Penilaian" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rating Hasil Kerja: Sesuai Ekspektasi"
+                android:fontFamily="@font/montserrat_semibold"
+                android:textSize="14sp"
+                android:textColor="@color/text_default"
+                android:paddingTop="10dp"
+                android:id="@+id/ratingHasilKerja" />
+
+            <TextView
+                android:paddingTop="10dp"
+                android:textSize="14sp"
+                android:id="@+id/predikatKerja"
+                android:fontFamily="@font/montserrat_semibold"
+                android:textColor="@color/text_default"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Predikat Kerja: Baik" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
