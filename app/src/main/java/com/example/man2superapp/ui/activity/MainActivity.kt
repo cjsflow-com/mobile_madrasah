@@ -25,7 +25,9 @@ import com.example.man2superapp.utils.Constant
 import com.example.man2superapp.utils.Help
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -96,10 +98,13 @@ class MainActivity : AppCompatActivity() {
     private fun cardAction() {
         lifecycleScope.launch {
             localStore.getToken().collect{ data ->
-                Log.d("TAG", "checkToken: ${data.token}")
-                mainBinding.tvUserName.text = data.name
-                data.token?.let { handleCardActions(it) }
-                data.role?.let{checkRoleLogin(it)}
+                withContext(Dispatchers.Main)
+                {
+                    Log.d("TAG", "checkToken: ${data.token}")
+                    mainBinding.tvUserName.text = data.name
+                    data.token?.let { handleCardActions(it) }
+                    data.role?.let{checkRoleLogin(it)}
+                }
             }
         }
         mainBinding.btnLogout.setOnClickListener {

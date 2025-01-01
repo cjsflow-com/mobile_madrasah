@@ -23,8 +23,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@Suppress("DEPRECATION")
 @AndroidEntryPoint
+@Suppress("DEPRECATION")
 class AddActivityEkinerja: AppCompatActivity()
 {
 
@@ -39,7 +39,7 @@ class AddActivityEkinerja: AppCompatActivity()
         addEKinerjaBinding = ActivityAddKinerjaBinding.inflate(layoutInflater)
         setContentView(addEKinerjaBinding.root)
         allViewModel.listTask.observe(this@AddActivityEkinerja){taskList ->
-            val taskMap = taskList.associateBy({it.nameTask},{it.id})
+            val taskMap = taskList.associateBy({"${it.nameTask} (${it.period} Laporan)"},{it.id})
             Log.d("AddActivityEkinerja", "onCreate: ${taskList.map { it.nameTask }}")
             val adapter = ArrayAdapter(this@AddActivityEkinerja,android.R.layout.simple_dropdown_item_1line,
                 taskList.map { "${it.nameTask} (${it.period} Laporan)" })
@@ -58,12 +58,11 @@ class AddActivityEkinerja: AppCompatActivity()
                 localStore.getToken().collect{ data ->
                     data.token?.let { token ->
                         btnSubmit.setOnClickListener {
-                            validation(token)
+                            it1 -> validation(token)
                         }
                         allViewModel.fetchTask(token,this@AddActivityEkinerja)
                     }
                 }
-
             }
         }
     }
@@ -78,9 +77,12 @@ class AddActivityEkinerja: AppCompatActivity()
             if (parentTupoksi.isNotEmpty() && planAction.isNotEmpty() && targetReport.isNotEmpty())
             {
                 val id = tupoksisMap?.get(parentTupoksi)
-                id?.let {
+                if(id != null)
+                {
                     allViewModel.createEmployeePerformance(token,
-                        it,planAction,targetReport.toInt()).observe(this@AddActivityEkinerja){data -> handleResponse(data)}
+                        id,planAction,targetReport.toInt()).observe(this@AddActivityEkinerja){data -> handleResponse(data)}
+                }else{
+                    Help.showToast(this@AddActivityEkinerja,"terjadi kesalahan pada tupoksi")
                 }
             }else{
                 Help.showToast(this@AddActivityEkinerja,"Semua field wajib diisi")
