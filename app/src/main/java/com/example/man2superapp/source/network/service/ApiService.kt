@@ -18,6 +18,7 @@ import com.example.man2superapp.source.network.response.student.UpdatePasswordSt
 import com.example.man2superapp.source.network.response.student.classses.GetAllClassStudentResponse
 import com.example.man2superapp.source.network.response.users.BiodataUserResponse
 import com.example.man2superapp.source.network.response.users.UpdateProfileResponse
+import com.example.man2superapp.source.network.response.violation.SchoolViolationMasterResponse
 import com.example.man2superapp.source.network.response.wbs.AllWbsResponse
 import com.example.man2superapp.source.network.response.wbs.CreateWbsResponse
 import com.example.man2superapp.source.network.response.wbs.GetAllUserResponse
@@ -290,4 +291,13 @@ interface ApiService {
     @GET(Constant.OFFICER_SERVICE_SONGKET_MOTHER)
     suspend fun getOfficerServiceSongketMother(): Response<GetAllUserResponse>
 
+    @GET(Constant.ALL_MASTER_VIOLATION)
+    suspend fun getAllMasterViolation(
+        @Header(Constant.AUTHORIZATION) token: String
+    ): Response<SchoolViolationMasterResponse>
+
+    @GET(Constant.ALL_VIOLATION_STUDENT)
+    suspend fun getAllViolationStudent(
+
+    ): okhttp3.Response
 }
