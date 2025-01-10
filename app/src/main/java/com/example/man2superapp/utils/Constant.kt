@@ -81,7 +81,7 @@ object Constant {
     private const val VIOLATION = "violation"
     const val ALL_MASTER_VIOLATION = "$VIOLATION/all_violation_master"
     const val ALL_VIOLATION_STUDENT = "$VIOLATION/all_violation_student"
-    const val  CREATE_VIOLATION_STUDENT = "$VIOLATION/create_violation_student"
+    const val CREATE_VIOLATION_STUDENT = "$VIOLATION/create_violation_student"
     const val CREATE_DISPUTE_VIOLATION = "$VIOLATION/create_dispute_violation/{id}"
     const val NOTE_DISPUTE_VIOLATION = "$VIOLATION/note_dispute_violation/{id}"
     const val GET_ALL_SCHOOL_VIOLATION_MASTER = "$VIOLATION/get_all_school_violation_master"

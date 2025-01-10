@@ -7,6 +7,7 @@ import com.example.man2superapp.source.network.response.e_kinerja.IndexResponse
 import com.example.man2superapp.source.network.response.login.LoginResponse
 import com.example.man2superapp.source.network.response.login.LoginStudentResponse
 import com.example.man2superapp.source.network.response.login.LogoutResponse
+import com.example.man2superapp.source.network.response.note_rejected_dispute.NoteRejectedResponse
 import com.example.man2superapp.source.network.response.songket_emak.CreateSongketMother
 import com.example.man2superapp.source.network.response.songket_emak.ListSongketEmakResponse
 import com.example.man2superapp.source.network.response.songket_emak.StatusResponse
@@ -18,7 +19,9 @@ import com.example.man2superapp.source.network.response.student.UpdatePasswordSt
 import com.example.man2superapp.source.network.response.student.classses.GetAllClassStudentResponse
 import com.example.man2superapp.source.network.response.users.BiodataUserResponse
 import com.example.man2superapp.source.network.response.users.UpdateProfileResponse
+import com.example.man2superapp.source.network.response.violation.CreateViolationResponse
 import com.example.man2superapp.source.network.response.violation.SchoolViolationMasterResponse
+import com.example.man2superapp.source.network.response.violation.SchoolViolationStudentResponse
 import com.example.man2superapp.source.network.response.wbs.AllWbsResponse
 import com.example.man2superapp.source.network.response.wbs.CreateWbsResponse
 import com.example.man2superapp.source.network.response.wbs.GetAllUserResponse
@@ -298,6 +301,33 @@ interface ApiService {
 
     @GET(Constant.ALL_VIOLATION_STUDENT)
     suspend fun getAllViolationStudent(
+        @Header(Constant.AUTHORIZATION) token: String
+    ): Response<SchoolViolationStudentResponse>
 
-    ): okhttp3.Response
+    @FormUrlEncoded
+    @POST(Constant.CREATE_VIOLATION_STUDENT)
+    suspend fun getCreateViolationStudent(
+        @Header(Constant.AUTHORIZATION) token: String,
+        @Field("student_id") studentId: Int,
+        @Field("school_violation_master_id") schoolViolationMasterId: Int
+    ): Response<CreateViolationResponse>
+
+    @FormUrlEncoded
+    @PUT(Constant.CREATE_DISPUTE_VIOLATION)
+    suspend fun createDisputeViolation(
+        @Header(Constant.AUTHORIZATION) token: String,
+        @Path("id") id: Int,
+        @Field("reason") reason: String,
+    ): Response<CreateViolationResponse>
+
+    @GET(Constant.NOTE_DISPUTE_VIOLATION)
+    suspend fun getNoteDisputeViolation(
+        @Header(Constant.AUTHORIZATION) token: String,
+        @Path("id") Id: Int,
+    ): Response<NoteRejectedResponse>
+
+//    @GET(Constant.GET_ALL_SCHOOL_VIOLATION_MASTER)
+//    suspend fun getAllSchoolViolationMaster(
+//        @Header(Constant.AUTHORIZATION) token: String,
+//    ): Response<>
 }
