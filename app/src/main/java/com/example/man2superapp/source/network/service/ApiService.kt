@@ -22,6 +22,7 @@ import com.example.man2superapp.source.network.response.users.UpdateProfileRespo
 import com.example.man2superapp.source.network.response.violation.CreateViolationResponse
 import com.example.man2superapp.source.network.response.violation.SchoolViolationMasterResponse
 import com.example.man2superapp.source.network.response.violation.SchoolViolationStudentResponse
+import com.example.man2superapp.source.network.response.violation.StudentTotalPointResponse
 import com.example.man2superapp.source.network.response.wbs.AllWbsResponse
 import com.example.man2superapp.source.network.response.wbs.CreateWbsResponse
 import com.example.man2superapp.source.network.response.wbs.GetAllUserResponse
@@ -306,7 +307,7 @@ interface ApiService {
 
     @FormUrlEncoded
     @POST(Constant.CREATE_VIOLATION_STUDENT)
-    suspend fun getCreateViolationStudent(
+    suspend fun createViolationStudent(
         @Header(Constant.AUTHORIZATION) token: String,
         @Field("student_id") studentId: Int,
         @Field("school_violation_master_id") schoolViolationMasterId: Int
@@ -325,6 +326,11 @@ interface ApiService {
         @Header(Constant.AUTHORIZATION) token: String,
         @Path("id") Id: Int,
     ): Response<NoteRejectedResponse>
+
+    @GET(Constant.TOTAL_POINT_STUDENT)
+    suspend fun getTotalPoint(
+        @Header(Constant.AUTHORIZATION) token: String
+    ): Response<StudentTotalPointResponse>
 
 //    @GET(Constant.GET_ALL_SCHOOL_VIOLATION_MASTER)
 //    suspend fun getAllSchoolViolationMaster(

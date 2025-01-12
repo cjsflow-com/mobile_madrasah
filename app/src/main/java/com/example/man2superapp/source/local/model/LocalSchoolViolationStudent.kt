@@ -7,7 +7,10 @@ data class LocalSchoolViolationStudent(
     var dateSchoolViolant: String,
     var nameSchoolViolation: String,
     var point: Int,
-    var timeSchoolViolant: String
+    var timeSchoolViolant: String,
+    var status: Int,
+    var reason: String,
+    var note: String,
 )
 
 fun List<SchoolViolationStudent>.toGenerateListViolationStudent(): MutableList<LocalSchoolViolationStudent>
@@ -24,5 +27,8 @@ fun SchoolViolationStudent.toViolationStudent(): LocalSchoolViolationStudent{
         point = this.point?: 0,
         dateSchoolViolant = this.dateSchoolViolant?: "",
         timeSchoolViolant = this.timeSchoolViolant?: "",
+        status = this.status?: 0,
+        reason = this.reason?: "",
+        note = this.note?: "",
     )
 }

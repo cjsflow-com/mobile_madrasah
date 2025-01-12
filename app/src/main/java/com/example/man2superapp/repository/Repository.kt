@@ -128,4 +128,17 @@ class Repository @Inject constructor(
 
     fun createEmployeePerformance(token: String,id: Int,performanceEvaluationPlan: String,performanceTargetEvaluation: Int)
         = remoteDataSource.createEmployeePerformance(token,id,performanceEvaluationPlan,performanceTargetEvaluation)
+
+    fun getAllMasterViolation(token: String,) = remoteDataSource.getAllMasterViolation(token)
+
+    fun getAllViolationStudent(token: String) = remoteDataSource.allViolationStudent(token)
+
+    fun createViolationStudent(token: String,studentId: Int,schoolViolationStudentId: Int) =
+        remoteDataSource.createViolationStudent(token,studentId,schoolViolationStudentId)
+
+    fun createViolationDisputeStudent(token: String,id: Int,reason: String) = remoteDataSource.createViolationDisputeStudent(token,id,reason)
+
+    fun getNoteDisputeViolation(token: String,id: Int) = remoteDataSource.getNoteDisputeViolation(token,id)
+
+    fun getTotalPointStudent(token: String) = remoteDataSource.getTotalPointStudent(token)
 }

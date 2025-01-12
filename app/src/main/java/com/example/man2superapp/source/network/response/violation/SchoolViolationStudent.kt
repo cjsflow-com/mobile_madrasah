@@ -13,5 +13,11 @@ data class SchoolViolationStudent(
     @SerializedName("point")
     val point: Int,
     @SerializedName("time_school_violant")
-    val timeSchoolViolant: String
+    val timeSchoolViolant: String,
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("reason")
+    val reason: String,
+    @SerializedName("note")
+    val note: String,
 )

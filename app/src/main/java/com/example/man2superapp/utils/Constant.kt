@@ -84,6 +84,7 @@ object Constant {
     const val CREATE_VIOLATION_STUDENT = "$VIOLATION/create_violation_student"
     const val CREATE_DISPUTE_VIOLATION = "$VIOLATION/create_dispute_violation/{id}"
     const val NOTE_DISPUTE_VIOLATION = "$VIOLATION/note_dispute_violation/{id}"
+    const val TOTAL_POINT_STUDENT = "$VIOLATION/student/total_points"
     const val GET_ALL_SCHOOL_VIOLATION_MASTER = "$VIOLATION/get_all_school_violation_master"
 
 //    TAG FOR API

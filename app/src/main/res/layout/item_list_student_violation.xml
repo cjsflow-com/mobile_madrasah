@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="5dp"
+    app:cardUseCompatPadding="true"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/mtvNameSchoolViolationStudent"
+            android:textAlignment="textStart"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/montserrat_medium"
+            android:layout_marginTop="5dp"
+            android:padding="8dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="Nama Pelanggaran" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/mtvPoint"
+            android:textAlignment="textStart"
+            android:textSize="15sp"
+            android:fontFamily="@font/montserrat_medium"
+            android:layout_marginTop="5dp"
+            android:padding="8dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="Poin Pelanggaran" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/mtvDate"
+            android:textAlignment="textStart"
+            android:textSize="15sp"
+            android:fontFamily="@font/montserrat_medium"
+            android:layout_marginTop="5dp"
+            android:padding="8dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="Tanggal Pelanggaran" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/mtvTimeSchool"
+            android:textAlignment="textStart"
+            android:textSize="15sp"
+            android:fontFamily="@font/montserrat_medium"
+            android:layout_marginTop="5dp"
+            android:padding="8dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="Waktu Pelanggaran" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/mtvViolationDispute"
+            android:textAlignment="textStart"
+            android:textSize="15sp"
+            android:visibility="gone"
+            android:fontFamily="@font/montserrat_medium"
+            android:layout_marginTop="5dp"
+            android:padding="8dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="Status Sanggahan" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/mtvNoteViolation"
+            android:textAlignment="textStart"
+            android:textSize="15sp"
+            android:visibility="gone"
+            android:fontFamily="@font/montserrat_medium"
+            android:layout_marginTop="5dp"
+            android:padding="8dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="Catatan Sanggahan" />
+
+       <com.google.android.material.button.MaterialButton
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginEnd="10dp"
+           app:cornerRadius="10dp"
+           android:layout_marginBottom="10dp"
+           android:text="Sanggah"
+           android:backgroundTint="@color/mangold"
+           android:layout_marginTop="10dp"
+           android:layout_marginStart="10dp"
+           android:id="@+id/btnDisputeViolation" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            app:cornerRadius="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="Lihat Penolakan"
+            android:backgroundTint="@android:color/holo_red_light"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
+            android:id="@+id/btnNoteRejected" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

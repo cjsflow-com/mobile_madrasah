@@ -9,6 +9,7 @@ import com.example.man2superapp.source.network.response.e_kinerja.IndexResponse
 import com.example.man2superapp.source.network.response.login.LoginResponse
 import com.example.man2superapp.source.network.response.login.LoginStudentResponse
 import com.example.man2superapp.source.network.response.login.LogoutResponse
+import com.example.man2superapp.source.network.response.note_rejected_dispute.NoteRejectedResponse
 import com.example.man2superapp.source.network.response.songket_emak.CreateSongketMother
 import com.example.man2superapp.source.network.response.songket_emak.ListSongketEmakResponse
 import com.example.man2superapp.source.network.response.songket_emak.StatusResponse
@@ -20,6 +21,10 @@ import com.example.man2superapp.source.network.response.student.UpdatePasswordSt
 import com.example.man2superapp.source.network.response.student.classses.GetAllClassStudentResponse
 import com.example.man2superapp.source.network.response.users.BiodataUserResponse
 import com.example.man2superapp.source.network.response.users.UpdateProfileResponse
+import com.example.man2superapp.source.network.response.violation.CreateViolationResponse
+import com.example.man2superapp.source.network.response.violation.SchoolViolationMasterResponse
+import com.example.man2superapp.source.network.response.violation.SchoolViolationStudentResponse
+import com.example.man2superapp.source.network.response.violation.StudentTotalPointResponse
 import com.example.man2superapp.source.network.response.wbs.AllWbsResponse
 import com.example.man2superapp.source.network.response.wbs.CreateWbsResponse
 import com.example.man2superapp.source.network.response.wbs.GetAllUserResponse
@@ -419,6 +424,73 @@ class RemoteDataSource @Inject constructor(
         }
     }.catch {
         Log.d(TAG, "getOfficerServiceSongketMother: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+    fun getAllMasterViolation(token: String) = flow<States<SchoolViolationMasterResponse>> {
+        emit(States.loading())
+        apiService.getAllMasterViolation(Constant.BEARER + token).let {
+            if(it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "createAllMasterViolation: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+    fun allViolationStudent(token: String) = flow<States<SchoolViolationStudentResponse>> {
+        emit(States.loading())
+        apiService.getAllViolationStudent(Constant.BEARER + token).let {
+            if (it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "allViolationStudent: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+    fun createViolationStudent(token: String,studentId: Int,schoolViolationMasterId: Int) = flow<States<CreateViolationResponse>> {
+        emit(States.loading())
+        apiService.createViolationStudent(Constant.BEARER + token,studentId,schoolViolationMasterId).let {
+            if (it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "createViolatioStudent: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+    fun createViolationDisputeStudent(token: String,id: Int,reason: String) = flow<States<CreateViolationResponse>>
+    {
+        emit(States.loading())
+        apiService.createDisputeViolation(Constant.BEARER + token,id,reason).let {
+            if (it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "createViolationDisputeStudent: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+    fun getNoteDisputeViolation(token: String, id: Int) = flow<States<NoteRejectedResponse>> {
+        emit(States.loading())
+        apiService.getNoteDisputeViolation(Constant.BEARER + token,id).let {
+            if (it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "getNoteDisputeViolation: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+    fun getTotalPointStudent(token: String) = flow<States<StudentTotalPointResponse>> {
+        emit(States.loading())
+        apiService.getTotalPoint(Constant.BEARER + token).let {
+            if (it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "getTotalPointStudent: ${it.message.toString()}")
         emit(States.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
 }

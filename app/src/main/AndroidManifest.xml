@@ -80,6 +80,8 @@
         <activity
             android:name=".ui.activity.AddActivityEkinerja"
             android:exported="false" />
+        <activity android:name=".ui.activity.TatibActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.activity.MainActivity"
             android:exported="true">

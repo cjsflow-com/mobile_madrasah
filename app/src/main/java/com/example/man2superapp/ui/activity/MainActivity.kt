@@ -62,6 +62,9 @@ class MainActivity : AppCompatActivity() {
                 sliderCard.visibility = if(loading) View.GONE else View.VISIBLE
             }
         }
+        allViewModel.totalPoint.observe(this@MainActivity){
+            mainBinding.tvTotalPoints.text = it.toString()
+        }
     }
 
     private fun setUpSlider()
@@ -102,6 +105,7 @@ class MainActivity : AppCompatActivity() {
                 {
                     Log.d("TAG", "checkToken: ${data.token}")
                     mainBinding.tvUserName.text = data.name
+                    data.token?.let { allViewModel.getTotalPointStudent(it) }
                     data.token?.let { handleCardActions(it) }
                     data.role?.let{checkRoleLogin(it)}
                 }
@@ -135,10 +139,17 @@ class MainActivity : AppCompatActivity() {
                 songketCard.visibility = View.VISIBLE
                 pelajarCard.visibility = View.GONE
                 etatibCard.visibility = View.GONE
+            }else if(role == "guru"){
+                ekinCard.visibility = View.VISIBLE
+                wbsCard.visibility = View.VISIBLE
+                pelajarCard.visibility = View.VISIBLE
+                songketCard.visibility = View.VISIBLE
+                jurnalCard.visibility = View.VISIBLE
             }else{
                 ekinCard.visibility = View.VISIBLE
                 wbsCard.visibility = View.VISIBLE
                 songketCard.visibility = View.VISIBLE
+                etatibCard.visibility = View.VISIBLE
             }
         }
     }
@@ -165,6 +176,7 @@ class MainActivity : AppCompatActivity() {
     {
         mainBinding.tvUserName.visibility = if (isShow) View.VISIBLE else View.GONE
         mainBinding.btnLogout.visibility = if(isShow) View.VISIBLE else View.GONE
+        mainBinding.tvTotalPoints.visibility = if (isShow) View.VISIBLE else View.GONE
         mainBinding.imProfile.visibility = if(isShow) View.VISIBLE else View.GONE
     }
 

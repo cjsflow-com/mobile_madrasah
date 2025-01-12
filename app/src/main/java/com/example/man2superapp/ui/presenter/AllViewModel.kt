@@ -10,6 +10,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.man2superapp.repository.Repository
 import com.example.man2superapp.source.local.model.GetAllUserWbs
 import com.example.man2superapp.source.local.model.GetClassStudent
+import com.example.man2superapp.source.local.model.LocalSchoolViolationStudent
+import com.example.man2superapp.source.local.model.LocalViolationMaster
 import com.example.man2superapp.source.local.model.NewsArticle
 import com.example.man2superapp.source.local.model.ResutlEmployeePerformance
 import com.example.man2superapp.source.local.model.TaskUser
@@ -18,6 +20,9 @@ import com.example.man2superapp.source.local.model.toGenerateAllResult
 import com.example.man2superapp.source.local.model.toGenerateAllTask
 import com.example.man2superapp.source.local.model.toGenerateAllUserWbs
 import com.example.man2superapp.source.local.model.toGenerateClassStudent
+import com.example.man2superapp.source.local.model.toGenerateListViolationMaster
+import com.example.man2superapp.source.local.model.toGenerateListViolationStudent
+import com.example.man2superapp.source.local.model.toNoteRejected
 import com.example.man2superapp.source.network.States
 import com.example.man2superapp.source.network.response.wbs.DataUser
 import com.example.man2superapp.source.network.response.wbs.GetAllUserResponse
@@ -35,9 +40,14 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
     private val _article = MutableLiveData<List<NewsArticle>>()
     private val _loading = MutableLiveData<Boolean>()
     private val _textError = MutableLiveData<String>()
+    private val _textSucces = MutableLiveData<String>()
     private val _listEkinerja = MutableLiveData<List<ResutlEmployeePerformance>>()
     private val _hasApprovedTask = MutableLiveData<Boolean>()
     private val _listTask = MutableLiveData<List<TaskUser>>()
+    private val _noteRejected = MutableLiveData<String>()
+    private val _allViolationMaster = MutableLiveData<List<LocalViolationMaster>>()
+    private val _allViolationStudent = MutableLiveData<List<LocalSchoolViolationStudent>>()
+    private val _totalPoint = MutableLiveData<Int>()
 
     val userList: LiveData<List<GetAllUserWbs>> get() = _userList
     val classList: LiveData<List<GetClassStudent>> get() = _clasList
@@ -47,6 +57,11 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
     val listTask: LiveData<List<TaskUser>> get() = _listTask
     val listEkinerja: LiveData<List<ResutlEmployeePerformance>> get() = _listEkinerja
     val textError: LiveData<String> get() = _textError
+    val textSuccess: LiveData<String> get() = _textSucces
+    val totalPoint:LiveData<Int> get() = _totalPoint
+    val noteRejected: LiveData<String> get() = _noteRejected
+    val allViolationMaster: LiveData<List<LocalViolationMaster>> get() = _allViolationMaster
+    val allViolationStudent: LiveData<List<LocalSchoolViolationStudent>> get() = _allViolationStudent
 
 
     fun loginEmployee(email: String, password: String) = repository.loginEmployee(email, password).asLiveData()
@@ -118,6 +133,95 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
                     }
                     is States.Failed -> {
                         Help.showToast(context,it.toString())
+                    }
+                }
+            }
+        }
+    }
+
+    fun fetchAllViolationMaster(token: String){
+        viewModelScope.launch {
+            repository.getAllMasterViolation(token).collect{
+                when(it){
+                    is States.Loading -> {_loading.value = true}
+                    is States.Success -> {
+                        _textSucces.value = it.data.message
+                        _loading.value = false
+                        _allViolationMaster.value = it.data.violationMaster.toGenerateListViolationMaster()
+                    }
+                    is States.Failed -> {
+                        _loading.value = false
+                        _textError.value = it.message.toString()
+                    }
+                }
+            }
+        }
+    }
+
+    fun fetchAllViolationSchoolStudent(token: String){
+        viewModelScope.launch {
+            repository.getAllViolationStudent(token).collect{
+                when(it){
+                    is States.Loading -> _loading.value = true
+                    is States.Success -> {
+                        _loading.value = false
+                        _allViolationStudent.value = it.data.schoolViolationStudent.toGenerateListViolationStudent()
+                    }
+                    is States.Failed -> {
+                        _loading.value = false
+                        _textError.value = "Terjadi kesalahan pada siste => ${it.message}"
+                    }
+                }
+            }
+        }
+    }
+
+    fun createViolationStudent(token: String,studentId: Int,schoolViolationStudentId: Int) = repository.createViolationStudent(token,studentId,schoolViolationStudentId).asLiveData()
+    fun createViolationDisputeStudent(token: String,id: Int,reason: String){
+        viewModelScope.launch {
+            repository.createViolationDisputeStudent(token,id,reason).collect{
+                when(it){
+                    is States.Loading -> {}
+                    is States.Success -> {
+                        _textSucces.value = it.data.message
+                    }
+                    is States.Failed -> {
+                        _textError.value = it.message.toString()
+                    }
+                }
+            }
+        }
+    }
+    fun getNoteDisputeViolation(token: String,id: Int){
+        viewModelScope.launch {
+            repository.getNoteDisputeViolation(token,id).collect{
+                when(it){
+                    is States.Loading -> {}
+                    is States.Success -> {
+                        val conversionNoteRejected = it.data.data.toNoteRejected()
+                        _noteRejected.value = conversionNoteRejected.note
+                    }
+                    is States.Failed -> {
+                        _textError.value = "Terjadi kesalahan => ${it.message}"
+                    }
+                }
+            }
+        }
+    }
+
+    fun getTotalPointStudent(token: String)
+    {
+        viewModelScope.launch {
+            repository.getTotalPointStudent(token).collect{
+                when(it){
+                    is States.Loading -> {_loading.value = true}
+                    is States.Success -> {
+                        _loading.value = false
+                        _totalPoint.value = it.data.totalPoints
+                    }
+                    is States.Failed -> {
+                        _textError.value = it.message.toString()
+                        _loading.value = false
                     }
                 }
             }
