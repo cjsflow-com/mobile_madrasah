@@ -30,6 +30,8 @@ class ProfilePopUpFragment(
     private val placeBirthday: String?,
     private val gender: Int?,
     private val classId: Int,
+    private val totalPoint: Int,
+    private val numberPhoneParent: String,
     private val context: Context
 ) : DialogFragment()
 {
@@ -65,6 +67,7 @@ class ProfilePopUpFragment(
                     tvPlaceBirthday.visibility = View.VISIBLE
                     tvNumberHandphone.visibility = View.VISIBLE
                     tvAddress.visibility = View.VISIBLE
+                    tvTotalPoint.visibility = View.VISIBLE
                     tvPosition.visibility = View.GONE
                     tvNameFather.text = "Nama Ayah: $nameFather"
                     tvNameMother.text = "Nama Ibu:  $nameMother"
@@ -72,17 +75,22 @@ class ProfilePopUpFragment(
                     tvPlaceBirthday.text = "Tempat Lahir: $placeBirthday"
                     tvAddress.text = "Alamat: $address"
                     tvNisn.text = "NISN: $nisn"
+                    tvNumberHandphoneParent.visibility = View.VISIBLE
+                    tvNumberHandphoneParent.text = "Nomor Tel/Hp OrangTua/Wali: $numberPhoneParent"
                     tvNumberHandphone.visibility = View.VISIBLE
                     tvNumberHandphone.text = "Nomor Handphone: $numberHandphone"
                     tvClassName.text = "Kelas: $className"
+                    tvTotalPoint.text = "Total Point: $totalPoint"
                 }else{
                     tvNisn.visibility = View.GONE
                     tvClassName.visibility = View.GONE
+                    tvNumberHandphoneParent.visibility = View.GONE
                     tvNameFather.visibility = View.GONE
                     tvNameMother.visibility = View.GONE
                     tvNumberHandphone.visibility = View.VISIBLE
                     tvDateBirthday.visibility = View.GONE
                     tvPlaceBirthday.visibility = View.GONE
+                    tvTotalPoint.visibility = View.GONE
                     tvAddress.visibility = View.GONE
                     tvPosition.visibility = View.VISIBLE
                     tvPosition.text = "Jabatan: $position"
@@ -111,6 +119,7 @@ class ProfilePopUpFragment(
                         putExtra(Constant.DATE_BIRTHDAY,dateBirthday)
                         putExtra(Constant.PLACE_BIRTHDAY,placeBirthday)
                         putExtra(Constant.POSITION,position)
+                        putExtra(Constant.PHONE_PARENT,numberPhoneParent)
                     }.also { startActivity(it) }.also { requireActivity().finish() }
                 }
             }

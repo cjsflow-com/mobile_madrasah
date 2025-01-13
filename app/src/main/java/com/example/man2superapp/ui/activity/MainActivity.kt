@@ -158,7 +158,7 @@ class MainActivity : AppCompatActivity() {
     {
         lifecycleScope.launch {
             localStore.putToken(LoginModel("",0,"","","",0,"","","","","",
-                "","","","","")).also {
+                "","","","","","")).also {
                 startActivity(Intent(this@MainActivity,LoginActivity::class.java))
                     .also { finish() }
             }
@@ -193,7 +193,7 @@ class MainActivity : AppCompatActivity() {
                                 is States.Success -> {
                                     fragmentShow(data.role,state.data.data.name,state.data.data.email,state.data.data.nisn,state.data.data.classX.nameClass,state.data.data.numberHandphone,
                                         state.data.data.mother,state.data.data.father,state.data.data.address,"",state.data.data.dateBirthday,
-                                        state.data.data.placeBirthday,state.data.data.gender,state.data.data.classX.id)
+                                        state.data.data.placeBirthday,state.data.data.gender,state.data.data.classX.id,state.data.data.totalPoint,state.data.data.numberHandphoneParent)
                                 }
                                 is States.Failed -> {
                                     Help.showToast(this@MainActivity,state.message)
@@ -209,7 +209,7 @@ class MainActivity : AppCompatActivity() {
                                     data.role?.let { it1 ->
                                         fragmentShow(
                                             it1,state.data.data.name,state.data.data.email,"","",state.data.data.numberHandphone,"","","",state.data.data.position,
-                                            "","",state.data.data.gender,0)
+                                            "","",state.data.data.gender,0,0,"")
                                     }
                                 }
                                 is States.Failed -> {
@@ -225,10 +225,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun fragmentShow(role: String,name: String,email: String,nisn: String,className: String,numberPhone: String,
                               mother: String,father: String,address: String,posititon: String,dateBirthday: String,
-                             placeBirthday: String, gender: Int,classId: Int)
+                             placeBirthday: String, gender: Int,classId: Int,totalPoint: Int,numberPhoneParent: String)
     {
         val fragment =  ProfilePopUpFragment(role,name,email,nisn,className,numberPhone,mother,father,
-            address,posititon,dateBirthday,placeBirthday,gender,classId,this@MainActivity)
+            address,posititon,dateBirthday,placeBirthday,gender,classId,totalPoint,numberPhoneParent,this@MainActivity)
         fragment.show(supportFragmentManager,"ProfilePopupFragment")
     }
 

@@ -120,6 +120,22 @@
         android:textSize="16sp"
         android:padding="8dp"/>
 
+    <TextView
+        android:id="@+id/tvTotalPoint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Total Point Pelanggaran"
+        android:textSize="16sp"
+        android:padding="8dp"/>
+
+    <TextView
+        android:id="@+id/tvNumberHandphoneParent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="HP/Tel OrangTua/Wali"
+        android:textSize="16sp"
+        android:padding="8dp"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

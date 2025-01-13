@@ -1,5 +1,6 @@
 package com.example.man2superapp.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -37,6 +38,14 @@ class TatibActivity: AppCompatActivity()
                         showAddViolation(roles)
                     }
                 }
+            }
+        }
+        tatibBinding.apply {
+            backBtn.setOnClickListener {
+                finish()
+            }
+            listViolationStudent.setOnClickListener {
+                startActivity(Intent(this@TatibActivity,ListAllViolationStudent::class.java))
             }
         }
     }

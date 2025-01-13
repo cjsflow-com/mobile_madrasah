@@ -170,6 +170,7 @@ interface ApiService {
         @Field("name_mother") nameMother: String,
         @Field("address") address: String,
         @Field("date_birthday") dateBirthday: String,
+        @Field("number_handphone_parent") phoneNumberParent: String,
     ): Response<UpdateProfileResponse>
 
     @GET(Constant.COUNT_STATUS_SONGKET_MOTHER_GTK)

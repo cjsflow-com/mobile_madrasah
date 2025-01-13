@@ -316,8 +316,8 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
         }
     }
 
-    fun updateProfileStudent(token: String, name: String, email: String, placeBirthday: String, nisn: String, phoneNumber: String, classStudentId: Int, gender: Int, nameFather: String, nameMother: String, address: String, dateBirthday: String)
-        = repository.updateProfileStudent(token,name,email,placeBirthday,nisn,phoneNumber,classStudentId,gender,nameFather,nameMother,address,dateBirthday).asLiveData()
+    fun updateProfileStudent(token: String, name: String, email: String, placeBirthday: String, nisn: String, phoneNumber: String, classStudentId: Int, gender: Int, nameFather: String, nameMother: String, address: String, dateBirthday: String,phoneNumberParent: String)
+        = repository.updateProfileStudent(token,name,email,placeBirthday,nisn,phoneNumber,classStudentId,gender,nameFather,nameMother,address,dateBirthday,phoneNumberParent).asLiveData()
 
     fun updateProfileEmployee(token: String,name: String,email: String,phoneNumber: String,gender: Int,position: String)
         = repository.updateProfileEmployee(token, name, email, phoneNumber, gender, position).asLiveData()

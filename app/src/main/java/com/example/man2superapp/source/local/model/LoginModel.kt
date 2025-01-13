@@ -17,4 +17,5 @@ data class LoginModel(
     val dateBirthday: String? = null,
     val placeBirthday: String? = null,
     val role: String? = null,
+    val numberPhoneParent:String? = null,
 )

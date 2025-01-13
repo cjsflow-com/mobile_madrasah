@@ -84,8 +84,9 @@ class Repository @Inject constructor(
 
     fun updateProfileEmployee(token: String,name: String,email: String,phoneNumber: String,gender: Int,position: String) = remoteDataSource.updateProfileEmployee(token,name,email,phoneNumber,gender,position)
 
-    fun updateProfileStudent(token: String, name: String, email: String, placeBirthday: String, nisn: String, phoneNumber: String, classStudentId: Int, gender: Int, nameFather: String, nameMother: String, address: String, dateBirthday: String) =
-        remoteDataSource.updateProfileStudent(token,name,email,placeBirthday,nisn,phoneNumber,classStudentId,gender,nameFather,nameMother,address,dateBirthday)
+    fun updateProfileStudent(token: String, name: String, email: String, placeBirthday: String, nisn: String, phoneNumber: String, classStudentId: Int, gender: Int, nameFather: String, nameMother: String, address: String, dateBirthday: String,
+                             phoneNumberParent: String,) =
+        remoteDataSource.updateProfileStudent(token,name,email,placeBirthday,nisn,phoneNumber,classStudentId,gender,nameFather,nameMother,address,dateBirthday,phoneNumberParent)
 
     fun getCountStatusSongketMotherGtk(token: String) = remoteDataSource.getCountStatusSongketMotherGtk(token)
 

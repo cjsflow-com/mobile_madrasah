@@ -37,6 +37,16 @@ class ListAllViolationStudent: AppCompatActivity()
             }
         }
         observer()
+        actionComponent()
+    }
+
+    private fun actionComponent()
+    {
+        listALlViolationStudentBinding.apply {
+            btnBack.setOnClickListener {
+                finish()
+            }
+        }
     }
 
     private fun observer()

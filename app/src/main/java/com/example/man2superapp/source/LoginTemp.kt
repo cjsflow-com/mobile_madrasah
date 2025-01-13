@@ -26,6 +26,7 @@ class LoginTemp constructor(private val context: Context) {
     private val ADDRESS = stringPreferencesKey("address")
     private val DATE_BIRHTDAY = stringPreferencesKey("date_birthday")
     private val PLACE_BIRTHDAY = stringPreferencesKey("place_birthday")
+    private val PHONE_PARENT = stringPreferencesKey("parent_phone")
 
     suspend fun getToken() = flow{
         val token = context.userStore.data.first()[TOKEN_KEY]?: ""
@@ -44,7 +45,8 @@ class LoginTemp constructor(private val context: Context) {
         val placeBirthday = context.userStore.data.first()[PLACE_BIRTHDAY]?: ""
         val numberPhone = context.userStore.data.first()[NUMBER_PHONE]?: ""
         val position = context.userStore.data.first()[POSITION]?: ""
-        emit(LoginModel(name,id, email,nisn,class_name,gender, token, profile, nameMother,nameFather,numberPhone,position,address,dateBirthday,placeBirthday, role))
+        val numberPhoneParent = context.userStore.data.first()[PHONE_PARENT]
+        emit(LoginModel(name,id, email,nisn,class_name,gender, token, profile, nameMother,nameFather,numberPhone,position,address,dateBirthday,placeBirthday, role,numberPhoneParent))
     }
 
     suspend fun putToken(loginModel: LoginModel)
@@ -66,6 +68,7 @@ class LoginTemp constructor(private val context: Context) {
             loginModel.dateBirthday?.let { preferences[DATE_BIRHTDAY] = it}
             loginModel.placeBirthday?.let { preferences[PLACE_BIRTHDAY] = it}
             loginModel.role?.let { preferences[ROLE_KEY] = it }
+            loginModel.numberPhoneParent?.let { preferences[PHONE_PARENT] = it}
         }
     }
 

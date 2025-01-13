@@ -215,12 +215,13 @@ class RemoteDataSource @Inject constructor(
         emit(States.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
 
-    fun updateProfileStudent(token: String, name: String, email: String, placeBirthday: String, nisn: String, phoneNumber: String, classStudentId: Int, gender: Int, nameFather: String, nameMother: String, address: String, dateBirthday: String) = flow<States<String>>
+    fun updateProfileStudent(token: String, name: String, email: String, placeBirthday: String, nisn: String, phoneNumber: String, classStudentId: Int, gender: Int, nameFather: String, nameMother: String, address: String, dateBirthday: String,
+                             phoneNumberParent: String) = flow<States<String>>
     {
         emit(States.loading())
         apiService.updateProfileStudent(Constant.BEARER + token,
             name,email,placeBirthday,nisn,phoneNumber,classStudentId,gender,
-            nameFather,nameMother,address,dateBirthday).let {
+            nameFather,nameMother,address,dateBirthday,phoneNumberParent).let {
             if(it.isSuccessful && it.body() != null) emit(States.success(it.body()!!.message))
             else emit(States.failed(it.message().toString()))
         }

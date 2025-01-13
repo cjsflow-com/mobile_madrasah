@@ -53,6 +53,7 @@ class UpdateStudent : AppCompatActivity()
         val nameMother = intent.getStringExtra(Constant.NAME_MOTHER)
         val address = intent.getStringExtra(Constant.ADDRESS)
         val dateBirthday = intent.getStringExtra(Constant.DATE_BIRTHDAY)
+        val phoneNumberParent = intent.getStringExtra(Constant.PHONE_PARENT)
 
         allViewModel.fetchAllClassStudent(this@UpdateStudent)
 
@@ -105,6 +106,7 @@ class UpdateStudent : AppCompatActivity()
             etPlaceBirthday.setText(placeBirthday)
             etBirthday.setText(dateBirthday)
             etNumberHandphone.setText(numberHandphone)
+            etNumberParent.setText(phoneNumberParent)
             tvBack.setOnClickListener {
                 startActivity(Intent(this@UpdateStudent,MainActivity::class.java))
                 finish()
@@ -150,13 +152,13 @@ class UpdateStudent : AppCompatActivity()
             val nisn = parentNisn.editText?.text.toString().trim()
             val dateBirthday = parentDateBirthday.editText?.text.toString().trim()
             val classes = parentClasses.editText?.text.toString().trim()
-            lifecycleScope.launch {  }
+            val phoneNumberParent = parentNumberHandphoneParent.editText?.text.toString().trim()
             if(role == "siswa")
             {
                 val takeClass = classesMap?.get(classes)
                  updateProfileStudent(
                     token,name,email,phoneNumber,selectGenderValue,address,nisn,takeClass,
-                    placeBirthDay,dateBirthday,nameFather,nameMother,
+                    placeBirthDay,dateBirthday,nameFather,nameMother,phoneNumberParent
                 )
             }else{
                 updateProfileEmployee(token,name,email,phoneNumber,selectGenderValue,position)
@@ -282,12 +284,12 @@ class UpdateStudent : AppCompatActivity()
 
     private fun updateProfileStudent(token: String,name: String,email: String,number_phone: String,gender: Int,
                                      address: String,nisn: String,classes: Int?,place_birthday: String,
-                                     date_birthday: String,name_father: String,name_mother: String)
+                                     date_birthday: String,name_father: String,name_mother: String,phoneParent: String)
     {
         classes?.let {
             allViewModel.updateProfileStudent(token,name,email,place_birthday,nisn, number_phone,
                 it,gender,
-                name_father,name_mother,address,date_birthday).observe(this@UpdateStudent){ state ->
+                name_father,name_mother,address,date_birthday,phoneParent).observe(this@UpdateStudent){ state ->
                 when(state) {
                     is States.Loading -> {
                         isShowProgress(true)

@@ -24,6 +24,7 @@ object Constant {
     const val TYPE_EKINERJA = "E-Kinerja"
 
     const val NAME = "name"
+    const val PHONE_PARENT = "phone_parent"
     const val EMAIL = "email"
     const val NISN = "nisn"
     const val PHONE = "phone"

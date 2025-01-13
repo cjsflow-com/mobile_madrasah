@@ -22,6 +22,10 @@ data class Data(
     val mother: String,
     @SerializedName("name")
     val name: String,
+    @SerializedName("total_point")
+    val totalPoint: Int,
+    @SerializedName("number_handphone_parent")
+    val numberHandphoneParent: String,
     @SerializedName("nisn")
     val nisn: String,
     @SerializedName("number_handphone")
