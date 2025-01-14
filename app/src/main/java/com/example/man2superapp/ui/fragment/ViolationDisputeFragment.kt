@@ -32,14 +32,12 @@ class ViolationDisputeFragment(
         dialog.window?.apply {
             attributes.windowAnimations = R.style.DialogAnimation
             setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT)
-            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             binding.apply {
                 val inputReason = parentNoteViolationDispute.editText?.text.toString().trim()
                 btnVioaltionDispute.setOnClickListener {
                     if (inputReason.isEmpty()) {
                         Help.showToast(context,"Alasan tidak boleh kosong")
-                    }
-                    else {
+                    } else {
                         token?.let { it1 -> onSubmit(id, it1,inputReason) }
                         dismiss()
                     }

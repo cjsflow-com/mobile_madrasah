@@ -21,10 +21,12 @@ import com.example.man2superapp.source.network.response.student.UpdatePasswordSt
 import com.example.man2superapp.source.network.response.student.classses.GetAllClassStudentResponse
 import com.example.man2superapp.source.network.response.users.BiodataUserResponse
 import com.example.man2superapp.source.network.response.users.UpdateProfileResponse
+import com.example.man2superapp.source.network.response.violation.AllStudentResponse
 import com.example.man2superapp.source.network.response.violation.CreateViolationResponse
 import com.example.man2superapp.source.network.response.violation.SchoolViolationMasterResponse
 import com.example.man2superapp.source.network.response.violation.SchoolViolationStudentResponse
 import com.example.man2superapp.source.network.response.violation.StudentTotalPointResponse
+import com.example.man2superapp.source.network.response.violation.UpdatePhoneNumberResponse
 import com.example.man2superapp.source.network.response.wbs.AllWbsResponse
 import com.example.man2superapp.source.network.response.wbs.CreateWbsResponse
 import com.example.man2superapp.source.network.response.wbs.GetAllUserResponse
@@ -450,7 +452,7 @@ class RemoteDataSource @Inject constructor(
         emit(States.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
 
-    fun createViolationStudent(token: String,studentId: Int,schoolViolationMasterId: Int) = flow<States<CreateViolationResponse>> {
+    fun createViolationStudent(token: String,studentId: Int?,schoolViolationMasterId: Int?) = flow<States<CreateViolationResponse>> {
         emit(States.loading())
         apiService.createViolationStudent(Constant.BEARER + token,studentId,schoolViolationMasterId).let {
             if (it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
@@ -492,6 +494,28 @@ class RemoteDataSource @Inject constructor(
         }
     }.catch {
         Log.d(TAG, "getTotalPointStudent: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+    fun getAllStudentViolation(token: String) = flow<States<AllStudentResponse>> {
+        emit(States.loading())
+        apiService.getAllStudentForViolation(Constant.BEARER + token).let {
+            if (it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "getAllStudentViolation: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+    fun updatePhoneNumberParent(token: String,numberPhoneParent: String) = flow<States<UpdatePhoneNumberResponse>> {
+        emit(States.loading())
+        apiService.updateStudentPhoneParent(Constant.BEARER + token,numberPhoneParent).let {
+            if (it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "updatePhoneNumberParent: ${it.message.toString()}")
         emit(States.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
 }

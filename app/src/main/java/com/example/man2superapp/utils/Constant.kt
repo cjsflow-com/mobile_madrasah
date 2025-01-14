@@ -49,6 +49,7 @@ object Constant {
     const val GET_STUDENT_CLASS = "$STUDENT/get_all_class"
     const val SHOW_PROFILE_EMPLOYEE = "$AUTH/show_employee/{id}"
     const val SHOW_PROFILE_STUDENT = "$AUTH/show_student/{id}"
+    const val UPDATE_NUMBER_PHONE_PARENT = "$STUDENT/update_number_phone_parent"
 
     // Songket Emak GTK/Karyawan
     const val CREATE_SONGKET_MOTHER_GTK = "$SONGKET_MOTHER/gtk/create"
@@ -86,6 +87,7 @@ object Constant {
     const val CREATE_DISPUTE_VIOLATION = "$VIOLATION/create_dispute_violation/{id}"
     const val NOTE_DISPUTE_VIOLATION = "$VIOLATION/note_dispute_violation/{id}"
     const val TOTAL_POINT_STUDENT = "$VIOLATION/student/total_points"
+    const val GET_ALL_STUDENT = "$VIOLATION/get_all_student"
     const val GET_ALL_SCHOOL_VIOLATION_MASTER = "$VIOLATION/get_all_school_violation_master"
 
 //    TAG FOR API

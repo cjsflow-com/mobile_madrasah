@@ -42,6 +42,7 @@ class TatibActivity: AppCompatActivity()
         }
         tatibBinding.apply {
             backBtn.setOnClickListener {
+                startActivity(Intent(this@TatibActivity,MainActivity::class.java))
                 finish()
             }
             listViolationStudent.setOnClickListener {

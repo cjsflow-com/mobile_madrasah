@@ -36,6 +36,6 @@ class NoteRejectedFragment(
                 btnVioaltionDispute.visibility = View.GONE
             }
         }
-        return super.onCreateDialog(savedInstanceState)
+        return dialog
     }
 }

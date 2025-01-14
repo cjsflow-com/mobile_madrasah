@@ -11,12 +11,14 @@ import com.example.man2superapp.repository.Repository
 import com.example.man2superapp.source.local.model.GetAllUserWbs
 import com.example.man2superapp.source.local.model.GetClassStudent
 import com.example.man2superapp.source.local.model.LocalSchoolViolationStudent
+import com.example.man2superapp.source.local.model.LocalStudent
 import com.example.man2superapp.source.local.model.LocalViolationMaster
 import com.example.man2superapp.source.local.model.NewsArticle
 import com.example.man2superapp.source.local.model.ResutlEmployeePerformance
 import com.example.man2superapp.source.local.model.TaskUser
 import com.example.man2superapp.source.local.model.toGenerateAllListArticle
 import com.example.man2superapp.source.local.model.toGenerateAllResult
+import com.example.man2superapp.source.local.model.toGenerateAllStudent
 import com.example.man2superapp.source.local.model.toGenerateAllTask
 import com.example.man2superapp.source.local.model.toGenerateAllUserWbs
 import com.example.man2superapp.source.local.model.toGenerateClassStudent
@@ -24,8 +26,6 @@ import com.example.man2superapp.source.local.model.toGenerateListViolationMaster
 import com.example.man2superapp.source.local.model.toGenerateListViolationStudent
 import com.example.man2superapp.source.local.model.toNoteRejected
 import com.example.man2superapp.source.network.States
-import com.example.man2superapp.source.network.response.wbs.DataUser
-import com.example.man2superapp.source.network.response.wbs.GetAllUserResponse
 import com.example.man2superapp.utils.Help
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -48,6 +48,7 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
     private val _allViolationMaster = MutableLiveData<List<LocalViolationMaster>>()
     private val _allViolationStudent = MutableLiveData<List<LocalSchoolViolationStudent>>()
     private val _totalPoint = MutableLiveData<Int>()
+    private val _allStudent = MutableLiveData<List<LocalStudent>>()
 
     val userList: LiveData<List<GetAllUserWbs>> get() = _userList
     val classList: LiveData<List<GetClassStudent>> get() = _clasList
@@ -62,6 +63,7 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
     val noteRejected: LiveData<String> get() = _noteRejected
     val allViolationMaster: LiveData<List<LocalViolationMaster>> get() = _allViolationMaster
     val allViolationStudent: LiveData<List<LocalSchoolViolationStudent>> get() = _allViolationStudent
+    val allStudent: LiveData<List<LocalStudent>> get() = _allStudent
 
 
     fun loginEmployee(email: String, password: String) = repository.loginEmployee(email, password).asLiveData()
@@ -116,6 +118,7 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
                         Help.showToast(context,state.message)
                         Log.d("AllViewModel", "fetchAllClassStudent: ${state.message}")
                     }
+                    else -> {}
                 }
             }
         }
@@ -134,6 +137,7 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
                     is States.Failed -> {
                         Help.showToast(context,it.toString())
                     }
+                    else -> {}
                 }
             }
         }
@@ -153,6 +157,7 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
                         _loading.value = false
                         _textError.value = it.message.toString()
                     }
+                    else -> {}
                 }
             }
         }
@@ -171,12 +176,27 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
                         _loading.value = false
                         _textError.value = "Terjadi kesalahan pada siste => ${it.message}"
                     }
+                    else -> {}
                 }
             }
         }
     }
 
-    fun createViolationStudent(token: String,studentId: Int,schoolViolationStudentId: Int) = repository.createViolationStudent(token,studentId,schoolViolationStudentId).asLiveData()
+    fun fetchAllStudent(token: String){
+        viewModelScope.launch {
+            repository.getAllStudent(token).collect{
+                when(it){
+                    is States.Loading -> {}
+                    is States.Success -> {
+                        _allStudent.value = it.data.student.toGenerateAllStudent()
+                    }
+                    is States.Failed -> {_textError.value = it.message.toString()}
+                }
+            }
+        }
+    }
+
+    fun createViolationStudent(token: String,studentId: Int?,schoolViolationStudentId: Int?) = repository.createViolationStudent(token,studentId,schoolViolationStudentId).asLiveData()
     fun createViolationDisputeStudent(token: String,id: Int,reason: String){
         viewModelScope.launch {
             repository.createViolationDisputeStudent(token,id,reason).collect{
@@ -188,6 +208,8 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
                     is States.Failed -> {
                         _textError.value = it.message.toString()
                     }
+
+                    else -> {}
                 }
             }
         }
@@ -204,6 +226,7 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
                     is States.Failed -> {
                         _textError.value = "Terjadi kesalahan => ${it.message}"
                     }
+                    else -> {}
                 }
             }
         }
@@ -223,10 +246,13 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
                         _textError.value = it.message.toString()
                         _loading.value = false
                     }
+                    else -> {}
                 }
             }
         }
     }
+
+    fun updatePhoneNumberParent(token: String,numberPhoneParent: String) = repository.updatePhoneNumberParent(token,numberPhoneParent).asLiveData()
 
     fun fetchApprovedTask(token: String,context: Context)
     {
@@ -239,6 +265,7 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
                         _hasApprovedTask.value = it.data.hasApproved
                     }
                     is States.Failed -> {Help.showToast(context,it.toString())}
+                    else -> {}
                 }
             }
         }
@@ -261,6 +288,7 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
                         _loading.value = false
                         Help.showToast(context,state.message)
                     }
+                    else -> {}
                 }
             }
         }
@@ -293,6 +321,7 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
                         Help.showToast(context,state.message)
                         Log.d("AllViewModel", "fetchAllUsers: ${state.message}")
                     }
+                    else -> {}
                 }
             }
         }
@@ -311,6 +340,7 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
                         Help.showToast(context,state.message)
                         Log.d("AllViewModel", "fetchAllOfficerService: ${state.message}")
                     }
+                    else -> {}
                 }
             }
         }
@@ -358,6 +388,7 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
                         _loading.value = false
                         _textError.value = "Terjadi kesalahan pada sistem => ${state.message}"
                     }
+                    else -> {}
                 }
             }
         }

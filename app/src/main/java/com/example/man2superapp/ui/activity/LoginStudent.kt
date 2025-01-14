@@ -72,10 +72,10 @@ class LoginStudent: AppCompatActivity()
                         is States.Success -> {
                             isShoProgressBar(false)
                             lifecycleScope.launch {
-                                Help.showToast(this@LoginStudent,state.data.message)
                                 Log.d(TAG, "action: ${state.data.message}")
                                 if(state.data.success)
                                 {
+                                    Help.showToast(this@LoginStudent,state.data.message)
                                     localStore.putToken(
                                         LoginModel(state.data.student?.name,state.data.student?.id,state.data.student?.email
                                             ,state.data.student?.nisn,state.data.student?.className,state.data.student?.gender,

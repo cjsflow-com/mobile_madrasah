@@ -49,6 +49,8 @@
             android:exported="false" />
         <activity android:name=".ui.activity.ListAllViolationStudent"
             android:exported="false" />
+        <activity android:name=".ui.activity.ActivityAddViolationStudent"
+            android:exported="false" />
         <activity
             android:name=".ui.activity.SongketActivity"
             android:exported="false" />

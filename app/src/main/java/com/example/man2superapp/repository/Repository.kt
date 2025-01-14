@@ -134,7 +134,7 @@ class Repository @Inject constructor(
 
     fun getAllViolationStudent(token: String) = remoteDataSource.allViolationStudent(token)
 
-    fun createViolationStudent(token: String,studentId: Int,schoolViolationStudentId: Int) =
+    fun createViolationStudent(token: String,studentId: Int?,schoolViolationStudentId: Int?) =
         remoteDataSource.createViolationStudent(token,studentId,schoolViolationStudentId)
 
     fun createViolationDisputeStudent(token: String,id: Int,reason: String) = remoteDataSource.createViolationDisputeStudent(token,id,reason)
@@ -142,4 +142,8 @@ class Repository @Inject constructor(
     fun getNoteDisputeViolation(token: String,id: Int) = remoteDataSource.getNoteDisputeViolation(token,id)
 
     fun getTotalPointStudent(token: String) = remoteDataSource.getTotalPointStudent(token)
+
+    fun getAllStudent(token: String) = remoteDataSource.getAllStudentViolation(token)
+
+    fun updatePhoneNumberParent(token: String,numberPhoneParent: String) = remoteDataSource.updatePhoneNumberParent(token,numberPhoneParent)
 }

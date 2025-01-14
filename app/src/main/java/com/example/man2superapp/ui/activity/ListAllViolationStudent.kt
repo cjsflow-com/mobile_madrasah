@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.man2superapp.databinding.ActivityLayoutListStudentBinding
 import com.example.man2superapp.source.LoginTemp
 import com.example.man2superapp.source.local.model.toNoteRejected
@@ -37,6 +38,7 @@ class ListAllViolationStudent: AppCompatActivity()
             }
         }
         observer()
+        setAdapter()
         actionComponent()
     }
 
@@ -51,11 +53,10 @@ class ListAllViolationStudent: AppCompatActivity()
 
     private fun observer()
     {
-        allViewModel.apply {
-           allViolationStudent.observe(this@ListAllViolationStudent){listAllStudentAdapter.submitListData(it)}
-            textSuccess.observe(this@ListAllViolationStudent){Help.showToast(this@ListAllViolationStudent,it)}
-            textError.observe(this@ListAllViolationStudent){Help.showToast(this@ListAllViolationStudent,it)}
-        }
+        allViewModel.allViolationStudent.observe(this@ListAllViolationStudent){listAllStudentAdapter.submitListData(it)}
+        allViewModel.textSuccess.observe(this@ListAllViolationStudent){Help.showToast(this@ListAllViolationStudent,it)}
+        allViewModel.textError.observe(this@ListAllViolationStudent){Help.showToast(this@ListAllViolationStudent,it)}
+
     }
 
     private fun onAddNoteDisputeViolation(violationId: Int)
@@ -71,6 +72,14 @@ class ListAllViolationStudent: AppCompatActivity()
     {
         allViewModel.getNoteDisputeViolation(token,id)
         allViewModel.noteRejected.observe(this@ListAllViolationStudent){showFragment(it)}
+    }
+
+    private fun setAdapter()
+    {
+        listALlViolationStudentBinding.rvListViolationStudent.apply {
+            layoutManager = LinearLayoutManager(this@ListAllViolationStudent)
+            adapter = listAllStudentAdapter
+        }
     }
 
     private fun showFragment(note: String)

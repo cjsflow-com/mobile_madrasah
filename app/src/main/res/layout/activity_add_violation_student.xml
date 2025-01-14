@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="Kembali"
+        android:src="@drawable/baseline_arrow_back_24"
+        android:padding="10dp"
+        android:background="@android:color/transparent"
+        android:layout_marginStart="2dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:contentDescription="Logo MAN 2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/medium_logo" />
+
+    <TextView
+        android:id="@+id/tvWbs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/montserrat_semibold"
+        android:text="Buat Pelanggaran Siswa"
+        android:textColor="@color/text_default"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/tvMan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="MAN 2 Pekanbaru"
+        android:textColor="@color/text_default"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvWbs"
+        tools:layout_editor_absoluteY="169dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_width="match_parent"
+        android:id="@+id/tvNamStudent"
+        app:layout_constraintTop_toBottomOf="@id/tvMan"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="Nama Siswa"
+        android:textColor="@color/text_default"
+        android:textSize="16sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            app:layout_constraintTop_toBottomOf="@id/tvNamStudent"
+            android:id="@+id/parentNameStudent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:hint="Nama Siswa">
+
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/etNameStudent"
+            android:textSize="15sp"
+            android:background="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="none"
+            tools:ignore="LabelFor"
+            android:fontFamily="@font/montserrat"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_width="match_parent"
+        android:id="@+id/tvNameViolation"
+        app:layout_constraintTop_toBottomOf="@id/parentNameStudent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="Nama Pelanggaran"
+        android:textColor="@color/text_default"
+        android:textSize="16sp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toBottomOf="@id/tvNameViolation"
+        android:id="@+id/parentViolation"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:hint="Nama Pelanggaran">
+
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/etViolation"
+            android:textSize="15sp"
+            android:background="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="none"
+            tools:ignore="LabelFor"
+            android:fontFamily="@font/montserrat"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:backgroundTint="@color/card_accepted_leader"
+        android:layout_height="wrap_content"
+        android:contentDescription="Tombol Submit"
+        android:src="@drawable/baseline_done_outline_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="30dp"
+        android:id="@+id/floatingBtnSubmit" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

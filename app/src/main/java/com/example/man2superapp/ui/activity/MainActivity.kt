@@ -1,6 +1,7 @@
 package com.example.man2superapp.ui.activity
 
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.provider.Contacts.Intents
 import android.util.Log
@@ -9,12 +10,14 @@ import android.widget.ImageView
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.OnBackPressedDispatcher
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.denzcoskun.imageslider.models.SlideModel
 import com.example.man2superapp.EkinAfter
+import com.example.man2superapp.R
 import com.example.man2superapp.databinding.ActivityMainBinding
 import com.example.man2superapp.source.LoginTemp
 import com.example.man2superapp.source.local.model.LoginModel
@@ -24,6 +27,7 @@ import com.example.man2superapp.ui.presenter.AllViewModel
 import com.example.man2superapp.utils.Constant
 import com.example.man2superapp.utils.Help
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -37,6 +41,7 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var localStore: LoginTemp
     private val allViewModel by viewModels<AllViewModel>()
+    private var isDialogShown = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,9 +54,9 @@ class MainActivity : AppCompatActivity() {
                 Help.alertDialog(this@MainActivity)
             }
         })
-        allViewModel.getAllArticle()
+//        allViewModel.getAllArticle()
         observerView()
-        setUpSlider()
+//        setUpSlider()
     }
 
     private fun observerView()
@@ -63,32 +68,32 @@ class MainActivity : AppCompatActivity() {
             }
         }
         allViewModel.totalPoint.observe(this@MainActivity){
-            mainBinding.tvTotalPoints.text = it.toString()
+            mainBinding.tvTotalPoints.text = "Total Point Pelanggaran: ${it}"
         }
     }
 
-    private fun setUpSlider()
-    {
-        val imageSlider = mainBinding.sliderCard
-        val slideModels = mutableListOf<SlideModel>()
-        allViewModel.article.observe(this@MainActivity){ articles ->
-            articles.let {
-                for(article in it){
-                    val contentImage = Constant.IMAGE_URL_NEWS + article.image
-                    slideModels.add(SlideModel(contentImage,article.title,ScaleTypes.CENTER_CROP))
-                }
-                imageSlider.setImageList(slideModels, ScaleTypes.FIT)
-                imageSlider.setItemClickListener(object: ItemClickListener{
-                    override fun doubleClick(position: Int) {
-                        openWebView("https://www.m2mpekanbaru.sch.id/berita")
-                    }
-                    override fun onItemSelected(position: Int) {
-                        openWebView("https://www.m2mpekanbaru.sch.id/berita")
-                    }
-                })
-            }
-        }
-    }
+//    private fun setUpSlider()
+//    {
+//        val imageSlider = mainBinding.sliderCard
+//        val slideModels = mutableListOf<SlideModel>()
+//        allViewModel.article.observe(this@MainActivity){ articles ->
+//            articles.let {
+//                for(article in it){
+//                    val contentImage = Constant.IMAGE_URL_NEWS + article.image
+//                    slideModels.add(SlideModel(contentImage,article.title,ScaleTypes.CENTER_CROP))
+//                }
+//                imageSlider.setImageList(slideModels, ScaleTypes.FIT)
+//                imageSlider.setItemClickListener(object: ItemClickListener{
+//                    override fun doubleClick(position: Int) {
+//                        openWebView("https://www.m2mpekanbaru.sch.id/berita")
+//                    }
+//                    override fun onItemSelected(position: Int) {
+//                        openWebView("https://www.m2mpekanbaru.sch.id/berita")
+//                    }
+//                })
+//            }
+//        }
+//    }
 
     private fun openWebView(url: String)
     {
@@ -103,6 +108,9 @@ class MainActivity : AppCompatActivity() {
             localStore.getToken().collect{ data ->
                 withContext(Dispatchers.Main)
                 {
+                    if (data.role == "siswa" && data.numberPhoneParent == null && !isDialogShown){
+                        data.token?.let { setDialogInput(it) }
+                    }
                     Log.d("TAG", "checkToken: ${data.token}")
                     mainBinding.tvUserName.text = data.name
                     data.token?.let { allViewModel.getTotalPointStudent(it) }
@@ -116,23 +124,71 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun setDialogInput(token: String) {
+        val view = layoutInflater.inflate(R.layout.dialog_input, null)
+        val textInputLayout = view.findViewById<TextInputLayout>(R.id.parentNumberParentPhone)
+
+        // Membuat AlertDialog
+        val dialog = MaterialAlertDialogBuilder(this@MainActivity)
+            .setTitle("Masukkan data nomor orangtua siswa")
+            .setView(view)
+            .setCancelable(false)
+            .setPositiveButton("Oke", null) // Tombol Oke, tapi listener di-overwrite nanti
+            .create()
+
+        dialog.show()
+
+        // Overwrite tombol PositiveButton setelah dialog ditampilkan
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+            val inputText = textInputLayout.editText?.text.toString().trim()
+
+            if (inputText.isNotEmpty()) {
+                // Jika input tidak kosong, panggil ViewModel untuk update
+                allViewModel.updatePhoneNumberParent(token, inputText).observe(this@MainActivity) { state ->
+                    when (state) {
+                        is States.Loading -> {}
+                        is States.Success -> {
+                            if (state.data.success) {
+                                Help.showToast(this@MainActivity, state.data.message)
+                                isDialogShown = false
+                                dialog.dismiss() // Tutup dialog jika berhasil
+                            } else {
+                                Help.showToast(this@MainActivity, state.data.message)
+                            }
+                        }
+                        is States.Failed -> {
+                            Help.showToast(this@MainActivity, state.message)
+                        }
+                    }
+                }
+            } else {
+                // Tampilkan pesan jika input kosong dan dialog tidak ditutup
+                Help.showToast(this@MainActivity, "Inputan nomor orangtua siswa harus diisi")
+            }
+        }
+    }
+
+
     private fun checkRoleLogin(role: String)
     {
         mainBinding.apply {
             if(role == "siswa")
             {
                 songketCard.visibility = View.VISIBLE
+                tvTotalPoints.visibility = View.VISIBLE
                 wbsCard.visibility = View.VISIBLE
                 ekinCard.visibility = View.GONE
                 pelajarCard.visibility = View.VISIBLE
                 etatibCard.visibility = View.VISIBLE
             }else if (role == "kepala_madrasah"){
+                tvTotalPoints.visibility = View.GONE
                 ekinCard.visibility = View.VISIBLE
                 wbsCard.visibility = View.VISIBLE
                 songketCard.visibility = View.GONE
                 pelajarCard.visibility = View.GONE
                 etatibCard.visibility = View.GONE
             }else if (role == "super_admin"){
+                tvTotalPoints.visibility = View.GONE
                 ekinCard.visibility = View.VISIBLE
                 wbsCard.visibility = View.VISIBLE
                 jurnalCard.visibility = View.GONE
@@ -140,6 +196,7 @@ class MainActivity : AppCompatActivity() {
                 pelajarCard.visibility = View.GONE
                 etatibCard.visibility = View.GONE
             }else if(role == "guru"){
+                tvTotalPoints.visibility = View.GONE
                 ekinCard.visibility = View.VISIBLE
                 wbsCard.visibility = View.VISIBLE
                 pelajarCard.visibility = View.VISIBLE
@@ -253,7 +310,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             etatibCard.setOnClickListener {
-                Help.showToast(this@MainActivity,"Fitur masih dalam tahap pengembangan")
+                val target  = if (token.isEmpty()) LoginActivity::class.java else TatibActivity::class.java
+                startActivity(Intent(this@MainActivity,target)).also { finish() }
             }
 
             pelajarCard.setOnClickListener {
@@ -270,8 +328,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-
 }
 
 //    private fun showMaterialDialog()

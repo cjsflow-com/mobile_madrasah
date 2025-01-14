@@ -19,10 +19,12 @@ import com.example.man2superapp.source.network.response.student.UpdatePasswordSt
 import com.example.man2superapp.source.network.response.student.classses.GetAllClassStudentResponse
 import com.example.man2superapp.source.network.response.users.BiodataUserResponse
 import com.example.man2superapp.source.network.response.users.UpdateProfileResponse
+import com.example.man2superapp.source.network.response.violation.AllStudentResponse
 import com.example.man2superapp.source.network.response.violation.CreateViolationResponse
 import com.example.man2superapp.source.network.response.violation.SchoolViolationMasterResponse
 import com.example.man2superapp.source.network.response.violation.SchoolViolationStudentResponse
 import com.example.man2superapp.source.network.response.violation.StudentTotalPointResponse
+import com.example.man2superapp.source.network.response.violation.UpdatePhoneNumberResponse
 import com.example.man2superapp.source.network.response.wbs.AllWbsResponse
 import com.example.man2superapp.source.network.response.wbs.CreateWbsResponse
 import com.example.man2superapp.source.network.response.wbs.GetAllUserResponse
@@ -310,8 +312,8 @@ interface ApiService {
     @POST(Constant.CREATE_VIOLATION_STUDENT)
     suspend fun createViolationStudent(
         @Header(Constant.AUTHORIZATION) token: String,
-        @Field("student_id") studentId: Int,
-        @Field("school_violation_master_id") schoolViolationMasterId: Int
+        @Field("student_id") studentId: Int?,
+        @Field("school_violation_master_id") schoolViolationMasterId: Int?
     ): Response<CreateViolationResponse>
 
     @FormUrlEncoded
@@ -332,6 +334,18 @@ interface ApiService {
     suspend fun getTotalPoint(
         @Header(Constant.AUTHORIZATION) token: String
     ): Response<StudentTotalPointResponse>
+
+    @GET(Constant.GET_ALL_STUDENT)
+    suspend fun getAllStudentForViolation(
+        @Header(Constant.AUTHORIZATION) token: String,
+    ): Response<AllStudentResponse>
+
+    @FormUrlEncoded
+    @PUT(Constant.UPDATE_NUMBER_PHONE_PARENT)
+    suspend fun updateStudentPhoneParent(
+        @Header(Constant.AUTHORIZATION) token: String,
+        @Field("number_handphone_parent") numberHpParent: String
+    ): Response<UpdatePhoneNumberResponse>
 
 //    @GET(Constant.GET_ALL_SCHOOL_VIOLATION_MASTER)
 //    suspend fun getAllSchoolViolationMaster(
