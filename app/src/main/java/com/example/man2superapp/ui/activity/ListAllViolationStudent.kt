@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.man2superapp.databinding.ActivityLayoutListStudentBinding
@@ -80,7 +83,9 @@ class ListAllViolationStudent: AppCompatActivity()
     private fun onNoteRejectedViolation(id: Int)
     {
         allViewModel.getNoteDisputeViolation(token,id)
-        allViewModel.noteRejected.observe(this@ListAllViolationStudent){showFragment(it)}
+        allViewModel.noteRejected.observeOnce(this@ListAllViolationStudent){note ->
+            showFragment(note)
+        }
     }
 
     private fun setAdapter()
@@ -95,5 +100,15 @@ class ListAllViolationStudent: AppCompatActivity()
     {
         val dialog = NoteRejectedFragment(note,this@ListAllViolationStudent)
         dialog.show(supportFragmentManager,"NoteRejectedFragment")
+    }
+
+    fun <T> LiveData<T>.observeOnce(lifecycleOwner: LifecycleOwner, observer: Observer<T>) {
+        observe(lifecycleOwner, object : Observer<T> {
+            override fun onChanged(value: T) {
+                observer.onChanged(value)
+                removeObserver(this)
+            }
+
+        })
     }
 }
