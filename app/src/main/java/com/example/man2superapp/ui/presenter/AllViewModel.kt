@@ -201,7 +201,9 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
         viewModelScope.launch {
             repository.createViolationDisputeStudent(token,id,reason).collect{
                 when(it){
-                    is States.Loading -> {}
+                    is States.Loading -> {
+
+                    }
                     is States.Success -> {
                         _textSucces.value = it.data.message
                     }

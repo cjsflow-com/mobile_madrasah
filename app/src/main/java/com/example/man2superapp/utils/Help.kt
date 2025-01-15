@@ -84,4 +84,18 @@ object Help {
             .show()
     }
 
+    fun formatDate(dateString: String): String
+    {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd",Locale("id","ID"))
+        val outputFormat = SimpleDateFormat("d MMMM yyyy",Locale("id","ID"))
+
+        return try {
+            val date = inputFormat.parse(dateString)
+            outputFormat.format(date)
+        }catch (e: Exception)
+        {
+            "Tanggal tidak valid"
+        }
+    }
+
 }

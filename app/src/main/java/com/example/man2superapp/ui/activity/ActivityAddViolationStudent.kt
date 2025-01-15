@@ -31,22 +31,29 @@ class ActivityAddViolationStudent : AppCompatActivity()
             localStore.getToken().collect{ model ->
                 model.token?.let {
                     allViewModel.fetchAllStudent(it)
-                    actionComponent(it)
+                    allViewModel.fetchAllViolationMaster(it)
                 }
             }
         }
         observerView()
+        actionComponent()
     }
 
 
-    private fun actionComponent(token: String)
+    private fun actionComponent()
     {
         addViolationBinding.apply {
             btnBack.setOnClickListener {
                 finish()
             }
             floatingBtnSubmit.setOnClickListener {
-                validation(token)
+                lifecycleScope.launch {
+                    localStore.getToken().collect{ model ->
+                        model.token?.let {
+                            validation(it)
+                        }
+                    }
+                }
             }
         }
     }

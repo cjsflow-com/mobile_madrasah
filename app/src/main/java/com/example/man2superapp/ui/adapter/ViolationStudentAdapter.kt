@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.man2superapp.R
 import com.example.man2superapp.databinding.ItemListStudentViolationBinding
 import com.example.man2superapp.source.local.model.LocalSchoolViolationStudent
+import com.example.man2superapp.utils.Help
 
 class ViolationStudentAdapter(
     private val onAddNoteDisputeViolation: (Int) -> Unit,
@@ -26,7 +27,8 @@ class ViolationStudentAdapter(
             {
                 mtvNameSchoolViolationStudent.text = "Aturan: ${data.nameSchoolViolation}"
                 mtvPoint.text = "Point: ${data.point}"
-                mtvDate.text = "Tanggal: ${data.dateSchoolViolant}"
+                val formatDate = Help.formatDate(data.dateSchoolViolant)
+                mtvDate.text = "Tanggal: $formatDate"
                 mtvTimeSchool.text = "Waktu: ${data.timeSchoolViolant}"
                 mtvNoteViolation.text = "Alasan: ${data.reason}"
                 val statusText = when(data.status)
@@ -49,7 +51,7 @@ class ViolationStudentAdapter(
                 }else{
                     View.VISIBLE
                 }
-                btnDisputeViolation.isEnabled = !(data.status == 2 || data.status == 99)
+                btnDisputeViolation.isEnabled = !(data.status == 2 || data.status == 99 || data.status == 1)
                 val visibilityViewBtn = if(data.note == "") View.GONE else View.VISIBLE
                 mtvViolationDispute.visibility = visibilityView
                 mtvNoteViolation.visibility = visibilityView

@@ -48,6 +48,9 @@ class TatibActivity: AppCompatActivity()
             listViolationStudent.setOnClickListener {
                 startActivity(Intent(this@TatibActivity,ListAllViolationStudent::class.java))
             }
+            floatingAddViolation.setOnClickListener {
+                startActivity(Intent(this@TatibActivity,ActivityAddViolationStudent::class.java))
+            }
         }
     }
 

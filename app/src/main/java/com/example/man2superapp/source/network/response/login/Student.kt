@@ -31,5 +31,7 @@ data class Student(
     @SerializedName("number_handphone")
     val numberHandphone: String,
     @SerializedName("profile")
-    val profile: String
+    val profile: String,
+    @SerializedName("number_handphone_parent")
+    val numberPhoneParent: String,
 )

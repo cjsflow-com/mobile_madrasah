@@ -1,5 +1,6 @@
 package com.example.man2superapp.ui.activity
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
@@ -54,11 +55,12 @@ class MainActivity : AppCompatActivity() {
                 Help.alertDialog(this@MainActivity)
             }
         })
-//        allViewModel.getAllArticle()
+        allViewModel.getAllArticle()
         observerView()
-//        setUpSlider()
+        setUpSlider()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun observerView()
     {
         allViewModel.loading.observe(this@MainActivity){ loading ->
@@ -67,33 +69,39 @@ class MainActivity : AppCompatActivity() {
                 sliderCard.visibility = if(loading) View.GONE else View.VISIBLE
             }
         }
-        allViewModel.totalPoint.observe(this@MainActivity){
-            mainBinding.tvTotalPoints.text = "Total Point Pelanggaran: ${it}"
+        allViewModel.totalPoint.observe(this@MainActivity){ model ->
+            if(model == 0)
+            {
+                mainBinding.tvTotalPoints.setText("Total Point Pelanggaran: -")
+            }else{
+               mainBinding.tvTotalPoints.setText("Total Point Pelanggaran: ${model}")
+            }
+
         }
     }
 
-//    private fun setUpSlider()
-//    {
-//        val imageSlider = mainBinding.sliderCard
-//        val slideModels = mutableListOf<SlideModel>()
-//        allViewModel.article.observe(this@MainActivity){ articles ->
-//            articles.let {
-//                for(article in it){
-//                    val contentImage = Constant.IMAGE_URL_NEWS + article.image
-//                    slideModels.add(SlideModel(contentImage,article.title,ScaleTypes.CENTER_CROP))
-//                }
-//                imageSlider.setImageList(slideModels, ScaleTypes.FIT)
-//                imageSlider.setItemClickListener(object: ItemClickListener{
-//                    override fun doubleClick(position: Int) {
-//                        openWebView("https://www.m2mpekanbaru.sch.id/berita")
-//                    }
-//                    override fun onItemSelected(position: Int) {
-//                        openWebView("https://www.m2mpekanbaru.sch.id/berita")
-//                    }
-//                })
-//            }
-//        }
-//    }
+    private fun setUpSlider()
+    {
+        val imageSlider = mainBinding.sliderCard
+        val slideModels = mutableListOf<SlideModel>()
+        allViewModel.article.observe(this@MainActivity){ articles ->
+            articles.let {
+                for(article in it){
+                    val contentImage = Constant.IMAGE_URL_NEWS + article.image
+                    slideModels.add(SlideModel(contentImage,article.title,ScaleTypes.CENTER_CROP))
+                }
+                imageSlider.setImageList(slideModels, ScaleTypes.FIT)
+                imageSlider.setItemClickListener(object: ItemClickListener{
+                    override fun doubleClick(position: Int) {
+                        openWebView("https://www.m2mpekanbaru.sch.id/berita")
+                    }
+                    override fun onItemSelected(position: Int) {
+                        openWebView("https://www.m2mpekanbaru.sch.id/berita")
+                    }
+                })
+            }
+        }
+    }
 
     private fun openWebView(url: String)
     {
@@ -108,13 +116,19 @@ class MainActivity : AppCompatActivity() {
             localStore.getToken().collect{ data ->
                 withContext(Dispatchers.Main)
                 {
-                    if (data.role == "siswa" && data.numberPhoneParent == null && !isDialogShown){
-                        data.token?.let { setDialogInput(it) }
+                    if(data.role == "siswa"){
+                        if (data.numberPhoneParent == "" && !isDialogShown){
+                            data.token?.let {
+                                setDialogInput(it)
+                            }
+                        }
+                        data.token?.let { allViewModel.getTotalPointStudent(it) }
+                    }
+                    data.token?.let {
+                        handleCardActions(it)
                     }
                     Log.d("TAG", "checkToken: ${data.token}")
                     mainBinding.tvUserName.text = data.name
-                    data.token?.let { allViewModel.getTotalPointStudent(it) }
-                    data.token?.let { handleCardActions(it) }
                     data.role?.let{checkRoleLogin(it)}
                 }
             }
@@ -148,6 +162,9 @@ class MainActivity : AppCompatActivity() {
                     when (state) {
                         is States.Loading -> {}
                         is States.Success -> {
+                            lifecycleScope.launch {
+                                localStore.putToken(LoginModel(numberPhoneParent = inputText))
+                            }
                             if (state.data.success) {
                                 Help.showToast(this@MainActivity, state.data.message)
                                 isDialogShown = false

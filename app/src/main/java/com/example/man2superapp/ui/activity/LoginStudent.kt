@@ -79,7 +79,8 @@ class LoginStudent: AppCompatActivity()
                                     localStore.putToken(
                                         LoginModel(state.data.student?.name,state.data.student?.id,state.data.student?.email
                                             ,state.data.student?.nisn,state.data.student?.className,state.data.student?.gender,
-                                            state.data.token,state.data.student?.profile,state.data.student?.nameMother,state.data.student?.nameFather,state.data.student?.numberHandphone,"",state.data.student?.address,state.data.student?.dateBirthday,state.data.student?.placeBirthday,"siswa")
+                                            state.data.token,state.data.student?.profile,state.data.student?.nameMother,state.data.student?.nameFather,state.data.student?.numberHandphone,"",state.data.student?.address,state.data.student?.dateBirthday,state.data.student?.placeBirthday,"siswa",
+                                            state.data.student?.numberPhoneParent)
                                             .also { startActivity(Intent(this@LoginStudent,MainActivity::class.java))
                                                 .also { finish() }}
                                     )

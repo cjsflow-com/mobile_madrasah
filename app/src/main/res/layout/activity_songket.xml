@@ -419,7 +419,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:id="@+id/ivHoldidayYear"
-                    android:src="@drawable/aktifsekolah"
+                    android:src="@drawable/leave"
                     android:layout_marginTop="15dp"
                     android:layout_centerHorizontal="true"/>
             </RelativeLayout>
@@ -453,7 +453,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:id="@+id/ivActivateTeacher"
-                    android:src="@drawable/aktifsekolah"
+                    android:src="@drawable/teach"
                     android:layout_marginTop="15dp"
                     android:layout_centerHorizontal="true"/>
             </RelativeLayout>
@@ -608,7 +608,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:id="@+id/ivRecomendation"
-                    android:src="@drawable/peringkat"
+                    android:src="@drawable/review"
                     android:layout_marginTop="15dp"
                     android:layout_centerHorizontal="true"/>
 
@@ -643,7 +643,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:id="@+id/ivTask"
-                    android:src="@drawable/peringkat"
+                    android:src="@drawable/duty"
                     android:layout_marginTop="15dp"
                     android:layout_centerHorizontal="true"/>
 

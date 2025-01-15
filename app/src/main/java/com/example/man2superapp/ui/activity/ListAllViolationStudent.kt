@@ -1,6 +1,7 @@
 package com.example.man2superapp.ui.activity
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -56,7 +57,15 @@ class ListAllViolationStudent: AppCompatActivity()
         allViewModel.allViolationStudent.observe(this@ListAllViolationStudent){listAllStudentAdapter.submitListData(it)}
         allViewModel.textSuccess.observe(this@ListAllViolationStudent){Help.showToast(this@ListAllViolationStudent,it)}
         allViewModel.textError.observe(this@ListAllViolationStudent){Help.showToast(this@ListAllViolationStudent,it)}
+        allViewModel.loading.observe(this@ListAllViolationStudent){isShowProgress(it)}
+    }
 
+    private fun isShowProgress(isShow: Boolean)
+    {
+        listALlViolationStudentBinding.apply {
+            progressBarList.visibility = if (isShow) View.VISIBLE else View.GONE
+            rvListViolationStudent.visibility = if (isShow) View.GONE else View.VISIBLE
+        }
     }
 
     private fun onAddNoteDisputeViolation(violationId: Int)
