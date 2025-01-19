@@ -30,6 +30,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activity.SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".ui.activity.EditEKinerjaActivity"
             android:exported="false" />
         <activity
@@ -47,9 +56,11 @@
         <activity
             android:name=".ui.activity.LoginStudent"
             android:exported="false" />
-        <activity android:name=".ui.activity.ListAllViolationStudent"
+        <activity
+            android:name=".ui.activity.ListAllViolationStudent"
             android:exported="false" />
-        <activity android:name=".ui.activity.ActivityAddViolationStudent"
+        <activity
+            android:name=".ui.activity.ActivityAddViolationStudent"
             android:exported="false" />
         <activity
             android:name=".ui.activity.SongketActivity"
@@ -84,16 +95,17 @@
         <activity
             android:name=".ui.activity.AddActivityEkinerja"
             android:exported="false" />
-        <activity android:name=".ui.activity.TatibActivity"
+        <activity
+            android:name=".ui.activity.TatibActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
 
         <meta-data
