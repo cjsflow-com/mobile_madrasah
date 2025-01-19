@@ -16,4 +16,5 @@
     <color name="card_accepted_leader">#198754</color>
     <color name="text_default">#44567F</color>
     <color name="text_shadow">#7f000000</color>
+    <color name="ssblue">#346DF6</color>
 </resources>
