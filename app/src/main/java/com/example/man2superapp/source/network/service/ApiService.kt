@@ -24,6 +24,7 @@ import com.example.man2superapp.source.network.response.violation.CreateViolatio
 import com.example.man2superapp.source.network.response.violation.SchoolViolationMasterResponse
 import com.example.man2superapp.source.network.response.violation.SchoolViolationStudentResponse
 import com.example.man2superapp.source.network.response.violation.StudentTotalPointResponse
+import com.example.man2superapp.source.network.response.violation.TargetViolationResponse
 import com.example.man2superapp.source.network.response.violation.UpdatePhoneNumberResponse
 import com.example.man2superapp.source.network.response.wbs.AllWbsResponse
 import com.example.man2superapp.source.network.response.wbs.CreateWbsResponse
@@ -346,6 +347,11 @@ interface ApiService {
         @Header(Constant.AUTHORIZATION) token: String,
         @Field("number_handphone_parent") numberHpParent: String
     ): Response<UpdatePhoneNumberResponse>
+
+    @GET(Constant.GET_ALL_TARGET_VIOLATION)
+    suspend fun getAllTargetViolation(
+        @Header(Constant.AUTHORIZATION) token: String,
+    ): Response<TargetViolationResponse>
 
 //    @GET(Constant.GET_ALL_SCHOOL_VIOLATION_MASTER)
 //    suspend fun getAllSchoolViolationMaster(

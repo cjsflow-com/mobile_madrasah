@@ -33,6 +33,7 @@ class NoteRejectedFragment(
                 btnBack.setOnClickListener {
                     dismiss()
                 }
+                parentNoteViolationDispute.isEnabled = false
                 btnVioaltionDispute.visibility = View.GONE
             }
         }

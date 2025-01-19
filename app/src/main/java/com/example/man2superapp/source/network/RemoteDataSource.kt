@@ -26,6 +26,7 @@ import com.example.man2superapp.source.network.response.violation.CreateViolatio
 import com.example.man2superapp.source.network.response.violation.SchoolViolationMasterResponse
 import com.example.man2superapp.source.network.response.violation.SchoolViolationStudentResponse
 import com.example.man2superapp.source.network.response.violation.StudentTotalPointResponse
+import com.example.man2superapp.source.network.response.violation.TargetViolationResponse
 import com.example.man2superapp.source.network.response.violation.UpdatePhoneNumberResponse
 import com.example.man2superapp.source.network.response.wbs.AllWbsResponse
 import com.example.man2superapp.source.network.response.wbs.CreateWbsResponse
@@ -516,6 +517,17 @@ class RemoteDataSource @Inject constructor(
         }
     }.catch {
         Log.d(TAG, "updatePhoneNumberParent: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+    fun getAllTargetViolation(token: String) = flow<States<TargetViolationResponse>> {
+        emit(States.loading())
+        apiService.getAllTargetViolation(Constant.BEARER + token).let {
+            if(it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "getAllTargetViolation: ${it.message.toString()}")
         emit(States.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
 }

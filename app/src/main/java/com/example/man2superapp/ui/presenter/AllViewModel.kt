@@ -234,6 +234,8 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
         }
     }
 
+    fun getTargetViolation(token: String) = repository.getAllViolationTarget(token).asLiveData()
+
     fun getTotalPointStudent(token: String)
     {
         viewModelScope.launch {
