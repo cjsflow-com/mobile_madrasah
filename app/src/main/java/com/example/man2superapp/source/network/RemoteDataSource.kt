@@ -3,6 +3,9 @@ package com.example.man2superapp.source.network
 import android.util.Log
 import com.example.man2superapp.source.local.model.toGenerateListSongketMother
 import com.example.man2superapp.source.network.response.ArticleNewsResponse
+import com.example.man2superapp.source.network.response.attendance_student.AddAttendanceStudentResponse
+import com.example.man2superapp.source.network.response.attendance_student.AttendanceTodayResponse
+import com.example.man2superapp.source.network.response.attendance_student.IndexAttendanceResponse
 import com.example.man2superapp.source.network.response.e_kinerja.GetTaskResponse
 import com.example.man2superapp.source.network.response.e_kinerja.HasApprovedTaskResponse
 import com.example.man2superapp.source.network.response.e_kinerja.IndexResponse
@@ -10,6 +13,7 @@ import com.example.man2superapp.source.network.response.login.LoginResponse
 import com.example.man2superapp.source.network.response.login.LoginStudentResponse
 import com.example.man2superapp.source.network.response.login.LogoutResponse
 import com.example.man2superapp.source.network.response.note_rejected_dispute.NoteRejectedResponse
+import com.example.man2superapp.source.network.response.setting.SettingResponse
 import com.example.man2superapp.source.network.response.songket_emak.CreateSongketMother
 import com.example.man2superapp.source.network.response.songket_emak.ListSongketEmakResponse
 import com.example.man2superapp.source.network.response.songket_emak.StatusResponse
@@ -528,6 +532,50 @@ class RemoteDataSource @Inject constructor(
         }
     }.catch {
         Log.d(TAG, "getAllTargetViolation: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+    fun addAttendanceToday(token: String) = flow<States<AddAttendanceStudentResponse>> {
+        emit(States.loading())
+        apiService.storeAttendanceStudent(Constant.BEARER + token).let {
+            if(it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "addAttendanceToday: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+    fun getAttendanceToday(token: String) = flow<States<AttendanceTodayResponse>> {
+        emit(States.loading())
+        apiService.getAttendanceToday(Constant.BEARER + token).let {
+            if (it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "getAttendanceToday: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+    fun getAllAttendanceToday(token: String) = flow<States<IndexAttendanceResponse>> {
+        emit(States.loading())
+        apiService.getAllAttendanceStudent(Constant.BEARER + token).let {
+            if (it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "getAllAttendanceToday: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
+
+    fun getLatAndLong(token: String) = flow<States<SettingResponse>> {
+        emit(States.loading())
+        apiService.getLatAndLong(Constant.BEARER + token).let {
+            if(it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "getLatAndLong: ${it.message.toString()}")
         emit(States.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
 }

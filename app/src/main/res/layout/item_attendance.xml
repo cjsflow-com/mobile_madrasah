@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="8dp"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="10dp"
+    android:backgroundTint="@android:color/white"
+    android:layout_height="wrap_content">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp">
+
+        <TableRow>
+            <com.google.android.material.textview.MaterialTextView
+                android:text="Nama"
+                android:textSize="15sp"
+                android:padding="8dp"
+                android:textStyle="bold" />
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:text="Nama"
+                android:id="@+id/mtv_name"
+                android:textSize="12sp"
+                android:padding="8dp" />
+        </TableRow>
+        <TableRow>
+            <com.google.android.material.textview.MaterialTextView
+                android:text="Status Masuk"
+                android:textSize="15sp"
+                android:padding="8dp"
+                android:textStyle="bold" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/mtv_content_status_in"
+                android:textSize="12sp"
+                android:padding="8dp" />
+        </TableRow>
+        <TableRow>
+            <com.google.android.material.textview.MaterialTextView
+                android:text="Jam Masuk"
+                android:textSize="15sp"
+                android:padding="8dp"
+                android:textStyle="bold" />
+            <com.google.android.material.textview.MaterialTextView
+                android:textSize="12sp"
+                android:id="@+id/mtv_content_check_in_time"
+                android:padding="8dp" />
+        </TableRow>
+        <TableRow>
+            <com.google.android.material.textview.MaterialTextView
+                android:text="Status Keluar"
+                android:textSize="15sp"
+                android:padding="8dp"
+                android:textStyle="bold" />
+            <com.google.android.material.textview.MaterialTextView
+                android:textSize="12sp"
+                android:id="@+id/mtv_content_status_out"
+                android:padding="8dp" />
+        </TableRow>
+
+        <TableRow>
+            <com.google.android.material.textview.MaterialTextView
+                android:text="Jam Keluar"
+                android:textSize="15sp"
+                android:padding="8dp"
+                android:textStyle="bold" />
+            <com.google.android.material.textview.MaterialTextView
+                android:textSize="12sp"
+                android:id="@+id/mtv_content_check_out_time"
+                android:padding="8dp" />
+        </TableRow>
+
+    </TableLayout>
+
+</com.google.android.material.card.MaterialCardView>

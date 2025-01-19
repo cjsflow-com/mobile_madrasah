@@ -74,6 +74,8 @@
         <activity
             android:name=".ui.activity.EditSongketActivity"
             android:exported="false" />
+        <activity android:name=".ui.activity.AttendanceStudent"
+            android:exported="false" />
         <activity
             android:name=".ui.activity.CreateSongketGtk"
             android:exported="false" />
@@ -100,13 +102,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.activity.MainActivity"
-            android:exported="false">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-        </activity>
+            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"

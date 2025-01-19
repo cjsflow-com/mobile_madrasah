@@ -1,13 +1,17 @@
 package com.example.man2superapp.source
 
 import android.content.Context
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.example.man2superapp.source.local.model.LoginModel
 import com.example.man2superapp.source.network.di.userStore
+import com.example.man2superapp.utils.Constant
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 
 class LoginTemp constructor(private val context: Context) {
     private val TOKEN_KEY = stringPreferencesKey("token")
@@ -27,6 +31,7 @@ class LoginTemp constructor(private val context: Context) {
     private val DATE_BIRHTDAY = stringPreferencesKey("date_birthday")
     private val PLACE_BIRTHDAY = stringPreferencesKey("place_birthday")
     private val PHONE_PARENT = stringPreferencesKey("parent_phone")
+    private val IS_FIRST_TIME = booleanPreferencesKey(Constant.IS_FIRST_TIME)
 
     suspend fun getToken() = flow{
         val token = context.userStore.data.first()[TOKEN_KEY]?: ""
@@ -49,6 +54,17 @@ class LoginTemp constructor(private val context: Context) {
         emit(LoginModel(name,id, email,nisn,class_name,gender, token, profile, nameMother,nameFather,numberPhone,position,address,dateBirthday,placeBirthday, role,numberPhoneParent))
     }
 
+    val isFirstTime: Flow<Boolean> = context.userStore.data.map { preferences->
+        preferences[IS_FIRST_TIME] ?: true
+    }
+
+
+    suspend fun setFirstTime(isFirstTime: Boolean)
+    {
+        context.userStore.edit { prefrences ->
+            prefrences[IS_FIRST_TIME] = isFirstTime
+        }
+    }
     suspend fun putToken(loginModel: LoginModel)
     {
         context.userStore.edit { preferences ->

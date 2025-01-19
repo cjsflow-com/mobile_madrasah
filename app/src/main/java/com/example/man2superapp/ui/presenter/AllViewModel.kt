@@ -403,4 +403,12 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
 
     fun createServiceSongketMotherGtk(id: Int, employeeId: Int, ratingService: Int) =
         repository.createServiceSongketMotherGtk(id,employeeId,ratingService).asLiveData()
+
+    fun addAttendanceToday(token: String) = repository.addAttendanceToday(token).asLiveData()
+
+    fun getAttendanceToday(token: String) = repository.getAttendanceToday(token).asLiveData()
+
+    fun getLatAndLong(token: String) = repository.getLatAndLong(token).asLiveData()
+
+    fun indexAllAttendanceToday(token: String) = repository.indexAttendanceToday(token).asLiveData()
 }

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="0dp"
+        android:id="@+id/card_tatib"
+        android:layout_margin="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="8dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/img_e_tatib"
+                android:contentDescription="E-Tatib"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/baseline_list_alt_24"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <LinearLayout
+                android:padding="10dp"
+                android:orientation="vertical"
+                app:layout_constraintTop_toTopOf="@id/img_e_tatib"
+                app:layout_constraintStart_toEndOf="@id/img_e_tatib"
+                android:layout_width="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="@id/img_e_tatib">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="E-Tatib"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="true" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        app:cardElevation="5dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="10dp"
+        app:cardCornerRadius="8dp"
+        android:layout_marginTop="15dp"
+        android:id="@+id/card_attendance_student"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/card_tatib"
+        app:layout_constraintStart_toStartOf="@id/card_tatib"
+        app:layout_constraintEnd_toEndOf="@id/card_tatib"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/img_attendance_student"
+                android:contentDescription="Absensi Siswa"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/baseline_calendar_month_24"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <LinearLayout
+                android:padding="10dp"
+                android:orientation="vertical"
+                app:layout_constraintTop_toTopOf="@id/img_attendance_student"
+                app:layout_constraintStart_toEndOf="@id/img_attendance_student"
+                android:layout_width="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="@id/img_attendance_student">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Absensi"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="true" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,6 +36,7 @@ object Constant {
     const val NAME_MOTHER = "name_mother"
     const val ADDRESS = "address"
     const val DATE_BIRTHDAY = "date_birthday"
+    const val IS_FIRST_TIME = "is_first_time"
     const val ID = "id"
     const val IMAGE_URL_NEWS = "https://m2mpekanbaru.sch.id/storage/uploads/"
 
@@ -90,6 +91,14 @@ object Constant {
     const val GET_ALL_STUDENT = "$VIOLATION/get_all_student"
     const val GET_ALL_SCHOOL_VIOLATION_MASTER = "$VIOLATION/get_all_school_violation_master"
     const val GET_ALL_TARGET_VIOLATION = "$VIOLATION/get_target_violation"
+
+    // Absensi
+    private const val ATTENDANCE_STUDENT = "attendance_student"
+    const val ADD_ATTENDANCE_STUDENT = "$ATTENDANCE_STUDENT/store"
+    const val INDEX_ATTENDANCE_STUDENT = "$ATTENDANCE_STUDENT/index"
+    const val FILTER_ATTENDANCE_STUDENT_BY_MONTH = "$ATTENDANCE_STUDENT/filter/{month}"
+    const val GET_LAT_AND_LONG = "$ATTENDANCE_STUDENT/get_lat_and_long"
+    const val GET_ATTENDANCE_TODAY = "$ATTENDANCE_STUDENT/getAttendanceToday"
 
 //    TAG FOR API
     const val TAG_CREATE_SONGKET = "CreateSongketActivity"

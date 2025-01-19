@@ -69,6 +69,11 @@ dependencies {
     implementation(libs.dexter)
     implementation(libs.picasso)
     implementation(libs.slider)
+    implementation(libs.face)
+    implementation(libs.camerax.core)
+    implementation(libs.camerax.camera2)
+    implementation(libs.camerax.lifecycle)
+    implementation(libs.camerax.view)
 }
 
 kapt {

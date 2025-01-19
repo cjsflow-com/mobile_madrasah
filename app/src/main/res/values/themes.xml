@@ -6,5 +6,12 @@
         <item name="colorPrimary">@color/manblue</item>
     </style>
 
+    <style name="customStyleChip" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="android:textSize">12sp</item>
+        <item name="backgroundColor">@color/chip_background</item>
+        <item name="android:textColor">@color/chip_text_color</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="Theme.Man2SuperApp" parent="Base.Theme.Man2SuperApp" />
 </resources>

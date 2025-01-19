@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:id="@+id/containerHeader"
+        android:background="@drawable/container_header_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_marginStart="10dp"
+                android:id="@+id/mtv_user"
+                android:drawablePadding="8dp"
+                android:textSize="12sp"
+                android:drawableTint="@android:color/white"
+                android:textColor="@android:color/white"
+                android:drawableStart="@drawable/baseline_account_circle_24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="Selamat Datang"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/mtv_location"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:maxLines="3"
+                android:drawableTint="@android:color/white"
+                android:textColor="@android:color/white"
+                android:textSize="10sp"
+                android:drawablePadding="10dp"
+                android:drawableStart="@drawable/baseline_location_on_24"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="@+id/mtv_user"
+                app:layout_constraintHorizontal_bias="0.534"
+                app:layout_constraintStart_toStartOf="@+id/mtv_user"
+                app:layout_constraintTop_toBottomOf="@+id/mtv_user" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/floatingActionButton"
+                android:layout_width="40dp"
+                android:backgroundTint="@color/card_rejected"
+                app:cardElevation="8dp"
+                app:cardCornerRadius="8dp"
+                app:contentPadding="10dp"
+                android:layout_height="40dp"
+                android:clickable="true"
+                android:padding="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.925"
+                app:layout_constraintStart_toEndOf="@+id/mtv_user"
+                app:layout_constraintTop_toTopOf="@+id/mtv_user"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/baseline_arrow_back_24"
+                    app:tint="@android:color/white" />
+
+
+            </com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="0dp"
+        android:background="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/containerHeader"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/scan_face"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/mangold"
+                app:icon="@drawable/baseline_face_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.974"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.969" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="0dp"
+                android:text="Tanggal Sekarang"
+                android:textSize="15sp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintBottom_toTopOf="@id/containerTextClock"
+                android:layout_marginEnd="5dp"
+                android:padding="10dp"
+                android:layout_marginStart="5dp"
+                android:textColor="@android:color/black"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/mtv_date_today" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:backgroundTint="@color/card_container_text_clock"
+                android:layout_marginStart="10dp"
+                app:cardCornerRadius="10dp"
+                android:id="@+id/containerTextClock"
+                app:cardElevation="8dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mtv_date_today"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="1dp"
+                tools:layout_editor_absoluteY="48dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5dp"
+                        android:contentDescription="Waktu"
+                        android:src="@drawable/baseline_access_time_24"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/white" />
+
+                    <TextClock
+                        android:id="@+id/time_today"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:format12Hour="hh:mm:ss a"
+                        android:format24Hour="hh:mm:ss a"
+                        android:text="TextView"
+                        android:textColor="@android:color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/imageView" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:text="Jam Sekarang"
+                        android:textColor="@android:color/white"
+                        app:layout_constraintTop_toBottomOf="@id/time_today"
+                        app:layout_constraintEnd_toEndOf="@id/time_today"
+                        app:layout_constraintStart_toStartOf="@id/time_today"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                android:id="@+id/containerTimeInAndOut"
+                android:layout_margin="10dp"
+                app:layout_constraintTop_toBottomOf="@id/containerTextClock"
+                app:layout_constraintEnd_toEndOf="@id/containerTextClock"
+                app:layout_constraintStart_toStartOf="@id/containerTextClock"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardView1"
+                    android:layout_marginEnd="15dp"
+                    android:layout_width="0dp"
+                    app:cardElevation="5dp"
+                    android:backgroundTint="@color/card_queue"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="10dp">
+
+                    <LinearLayout
+                        android:layout_gravity="center_horizontal"
+                        android:padding="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:id="@+id/mtv_content_in_time"
+                            android:textSize="15sp"
+                            android:text="Jam Masuk Anda"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="match_parent"
+                            android:textColor="@android:color/white"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp"
+                            android:textAlignment="textStart"
+                            android:text="Jam masuk" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:backgroundTint="@color/card_rejected"
+                    android:id="@+id/cardView2"
+                    android:layout_width="0dp"
+                    app:cardElevation="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="10dp">
+
+                    <LinearLayout
+                        android:layout_gravity="center_horizontal"
+                        android:padding="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:id="@+id/mtv_content_time_out"
+                            android:textSize="15sp"
+                            android:text="Jam Keluar Anda"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="match_parent"
+                            android:textColor="@android:color/white"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp"
+                            android:textAlignment="textStart"
+                            android:text="Jam Keluar" />
+                    </LinearLayout>
+
+
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:text="Tidak Ada Absensi Hari Ini"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="160dp"
+                android:textSize="18sp"
+                android:id="@+id/mtv_text_empty"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/containerTimeInAndOut"/>
+
+
+            <ProgressBar
+                android:visibility="gone"
+                android:layout_marginBottom="50dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/progressBarAttendance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/containerTimeInAndOut"/>
+
+            <HorizontalScrollView
+                android:id="@+id/containerChip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/containerTimeInAndOut">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:padding="10dp"
+                    app:singleLine="true"
+                    app:singleSelection="true">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipAll"
+                        style="@style/customStyleChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Semua" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipJanuary"
+                        style="@style/customStyleChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Januari" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipFebruary"
+                        style="@style/customStyleChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Februari" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipMaret"
+                        style="@style/customStyleChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Maret" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipApril"
+                        style="@style/customStyleChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="April" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipMay"
+                        style="@style/customStyleChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mei" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipJun"
+                        style="@style/customStyleChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Juni" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipJuly"
+                        style="@style/customStyleChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Juli" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipAgust"
+                        style="@style/customStyleChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Agustus" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipSeptember"
+                        style="@style/customStyleChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="September" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipOctober"
+                        style="@style/customStyleChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Oktober" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipNovember"
+                        style="@style/customStyleChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="November" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipDecember"
+                        style="@style/customStyleChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Desember" />
+
+
+                </com.google.android.material.chip.ChipGroup>
+
+            </HorizontalScrollView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:padding="5dp"
+                android:visibility="visible"
+                tools:listitem="@layout/item_attendance"
+                android:id="@+id/rv_attendance_all_today"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/containerChip"
+                android:layout_height="wrap_content"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

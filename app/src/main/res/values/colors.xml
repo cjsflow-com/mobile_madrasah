@@ -17,4 +17,8 @@
     <color name="text_default">#44567F</color>
     <color name="text_shadow">#7f000000</color>
     <color name="ssblue">#346DF6</color>
+    <color name="card_container_text_clock">#1a63ff</color>
+    <color name="chip_inactivate">#F3F3F3</color>
+    <color name="splash_screen_color">#82B3C9</color>
+    <color name="inactivate">#F0F7F8</color>
 </resources>

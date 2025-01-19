@@ -1,6 +1,9 @@
 package com.example.man2superapp.source.network.service
 
 import com.example.man2superapp.source.network.response.ArticleNewsResponse
+import com.example.man2superapp.source.network.response.attendance_student.AddAttendanceStudentResponse
+import com.example.man2superapp.source.network.response.attendance_student.AttendanceTodayResponse
+import com.example.man2superapp.source.network.response.attendance_student.IndexAttendanceResponse
 import com.example.man2superapp.source.network.response.e_kinerja.GetTaskResponse
 import com.example.man2superapp.source.network.response.e_kinerja.HasApprovedTaskResponse
 import com.example.man2superapp.source.network.response.e_kinerja.IndexResponse
@@ -8,6 +11,7 @@ import com.example.man2superapp.source.network.response.login.LoginResponse
 import com.example.man2superapp.source.network.response.login.LoginStudentResponse
 import com.example.man2superapp.source.network.response.login.LogoutResponse
 import com.example.man2superapp.source.network.response.note_rejected_dispute.NoteRejectedResponse
+import com.example.man2superapp.source.network.response.setting.SettingResponse
 import com.example.man2superapp.source.network.response.songket_emak.CreateSongketMother
 import com.example.man2superapp.source.network.response.songket_emak.ListSongketEmakResponse
 import com.example.man2superapp.source.network.response.songket_emak.StatusResponse
@@ -352,6 +356,28 @@ interface ApiService {
     suspend fun getAllTargetViolation(
         @Header(Constant.AUTHORIZATION) token: String,
     ): Response<TargetViolationResponse>
+
+    @POST(Constant.ADD_ATTENDANCE_STUDENT)
+    suspend fun storeAttendanceStudent(
+        @Header(Constant.AUTHORIZATION) token: String
+    ): Response<AddAttendanceStudentResponse>
+
+    @GET(Constant.GET_LAT_AND_LONG)
+    suspend fun getLatAndLong(
+        @Header(Constant.AUTHORIZATION) token: String
+    ): Response<SettingResponse>
+
+    @GET(Constant.GET_ATTENDANCE_TODAY)
+    suspend fun getAttendanceToday(
+        @Header(Constant.AUTHORIZATION) token: String
+    ): Response<AttendanceTodayResponse>
+
+    @GET(Constant.INDEX_ATTENDANCE_STUDENT)
+    suspend fun getAllAttendanceStudent(
+        @Header(Constant.AUTHORIZATION) token: String
+    ): Response<IndexAttendanceResponse>
+
+
 
 //    @GET(Constant.GET_ALL_SCHOOL_VIOLATION_MASTER)
 //    suspend fun getAllSchoolViolationMaster(

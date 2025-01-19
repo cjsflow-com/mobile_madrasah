@@ -23,10 +23,12 @@ import com.example.man2superapp.databinding.ActivityMainBinding
 import com.example.man2superapp.source.LoginTemp
 import com.example.man2superapp.source.local.model.LoginModel
 import com.example.man2superapp.source.network.States
+import com.example.man2superapp.ui.fragment.ChooseViewFragment
 import com.example.man2superapp.ui.fragment.ProfilePopUpFragment
 import com.example.man2superapp.ui.presenter.AllViewModel
 import com.example.man2superapp.utils.Constant
 import com.example.man2superapp.utils.Help
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
@@ -327,8 +329,13 @@ class MainActivity : AppCompatActivity() {
             }
 
             etatibCard.setOnClickListener {
-                val target  = if (token.isEmpty()) LoginActivity::class.java else TatibActivity::class.java
-                startActivity(Intent(this@MainActivity,target)).also { finish() }
+//                Help.showToast(this@MainActivity,"Fitur masih dalam tahap pengembangan")
+                if (token.isEmpty())
+                {
+                    startActivity(Intent(this@MainActivity,LoginActivity::class.java)).also { finish() }
+                }else{
+                    showFragment()
+                }
             }
 
             pelajarCard.setOnClickListener {
@@ -344,6 +351,12 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this@MainActivity, wbs::class.java))
             }
         }
+    }
+
+    private fun showFragment()
+    {
+        val bottomSheetFragment = ChooseViewFragment()
+        bottomSheetFragment.show(supportFragmentManager,"ChooseViewFragment")
     }
 }
 

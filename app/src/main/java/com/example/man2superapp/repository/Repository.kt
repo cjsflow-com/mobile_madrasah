@@ -148,4 +148,12 @@ class Repository @Inject constructor(
     fun updatePhoneNumberParent(token: String,numberPhoneParent: String) = remoteDataSource.updatePhoneNumberParent(token,numberPhoneParent)
 
     fun getAllViolationTarget(token: String) = remoteDataSource.getAllTargetViolation(token)
+
+    fun addAttendanceToday(token: String) = remoteDataSource.addAttendanceToday(token)
+
+    fun indexAttendanceToday(token: String) = remoteDataSource.getAllAttendanceToday(token)
+
+    fun getAttendanceToday(token: String) = remoteDataSource.getAttendanceToday(token)
+
+    fun getLatAndLong(token: String) = remoteDataSource.getLatAndLong(token)
 }
