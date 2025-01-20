@@ -3,6 +3,7 @@ package com.example.man2superapp.source.local.model
 import com.example.man2superapp.source.network.response.attendance_student.Attendance
 
 data class LocalAttendance(
+
     var timeIn: String,
     var timeOut: String,
     var statusIn: String,

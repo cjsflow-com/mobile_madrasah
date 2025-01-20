@@ -15,19 +15,6 @@
 
         <TableRow>
             <com.google.android.material.textview.MaterialTextView
-                android:text="Nama"
-                android:textSize="15sp"
-                android:padding="8dp"
-                android:textStyle="bold" />
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="match_parent"
-                android:text="Nama"
-                android:id="@+id/mtv_name"
-                android:textSize="12sp"
-                android:padding="8dp" />
-        </TableRow>
-        <TableRow>
-            <com.google.android.material.textview.MaterialTextView
                 android:text="Status Masuk"
                 android:textSize="15sp"
                 android:padding="8dp"

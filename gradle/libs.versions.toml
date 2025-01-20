@@ -28,6 +28,7 @@ picasso = "2.8"
 imageSlideShow = "0.1.2"
 face-detection = "16.1.7"
 camerax-core = "1.4.1"
+playServicesLocation = "21.3.0"
 
 
 
@@ -63,6 +64,7 @@ camerax-core = { module = "androidx.camera:camera-core", version.ref = "camerax-
 camerax-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "camerax-core" }
 camerax-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "camerax-core" }
 camerax-view = { module = "androidx.camera:camera-view", version.ref = "camerax-core" }
+play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServicesLocation" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

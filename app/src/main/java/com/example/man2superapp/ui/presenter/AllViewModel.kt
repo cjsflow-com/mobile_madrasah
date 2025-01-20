@@ -49,6 +49,8 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
     private val _allViolationStudent = MutableLiveData<List<LocalSchoolViolationStudent>>()
     private val _totalPoint = MutableLiveData<Int>()
     private val _allStudent = MutableLiveData<List<LocalStudent>>()
+    private val _timeIn = MutableLiveData<String>()
+    private val _timeOut = MutableLiveData<String>()
 
     val userList: LiveData<List<GetAllUserWbs>> get() = _userList
     val classList: LiveData<List<GetClassStudent>> get() = _clasList
@@ -64,11 +66,19 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
     val allViolationMaster: LiveData<List<LocalViolationMaster>> get() = _allViolationMaster
     val allViolationStudent: LiveData<List<LocalSchoolViolationStudent>> get() = _allViolationStudent
     val allStudent: LiveData<List<LocalStudent>> get() = _allStudent
+    val timeIn: LiveData<String> get() = _timeIn
+    val timeOut: LiveData<String> get() = _timeOut
 
 
     fun loginEmployee(email: String, password: String) = repository.loginEmployee(email, password).asLiveData()
     fun getAllWbs(token: String) = repository.getAllWbs(token).asLiveData()
 //    fun getAllUser() = repository.getAllUser().asLiveData()
+    fun setTimeIn(time: String){
+        _timeIn.value = time
+    }
+    fun setTimeOut(time: String){
+        _timeOut.value = time
+    }
     fun createWbs(complainTopic: RequestBody, estimatedOfDateOfOccurrence: RequestBody, relatedOfficialsId: RequestBody,
                   workUnit: RequestBody, workLocation: RequestBody,
                   complainDescription: RequestBody, documentation: MultipartBody.Part?) =

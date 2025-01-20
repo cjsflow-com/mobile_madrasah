@@ -161,6 +161,7 @@
           <option name="screenY" value="3120" />
         </PersistentDeviceSelectionData>
         <PersistentDeviceSelectionData>
+<<<<<<< Updated upstream
           <option name="api" value="33" />
           <option name="brand" value="google" />
           <option name="codename" value="eos" />
@@ -172,6 +173,8 @@
           <option name="screenY" value="384" />
         </PersistentDeviceSelectionData>
         <PersistentDeviceSelectionData>
+=======
+>>>>>>> Stashed changes
           <option name="api" value="33" />
           <option name="brand" value="google" />
           <option name="codename" value="felix" />

@@ -99,6 +99,7 @@ object Constant {
     const val FILTER_ATTENDANCE_STUDENT_BY_MONTH = "$ATTENDANCE_STUDENT/filter/{month}"
     const val GET_LAT_AND_LONG = "$ATTENDANCE_STUDENT/get_lat_and_long"
     const val GET_ATTENDANCE_TODAY = "$ATTENDANCE_STUDENT/getAttendanceToday"
+    const val IS_FACE_DETECTED = "isFaceDetected"
 
 //    TAG FOR API
     const val TAG_CREATE_SONGKET = "CreateSongketActivity"
