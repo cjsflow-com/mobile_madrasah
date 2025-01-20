@@ -309,7 +309,7 @@ class AttendanceStudent : AppCompatActivity()
                                     val long = locationApi.data.longitude
                                     val distance = FloatArray(1)
                                     Location.distanceBetween(data.latitude,data.longitude,lat,long,distance)
-                                    val radius = 100.0
+                                    val radius = 150.0
                                     val distanceInMeter = distance[0]
                                     Log.d(TAG, "locationUser: Jarak antara lokasi saya dengan lokasi sebelah ${distanceInMeter} meter")
                                     if(distance[0] < radius)

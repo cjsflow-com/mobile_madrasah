@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.man2superapp.databinding.DialogChooseEtatibBinding
+import com.example.man2superapp.ui.activity.AttendanceStudent
 import com.example.man2superapp.ui.activity.TatibActivity
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -26,7 +27,7 @@ class ChooseViewFragment : BottomSheetDialogFragment()
                 Intent(requireActivity(),TatibActivity::class.java).also { startActivity(it) }
             }
             cardAttendanceStudent.setOnClickListener {
-
+                Intent(requireActivity(),AttendanceStudent::class.java).also { startActivity(it) }
             }
         }
         return binding.root

@@ -57,9 +57,9 @@ class MainActivity : AppCompatActivity() {
                 Help.alertDialog(this@MainActivity)
             }
         })
-        allViewModel.getAllArticle()
+//        allViewModel.getAllArticle()
         observerView()
-        setUpSlider()
+//        setUpSlider()
     }
 
     @SuppressLint("SetTextI18n")

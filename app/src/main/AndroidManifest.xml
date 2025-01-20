@@ -78,6 +78,8 @@
             android:exported="false" />
         <activity android:name=".ui.activity.AttendanceStudent"
             android:exported="false" />
+        <activity android:name=".ui.activity.CameraActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.activity.CreateSongketGtk"
             android:exported="false" />

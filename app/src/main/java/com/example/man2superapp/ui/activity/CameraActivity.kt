@@ -16,10 +16,19 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.example.man2superapp.databinding.ActivityCameraXBinding
 import com.example.man2superapp.utils.Constant
+import com.example.man2superapp.utils.Help
+import com.google.android.gms.vision.face.Landmark
 import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.face.Face
 import com.google.mlkit.vision.face.FaceDetection
 import com.google.mlkit.vision.face.FaceDetector
 import com.google.mlkit.vision.face.FaceDetectorOptions
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionDeniedResponse
+import com.karumi.dexter.listener.PermissionGrantedResponse
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.single.PermissionListener
 import java.util.concurrent.Executors
 
 class CameraActivity: AppCompatActivity()
@@ -30,6 +39,7 @@ class CameraActivity: AppCompatActivity()
         super.onCreate(savedInstanceState)
         cameraBinding = ActivityCameraXBinding.inflate(layoutInflater)
         setContentView(cameraBinding.root)
+        setAccessCamera()
         setUpFaceDetector()
         startCamera()
     }
@@ -48,7 +58,7 @@ class CameraActivity: AppCompatActivity()
 
             // Konfigurasi ImageAnalysis
             val imageAnalysis = ImageAnalysis.Builder()
-                .setOutputImageFormat(ImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888)
+                .setOutputImageFormat(ImageAnalysis.OUTPUT_IMAGE_FORMAT_YUV_420_888)
                 .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                 .build()
 
@@ -83,15 +93,19 @@ class CameraActivity: AppCompatActivity()
 
             faceDetector.process(inputImage).addOnSuccessListener { faces ->
                 if (faces.isNotEmpty()){
-                    val face = faces[0]
-                    val confidence = face.headEulerAngleY
-                    if(confidence > 75f){
-                        val resultIntent = Intent().apply {
-                            putExtra(Constant.IS_FACE_DETECTED,true)
-                        }
-                        setResult(RESULT_OK,resultIntent)
-                        finish()
+//                    for (face in faces) {
+//                        // Landmark Deteksi
+//                        val leftEye = face.getLandmark()?.position
+//                        val rightEye = face.getLandmark(Face.Landmark.RIGHT_EYE)?.position
+//                        val noseBase = face.getLandmark(Face.Landmark.NOSE_BASE)?.position
+//
+//                        Log.d("TAG", "Left Eye: $leftEye, Right Eye: $rightEye, Nose Base: $noseBase")
+//                    }
+                    val resultIntent = Intent().apply {
+                        putExtra(Constant.IS_FACE_DETECTED,true)
                     }
+                    setResult(RESULT_OK,resultIntent)
+                    finish()
                 }
             }
                 .addOnFailureListener { e ->
@@ -109,9 +123,35 @@ class CameraActivity: AppCompatActivity()
     private fun setUpFaceDetector()
     {
         val options = FaceDetectorOptions.Builder()
-            .setPerformanceMode(FaceDetectorOptions.PERFORMANCE_MODE_FAST)
+            .setPerformanceMode(FaceDetectorOptions.PERFORMANCE_MODE_ACCURATE)
+            .setLandmarkMode(FaceDetectorOptions.LANDMARK_MODE_ALL)
+            .setClassificationMode(FaceDetectorOptions.CLASSIFICATION_MODE_ALL)
             .build()
         faceDetector = FaceDetection.getClient(options)
+    }
+
+    private fun setAccessCamera()
+    {
+        Dexter.withContext(this@CameraActivity).withPermission(android.Manifest.permission.CAMERA)
+            .withListener(object: PermissionListener{
+                override fun onPermissionGranted(p0: PermissionGrantedResponse?) {
+                    Help.showToast(this@CameraActivity,"Izin diberikan")
+                }
+
+                override fun onPermissionDenied(p0: PermissionDeniedResponse?) {
+                    Help.showToast(this@CameraActivity,"Izin tidak diberikan, Aplikasi ini" +
+                            "membutuhkan izin kamera agar berfungsi")
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    p0: PermissionRequest?,
+                    p1: PermissionToken?
+                ) {
+                    Help.showToast(this@CameraActivity,"Izin tidak diberikan, Aplikasi ini" +
+                            "membutuhkan izin kamera agar berfungsi")
+                }
+
+            }).onSameThread().check()
     }
 
 }
