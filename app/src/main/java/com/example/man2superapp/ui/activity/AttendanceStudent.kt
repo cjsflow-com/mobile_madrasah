@@ -14,17 +14,22 @@ import android.os.Looper
 import android.provider.Settings
 import android.provider.Telephony.Mms.Intents
 import android.util.Log
+import android.view.View
+import android.widget.LinearLayout
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.man2superapp.R
 import com.example.man2superapp.databinding.ActivityAttendanceStudentBinding
 import com.example.man2superapp.source.LoginTemp
 import com.example.man2superapp.source.local.model.toAttendance
 import com.example.man2superapp.source.network.States
+import com.example.man2superapp.ui.adapter.AttendanceAdapter
 import com.example.man2superapp.ui.presenter.AllViewModel
 import com.example.man2superapp.utils.Constant
 import com.example.man2superapp.utils.Help
@@ -44,6 +49,7 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.Calendar
 import java.util.Locale
 import javax.inject.Inject
@@ -57,11 +63,13 @@ class AttendanceStudent : AppCompatActivity()
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationCallback: LocationCallback
     private val allViewModel by viewModels<AllViewModel>()
+    private val adapterAttendance by lazy { AttendanceAdapter()}
 
     companion object{
         const val TAG = "AttendanceStudent"
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         attendanceBinding = ActivityAttendanceStudentBinding.inflate(layoutInflater)
@@ -83,20 +91,57 @@ class AttendanceStudent : AppCompatActivity()
             ))
             scanFace.setOnClickListener { scanFace() }
             timeToday.format24Hour = "HH:mm:ss a"
-            observerView(mtvContentInTime,mtvContentTimeOut)
+            observerView(mtvContentInTime,mtvContentTimeOut,mtvTextEmpty)
             setLocationUser()
+        }
+        lifecycleScope.launch {
+            localStore.getToken().collect{model ->
+                model.token?.let { token ->
+                    setUpChipListener(token)
+                    setActivateChip()
+                    val currentMonth = LocalDate.now().monthValue
+                    allViewModel.filterByMonth(token,currentMonth)
+                }
+            }
         }
         setCurrentDate()
         setAttendanceStudentToday()
+        setLayoutManager()
     }
 
-    private fun observerView(mtTextIn: MaterialTextView,mtTextOut: MaterialTextView)
+    private fun observerView(mtTextIn: MaterialTextView,mtTextOut: MaterialTextView,empty: MaterialTextView)
     {
         allViewModel.timeIn.observe(this@AttendanceStudent){ timeIn ->
             mtTextIn.text = timeIn
         }
         allViewModel.timeOut.observe(this@AttendanceStudent){timeOut ->
             mtTextOut.text = timeOut
+        }
+        allViewModel.loading.observe(this@AttendanceStudent){isLoading ->
+            showProgressBar(isLoading)
+        }
+        allViewModel.textSuccess.observe(this@AttendanceStudent){ success ->
+            Help.showToast(this@AttendanceStudent,success)
+        }
+        allViewModel.textError.observe(this@AttendanceStudent){isError ->
+            Help.showToast(this@AttendanceStudent, isError)
+        }
+        allViewModel.emptyText.observe(this@AttendanceStudent){isEmpty ->
+            empty.text = isEmpty
+            empty.visibility = View.VISIBLE
+        }
+        allViewModel.attendanceStudent.observe(this@AttendanceStudent){attendnace ->
+            adapterAttendance.submitListData(attendnace)
+        }
+
+    }
+
+    private fun showProgressBar(isShow: Boolean)
+    {
+        attendanceBinding.apply {
+            progressBarAttendance.visibility = if (isShow) View.VISIBLE else View.GONE
+            rvAttendanceAllToday.visibility = if (isShow) View.GONE else View.VISIBLE
+            mtvTextEmpty.visibility = if(isShow) View.GONE else View.GONE
         }
     }
 
@@ -106,12 +151,12 @@ class AttendanceStudent : AppCompatActivity()
         lifecycleScope.launch {
             localStore.getToken().collect{ model ->
                 attendanceBinding.mtvUser.text = "Hallo ${model.name}"
-                model.token?.let { data ->  setAttendanceStudentToday(data) }
+                model.token?.let { data ->  getAttendanceToday(data) }
             }
         }
     }
 
-    private fun setAttendanceStudentToday(token: String)
+    private fun getAttendanceToday(token: String)
     {
         allViewModel.getAttendanceToday(token).observe(this@AttendanceStudent)
         { model ->
@@ -149,6 +194,47 @@ class AttendanceStudent : AppCompatActivity()
         }
     }
 
+    private fun setUpChipListener(token: String)
+    {
+        attendanceBinding.apply {
+            chipAll.setOnClickListener { allViewModel.indexAllAttendanceToday(token) }
+            chipJanuary.setOnClickListener { allViewModel.filterByMonth(token,1) }
+            chipFebruary.setOnClickListener { allViewModel.filterByMonth(token,2) }
+            chipMaret.setOnClickListener { allViewModel.filterByMonth(token,3) }
+            chipApril.setOnClickListener { allViewModel.filterByMonth(token,4) }
+            chipMay.setOnClickListener { allViewModel.filterByMonth(token,5) }
+            chipJun.setOnClickListener { allViewModel.filterByMonth(token,6) }
+            chipJuly.setOnClickListener { allViewModel.filterByMonth(token,7) }
+            chipAgust.setOnClickListener { allViewModel.filterByMonth(token,8) }
+            chipSeptember.setOnClickListener { allViewModel.filterByMonth(token,9) }
+            chipOctober.setOnClickListener { allViewModel.filterByMonth(token,10) }
+            chipNovember.setOnClickListener { allViewModel.filterByMonth(token,11) }
+            chipDecember.setOnClickListener { allViewModel.filterByMonth(token,12) }
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun setActivateChip(){
+        attendanceBinding.apply {
+            val currentMonth = LocalDate.now().monthValue
+            when(currentMonth){
+                1 -> chipJanuary.isChecked = true
+                2 -> chipFebruary.isChecked = true
+                3 -> chipMaret.isChecked = true
+                4 -> chipApril.isChecked = true
+                5 -> chipMay.isChecked = true
+                6 -> chipJun.isChecked = true
+                7 -> chipJuly.isChecked = true
+                8 -> chipAgust.isChecked = true
+                9 -> chipSeptember.isChecked = true
+                10 -> chipOctober.isChecked = true
+                11 -> chipNovember.isChecked = true
+                12 -> chipDecember.isChecked = true
+            }
+        }
+
+    }
+
     private fun addAttendanceStudent(){
         lifecycleScope.launch {
             localStore.getToken().collect{ it ->
@@ -168,6 +254,7 @@ class AttendanceStudent : AppCompatActivity()
                                     attendanceAdd.timeOut.let { it2 ->
                                         allViewModel.setTimeOut(it2)
                                     }
+                                    allViewModel.indexAllAttendanceToday(it1)
                                     Help.showToast(this@AttendanceStudent,face.data.message)
                                 }
                             }
@@ -286,12 +373,21 @@ class AttendanceStudent : AppCompatActivity()
         }
     }
 
+    private fun setLayoutManager()
+    {
+        attendanceBinding.rvAttendanceAllToday.apply {
+            layoutManager = LinearLayoutManager(this@AttendanceStudent,LinearLayoutManager.HORIZONTAL,false)
+            adapter = adapterAttendance
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
     private fun setCurrentDate()
     {
         val calendar = Calendar.getInstance()
         val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
         val dateNow = dateFormat.format(calendar.time)
-        attendanceBinding.mtvDateToday.text = dateNow
+        attendanceBinding.mtvDateToday.text = "Tanggal: ${dateNow}"
     }
 
     @SuppressLint("MissingPermission")

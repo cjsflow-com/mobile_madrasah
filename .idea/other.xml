@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ScreenshotViewer">
-    <option name="frameScreenshot" value="true" />
-  </component>
   <component name="direct_access_persist.xml">
     <option name="deviceSelectionList">
       <list>
@@ -161,7 +158,6 @@
           <option name="screenY" value="3120" />
         </PersistentDeviceSelectionData>
         <PersistentDeviceSelectionData>
-<<<<<<< Updated upstream
           <option name="api" value="33" />
           <option name="brand" value="google" />
           <option name="codename" value="eos" />
@@ -173,8 +169,6 @@
           <option name="screenY" value="384" />
         </PersistentDeviceSelectionData>
         <PersistentDeviceSelectionData>
-=======
->>>>>>> Stashed changes
           <option name="api" value="33" />
           <option name="brand" value="google" />
           <option name="codename" value="felix" />

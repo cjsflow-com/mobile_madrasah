@@ -578,4 +578,15 @@ class RemoteDataSource @Inject constructor(
         Log.d(TAG, "getLatAndLong: ${it.message.toString()}")
         emit(States.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
+
+    fun getAttendanceByFilterMonth(token: String,month: Int) = flow<States<IndexAttendanceResponse>> {
+        emit(States.loading())
+        apiService.filterByMonthAttendance(Constant.BEARER + token,month).let {
+            if (it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "getAttendanceByFilterMonth: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
 }

@@ -10,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.man2superapp.repository.Repository
 import com.example.man2superapp.source.local.model.GetAllUserWbs
 import com.example.man2superapp.source.local.model.GetClassStudent
+import com.example.man2superapp.source.local.model.LocalAttendance
 import com.example.man2superapp.source.local.model.LocalSchoolViolationStudent
 import com.example.man2superapp.source.local.model.LocalStudent
 import com.example.man2superapp.source.local.model.LocalViolationMaster
@@ -21,6 +22,7 @@ import com.example.man2superapp.source.local.model.toGenerateAllResult
 import com.example.man2superapp.source.local.model.toGenerateAllStudent
 import com.example.man2superapp.source.local.model.toGenerateAllTask
 import com.example.man2superapp.source.local.model.toGenerateAllUserWbs
+import com.example.man2superapp.source.local.model.toGenerateAttendance
 import com.example.man2superapp.source.local.model.toGenerateClassStudent
 import com.example.man2superapp.source.local.model.toGenerateListViolationMaster
 import com.example.man2superapp.source.local.model.toGenerateListViolationStudent
@@ -39,6 +41,7 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
     private val _clasList = MutableLiveData<List<GetClassStudent>>()
     private val _article = MutableLiveData<List<NewsArticle>>()
     private val _loading = MutableLiveData<Boolean>()
+    private val _emptyText = MutableLiveData<String>()
     private val _textError = MutableLiveData<String>()
     private val _textSucces = MutableLiveData<String>()
     private val _listEkinerja = MutableLiveData<List<ResutlEmployeePerformance>>()
@@ -51,6 +54,7 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
     private val _allStudent = MutableLiveData<List<LocalStudent>>()
     private val _timeIn = MutableLiveData<String>()
     private val _timeOut = MutableLiveData<String>()
+    private val _listAttendance = MutableLiveData<List<LocalAttendance>>()
 
     val userList: LiveData<List<GetAllUserWbs>> get() = _userList
     val classList: LiveData<List<GetClassStudent>> get() = _clasList
@@ -68,6 +72,8 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
     val allStudent: LiveData<List<LocalStudent>> get() = _allStudent
     val timeIn: LiveData<String> get() = _timeIn
     val timeOut: LiveData<String> get() = _timeOut
+    val emptyText: LiveData<String> get() = _emptyText
+    val attendanceStudent: LiveData<List<LocalAttendance>> get() = _listAttendance
 
 
     fun loginEmployee(email: String, password: String) = repository.loginEmployee(email, password).asLiveData()
@@ -420,5 +426,59 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
 
     fun getLatAndLong(token: String) = repository.getLatAndLong(token).asLiveData()
 
-    fun indexAllAttendanceToday(token: String) = repository.indexAttendanceToday(token).asLiveData()
+    fun filterByMonth(token: String,month: Int){
+        viewModelScope.launch {
+            repository.filterStudentByMonth(token,month).collect{ state ->
+                when(state)
+                {
+                    is States.Loading -> {_loading.value = true}
+                    is States.Success -> {
+                        _loading.value = false
+                        if(state.data.success){
+                            if(state.data.attendance.toGenerateAttendance().isEmpty())
+                            {
+                                _emptyText.value = "Tidak ada absensi sama sekali"
+                            }else{
+                                _textSucces.value = state.data.message
+                                _listAttendance.value = state.data.attendance.toGenerateAttendance()
+                            }
+                        }else{
+                            _textError.value = state.data.message
+                        }
+                    }
+                    is States.Failed -> {
+                        _textError.value = state.message
+                    }
+                }
+            }
+        }
+    }
+
+    fun indexAllAttendanceToday(token: String) {
+        viewModelScope.launch {
+            repository.indexAttendanceToday(token).collect{ state ->
+                when(state)
+                {
+                    is States.Loading -> {_loading.value = true}
+                    is States.Success -> {
+                        _loading.value = false
+                        if(state.data.success){
+                            if(state.data.attendance.toGenerateAttendance().isEmpty())
+                            {
+                                _emptyText.value = "Tidak ada absensi sama sekali"
+                            }else{
+                                _listAttendance.value = state.data.attendance.toGenerateAttendance()
+                                _textSucces.value = state.data.message
+                            }
+                        }else{
+                            _textError.value = state.data.message
+                        }
+                    }
+                    is States.Failed -> {
+                        _textError.value = state.message
+                    }
+                }
+            }
+        }
+    }
 }

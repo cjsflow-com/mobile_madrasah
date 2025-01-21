@@ -96,7 +96,7 @@ object Constant {
     private const val ATTENDANCE_STUDENT = "attendance_student"
     const val ADD_ATTENDANCE_STUDENT = "$ATTENDANCE_STUDENT/store"
     const val INDEX_ATTENDANCE_STUDENT = "$ATTENDANCE_STUDENT/index"
-    const val FILTER_ATTENDANCE_STUDENT_BY_MONTH = "$ATTENDANCE_STUDENT/filter/{month}"
+    const val FILTER_ATTENDANCE_STUDENT_BY_MONTH = "$ATTENDANCE_STUDENT/filter/"
     const val GET_LAT_AND_LONG = "$ATTENDANCE_STUDENT/get_lat_and_long"
     const val GET_ATTENDANCE_TODAY = "$ATTENDANCE_STUDENT/getAttendanceToday"
     const val IS_FACE_DETECTED = "isFaceDetected"

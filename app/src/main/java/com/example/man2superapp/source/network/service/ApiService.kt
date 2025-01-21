@@ -377,6 +377,12 @@ interface ApiService {
         @Header(Constant.AUTHORIZATION) token: String
     ): Response<IndexAttendanceResponse>
 
+    @GET(Constant.FILTER_ATTENDANCE_STUDENT_BY_MONTH)
+    suspend fun filterByMonthAttendance(
+        @Header(Constant.AUTHORIZATION) token: String,
+        @Query("bulan") month: Int,
+    ):  Response<IndexAttendanceResponse>
+
 
 
 //    @GET(Constant.GET_ALL_SCHOOL_VIOLATION_MASTER)
