@@ -39,14 +39,13 @@
                 android:id="@+id/mtv_location"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="TextView"
-                android:maxLines="3"
+                android:text="Lokasi"
+                android:drawablePadding="8dp"
                 android:drawableTint="@android:color/white"
                 android:textColor="@android:color/white"
-                android:textSize="10sp"
-                android:drawablePadding="10dp"
+                android:textSize="12sp"
                 android:drawableStart="@drawable/baseline_location_on_24"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.534"
                 app:layout_constraintStart_toStartOf="@+id/mtv_user"
@@ -292,7 +291,7 @@
 
 
             <ProgressBar
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_marginBottom="50dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:id="@+id/progressBarAttendance"
@@ -302,162 +301,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/containerTimeInAndOut"/>
 
-            <HorizontalScrollView
-                android:id="@+id/containerChip"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="horizontal"
-                android:layout_marginStart="5dp"
-                android:fillViewport="true"
-                android:layout_marginEnd="5dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/containerTimeInAndOut">
-
-                <com.google.android.material.chip.ChipGroup
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:padding="10dp"
-                    app:singleLine="true"
-                    app:singleSelection="true">
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipAll"
-                        android:maxLines="1"
-                        style="@style/customStyleChip"
-                        android:layout_width="100dp"
-                        android:textAlignment="center"
-                        android:layout_height="wrap_content"
-                        android:text="Semua" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipJanuary"
-                        style="@style/customStyleChip"
-                        android:layout_width="100dp"
-                        android:textAlignment="center"
-                        android:layout_height="wrap_content"
-                        android:maxLines="1"
-                        android:text="Januari" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipFebruary"
-                        style="@style/customStyleChip"
-                        android:maxLines="1"
-                        android:layout_width="100dp"
-                        android:textAlignment="center"
-                        android:layout_height="wrap_content"
-                        android:text="Februari" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipMaret"
-                        style="@style/customStyleChip"
-                        android:maxLines="1"
-                        android:layout_width="100dp"
-                        android:textAlignment="center"
-                        android:layout_height="wrap_content"
-                        android:text="Maret" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipApril"
-                        android:maxLines="1"
-                        style="@style/customStyleChip"
-                        android:layout_width="100dp"
-                        android:textAlignment="center"
-                        android:layout_height="wrap_content"
-                        android:text="April" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipMay"
-                        android:maxLines="1"
-                        style="@style/customStyleChip"
-                        android:layout_width="100dp"
-                        android:textAlignment="center"
-                        android:layout_height="wrap_content"
-                        android:text="Mei" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipJun"
-                        android:maxLines="1"
-                        style="@style/customStyleChip"
-                        android:layout_width="100dp"
-                        android:textAlignment="center"
-                        android:layout_height="wrap_content"
-                        android:text="Juni" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipJuly"
-                        style="@style/customStyleChip"
-                        android:maxLines="1"
-                        android:layout_width="100dp"
-                        android:textAlignment="center"
-                        android:layout_height="wrap_content"
-                        android:text="Juli" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipAgust"
-                        android:maxLines="1"
-                        style="@style/customStyleChip"
-                        android:layout_width="100dp"
-                        android:textAlignment="center"
-                        android:layout_height="wrap_content"
-                        android:text="Agustus" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipSeptember"
-                        style="@style/customStyleChip"
-                        android:layout_width="100dp"
-                        android:textAlignment="center"
-                        android:maxLines="1"
-                        android:layout_height="wrap_content"
-                        android:text="September" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipOctober"
-                        style="@style/customStyleChip"
-                        android:maxLines="1"
-                        android:layout_width="100dp"
-                        android:textAlignment="center"
-                        android:layout_height="wrap_content"
-                        android:text="Oktober" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipNovember"
-                        style="@style/customStyleChip"
-                        android:layout_width="100dp"
-                        android:textAlignment="center"
-                        android:layout_height="wrap_content"
-                        android:maxLines="1"
-                        android:text="November" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipDecember"
-                        android:maxLines="1"
-                        style="@style/customStyleChip"
-                        android:layout_width="100dp"
-                        android:textAlignment="center"
-                        android:layout_height="wrap_content"
-                        android:text="Desember" />
-
-
-                </com.google.android.material.chip.ChipGroup>
-
-            </HorizontalScrollView>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:padding="5dp"
+                android:layout_width="0dp"
                 android:visibility="visible"
+                android:padding="5dp"
                 tools:listitem="@layout/item_attendance"
                 android:id="@+id/rv_attendance_all_today"
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/containerChip"
-                android:layout_height="wrap_content"/>
-
+                app:layout_constraintTop_toBottomOf="@id/containerTimeInAndOut"
+                android:layout_height="0dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

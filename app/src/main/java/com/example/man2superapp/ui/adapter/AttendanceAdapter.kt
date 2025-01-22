@@ -2,6 +2,8 @@ package com.example.man2superapp.ui.adapter
 
 import android.annotation.SuppressLint
 import android.view.ViewGroup
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.man2superapp.databinding.ItemAttendanceBinding
 import com.example.man2superapp.source.local.model.LocalAttendance
@@ -11,17 +13,15 @@ import okhttp3.internal.notifyAll
 class AttendanceAdapter: RecyclerView.Adapter<AttendanceAdapter.ViewHolder>()
 {
 
-    private val listAttendanceStudent = ArrayList<LocalAttendance>()
-
     inner class ViewHolder(private val binding: ItemAttendanceBinding): RecyclerView.ViewHolder(binding.root)
     {
         fun bind(data: LocalAttendance){
             with(binding)
             {
-                mtvContentCheckInTime.text = data.timeIn
-                mtvContentCheckOutTime.text = data.timeOut
-                mtvContentStatusIn.text = data.statusIn
-                mtvContentStatusOut.text = data.statusOut
+                mtvContentCheckInTime.text = data.timeIn?: "?"
+                mtvContentCheckOutTime.text = data.timeOut?: "?"
+                mtvContentStatusIn.text = data.statusIn?: "?"
+                mtvContentStatusOut.text = data.statusOut?: "?"
             }
         }
     }
@@ -40,16 +40,28 @@ class AttendanceAdapter: RecyclerView.Adapter<AttendanceAdapter.ViewHolder>()
     }
 
     override fun onBindViewHolder(holder: AttendanceAdapter.ViewHolder, position: Int) {
-        holder.bind(listAttendanceStudent[position])
+        holder.bind(differ.currentList[position])
     }
 
-    override fun getItemCount(): Int = listAttendanceStudent.size
+    val differ = AsyncListDiffer(this, object: DiffUtil.ItemCallback<LocalAttendance>(){
+        override fun areItemsTheSame(oldItem: LocalAttendance, newItem: LocalAttendance): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(
+            oldItem: LocalAttendance,
+            newItem: LocalAttendance
+        ): Boolean {
+           return  oldItem == newItem
+        }
+
+    })
+
+    override fun getItemCount(): Int = differ.currentList.size
 
     @SuppressLint("NotifyDataSetChanged")
     fun submitListData(listAttendanceAttendance: List<LocalAttendance>){
-        listAttendanceStudent.clear()
-        listAttendanceStudent.addAll(listAttendanceAttendance)
-        notifyDataSetChanged()
+        differ.submitList(listAttendanceAttendance)
     }
 
 }

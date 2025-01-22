@@ -557,17 +557,6 @@ class RemoteDataSource @Inject constructor(
         emit(States.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
 
-    fun getAllAttendanceToday(token: String) = flow<States<IndexAttendanceResponse>> {
-        emit(States.loading())
-        apiService.getAllAttendanceStudent(Constant.BEARER + token).let {
-            if (it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
-            else emit(States.failed(it.message().toString()))
-        }
-    }.catch {
-        Log.d(TAG, "getAllAttendanceToday: ${it.message.toString()}")
-        emit(States.failed(it.message.toString()))
-    }.flowOn(Dispatchers.IO)
-
     fun getLatAndLong(token: String) = flow<States<SettingResponse>> {
         emit(States.loading())
         apiService.getLatAndLong(Constant.BEARER + token).let {
@@ -579,9 +568,9 @@ class RemoteDataSource @Inject constructor(
         emit(States.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
 
-    fun getAttendanceByFilterMonth(token: String,month: Int) = flow<States<IndexAttendanceResponse>> {
+    fun getAttendanceByFilterMonth(token: String) = flow<States<IndexAttendanceResponse>> {
         emit(States.loading())
-        apiService.filterByMonthAttendance(Constant.BEARER + token,month).let {
+        apiService.filterByMonthAttendance(Constant.BEARER + token).let {
             if (it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
             else emit(States.failed(it.message().toString()))
         }

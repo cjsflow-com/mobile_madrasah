@@ -28,6 +28,7 @@ import com.example.man2superapp.R
 import com.example.man2superapp.databinding.ActivityAttendanceStudentBinding
 import com.example.man2superapp.source.LoginTemp
 import com.example.man2superapp.source.local.model.toAttendance
+import com.example.man2superapp.source.local.model.toGenerateAttendance
 import com.example.man2superapp.source.network.States
 import com.example.man2superapp.ui.adapter.AttendanceAdapter
 import com.example.man2superapp.ui.presenter.AllViewModel
@@ -84,56 +85,64 @@ class AttendanceStudent : AppCompatActivity()
                 super.onLocationResult(p0)
             }
         }
+        setLayoutManager()
         attendanceBinding.apply {
+            allViewModel.timeIn.observe(this@AttendanceStudent){ timeIn ->
+                mtvContentInTime.text = timeIn
+            }
+            allViewModel.timeOut.observe(this@AttendanceStudent){timeOut ->
+                mtvContentTimeOut.text = timeOut
+            }
+            floatingActionButton.setOnClickListener { finish() }
             scanFace.isEnabled = false
             scanFace.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(
                 this@AttendanceStudent,R.color.inactivate
             ))
             scanFace.setOnClickListener { scanFace() }
             timeToday.format24Hour = "HH:mm:ss a"
-            observerView(mtvContentInTime,mtvContentTimeOut,mtvTextEmpty)
             setLocationUser()
+            setCurrentDate()
         }
+        listByMonth()
+        setAttendanceStudentToday()
+    }
+
+    private fun listByMonth()
+    {
         lifecycleScope.launch {
-            localStore.getToken().collect{model ->
-                model.token?.let { token ->
-                    setUpChipListener(token)
-                    setActivateChip()
-                    val currentMonth = LocalDate.now().monthValue
-                    allViewModel.filterByMonth(token,currentMonth)
+            localStore.getToken().collect{
+                allViewModel.filterByMonth(it.token!!).observe(this@AttendanceStudent){state ->
+                    when(state)
+                    {
+                        is States.Loading -> {
+                            showProgressBar(true)
+                            attendanceBinding.mtvTextEmpty.visibility = View.GONE
+                        }
+                        is States.Success -> {
+                            if(!state.data.success)
+                            {
+                                attendanceBinding.apply {
+                                    mtvTextEmpty.visibility = View.VISIBLE
+                                    mtvTextEmpty.text = state.data.message
+                                }
+                            }else{
+                                Help.showToast(this@AttendanceStudent,state.data.message)
+                                showProgressBar(false)
+                                attendanceBinding.mtvTextEmpty.visibility = View.GONE
+                                adapterAttendance.submitListData(state.data.attendance.toGenerateAttendance())
+                            }
+                        }
+                        is States.Failed -> {
+                            attendanceBinding.apply {
+                                mtvTextEmpty.visibility = View.VISIBLE
+                                rvAttendanceAllToday.visibility = View.GONE
+                                progressBarAttendance.visibility = View.GONE
+                            }
+                        }
+                    }
                 }
             }
         }
-        setCurrentDate()
-        setAttendanceStudentToday()
-        setLayoutManager()
-    }
-
-    private fun observerView(mtTextIn: MaterialTextView,mtTextOut: MaterialTextView,empty: MaterialTextView)
-    {
-        allViewModel.timeIn.observe(this@AttendanceStudent){ timeIn ->
-            mtTextIn.text = timeIn
-        }
-        allViewModel.timeOut.observe(this@AttendanceStudent){timeOut ->
-            mtTextOut.text = timeOut
-        }
-        allViewModel.loading.observe(this@AttendanceStudent){isLoading ->
-            showProgressBar(isLoading)
-        }
-        allViewModel.textSuccess.observe(this@AttendanceStudent){ success ->
-            Help.showToast(this@AttendanceStudent,success)
-        }
-        allViewModel.textError.observe(this@AttendanceStudent){isError ->
-            Help.showToast(this@AttendanceStudent, isError)
-        }
-        allViewModel.emptyText.observe(this@AttendanceStudent){isEmpty ->
-            empty.text = isEmpty
-            empty.visibility = View.VISIBLE
-        }
-        allViewModel.attendanceStudent.observe(this@AttendanceStudent){attendnace ->
-            adapterAttendance.submitListData(attendnace)
-        }
-
     }
 
     private fun showProgressBar(isShow: Boolean)
@@ -141,7 +150,7 @@ class AttendanceStudent : AppCompatActivity()
         attendanceBinding.apply {
             progressBarAttendance.visibility = if (isShow) View.VISIBLE else View.GONE
             rvAttendanceAllToday.visibility = if (isShow) View.GONE else View.VISIBLE
-            mtvTextEmpty.visibility = if(isShow) View.GONE else View.GONE
+//            mtvTextEmpty.visi
         }
     }
 
@@ -194,47 +203,6 @@ class AttendanceStudent : AppCompatActivity()
         }
     }
 
-    private fun setUpChipListener(token: String)
-    {
-        attendanceBinding.apply {
-            chipAll.setOnClickListener { allViewModel.indexAllAttendanceToday(token) }
-            chipJanuary.setOnClickListener { allViewModel.filterByMonth(token,1) }
-            chipFebruary.setOnClickListener { allViewModel.filterByMonth(token,2) }
-            chipMaret.setOnClickListener { allViewModel.filterByMonth(token,3) }
-            chipApril.setOnClickListener { allViewModel.filterByMonth(token,4) }
-            chipMay.setOnClickListener { allViewModel.filterByMonth(token,5) }
-            chipJun.setOnClickListener { allViewModel.filterByMonth(token,6) }
-            chipJuly.setOnClickListener { allViewModel.filterByMonth(token,7) }
-            chipAgust.setOnClickListener { allViewModel.filterByMonth(token,8) }
-            chipSeptember.setOnClickListener { allViewModel.filterByMonth(token,9) }
-            chipOctober.setOnClickListener { allViewModel.filterByMonth(token,10) }
-            chipNovember.setOnClickListener { allViewModel.filterByMonth(token,11) }
-            chipDecember.setOnClickListener { allViewModel.filterByMonth(token,12) }
-        }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun setActivateChip(){
-        attendanceBinding.apply {
-            val currentMonth = LocalDate.now().monthValue
-            when(currentMonth){
-                1 -> chipJanuary.isChecked = true
-                2 -> chipFebruary.isChecked = true
-                3 -> chipMaret.isChecked = true
-                4 -> chipApril.isChecked = true
-                5 -> chipMay.isChecked = true
-                6 -> chipJun.isChecked = true
-                7 -> chipJuly.isChecked = true
-                8 -> chipAgust.isChecked = true
-                9 -> chipSeptember.isChecked = true
-                10 -> chipOctober.isChecked = true
-                11 -> chipNovember.isChecked = true
-                12 -> chipDecember.isChecked = true
-            }
-        }
-
-    }
-
     private fun addAttendanceStudent(){
         lifecycleScope.launch {
             localStore.getToken().collect{ it ->
@@ -254,7 +222,6 @@ class AttendanceStudent : AppCompatActivity()
                                     attendanceAdd.timeOut.let { it2 ->
                                         allViewModel.setTimeOut(it2)
                                     }
-                                    allViewModel.indexAllAttendanceToday(it1)
                                     Help.showToast(this@AttendanceStudent,face.data.message)
                                 }
                             }
@@ -267,8 +234,6 @@ class AttendanceStudent : AppCompatActivity()
             }
         }
     }
-
-
 
     private fun setLocationUser(){
         Dexter.withContext(this@AttendanceStudent).withPermissions(
@@ -354,9 +319,14 @@ class AttendanceStudent : AppCompatActivity()
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
             geoCoder.getFromLocation(latitude,longitude,1){list ->
                 if (list.size != 0){
-                    val addressName = list[0].getAddressLine(0)
-                    attendanceBinding.mtvLocation.text = addressName
-                    Log.d(TAG, "getAddressFromLocation: $addressName")
+                    val addressName = list[0]
+                    val thoroughfare = addressName.thoroughfare // Jalan
+                    val subThoroughfare = addressName.subThoroughfare // Nomor rumah
+                    val locality = addressName.locality // Kecamatan
+
+                    val formattedAddress = "$thoroughfare $subThoroughfare, $locality"
+                    attendanceBinding.mtvLocation.text = formattedAddress
+                    Log.d(TAG, "getAddressFromLocation: $formattedAddress")
                 }
             }
         }else{

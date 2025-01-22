@@ -151,11 +151,9 @@ class Repository @Inject constructor(
 
     fun addAttendanceToday(token: String) = remoteDataSource.addAttendanceToday(token)
 
-    fun indexAttendanceToday(token: String) = remoteDataSource.getAllAttendanceToday(token)
-
     fun getAttendanceToday(token: String) = remoteDataSource.getAttendanceToday(token)
 
     fun getLatAndLong(token: String) = remoteDataSource.getLatAndLong(token)
 
-    fun filterStudentByMonth(token: String,month: Int) = remoteDataSource.getAttendanceByFilterMonth(token,month)
+    fun filterStudentByMonth(token: String) = remoteDataSource.getAttendanceByFilterMonth(token)
 }
