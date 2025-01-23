@@ -53,6 +53,7 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
     private val _allStudent = MutableLiveData<List<LocalStudent>>()
     private val _timeIn = MutableLiveData<String>()
     private val _timeOut = MutableLiveData<String>()
+    private val _listAttendance = MutableLiveData<List<LocalAttendance>>()
 
     val userList: LiveData<List<GetAllUserWbs>> get() = _userList
     val classList: LiveData<List<GetClassStudent>> get() = _clasList
@@ -70,6 +71,11 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
     val allStudent: LiveData<List<LocalStudent>> get() = _allStudent
     val timeIn: LiveData<String> get() = _timeIn
     val timeOut: LiveData<String> get() = _timeOut
+    val listAttendance: LiveData<List<LocalAttendance>> = _listAttendance
+
+    fun setList(list: List<LocalAttendance>){
+        _listAttendance.value = list
+    }
 
 
     fun loginEmployee(email: String, password: String) = repository.loginEmployee(email, password).asLiveData()

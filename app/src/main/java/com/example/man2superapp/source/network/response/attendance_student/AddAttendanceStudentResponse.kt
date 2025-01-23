@@ -11,8 +11,6 @@ data class AddAttendanceStudentResponse(
     val success: Boolean,
     @SerializedName("attendance")
     val attendance: Attendance,
-    @SerializedName("url_masuk")
-    val urlIn: String,
-    @SerializedName("url_pulang")
-    val urlOut: String,
+    @SerializedName("url")
+    val url: String,
 )

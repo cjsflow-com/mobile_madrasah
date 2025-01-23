@@ -105,6 +105,9 @@ class AttendanceStudent : AppCompatActivity()
         }
         listByMonth()
         setAttendanceStudentToday()
+        allViewModel.listAttendance.observe(this@AttendanceStudent){
+            adapterAttendance.submitListData(it)
+        }
     }
 
     private fun listByMonth()
@@ -126,10 +129,20 @@ class AttendanceStudent : AppCompatActivity()
                                     mtvTextEmpty.text = state.data.message
                                 }
                             }else{
+                                if(state.data.attendance.toGenerateAttendance().isEmpty())
+                                {
+                                    attendanceBinding.apply {
+                                        mtvTextEmpty.visibility = View.VISIBLE
+                                        mtvTextEmpty.text = "Tidak ada absensi pada bulan ini"
+                                        progressBarAttendance.visibility = View.GONE
+                                        rvAttendanceAllToday.visibility = View.GONE
+                                    }
+                                    return@observe
+                                }
                                 Help.showToast(this@AttendanceStudent,state.data.message)
                                 showProgressBar(false)
                                 attendanceBinding.mtvTextEmpty.visibility = View.GONE
-                                adapterAttendance.submitListData(state.data.attendance.toGenerateAttendance())
+                                allViewModel.setList(state.data.attendance.toGenerateAttendance())
                             }
                         }
                         is States.Failed -> {
@@ -173,6 +186,10 @@ class AttendanceStudent : AppCompatActivity()
             {
                 is States.Loading -> {}
                 is States.Success -> {
+                    if(model.data.timeAttendanceStudentIn == "?" && model.data.timeAttendanceStudentOut == "?")
+                    {
+                        attendanceBinding.mtvTextEmpty.visibility = View.VISIBLE
+                    }
                     attendanceBinding.mtvContentInTime.text = model.data.timeAttendanceStudentIn
                     attendanceBinding.mtvContentTimeOut.text = model.data.timeAttendanceStudentOut
                 }
@@ -211,11 +228,17 @@ class AttendanceStudent : AppCompatActivity()
                         when(face){
                             is States.Loading -> {}
                             is States.Success -> {
-                                if(!face.data.success){
+                                if(!face.data.success && face.data.code == 400){
                                     Help.showToast(this@AttendanceStudent,face.data.message)
+                                    sendWhatsAppMessage(it.numberPhoneParent!!,"ini adalah link dari absensi anda => ${face.data.url}")
                                     Log.d(TAG, "addAttendanceStudent: ${face.data.message},${face.data.success}")
+                                }else if(!face.data.success && face.data.code == 404){
+                                    Help.showToast(this@AttendanceStudent,face.data.message)
+                                }else if(!face.data.success && face.data.code == 600){
+                                    Help.showToast(this@AttendanceStudent,face.data.message)
                                 }else{
                                     val attendanceAdd = face.data.attendance.toAttendance()
+                                    sendWhatsAppMessage(it.numberPhoneParent!!,"ini adalah linkd dari absensi anda => ${face.data.url}")
                                     attendanceAdd.timeIn.let { it2 ->
                                         allViewModel.setTimeIn(it2)
                                     }
@@ -232,6 +255,20 @@ class AttendanceStudent : AppCompatActivity()
                     }
                 }
             }
+        }
+    }
+
+    private fun sendWhatsAppMessage(numberParentStudent: String,message: String)
+    {
+       val url = "https://wa.me/$numberParentStudent?text=${message}"
+       val intent = Intent(Intent.ACTION_VIEW).apply {
+           data = Uri.parse(url)
+       }
+        try {
+            startActivity(intent)
+        } catch (e: Exception) {
+            Log.e(TAG, "WhatsApp tidak ditemukan: ${e.message}")
+            Help.showToast(this, "WhatsApp tidak terinstal di perangkat ini")
         }
     }
 

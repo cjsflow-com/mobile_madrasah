@@ -57,9 +57,9 @@ class MainActivity : AppCompatActivity() {
                 Help.alertDialog(this@MainActivity)
             }
         })
-//        allViewModel.getAllArticle()
+        allViewModel.getAllArticle()
         observerView()
-//        setUpSlider()
+        setUpSlider()
     }
 
     @SuppressLint("SetTextI18n")
@@ -156,10 +156,14 @@ class MainActivity : AppCompatActivity() {
 
         // Overwrite tombol PositiveButton setelah dialog ditampilkan
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-            val inputText = textInputLayout.editText?.text.toString().trim()
+            var inputText = textInputLayout.editText?.text.toString().trim()
 
             if (inputText.isNotEmpty()) {
                 // Jika input tidak kosong, panggil ViewModel untuk update
+                if(inputText.startsWith("0"))
+                {
+                    inputText = "62" + inputText.substring(1)
+                }
                 allViewModel.updatePhoneNumberParent(token, inputText).observe(this@MainActivity) { state ->
                     when (state) {
                         is States.Loading -> {}
@@ -180,6 +184,9 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                 }
+            }else if(inputText.length > 13)
+            {
+                Help.showToast(this@MainActivity,"Nomor tidak boleh lebih dari 13 karakter")
             } else {
                 // Tampilkan pesan jika input kosong dan dialog tidak ditutup
                 Help.showToast(this@MainActivity, "Inputan nomor orangtua siswa harus diisi")

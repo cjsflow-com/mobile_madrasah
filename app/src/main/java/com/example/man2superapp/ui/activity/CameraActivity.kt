@@ -1,6 +1,7 @@
 package com.example.man2superapp.ui.activity
 
 import android.content.Intent
+import android.hardware.Camera
 import android.os.Bundle
 import android.util.Log
 import android.util.Size
@@ -20,9 +21,11 @@ import com.example.man2superapp.utils.Help
 import com.google.android.gms.vision.face.Landmark
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.face.Face
+import com.google.mlkit.vision.face.FaceContour
 import com.google.mlkit.vision.face.FaceDetection
 import com.google.mlkit.vision.face.FaceDetector
 import com.google.mlkit.vision.face.FaceDetectorOptions
+import com.google.mlkit.vision.face.FaceLandmark
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
@@ -93,19 +96,26 @@ class CameraActivity: AppCompatActivity()
 
             faceDetector.process(inputImage).addOnSuccessListener { faces ->
                 if (faces.isNotEmpty()){
-//                    for (face in faces) {
-//                        // Landmark Deteksi
-//                        val leftEye = face.getLandmark()?.position
-//                        val rightEye = face.getLandmark(Face.Landmark.RIGHT_EYE)?.position
-//                        val noseBase = face.getLandmark(Face.Landmark.NOSE_BASE)?.position
-//
-//                        Log.d("TAG", "Left Eye: $leftEye, Right Eye: $rightEye, Nose Base: $noseBase")
-//                    }
-                    val resultIntent = Intent().apply {
-                        putExtra(Constant.IS_FACE_DETECTED,true)
+                    for(face in faces)
+                    {
+                        val requiredLandmark = listOf(
+                            face.getLandmark(FaceLandmark.LEFT_EYE)?.position,
+                            face.getLandmark(FaceLandmark.RIGHT_EYE)?.position,
+                            face.getLandmark(FaceLandmark.NOSE_BASE)?.position,
+                            face.getLandmark(FaceLandmark.LEFT_EAR)?.position,
+                            face.getLandmark(FaceLandmark.RIGHT_EAR)?.position,
+                        )
+                        if(requiredLandmark.all { it != null }){
+                            Log.d("TAG", "Semua landmark terdeteksi: $requiredLandmark")
+                            val resultIntent = Intent().apply {
+                                putExtra(Constant.IS_FACE_DETECTED, true)
+                            }
+                            setResult(RESULT_OK, resultIntent)
+                            finish()
+                        }else{
+                            Log.d("TAG", "Landmark tidak lengkap, deteksi diabaikan")
+                        }
                     }
-                    setResult(RESULT_OK,resultIntent)
-                    finish()
                 }
             }
                 .addOnFailureListener { e ->
