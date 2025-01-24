@@ -105,57 +105,56 @@ class AttendanceStudent : AppCompatActivity()
         }
         listByMonth()
         setAttendanceStudentToday()
-        allViewModel.listAttendance.observe(this@AttendanceStudent){
-            adapterAttendance.submitListData(it)
+        lifecycleScope.launch {
+            localStore.getToken().collect{ model ->
+                model.token?.let { allViewModel.setAllAttendanceMonth(it) }
+            }
         }
     }
 
     private fun listByMonth()
     {
-        lifecycleScope.launch {
-            localStore.getToken().collect{
-                allViewModel.filterByMonth(it.token!!).observe(this@AttendanceStudent){state ->
-                    when(state)
-                    {
-                        is States.Loading -> {
-                            showProgressBar(true)
-                            attendanceBinding.mtvTextEmpty.visibility = View.GONE
-                        }
-                        is States.Success -> {
-                            if(!state.data.success)
+            allViewModel.listAttendance.observe(this@AttendanceStudent){state ->
+                when(state)
+                {
+                    is States.Loading -> {
+                        showProgressBar(true)
+                        attendanceBinding.mtvTextEmpty.visibility = View.GONE
+                    }
+                    is States.Success -> {
+                        if(!state.data.success)
+                        {
+                            attendanceBinding.apply {
+                                mtvTextEmpty.visibility = View.VISIBLE
+                                mtvTextEmpty.text = state.data.message
+                            }
+                        }else{
+                           val attendance = state.data.attendance.toGenerateAttendance()
+                            if(attendance.isEmpty())
                             {
                                 attendanceBinding.apply {
                                     mtvTextEmpty.visibility = View.VISIBLE
-                                    mtvTextEmpty.text = state.data.message
+                                    mtvTextEmpty.text = "Tidak ada absensi pada bulan ini"
+                                    progressBarAttendance.visibility = View.GONE
+                                    rvAttendanceAllToday.visibility = View.GONE
                                 }
-                            }else{
-                                if(state.data.attendance.toGenerateAttendance().isEmpty())
-                                {
-                                    attendanceBinding.apply {
-                                        mtvTextEmpty.visibility = View.VISIBLE
-                                        mtvTextEmpty.text = "Tidak ada absensi pada bulan ini"
-                                        progressBarAttendance.visibility = View.GONE
-                                        rvAttendanceAllToday.visibility = View.GONE
-                                    }
-                                    return@observe
-                                }
-                                Help.showToast(this@AttendanceStudent,state.data.message)
-                                showProgressBar(false)
-                                attendanceBinding.mtvTextEmpty.visibility = View.GONE
-                                allViewModel.setList(state.data.attendance.toGenerateAttendance())
+                                return@observe
                             }
+                            Help.showToast(this@AttendanceStudent,state.data.message)
+                            showProgressBar(false)
+                            attendanceBinding.mtvTextEmpty.visibility = View.GONE
+                            adapterAttendance.submitListData(attendance)
                         }
-                        is States.Failed -> {
-                            attendanceBinding.apply {
-                                mtvTextEmpty.visibility = View.VISIBLE
-                                rvAttendanceAllToday.visibility = View.GONE
-                                progressBarAttendance.visibility = View.GONE
-                            }
+                    }
+                    is States.Failed -> {
+                        attendanceBinding.apply {
+                            mtvTextEmpty.visibility = View.VISIBLE
+                            rvAttendanceAllToday.visibility = View.GONE
+                            progressBarAttendance.visibility = View.GONE
                         }
                     }
                 }
             }
-        }
     }
 
     private fun showProgressBar(isShow: Boolean)
@@ -230,7 +229,7 @@ class AttendanceStudent : AppCompatActivity()
                             is States.Success -> {
                                 if(!face.data.success && face.data.code == 400){
                                     Help.showToast(this@AttendanceStudent,face.data.message)
-                                    sendWhatsAppMessage(it.numberPhoneParent!!,"ini adalah link dari absensi anda => ${face.data.url}")
+                                    sendWhatsAppMessage(it.numberPhoneParent!!," ${face.data.url}")
                                     Log.d(TAG, "addAttendanceStudent: ${face.data.message},${face.data.success}")
                                 }else if(!face.data.success && face.data.code == 404){
                                     Help.showToast(this@AttendanceStudent,face.data.message)
@@ -238,7 +237,7 @@ class AttendanceStudent : AppCompatActivity()
                                     Help.showToast(this@AttendanceStudent,face.data.message)
                                 }else{
                                     val attendanceAdd = face.data.attendance.toAttendance()
-                                    sendWhatsAppMessage(it.numberPhoneParent!!,"ini adalah linkd dari absensi anda => ${face.data.url}")
+                                    sendWhatsAppMessage(it.numberPhoneParent!!,"Assalamualaikum, anak anda sudah tiba di Madrasah, klik link berikut untuk melihat detailnya \n  Link: ${face.data.url}")
                                     attendanceAdd.timeIn.let { it2 ->
                                         allViewModel.setTimeIn(it2)
                                     }
@@ -246,6 +245,7 @@ class AttendanceStudent : AppCompatActivity()
                                         allViewModel.setTimeOut(it2)
                                     }
                                     Help.showToast(this@AttendanceStudent,face.data.message)
+                                    allViewModel.setAllAttendanceMonth(it1)
                                 }
                             }
                             is States.Failed -> {

@@ -28,6 +28,8 @@ import com.example.man2superapp.source.local.model.toGenerateListViolationMaster
 import com.example.man2superapp.source.local.model.toGenerateListViolationStudent
 import com.example.man2superapp.source.local.model.toNoteRejected
 import com.example.man2superapp.source.network.States
+import com.example.man2superapp.source.network.response.attendance_student.IndexAttendanceResponse
+import com.example.man2superapp.source.network.response.e_kinerja.IndexResponse
 import com.example.man2superapp.utils.Help
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -53,7 +55,9 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
     private val _allStudent = MutableLiveData<List<LocalStudent>>()
     private val _timeIn = MutableLiveData<String>()
     private val _timeOut = MutableLiveData<String>()
-    private val _listAttendance = MutableLiveData<List<LocalAttendance>>()
+    private val _point = MutableLiveData<Int>()
+    private val _note = MutableLiveData<String>()
+    private val _allAttendanceMonth = MutableLiveData<States<IndexAttendanceResponse>>()
 
     val userList: LiveData<List<GetAllUserWbs>> get() = _userList
     val classList: LiveData<List<GetClassStudent>> get() = _clasList
@@ -71,12 +75,15 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
     val allStudent: LiveData<List<LocalStudent>> get() = _allStudent
     val timeIn: LiveData<String> get() = _timeIn
     val timeOut: LiveData<String> get() = _timeOut
-    val listAttendance: LiveData<List<LocalAttendance>> = _listAttendance
+    val listAttendance: LiveData<States<IndexAttendanceResponse>> = _allAttendanceMonth
+    val point: LiveData<Int> get() = _point
+    val note: LiveData<String> get() = _note
 
-    fun setList(list: List<LocalAttendance>){
-        _listAttendance.value = list
+    fun setAllAttendanceMonth(token: String) = viewModelScope.launch {
+        repository.filterStudentByMonth(token).collect{data ->
+            _allAttendanceMonth.value = data
+        }
     }
-
 
     fun loginEmployee(email: String, password: String) = repository.loginEmployee(email, password).asLiveData()
     fun getAllWbs(token: String) = repository.getAllWbs(token).asLiveData()
@@ -252,7 +259,18 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
         }
     }
 
-    fun getTargetViolation(token: String) = repository.getAllViolationTarget(token).asLiveData()
+//    fun getTargetViolation(token: String) {
+//        viewModelScope.launch {
+//            repository.getAllViolationTarget(token).collect{ state ->
+//                when(state){
+//                    is States.Loading -> {}
+//                    is States.Success -> {
+//                        _note.value = state.data.targetViolation.n
+//                    }
+//                }
+//            }
+//        }
+//    }
 
     fun getTotalPointStudent(token: String)
     {
@@ -427,6 +445,4 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
     fun getAttendanceToday(token: String) = repository.getAttendanceToday(token).asLiveData()
 
     fun getLatAndLong(token: String) = repository.getLatAndLong(token).asLiveData()
-
-    fun filterByMonth(token: String) = repository.filterStudentByMonth(token).asLiveData()
 }

@@ -20,6 +20,7 @@ import com.denzcoskun.imageslider.models.SlideModel
 import com.example.man2superapp.EkinAfter
 import com.example.man2superapp.R
 import com.example.man2superapp.databinding.ActivityMainBinding
+import com.example.man2superapp.databinding.DialogTargetPointBinding
 import com.example.man2superapp.source.LoginTemp
 import com.example.man2superapp.source.local.model.LoginModel
 import com.example.man2superapp.source.network.States
@@ -31,6 +32,7 @@ import com.example.man2superapp.utils.Help
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
+import com.google.android.material.textview.MaterialTextView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -45,6 +47,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var localStore: LoginTemp
     private val allViewModel by viewModels<AllViewModel>()
     private var isDialogShown = false
+    private var totalPoint = 0
+    private var targetPoint = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,14 +76,16 @@ class MainActivity : AppCompatActivity() {
             }
         }
         allViewModel.totalPoint.observe(this@MainActivity){ model ->
+            totalPoint = model
             if(model == 0)
             {
                 mainBinding.tvTotalPoints.setText("Total Point Pelanggaran: -")
             }else{
-               mainBinding.tvTotalPoints.setText("Total Point Pelanggaran: ${model}")
+               mainBinding.tvTotalPoints.setText("Total Point Pelanggaran: ${totalPoint}")
             }
-
         }
+
+//        allViewModel.getTargetViolation()
     }
 
     private fun setUpSlider()
@@ -138,6 +144,20 @@ class MainActivity : AppCompatActivity() {
         mainBinding.btnLogout.setOnClickListener {
             logoutEmployee()
         }
+    }
+
+    private fun setDialogViolationTarget(token: String)
+    {
+        val view = layoutInflater.inflate(R.layout.dialog_target_point,null)
+        val mtvError = view.findViewById<MaterialTextView>(R.id.mtvError)
+        val dialog = MaterialAlertDialogBuilder(this@MainActivity)
+            .setTitle("Peringatan")
+            .setView(view)
+            .setCancelable(false)
+            .create()
+
+        dialog.show()
+        mtvError.text = ""
     }
 
     private fun setDialogInput(token: String) {
