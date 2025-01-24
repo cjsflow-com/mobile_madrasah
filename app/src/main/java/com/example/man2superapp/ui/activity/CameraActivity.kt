@@ -1,6 +1,7 @@
 package com.example.man2superapp.ui.activity
 
 import android.content.Intent
+import android.graphics.RectF
 import android.hardware.Camera
 import android.os.Bundle
 import android.util.Log
@@ -15,6 +16,7 @@ import androidx.camera.core.ImageProxy
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import com.example.man2superapp.R
 import com.example.man2superapp.databinding.ActivityCameraXBinding
 import com.example.man2superapp.utils.Constant
 import com.example.man2superapp.utils.Help
@@ -94,26 +96,28 @@ class CameraActivity: AppCompatActivity()
             val rotationDegrees = imageProxy.imageInfo.rotationDegrees
             val inputImage = InputImage.fromMediaImage(mediaImage,rotationDegrees)
 
-            faceDetector.process(inputImage).addOnSuccessListener { faces ->
-                if (faces.isNotEmpty()){
-                    for(face in faces)
+            faceDetector.process(inputImage).addOnSuccessListener { faceses ->
+                if (faceses.isNotEmpty()){
+                    for(face in faceses)
                     {
-                        val requiredLandmark = listOf(
-                            face.getLandmark(FaceLandmark.LEFT_EYE)?.position,
-                            face.getLandmark(FaceLandmark.RIGHT_EYE)?.position,
-                            face.getLandmark(FaceLandmark.NOSE_BASE)?.position,
-                            face.getLandmark(FaceLandmark.LEFT_EAR)?.position,
-                            face.getLandmark(FaceLandmark.RIGHT_EAR)?.position,
-                        )
-                        if(requiredLandmark.all { it != null }){
-                            Log.d("TAG", "Semua landmark terdeteksi: $requiredLandmark")
-                            val resultIntent = Intent().apply {
-                                putExtra(Constant.IS_FACE_DETECTED, true)
+                        val leftEye = face.getLandmark(FaceLandmark.LEFT_EYE)
+                        val rightEye = face.getLandmark(FaceLandmark.RIGHT_EYE)
+
+                        if(leftEye?.position != null && rightEye?.position != null)
+                        {
+                            val leftOpenProbability = face.leftEyeOpenProbability ?: 0.0f
+                            val rightOpenProbability = face.rightEyeOpenProbability ?: 0.0f
+
+                            if(leftOpenProbability < 0.5f && rightOpenProbability < 0.5f)
+                            {
+                                val resultIntent = Intent().apply {
+                                    putExtra(Constant.IS_FACE_DETECTED,true)
+                                }
+                                setResult(RESULT_OK,resultIntent)
+                                finish()
+                            }else{
+                                Log.d("TAG", "processImageProxy: Mata tidak berkedip")
                             }
-                            setResult(RESULT_OK, resultIntent)
-                            finish()
-                        }else{
-                            Log.d("TAG", "Landmark tidak lengkap, deteksi diabaikan")
                         }
                     }
                 }

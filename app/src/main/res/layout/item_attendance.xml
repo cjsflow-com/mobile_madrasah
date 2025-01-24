@@ -15,6 +15,18 @@
 
         <TableRow>
             <com.google.android.material.textview.MaterialTextView
+                android:text="Tanggal"
+                android:textSize="15sp"
+                android:padding="8dp"
+                android:textStyle="bold" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/mtv_date"
+                android:textSize="12sp"
+                android:padding="8dp" />
+        </TableRow>
+
+        <TableRow>
+            <com.google.android.material.textview.MaterialTextView
                 android:text="Status Masuk"
                 android:textSize="15sp"
                 android:padding="8dp"

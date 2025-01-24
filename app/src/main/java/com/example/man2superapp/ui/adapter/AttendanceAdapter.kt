@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.man2superapp.databinding.ItemAttendanceBinding
 import com.example.man2superapp.source.local.model.LocalAttendance
 import com.example.man2superapp.source.local.model.LocalStudent
+import com.example.man2superapp.utils.Help
 import okhttp3.internal.notifyAll
 
 class AttendanceAdapter: RecyclerView.Adapter<AttendanceAdapter.ViewHolder>()
@@ -18,6 +19,7 @@ class AttendanceAdapter: RecyclerView.Adapter<AttendanceAdapter.ViewHolder>()
         fun bind(data: LocalAttendance){
             with(binding)
             {
+                mtvDate.text = Help.formatDate(data.date)?: "?"
                 mtvContentCheckInTime.text = data.timeIn?: "?"
                 mtvContentCheckOutTime.text = data.timeOut?: "?"
                 mtvContentStatusIn.text = data.statusIn?: "?"

@@ -4,6 +4,7 @@ import com.example.man2superapp.source.network.response.attendance_student.Atten
 
 data class LocalAttendance(
     var id: Int,
+    var date: String,
     var timeIn: String,
     var timeOut: String,
     var statusIn: String,
@@ -19,6 +20,7 @@ fun List<Attendance>.toGenerateAttendance(): MutableList<LocalAttendance>{
 fun Attendance.toAttendance(): LocalAttendance{
     return LocalAttendance(
         id = this.id?: 0,
+        date = this.date?: "?",
         timeIn = this.timeIn?: "?",
         timeOut = this.timeOut?: "?",
         statusIn = this.statusIn?: "?",

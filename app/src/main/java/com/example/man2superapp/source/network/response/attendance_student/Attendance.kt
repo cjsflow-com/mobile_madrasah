@@ -5,6 +5,8 @@ import com.google.gson.annotations.SerializedName
 data class Attendance(
     @SerializedName("id")
     val id: Int,
+    @SerializedName("date")
+    val date: String,
     @SerializedName("time_attendance_student_in")
     val timeIn: String,
     @SerializedName("time_attendance_student_out")

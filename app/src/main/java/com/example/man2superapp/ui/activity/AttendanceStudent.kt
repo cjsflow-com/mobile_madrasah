@@ -229,7 +229,7 @@ class AttendanceStudent : AppCompatActivity()
                             is States.Success -> {
                                 if(!face.data.success && face.data.code == 400){
                                     Help.showToast(this@AttendanceStudent,face.data.message)
-                                    sendWhatsAppMessage(it.numberPhoneParent!!," ${face.data.url}")
+                                    sendWhatsAppMessage(it.numberPhoneParent!!,"Assalamualaikum, anak anda sudah tiba di Madrasah, klik link berikut untuk melihat detailnya \n Link: ${face.data.url}")
                                     Log.d(TAG, "addAttendanceStudent: ${face.data.message},${face.data.success}")
                                 }else if(!face.data.success && face.data.code == 404){
                                     Help.showToast(this@AttendanceStudent,face.data.message)
@@ -237,7 +237,7 @@ class AttendanceStudent : AppCompatActivity()
                                     Help.showToast(this@AttendanceStudent,face.data.message)
                                 }else{
                                     val attendanceAdd = face.data.attendance.toAttendance()
-                                    sendWhatsAppMessage(it.numberPhoneParent!!,"Assalamualaikum, anak anda sudah tiba di Madrasah, klik link berikut untuk melihat detailnya \n  Link: ${face.data.url}")
+                                    sendWhatsAppMessage(it.numberPhoneParent!!,"Assalamualaikum, anak anda sudah tiba di Madrasah, klik link berikut untuk melihat detailnya \n Link: ${face.data.url}")
                                     attendanceAdd.timeIn.let { it2 ->
                                         allViewModel.setTimeIn(it2)
                                     }

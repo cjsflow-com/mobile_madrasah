@@ -4,15 +4,21 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.camera.view.PreviewView
+    <FrameLayout
+        android:layout_marginTop="10dp"
+        android:id="@+id/container"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="10dp"
-        android:id="@+id/previewView"
-        android:layout_width="300dp"
-        android:layout_height="300dp" />
+        android:layout_width="150dp"
+        android:layout_height="150dp">
 
+        <androidx.camera.view.PreviewView
+            android:id="@+id/previewView"
+            android:layout_width="150dp"
+            android:layout_height="150dp" />
+
+    </FrameLayout>
 
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="0dp"
@@ -20,7 +26,7 @@
         android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
         android:text="Wajah anda harus menghadap kamera agar bisa terdeteksi \n Wajah harus pas kehadapan kamera"
-        app:layout_constraintTop_toBottomOf="@id/previewView"
+        app:layout_constraintTop_toBottomOf="@id/container"
         android:padding="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
