@@ -44,9 +44,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardError"
-            android:text="Point anda telah melampui dari target poin yang telah diberikan oleh madrasah \n point anda adalah 100 point sedangkan target point itu 100 poin \n Silahkan jumpai admin" />
-
-
+            android:text="" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

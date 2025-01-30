@@ -10,6 +10,4 @@ data class TargetViolationResponse(
     val message: String,
     @SerializedName("success")
     val success: Boolean,
-    @SerializedName("target_violation")
-    val targetViolation: List<TargetViolation>
 )

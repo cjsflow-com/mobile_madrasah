@@ -84,6 +84,7 @@ interface ApiService {
     suspend fun loginStudent(
         @Field("nisn") nisn: String,
         @Field("password") password: String,
+        @Field("device_id") deviceId: String,
     ): Response<LoginStudentResponse>
 
     @POST(Constant.LOGOUT)

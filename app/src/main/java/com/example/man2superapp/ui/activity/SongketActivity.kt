@@ -55,11 +55,11 @@ class SongketActivity : AppCompatActivity() {
         songketBinding = ActivitySongketBinding.inflate(layoutInflater)
         setContentView(songketBinding.root)
         setCurrentDate()
-        onBackPressedDispatcher.addCallback(this@SongketActivity,object: OnBackPressedCallback(true){
-            override fun handleOnBackPressed() {
-                Help.alertDialog(this@SongketActivity)
-            }
-        })
+//        onBackPressedDispatcher.addCallback(this@SongketActivity,object: OnBackPressedCallback(true){
+//            override fun handleOnBackPressed() {
+//                Help.alertDialog(this@SongketActivity)
+//            }
+//        })
         lifecycleScope.launch {
             localStore.getToken().collect{data ->
                 cardAction(data.id!!)
@@ -70,7 +70,6 @@ class SongketActivity : AppCompatActivity() {
         }
         songketBinding.apply {
             ivBack.setOnClickListener {
-                startActivity(Intent(this@SongketActivity,MainActivity::class.java))
                 finish()
             }
         }

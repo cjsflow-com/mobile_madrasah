@@ -77,9 +77,9 @@ class RemoteDataSource @Inject constructor(
         emit(States.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
 
-    fun loginStudent(nisn: String, password: String) = flow<States<LoginStudentResponse>> {
+    fun loginStudent(nisn: String, password: String,deviceId: String) = flow<States<LoginStudentResponse>> {
         emit(States.loading())
-        apiService.loginStudent(nisn,password).let {
+        apiService.loginStudent(nisn,password,deviceId).let {
             if (it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
             else emit(States.failed(it.message()))
         }

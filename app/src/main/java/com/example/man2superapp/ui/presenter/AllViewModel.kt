@@ -10,7 +10,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.man2superapp.repository.Repository
 import com.example.man2superapp.source.local.model.GetAllUserWbs
 import com.example.man2superapp.source.local.model.GetClassStudent
-import com.example.man2superapp.source.local.model.LocalAttendance
 import com.example.man2superapp.source.local.model.LocalSchoolViolationStudent
 import com.example.man2superapp.source.local.model.LocalStudent
 import com.example.man2superapp.source.local.model.LocalViolationMaster
@@ -45,6 +44,7 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
     private val _loading = MutableLiveData<Boolean>()
     private val _textError = MutableLiveData<String>()
     private val _textSucces = MutableLiveData<String>()
+    private val _messageViolation = MutableLiveData<String>()
     private val _listEkinerja = MutableLiveData<List<ResutlEmployeePerformance>>()
     private val _hasApprovedTask = MutableLiveData<Boolean>()
     private val _listTask = MutableLiveData<List<TaskUser>>()
@@ -55,8 +55,6 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
     private val _allStudent = MutableLiveData<List<LocalStudent>>()
     private val _timeIn = MutableLiveData<String>()
     private val _timeOut = MutableLiveData<String>()
-    private val _point = MutableLiveData<Int>()
-    private val _note = MutableLiveData<String>()
     private val _allAttendanceMonth = MutableLiveData<States<IndexAttendanceResponse>>()
 
     val userList: LiveData<List<GetAllUserWbs>> get() = _userList
@@ -76,8 +74,7 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
     val timeIn: LiveData<String> get() = _timeIn
     val timeOut: LiveData<String> get() = _timeOut
     val listAttendance: LiveData<States<IndexAttendanceResponse>> = _allAttendanceMonth
-    val point: LiveData<Int> get() = _point
-    val note: LiveData<String> get() = _note
+    val messageViolation: LiveData<String> = _messageViolation
 
     fun setAllAttendanceMonth(token: String) = viewModelScope.launch {
         repository.filterStudentByMonth(token).collect{data ->
@@ -112,7 +109,7 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
             nameUniversity,major, ranking, semester, totalStudent, averageValue)
             .asLiveData()
 
-    fun loginStudent(nisn: String,password: String) = repository.loginStudent(nisn,password).asLiveData()
+    fun loginStudent(nisn: String,password: String,deviceId:String) = repository.loginStudent(nisn,password,deviceId).asLiveData()
 
     fun getCountStatus(id: Int) = repository.getCountStatus(id).asLiveData()
 
@@ -259,18 +256,27 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
         }
     }
 
-//    fun getTargetViolation(token: String) {
-//        viewModelScope.launch {
-//            repository.getAllViolationTarget(token).collect{ state ->
-//                when(state){
-//                    is States.Loading -> {}
-//                    is States.Success -> {
-//                        _note.value = state.data.targetViolation.n
-//                    }
-//                }
-//            }
-//        }
-//    }
+    fun getTargetViolation(token: String) {
+        viewModelScope.launch {
+            repository.getAllViolationTarget(token).collect{ state ->
+                when(state){
+                    is States.Loading -> {}
+                    is States.Success -> {
+                        if(state.data.code == 200){
+                            _textSucces.value = state.data.message
+                        }else if(state.data.code == 400){
+                            _messageViolation.value = state.data.message
+                        }else{
+                            _textError.value = state.data.message
+                        }
+                    }
+                    is States.Failed -> {
+                        _textError.value = state.message
+                    }
+                }
+            }
+        }
+    }
 
     fun getTotalPointStudent(token: String)
     {

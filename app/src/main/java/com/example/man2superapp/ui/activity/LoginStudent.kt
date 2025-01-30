@@ -1,7 +1,10 @@
 package com.example.man2superapp.ui.activity
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
+import android.provider.Settings.Secure.ANDROID_ID
 import android.util.Log
 import android.view.View
 import androidx.activity.OnBackPressedCallback
@@ -53,6 +56,11 @@ class LoginStudent: AppCompatActivity()
             }
         }
     }
+    
+    @SuppressLint("HardwareIds")
+    fun getUniqueDeviceId(): String{
+        return Settings.Secure.getString(contentResolver,Settings.Secure.ANDROID_ID)
+    }
 
     private fun action()
     {
@@ -63,7 +71,7 @@ class LoginStudent: AppCompatActivity()
             {
                 Help.showToast(this@LoginStudent,"Email dan Password tidak boleh kosong")
             }else{
-                loginStudentViewModel.loginStudent(nisn,password).observe(this@LoginStudent){ state ->
+                loginStudentViewModel.loginStudent(nisn,password,getUniqueDeviceId()).observe(this@LoginStudent){ state ->
                     when(state)
                     {
                         is States.Loading -> {

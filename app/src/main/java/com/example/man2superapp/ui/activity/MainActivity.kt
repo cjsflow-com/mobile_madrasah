@@ -47,8 +47,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var localStore: LoginTemp
     private val allViewModel by viewModels<AllViewModel>()
     private var isDialogShown = false
-    private var totalPoint = 0
-    private var targetPoint = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,14 +59,17 @@ class MainActivity : AppCompatActivity() {
                 Help.alertDialog(this@MainActivity)
             }
         })
-        allViewModel.getAllArticle()
+//        allViewModel.getAllArticle()
         observerView()
-        setUpSlider()
+//        setUpSlider()
     }
 
     @SuppressLint("SetTextI18n")
     private fun observerView()
     {
+        allViewModel.textSuccess.observe(this@MainActivity){
+            Help.showToast(this@MainActivity,it)
+        }
         allViewModel.loading.observe(this@MainActivity){ loading ->
             mainBinding.apply {
                 progressBar.visibility = if(loading) View.VISIBLE else View.GONE
@@ -76,16 +77,19 @@ class MainActivity : AppCompatActivity() {
             }
         }
         allViewModel.totalPoint.observe(this@MainActivity){ model ->
-            totalPoint = model
             if(model == 0)
             {
-                mainBinding.tvTotalPoints.setText("Total Point Pelanggaran: -")
+                mainBinding.tvTotalPoints.setText("Total Poin Pelanggaran: -")
             }else{
-               mainBinding.tvTotalPoints.setText("Total Point Pelanggaran: ${totalPoint}")
+                mainBinding.tvTotalPoints.setText("Total Poin Pelanggaran: $model")
             }
         }
-
-//        allViewModel.getTargetViolation()
+        allViewModel.textError.observe(this@MainActivity){
+            Help.showToast(this@MainActivity,it)
+        }
+        allViewModel.messageViolation.observe(this@MainActivity){
+            setDialogViolationTarget(it)
+        }
     }
 
     private fun setUpSlider()
@@ -131,6 +135,7 @@ class MainActivity : AppCompatActivity() {
                             }
                         }
                         data.token?.let { allViewModel.getTotalPointStudent(it) }
+                        data.token?.let { allViewModel.getTargetViolation(it) }
                     }
                     data.token?.let {
                         handleCardActions(it)
@@ -141,12 +146,13 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
         mainBinding.btnLogout.setOnClickListener {
             logoutEmployee()
         }
     }
 
-    private fun setDialogViolationTarget(token: String)
+    private fun setDialogViolationTarget(message: String)
     {
         val view = layoutInflater.inflate(R.layout.dialog_target_point,null)
         val mtvError = view.findViewById<MaterialTextView>(R.id.mtvError)
@@ -155,9 +161,8 @@ class MainActivity : AppCompatActivity() {
             .setView(view)
             .setCancelable(false)
             .create()
-
+        mtvError.text = "$message \n Point anda telah melampui dari target poin yang telah diberikan oleh madrasah, Silahkan jumpai admin"
         dialog.show()
-        mtvError.text = ""
     }
 
     private fun setDialogInput(token: String) {
@@ -386,20 +391,4 @@ class MainActivity : AppCompatActivity() {
         bottomSheetFragment.show(supportFragmentManager,"ChooseViewFragment")
     }
 }
-
-//    private fun showMaterialDialog()
-//    {
-//        MaterialAlertDialogBuilder(this)
-//            .setTitle("Informasi")
-//            .setMessage("Anda ingin login terlebih dahulu atau mengisi form langsung ?")
-//            .setPositiveButton("Ya, saya ingin login dulu"){dialog,_ ->
-//                startActivity(Intent(this@MainActivity,LoginActivity::class.java))
-//                dialog.dismiss()
-//            }
-//            .setNegativeButton("Saya langsung mengisi form saja"){dialog, _ ->
-//                startActivity(Intent(this@MainActivity, wbs::class.java))
-//                dialog.dismiss()
-//            }
-//            .show()
-//    }
 

@@ -19,7 +19,7 @@ class Repository @Inject constructor(
         relatedOfficialsId,workUnit,workLocation,complainDescription,documentation)
     fun logoutEmployee() = remoteDataSource.logoutEmployee()
 
-    fun loginStudent(nisn: String, password: String) = remoteDataSource.loginStudent(nisn,password)
+    fun loginStudent(nisn: String, password: String,deviceId: String) = remoteDataSource.loginStudent(nisn,password,deviceId)
 
     fun listSongketMotherByStatus(studentId: Int,status: String) = remoteDataSource.listSongketMotherByStatus(status,studentId)
 
