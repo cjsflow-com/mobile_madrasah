@@ -5,6 +5,8 @@ import com.google.gson.annotations.SerializedName
 data class AddAttendanceStudentResponse(
     @SerializedName("message")
     val message: String,
+    @SerializedName("position")
+    val position: Int,
     @SerializedName("code")
     val code: Int,
     @SerializedName("success")

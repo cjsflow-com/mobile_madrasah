@@ -227,17 +227,24 @@ class AttendanceStudent : AppCompatActivity()
                         when(face){
                             is States.Loading -> {}
                             is States.Success -> {
+                                val position = face.data.position
+                                val message = if(position == 1) {
+                                    "Assalamualaikum, anak anda sudah tiba di Madrasah pada **JAM MASUK**. Klik link berikut untuk melihat detailnya \nLink: ${face.data.url}"
+                                }else{
+                                    "Assalamualaikum, anak anda sudah **MENINGGALKAN** Madrasah pada **JAM PULANG**. Klik link berikut untuk melihat detailnya \nLink: ${face.data.url}"
+                                }
                                 if(!face.data.success && face.data.code == 400){
                                     Help.showToast(this@AttendanceStudent,face.data.message)
-                                    sendWhatsAppMessage(it.numberPhoneParent!!,"Assalamualaikum, anak anda sudah tiba di Madrasah, klik link berikut untuk melihat detailnya \n Link: ${face.data.url}")
+                                    sendWhatsAppMessage(it.numberPhoneParent!!,message)
                                     Log.d(TAG, "addAttendanceStudent: ${face.data.message},${face.data.success}")
+
                                 }else if(!face.data.success && face.data.code == 404){
                                     Help.showToast(this@AttendanceStudent,face.data.message)
                                 }else if(!face.data.success && face.data.code == 600){
                                     Help.showToast(this@AttendanceStudent,face.data.message)
                                 }else{
                                     val attendanceAdd = face.data.attendance.toAttendance()
-                                    sendWhatsAppMessage(it.numberPhoneParent!!,"Assalamualaikum, anak anda sudah tiba di Madrasah, klik link berikut untuk melihat detailnya \n Link: ${face.data.url}")
+                                    sendWhatsAppMessage(it.numberPhoneParent!!,message)
                                     attendanceAdd.timeIn.let { it2 ->
                                         allViewModel.setTimeIn(it2)
                                     }
