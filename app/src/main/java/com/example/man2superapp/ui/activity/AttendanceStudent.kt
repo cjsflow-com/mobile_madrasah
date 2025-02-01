@@ -229,9 +229,9 @@ class AttendanceStudent : AppCompatActivity()
                             is States.Success -> {
                                 val position = face.data.position
                                 val message = if(position == 1) {
-                                    "Assalamualaikum, anak anda sudah tiba di Madrasah pada **JAM MASUK**. Klik link berikut untuk melihat detailnya \nLink: ${face.data.url}"
+                                    "Assalamualaikum ayah bunda, Ananda sudah tiba di Madrasah. Mohon doakan Ananda agar mendapat ilmu yang berkah. \nKlik link berikut untuk melihat detail selengkapnya => ${face.data.url}"
                                 }else{
-                                    "Assalamualaikum, anak anda sudah **MENINGGALKAN** Madrasah pada **JAM PULANG**. Klik link berikut untuk melihat detailnya \nLink: ${face.data.url}"
+                                    "Assalamualaikum ayah bunda, Ananda sudah pulang dari madrasah, sampai jumpa dihari esok dengan semangat baru. \nKlik link berikut untuk melihat detail selengkapnya => ${face.data.url}"
                                 }
                                 if(!face.data.success && face.data.code == 400){
                                     Help.showToast(this@AttendanceStudent,face.data.message)
