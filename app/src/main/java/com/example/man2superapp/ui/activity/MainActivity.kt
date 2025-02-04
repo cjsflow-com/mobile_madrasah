@@ -2,9 +2,10 @@ package com.example.man2superapp.ui.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.IntentFilter
+import android.os.Build
 import android.os.Bundle
-import android.provider.Contacts.Intents
+import android.provider.Settings
+import android.provider.Settings.Secure.getString
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
@@ -286,6 +287,7 @@ class MainActivity : AppCompatActivity() {
         mainBinding.btnLogout.visibility = if(isShow) View.VISIBLE else View.GONE
         mainBinding.tvTotalPoints.visibility = if (isShow) View.VISIBLE else View.GONE
         mainBinding.imProfile.visibility = if(isShow) View.VISIBLE else View.GONE
+        mainBinding.iconBell.visibility = if(isShow) View.VISIBLE else View.GONE
     }
 
     private fun popUpToProfile()
@@ -340,6 +342,22 @@ class MainActivity : AppCompatActivity() {
         fragment.show(supportFragmentManager,"ProfilePopupFragment")
     }
 
+    @SuppressLint("HardwareIds")
+    fun showDeviceInfoDialog()
+    {
+        val deviceName = Build.MODEL
+        val deviceId = getString(contentResolver,Settings.Secure.ANDROID_ID)
+        val message = """
+            Nama Device Anda: $deviceName
+            ID Device Anda: $deviceId
+        """.trimIndent()
+
+        AlertDialog.Builder(this@MainActivity)
+            .setTitle("Informasi Perangkat")
+            .setMessage(message)
+            .setPositiveButton("Oke"){dialog,_ -> dialog.dismiss()}
+            .show()
+    }
 
     private fun handleCardActions(token: String) {
         if(token.isEmpty())
@@ -349,6 +367,9 @@ class MainActivity : AppCompatActivity() {
             showMaterialTextViewName(true)
         }
         mainBinding.apply {
+            iconBell.setOnClickListener {
+                showDeviceInfoDialog()
+            }
             ekinCard.setOnClickListener {
                 val target = if (token.isEmpty()) LoginActivity::class.java else EkinAfter::class.java
                 startActivity(Intent(this@MainActivity,target))
