@@ -4,6 +4,10 @@ import com.example.man2superapp.source.network.response.ArticleNewsResponse
 import com.example.man2superapp.source.network.response.attendance_student.AddAttendanceStudentResponse
 import com.example.man2superapp.source.network.response.attendance_student.AttendanceTodayResponse
 import com.example.man2superapp.source.network.response.attendance_student.IndexAttendanceResponse
+import com.example.man2superapp.source.network.response.counseling.AllScheduleCounselingResponse
+import com.example.man2superapp.source.network.response.counseling.CounselingResponse
+import com.example.man2superapp.source.network.response.counseling.CounselorResponse
+import com.example.man2superapp.source.network.response.counseling.CreateScheduleResponse
 import com.example.man2superapp.source.network.response.e_kinerja.GetTaskResponse
 import com.example.man2superapp.source.network.response.e_kinerja.HasApprovedTaskResponse
 import com.example.man2superapp.source.network.response.e_kinerja.IndexResponse
@@ -378,7 +382,29 @@ interface ApiService {
         @Header(Constant.AUTHORIZATION) token: String,
     ):  Response<IndexAttendanceResponse>
 
+    @GET(Constant.ALL_COUNSELOR)
+    suspend fun allCounselor(
+        @Header(Constant.AUTHORIZATION) token: String
+    ): Response<CounselorResponse>
 
+    @GET(Constant.ALL_COUNSELING_SESSION)
+    suspend fun allCounselingSession(
+        @Header(Constant.AUTHORIZATION) token: String
+    ): Response<CounselingResponse>
+
+    @GET(Constant.ALL_SCHEDULE_COUNSELING)
+    suspend fun allScheduleCounseling(
+        @Header(Constant.AUTHORIZATION) token: String
+    ): Response<AllScheduleCounselingResponse>
+
+    @FormUrlEncoded
+    @POST(Constant.BOOKING)
+    suspend fun createScheduleCounseling(
+        @Header(Constant.AUTHORIZATION) token: String,
+        @Field("counseling_session_id") counselingId: Int,
+        @Field("date_counseling") dateCounseling: String,
+        @Field("counselor_id") counselorId: Int,
+    ): Response<CreateScheduleResponse>
 
 //    @GET(Constant.GET_ALL_SCHOOL_VIOLATION_MASTER)
 //    suspend fun getAllSchoolViolationMaster(

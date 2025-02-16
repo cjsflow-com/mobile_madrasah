@@ -156,4 +156,13 @@ class Repository @Inject constructor(
     fun getLatAndLong(token: String) = remoteDataSource.getLatAndLong(token)
 
     fun filterStudentByMonth(token: String) = remoteDataSource.getAttendanceByFilterMonth(token)
+
+    fun getAllCounselor(token: String) = remoteDataSource.getAlLCounselor(token)
+
+    fun getAllCounselingSession(token: String) = remoteDataSource.getAllCounselingSession(token)
+
+    fun getAllScheduleCounseling(token: String) = remoteDataSource.getScheduleCounseling(token)
+
+    fun createScheduleCounseling(token: String,counselorSessionId: Int,dateCounseling: String,counselorId: Int)
+    = remoteDataSource.createScheduleCounseling(token,counselorSessionId,dateCounseling,counselorId)
 }

@@ -101,6 +101,13 @@ object Constant {
     const val GET_ATTENDANCE_TODAY = "$ATTENDANCE_STUDENT/getAttendanceToday"
     const val IS_FACE_DETECTED = "isFaceDetected"
 
+    // Counseling
+    private const val COUNSELING = "counseling"
+    const val ALL_COUNSELING_SESSION = "$COUNSELING/all_session_counseling"
+    const val ALL_SCHEDULE_COUNSELING = "$COUNSELING/all_schedule_counseling_student"
+    const val ALL_COUNSELOR = "$COUNSELING/all_counselor"
+    const val BOOKING = "$COUNSELING/booking"
+
 //    TAG FOR API
     const val TAG_CREATE_SONGKET = "CreateSongketActivity"
 }
