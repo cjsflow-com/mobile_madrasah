@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:focusable="true"
+    android:clickable="true"
+    app:cardElevation="5dp"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="15dp"
+    android:backgroundTint="@color/white"
+    android:layout_height="wrap_content">
+    
+    <LinearLayout
+        android:padding="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:padding="8dp"
+            android:id="@+id/mtvNameCounseling"
+            android:text="Nama Konseling"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:padding="8dp"
+            android:text="Nama Konselor"
+            android:id="@+id/nameCounselor" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:textSize="12sp"
+            android:id="@+id/mtvNameStudent"
+            android:text="Nama Siswa"
+             />
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Waktu Konseling"
+            android:textSize="12sp"
+            android:padding="8dp"
+            android:id="@+id/timeCounseling" />
+        
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Status"
+            android:textSize="12sp"
+            android:padding="8dp"
+            android:id="@+id/mtvStatus" />
+        
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="Tanggal Konseling"
+            android:textSize="12sp"
+            android:id="@+id/mtvDateCounseling" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardElevation="5dp"
+            android:id="@+id/bookingNow"
+            android:backgroundTint="@color/mangold"
+            app:cardCornerRadius="10dp"
+            android:clickable="true"
+            app:cardUseCompatPadding="true"
+            android:layout_gravity="end"
+            >
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Pesan"
+                android:textSize="15sp"
+                android:padding="10dp" />
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+
+
+</com.google.android.material.card.MaterialCardView>

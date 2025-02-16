@@ -6,6 +6,10 @@ import com.example.man2superapp.source.network.response.ArticleNewsResponse
 import com.example.man2superapp.source.network.response.attendance_student.AddAttendanceStudentResponse
 import com.example.man2superapp.source.network.response.attendance_student.AttendanceTodayResponse
 import com.example.man2superapp.source.network.response.attendance_student.IndexAttendanceResponse
+import com.example.man2superapp.source.network.response.counseling.AllScheduleCounselingResponse
+import com.example.man2superapp.source.network.response.counseling.CounselingResponse
+import com.example.man2superapp.source.network.response.counseling.CounselorResponse
+import com.example.man2superapp.source.network.response.counseling.CreateScheduleResponse
 import com.example.man2superapp.source.network.response.e_kinerja.GetTaskResponse
 import com.example.man2superapp.source.network.response.e_kinerja.HasApprovedTaskResponse
 import com.example.man2superapp.source.network.response.e_kinerja.IndexResponse
@@ -578,4 +582,48 @@ class RemoteDataSource @Inject constructor(
         Log.d(TAG, "getAttendanceByFilterMonth: ${it.message.toString()}")
         emit(States.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
+
+    fun getAlLCounselor(token: String) = flow<States<CounselorResponse>> {
+        emit(States.loading())
+        apiService.allCounselor(Constant.BEARER + token).let {
+            if (it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "getAlLCounselor: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }
+
+    fun getAllCounselingSession(token: String) = flow<States<CounselingResponse>> {
+        emit(States.loading())
+        apiService.allCounselingSession(Constant.BEARER + token).let {
+            if (it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "getAllCounselingSession: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }
+
+    fun getScheduleCounseling(token: String) = flow<States<AllScheduleCounselingResponse>> {
+        emit(States.loading())
+        apiService.allScheduleCounseling(Constant.BEARER + token).let {
+            if(it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "getScheduleCounseling: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }
+
+    fun createScheduleCounseling(token: String,counselingSessionId: Int,dateCounseling: String,counselorId: Int) = flow<States<CreateScheduleResponse>> {
+        emit(States.loading())
+        apiService.createScheduleCounseling(Constant.BEARER + token,counselingSessionId,dateCounseling,counselorId).let {
+            if (it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "createScheduleCounseling: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }
 }

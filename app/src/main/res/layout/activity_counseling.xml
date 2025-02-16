@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="0dp"
+        android:fontFamily="@font/montserrat_semibold"
+        android:text="Tidak ada data sama sekali"
+        android:textAlignment="center"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/mtvDate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/mtv_text_empty" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:strokeWidth="2dp"
+        android:id="@+id/back_button"
+        app:rippleColor="@color/card_rejected"
+        app:strokeColor="@color/card_rejected"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="5dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardElevation="5dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toBottomOf="@id/mtvDate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/mtvDate">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:src="@drawable/baseline_arrow_back_24" />
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:text="Tanggal"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="10dp"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:id="@+id/mtvDate"
+        android:fontFamily="@font/montserrat_bold"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+    
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="0dp"
+        android:id="@+id/rvItemSessionCounseling"
+        android:padding="10dp"
+        tools:listitem="@layout/item_session_counseling"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mtvDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="0dp" />
+    
+    <ProgressBar
+        android:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mtvDate"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/progressBar" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="5dp"
+        android:id="@+id/btnCardSeeSchedule"
+        app:cardBackgroundColor="@color/white"
+        app:cardElevation="5dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginStart="40dp"
+        android:clickable="true"
+        android:layout_marginBottom="20dp"
+        android:focusable="true"
+        app:strokeColor="@color/manblue"
+        app:strokeWidth="2dp"
+        app:rippleColor="@color/manblue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:text="Lihat Jadwal Konseling"
+            android:padding="10dp"
+            android:textColor="@android:color/black"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"/>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

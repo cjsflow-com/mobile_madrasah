@@ -10,12 +10,16 @@ import androidx.lifecycle.viewModelScope
 import com.example.man2superapp.repository.Repository
 import com.example.man2superapp.source.local.model.GetAllUserWbs
 import com.example.man2superapp.source.local.model.GetClassStudent
+import com.example.man2superapp.source.local.model.LocalCounselingSession
+import com.example.man2superapp.source.local.model.LocalCounselor
+import com.example.man2superapp.source.local.model.LocalSchedule
 import com.example.man2superapp.source.local.model.LocalSchoolViolationStudent
 import com.example.man2superapp.source.local.model.LocalStudent
 import com.example.man2superapp.source.local.model.LocalViolationMaster
 import com.example.man2superapp.source.local.model.NewsArticle
 import com.example.man2superapp.source.local.model.ResutlEmployeePerformance
 import com.example.man2superapp.source.local.model.TaskUser
+import com.example.man2superapp.source.local.model.toGenerateAllCounselor
 import com.example.man2superapp.source.local.model.toGenerateAllListArticle
 import com.example.man2superapp.source.local.model.toGenerateAllResult
 import com.example.man2superapp.source.local.model.toGenerateAllStudent
@@ -23,8 +27,10 @@ import com.example.man2superapp.source.local.model.toGenerateAllTask
 import com.example.man2superapp.source.local.model.toGenerateAllUserWbs
 import com.example.man2superapp.source.local.model.toGenerateAttendance
 import com.example.man2superapp.source.local.model.toGenerateClassStudent
+import com.example.man2superapp.source.local.model.toGenerateListCounselingSession
 import com.example.man2superapp.source.local.model.toGenerateListViolationMaster
 import com.example.man2superapp.source.local.model.toGenerateListViolationStudent
+import com.example.man2superapp.source.local.model.toGenerateSchedule
 import com.example.man2superapp.source.local.model.toNoteRejected
 import com.example.man2superapp.source.network.States
 import com.example.man2superapp.source.network.response.attendance_student.IndexAttendanceResponse
@@ -56,6 +62,10 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
     private val _timeIn = MutableLiveData<String>()
     private val _timeOut = MutableLiveData<String>()
     private val _allAttendanceMonth = MutableLiveData<States<IndexAttendanceResponse>>()
+    private val _allScheduleCounseling = MutableLiveData<List<LocalSchedule>>()
+    private val _allSessionCounseling = MutableLiveData<List<LocalCounselingSession>>()
+    private val _allCounselor = MutableLiveData<List<LocalCounselor>>()
+    private val _message = MutableLiveData<String>()
 
     val userList: LiveData<List<GetAllUserWbs>> get() = _userList
     val classList: LiveData<List<GetClassStudent>> get() = _clasList
@@ -75,6 +85,10 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
     val timeOut: LiveData<String> get() = _timeOut
     val listAttendance: LiveData<States<IndexAttendanceResponse>> = _allAttendanceMonth
     val messageViolation: LiveData<String> = _messageViolation
+    val allCounselor:LiveData<List<LocalCounselor>> get() = _allCounselor
+    val allSessionCounseling: LiveData<List<LocalCounselingSession>> get() = _allSessionCounseling
+    val allScheduleCounseling: LiveData<List<LocalSchedule>> get() =  _allScheduleCounseling
+    val message: LiveData<String> get() = _message
 
     fun setAllAttendanceMonth(token: String) = viewModelScope.launch {
         repository.filterStudentByMonth(token).collect{data ->
@@ -213,6 +227,91 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
                         _allStudent.value = it.data.student.toGenerateAllStudent()
                     }
                     is States.Failed -> {_textError.value = it.message.toString()}
+                }
+            }
+        }
+    }
+
+    fun fetchAllCounselor(token: String) = viewModelScope.launch {
+        repository.getAllCounselor(token).collect{ value ->
+            when(value){
+                is States.Loading -> {}
+                is States.Success -> {
+                    _allCounselor.value = value.data.counselor.toGenerateAllCounselor()
+                }
+                is States.Failed -> {
+                    _message.value = value.message
+                }
+            }
+        }
+    }
+
+    fun createScheduleCounseling(token: String,counselorSessionId: Int, dateCounseling: String, counselorId: Int) =
+        viewModelScope.launch {
+            repository.createScheduleCounseling(token,counselorSessionId,dateCounseling,counselorId).collect{ value ->
+                when(value)
+                {
+                    is States.Loading -> {
+                        _loading.value = true
+                    }
+                    is States.Success -> {
+                        _loading.value = false
+                        if(value.data.success){
+                            _textSucces.value = value.data.message
+                        }else{
+                            _message.value = value.data.message
+                        }
+                    }
+                    is States.Failed -> {
+                        _message.value = value.message
+                    }
+                }
+            }
+        }
+
+    fun fetchAllScheduleCounseling(token: String) = viewModelScope.launch {
+        repository.getAllScheduleCounseling(token).collect{ value ->
+            when(value)
+            {
+                is States.Loading -> {
+                    _loading.value = true
+                }
+                is States.Success -> {
+                    _loading.value = false
+                    if(value.data.success){
+                        _message.value = value.data.message
+                        _allScheduleCounseling.value = value.data.shcedule.toGenerateSchedule()
+                    }else{
+                        _message.value = value.data.message
+                    }
+                }
+                is States.Failed -> {
+                    _loading.value = false
+                    _message.value = value.message
+                }
+            }
+        }
+    }
+
+    fun fetchAllCounseling(token: String) = viewModelScope.launch {
+        repository.getAllCounselingSession(token).collect{ value ->
+            when(value)
+            {
+                is States.Loading -> {
+                    _loading.value = true
+                }
+                is States.Success -> {
+                    _loading.value = false
+                    if (value.data.success){
+                        _allSessionCounseling.value = value.data.sessionCounseling.toGenerateListCounselingSession()
+                        _message.value = value.data.message
+                    }else{
+                        _message.value = value.data.message
+                    }
+                }
+                is States.Failed -> {
+                    _loading.value = false
+                   _message.value = value.message
                 }
             }
         }
