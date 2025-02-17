@@ -4,13 +4,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:focusable="true"
     android:clickable="true"
+    app:cardElevation="5dp"
     android:layout_margin="10dp"
-    app:cardCornerRadius="8dp"
+    app:cardCornerRadius="15dp"
     android:backgroundTint="@color/white"
     android:layout_height="wrap_content">
     
     <LinearLayout
         android:padding="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -32,6 +34,14 @@
             android:text="Nama Konselor"
             android:id="@+id/nameCounselor" />
 
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:textSize="12sp"
+            android:id="@+id/mtvNameStudent"
+            android:text="Nama Siswa"
+             />
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -60,6 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:cardElevation="5dp"
+            android:id="@+id/bookingNow"
             android:backgroundTint="@color/mangold"
             app:cardCornerRadius="10dp"
             android:clickable="true"

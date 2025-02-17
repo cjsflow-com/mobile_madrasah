@@ -8,6 +8,7 @@ data class LocalSchedule(
     var id: Int,
     var sessionName: String,
     var status: String,
+    var time: String,
     var studentName: String,
 )
 
@@ -24,6 +25,7 @@ fun Shcedule.toSchedule(): LocalSchedule{
         id = this.id?: 0,
         sessionName = this.sessionName?: "?",
         status = this.status?: "?",
+        time = this.time?: "?",
         studentName = this.studentName?: "?",
     )
 }

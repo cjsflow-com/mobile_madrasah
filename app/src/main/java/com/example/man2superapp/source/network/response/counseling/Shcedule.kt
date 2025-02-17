@@ -8,6 +8,8 @@ data class Shcedule(
     val counselorName: String,
     @SerializedName("date_counseling")
     val dateCounseling: String,
+    @SerializedName("time")
+    val time: String,
     @SerializedName("id")
     val id: Int,
     @SerializedName("session_name")

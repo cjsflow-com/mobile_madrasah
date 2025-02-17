@@ -89,13 +89,11 @@ object Constant {
     const val NOTE_DISPUTE_VIOLATION = "$VIOLATION/note_dispute_violation/{id}"
     const val TOTAL_POINT_STUDENT = "$VIOLATION/student/total_points"
     const val GET_ALL_STUDENT = "$VIOLATION/get_all_student"
-    const val GET_ALL_SCHOOL_VIOLATION_MASTER = "$VIOLATION/get_all_school_violation_master"
     const val GET_ALL_TARGET_VIOLATION = "$VIOLATION/get_target_violation"
 
     // Absensi
     private const val ATTENDANCE_STUDENT = "attendance_student"
     const val ADD_ATTENDANCE_STUDENT = "$ATTENDANCE_STUDENT/store"
-    const val INDEX_ATTENDANCE_STUDENT = "$ATTENDANCE_STUDENT/index"
     const val FILTER_ATTENDANCE_STUDENT_BY_MONTH = "$ATTENDANCE_STUDENT/filter/"
     const val GET_LAT_AND_LONG = "$ATTENDANCE_STUDENT/get_lat_and_long"
     const val GET_ATTENDANCE_TODAY = "$ATTENDANCE_STUDENT/getAttendanceToday"
@@ -107,6 +105,8 @@ object Constant {
     const val ALL_SCHEDULE_COUNSELING = "$COUNSELING/all_schedule_counseling_student"
     const val ALL_COUNSELOR = "$COUNSELING/all_counselor"
     const val BOOKING = "$COUNSELING/booking"
+    const val ID_COUNSELING = "id_counseling"
+    const val NAME_COUNSELING_SESSION = "name_counseling"
 
 //    TAG FOR API
     const val TAG_CREATE_SONGKET = "CreateSongketActivity"

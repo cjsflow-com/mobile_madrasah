@@ -40,6 +40,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.activity.counseling.SessionCounselingActivity"
+            android:exported="false" />
+        <activity android:name=".ui.activity.counseling.ScheduleCounselingActivity"
+            android:exported="false" />
+        <activity android:name=".ui.activity.counseling.AddCounselingActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.activity.EditEKinerjaActivity"
             android:exported="false" />

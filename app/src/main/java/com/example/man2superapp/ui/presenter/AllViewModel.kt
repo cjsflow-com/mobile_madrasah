@@ -240,7 +240,7 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
                     _allCounselor.value = value.data.counselor.toGenerateAllCounselor()
                 }
                 is States.Failed -> {
-                    _message.value = value.message.toString()
+                    _message.value = value.message
                 }
             }
         }
@@ -257,7 +257,7 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
                     is States.Success -> {
                         _loading.value = false
                         if(value.data.success){
-                            _message.value = value.data.message
+                            _textSucces.value = value.data.message
                         }else{
                             _message.value = value.data.message
                         }
@@ -297,8 +297,11 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
         repository.getAllCounselingSession(token).collect{ value ->
             when(value)
             {
-                is States.Loading -> {}
+                is States.Loading -> {
+                    _loading.value = true
+                }
                 is States.Success -> {
+                    _loading.value = false
                     if (value.data.success){
                         _allSessionCounseling.value = value.data.sessionCounseling.toGenerateListCounselingSession()
                         _message.value = value.data.message
@@ -307,6 +310,7 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
                     }
                 }
                 is States.Failed -> {
+                    _loading.value = false
                    _message.value = value.message
                 }
             }

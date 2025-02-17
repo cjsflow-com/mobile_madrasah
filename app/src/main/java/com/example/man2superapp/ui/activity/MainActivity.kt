@@ -25,6 +25,7 @@ import com.example.man2superapp.databinding.DialogTargetPointBinding
 import com.example.man2superapp.source.LoginTemp
 import com.example.man2superapp.source.local.model.LoginModel
 import com.example.man2superapp.source.network.States
+import com.example.man2superapp.ui.activity.counseling.SessionCounselingActivity
 import com.example.man2superapp.ui.fragment.ChooseViewFragment
 import com.example.man2superapp.ui.fragment.ProfilePopUpFragment
 import com.example.man2superapp.ui.presenter.AllViewModel
@@ -60,9 +61,9 @@ class MainActivity : AppCompatActivity() {
                 Help.alertDialog(this@MainActivity)
             }
         })
-        allViewModel.getAllArticle()
+//        allViewModel.getAllArticle()
         observerView()
-        setUpSlider()
+//        setUpSlider()
     }
 
     @SuppressLint("SetTextI18n")
@@ -392,7 +393,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             pelajarCard.setOnClickListener {
-                Help.showToast(this@MainActivity,"Fitur masih dalam tahap pengembangan")
+                val target = if (token.isEmpty()) LoginActivity::class.java else SessionCounselingActivity::class.java
+                startActivity(Intent(this@MainActivity,target))
             }
 
             songketCard.setOnClickListener {
