@@ -78,19 +78,26 @@ class AddCounselingActivity: AppCompatActivity()
         }
     }
 
-    private fun getUpWeekDates(): List<String>{
+    private fun getUpWeekDates(): List<String> {
         val dateList = mutableListOf<String>()
-        val dateFormat = SimpleDateFormat("EEEE, dd MMMM yyyy", Locale("id","ID"))
+        val dateFormat = SimpleDateFormat("EEEE, dd MMMM yyyy", Locale("id", "ID"))
         val calendar = Calendar.getInstance()
 
-        calendar.add(Calendar.DATE,1)
+        var addedDays = 0
 
-        for (i in 0 until 6)
-        {
-            val date = calendar.time
-            dateList.add(dateFormat.format(date))
-            calendar.add(Calendar.DATE,1)
+        while (addedDays < 7) {
+            val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
+
+            // Lewati Sabtu (7) dan Minggu (1)
+            if (dayOfWeek != Calendar.SATURDAY && dayOfWeek != Calendar.SUNDAY) {
+                val date = calendar.time
+                dateList.add(dateFormat.format(date))
+                addedDays++ // Hanya bertambah jika hari kerja
+            }
+
+            calendar.add(Calendar.DATE, 1) // Pindah ke hari berikutnya
         }
+
         return dateList
     }
 
