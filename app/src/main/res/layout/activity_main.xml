@@ -383,7 +383,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/pelajarName"
-                    android:text="Kartu Pelajar"
+                    android:text="E-Counseling"
                     android:textSize="12sp"
                     android:fontFamily="@font/poppins_semibold"
                     android:layout_marginTop="5dp"
@@ -394,7 +394,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:id="@+id/pelajarImage"
-                    android:src="@drawable/kartu_pelajar"
+                    android:src="@drawable/discussion"
                     android:layout_marginTop="12dp"
                     android:layout_centerHorizontal="true"/>
 
