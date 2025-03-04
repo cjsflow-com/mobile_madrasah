@@ -252,10 +252,11 @@ class MainActivity : AppCompatActivity() {
                 tvTotalPoints.visibility = View.GONE
                 ekinCard.visibility = View.VISIBLE
                 wbsCard.visibility = View.VISIBLE
-                pelajarCard.visibility = View.VISIBLE
+                pelajarCard.visibility = View.GONE
                 songketCard.visibility = View.VISIBLE
                 jurnalCard.visibility = View.VISIBLE
             }else{
+                pelajarCard.visibility = View.VISIBLE
                 ekinCard.visibility = View.VISIBLE
                 wbsCard.visibility = View.VISIBLE
                 songketCard.visibility = View.VISIBLE
