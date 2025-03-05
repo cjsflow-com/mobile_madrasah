@@ -108,6 +108,12 @@ object Constant {
     const val ID_COUNSELING = "id_counseling"
     const val NAME_COUNSELING_SESSION = "name_counseling"
 
+    // ROlE
+    const val KESISWAAN = "kesiswaan"
+    const val KARYAWAN = "karyawan"
+    const val PTSP = "ptsp"
+    const val KONSELOR = "konselor"
+
 //    TAG FOR API
     const val TAG_CREATE_SONGKET = "CreateSongketActivity"
 }

@@ -256,7 +256,8 @@ class MainActivity : AppCompatActivity() {
                 pelajarCard.visibility = View.GONE
                 songketCard.visibility = View.VISIBLE
                 jurnalCard.visibility = View.VISIBLE
-            }else{
+            }else if (role == Constant.KESISWAAN || role == Constant.KARYAWAN || role == Constant.PTSP || role == Constant.KONSELOR)
+            {
                 tvTotalPoints.visibility = View.GONE
                 ekinCard.visibility = View.VISIBLE
                 wbsCard.visibility = View.VISIBLE
@@ -264,6 +265,14 @@ class MainActivity : AppCompatActivity() {
                 jurnalCard.visibility = View.GONE
                 pelajarCard.visibility = View.GONE
                 etatibCard.visibility = View.GONE
+            }else{
+                tvTotalPoints.visibility = View.GONE
+                ekinCard.visibility = View.VISIBLE
+                wbsCard.visibility = View.VISIBLE
+                songketCard.visibility = View.VISIBLE
+                jurnalCard.visibility = View.VISIBLE
+                pelajarCard.visibility = View.VISIBLE
+                etatibCard.visibility = View.VISIBLE
             }
         }
     }
