@@ -61,9 +61,9 @@ class MainActivity : AppCompatActivity() {
                 Help.alertDialog(this@MainActivity)
             }
         })
-//        allViewModel.getAllArticle()
+        allViewModel.getAllArticle()
         observerView()
-//        setUpSlider()
+        setUpSlider()
     }
 
     @SuppressLint("SetTextI18n")
@@ -231,11 +231,12 @@ class MainActivity : AppCompatActivity() {
                 tvTotalPoints.visibility = View.VISIBLE
                 wbsCard.visibility = View.VISIBLE
                 ekinCard.visibility = View.GONE
+                jurnalCard.visibility = View.GONE
                 pelajarCard.visibility = View.VISIBLE
                 etatibCard.visibility = View.VISIBLE
             }else if (role == "kepala_madrasah"){
                 tvTotalPoints.visibility = View.GONE
-                ekinCard.visibility = View.VISIBLE
+                ekinCard.visibility = View.GONE
                 wbsCard.visibility = View.VISIBLE
                 songketCard.visibility = View.GONE
                 pelajarCard.visibility = View.GONE
@@ -256,11 +257,13 @@ class MainActivity : AppCompatActivity() {
                 songketCard.visibility = View.VISIBLE
                 jurnalCard.visibility = View.VISIBLE
             }else{
-                pelajarCard.visibility = View.VISIBLE
+                tvTotalPoints.visibility = View.GONE
                 ekinCard.visibility = View.VISIBLE
                 wbsCard.visibility = View.VISIBLE
                 songketCard.visibility = View.VISIBLE
-                etatibCard.visibility = View.VISIBLE
+                jurnalCard.visibility = View.GONE
+                pelajarCard.visibility = View.GONE
+                etatibCard.visibility = View.GONE
             }
         }
     }

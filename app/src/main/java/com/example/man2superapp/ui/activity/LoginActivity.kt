@@ -119,13 +119,18 @@ class LoginActivity : AppCompatActivity() {
                         is States.Success -> {
                             lifecycleScope.launch {
                                 Help.showToast(this@LoginActivity,state.data.messages)
-                                Log.d(TAG, "action: ${state.data.messages}")
-                                localStore.putToken(
-                                    LoginModel(state.data.name,state.data.id,state.data.email,"","",state.data.gender,state.data.token,state.data.profile,
-                                        "","",state.data.numberPhone,state.data.numberPhone,"","","",state.data.role).also {
+                                if (state.data.success)
+                                {
+                                    localStore.putToken(
+                                        LoginModel(state.data.name,state.data.id,state.data.email,"","",state.data.gender,state.data.token,state.data.profile,
+                                            "","",state.data.numberPhone,state.data.numberPhone,"","","",state.data.role).also {
                                             startActivity(Intent(this@LoginActivity,MainActivity::class.java)).also { finish() }
-                                    }
-                                )
+                                        }
+                                    )
+                                }else{
+                                    Help.showToast(this@LoginActivity,state.data.messages)
+                                }
+                                Log.d(TAG, "action: ${state.data.messages}")
                                 isShowProgressBar(false)
                             }
                         }
