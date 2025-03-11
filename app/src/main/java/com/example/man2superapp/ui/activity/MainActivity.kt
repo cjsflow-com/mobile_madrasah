@@ -256,6 +256,7 @@ class MainActivity : AppCompatActivity() {
                 pelajarCard.visibility = View.GONE
                 songketCard.visibility = View.VISIBLE
                 jurnalCard.visibility = View.VISIBLE
+                etatibCard.visibility = View.VISIBLE
             }else if (role == Constant.KESISWAAN || role == Constant.KARYAWAN || role == Constant.PTSP || role == Constant.KONSELOR)
             {
                 tvTotalPoints.visibility = View.GONE

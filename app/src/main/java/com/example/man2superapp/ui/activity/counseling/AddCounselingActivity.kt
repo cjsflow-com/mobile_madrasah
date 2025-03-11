@@ -85,7 +85,7 @@ class AddCounselingActivity: AppCompatActivity()
 
         var addedDays = 0
 
-        while (addedDays < 7) {
+        while (addedDays < 5) {
             val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
 
             // Lewati Sabtu (7) dan Minggu (1)
