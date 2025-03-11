@@ -32,6 +32,7 @@ import com.example.man2superapp.ui.presenter.AllViewModel
 import com.example.man2superapp.utils.Constant
 import com.example.man2superapp.utils.Help
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.textview.MaterialTextView
@@ -158,12 +159,16 @@ class MainActivity : AppCompatActivity() {
     {
         val view = layoutInflater.inflate(R.layout.dialog_target_point,null)
         val mtvError = view.findViewById<MaterialTextView>(R.id.mtvError)
+        val imageClose = view.findViewById<MaterialCardView>(R.id.close)
         val dialog = MaterialAlertDialogBuilder(this@MainActivity)
             .setTitle("Peringatan")
             .setView(view)
             .setCancelable(false)
             .create()
         mtvError.text = "$message \n Point anda telah melampui dari target poin yang telah diberikan oleh madrasah, Silahkan jumpai admin"
+        imageClose.setOnClickListener {
+            dialog.dismiss()
+        }
         dialog.show()
     }
 
