@@ -113,6 +113,9 @@ object Constant {
     const val KARYAWAN = "karyawan"
     const val PTSP = "ptsp"
     const val KONSELOR = "konselor"
+    const val TEACHER = "guru"
+    const val LEADER = "kepala_madrasah"
+    const val SUPER_ADMIN = "super_admin"
 
 //    TAG FOR API
     const val TAG_CREATE_SONGKET = "CreateSongketActivity"
