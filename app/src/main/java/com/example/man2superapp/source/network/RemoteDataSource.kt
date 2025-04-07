@@ -10,6 +10,7 @@ import com.example.man2superapp.source.network.response.counseling.AllScheduleCo
 import com.example.man2superapp.source.network.response.counseling.CounselingResponse
 import com.example.man2superapp.source.network.response.counseling.CounselorResponse
 import com.example.man2superapp.source.network.response.counseling.CreateScheduleResponse
+import com.example.man2superapp.source.network.response.counseling.GetScheduleResponse
 import com.example.man2superapp.source.network.response.e_kinerja.GetTaskResponse
 import com.example.man2superapp.source.network.response.e_kinerja.HasApprovedTaskResponse
 import com.example.man2superapp.source.network.response.e_kinerja.IndexResponse
@@ -624,6 +625,17 @@ class RemoteDataSource @Inject constructor(
         }
     }.catch {
         Log.d(TAG, "createScheduleCounseling: ${it.message.toString()}")
+        emit(States.failed(it.message.toString()))
+    }
+
+    fun getScheduleCounselingPreview(counseorId: Int) = flow<States<GetScheduleResponse>> {
+        emit(States.loading())
+        apiService.getScheduleCounseling(counseorId).let {
+            if (it.isSuccessful && it.body() != null) emit(States.success(it.body()!!))
+            else emit(States.failed(it.message().toString()))
+        }
+    }.catch {
+        Log.d(TAG, "getScheduleCounselingPreview: ${it.message.toString()}")
         emit(States.failed(it.message.toString()))
     }
 }

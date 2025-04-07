@@ -8,6 +8,7 @@ import com.example.man2superapp.source.network.response.counseling.AllScheduleCo
 import com.example.man2superapp.source.network.response.counseling.CounselingResponse
 import com.example.man2superapp.source.network.response.counseling.CounselorResponse
 import com.example.man2superapp.source.network.response.counseling.CreateScheduleResponse
+import com.example.man2superapp.source.network.response.counseling.GetScheduleResponse
 import com.example.man2superapp.source.network.response.e_kinerja.GetTaskResponse
 import com.example.man2superapp.source.network.response.e_kinerja.HasApprovedTaskResponse
 import com.example.man2superapp.source.network.response.e_kinerja.IndexResponse
@@ -405,6 +406,11 @@ interface ApiService {
         @Field("date_counseling") dateCounseling: String,
         @Field("counselor_id") counselorId: Int,
     ): Response<CreateScheduleResponse>
+
+    @GET(Constant.GET_SCHEDULE_COUNSELING)
+    suspend fun getScheduleCounseling(
+        @Path("id") counselorId: Int
+    ):Response<GetScheduleResponse>
 
 //    @GET(Constant.GET_ALL_SCHOOL_VIOLATION_MASTER)
 //    suspend fun getAllSchoolViolationMaster(

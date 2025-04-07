@@ -103,6 +103,7 @@ object Constant {
     private const val COUNSELING = "counseling"
     const val ALL_COUNSELING_SESSION = "$COUNSELING/all_session_counseling"
     const val ALL_SCHEDULE_COUNSELING = "$COUNSELING/all_schedule_counseling_student"
+    const val GET_SCHEDULE_COUNSELING = "$COUNSELING/get_schedule/{id}"
     const val ALL_COUNSELOR = "$COUNSELING/all_counselor"
     const val BOOKING = "$COUNSELING/booking"
     const val ID_COUNSELING = "id_counseling"

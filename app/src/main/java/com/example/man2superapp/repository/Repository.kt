@@ -165,4 +165,6 @@ class Repository @Inject constructor(
 
     fun createScheduleCounseling(token: String,counselorSessionId: Int,dateCounseling: String,counselorId: Int)
     = remoteDataSource.createScheduleCounseling(token,counselorSessionId,dateCounseling,counselorId)
+
+    fun getScheduleCounselingPreview(counselorId: Int) = remoteDataSource.getScheduleCounselingPreview(counselorId)
 }

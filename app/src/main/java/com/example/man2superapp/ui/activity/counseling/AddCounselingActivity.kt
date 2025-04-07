@@ -1,5 +1,6 @@
 package com.example.man2superapp.ui.activity.counseling
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
@@ -9,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.man2superapp.databinding.ActivityAddScheduleCounselingBinding
 import com.example.man2superapp.source.LoginTemp
+import com.example.man2superapp.source.local.model.LocalResultScheduleCounseling
+import com.example.man2superapp.ui.adapter.ScheduleDropDownAdapter
 import com.example.man2superapp.ui.presenter.AllViewModel
 import com.example.man2superapp.utils.Constant
 import com.example.man2superapp.utils.Help
@@ -46,6 +49,7 @@ class AddCounselingActivity: AppCompatActivity()
             }
         }
         observerView()
+        selectDropDownCounselor()
     }
 
     private fun actionSubmit(token: String)
@@ -78,27 +82,24 @@ class AddCounselingActivity: AppCompatActivity()
         }
     }
 
-    private fun getUpWeekDates(): List<String> {
-        val dateList = mutableListOf<String>()
-        val dateFormat = SimpleDateFormat("EEEE, dd MMMM yyyy", Locale("id", "ID"))
-        val calendar = Calendar.getInstance()
-
-        var addedDays = 0
-
-        while (addedDays < 5) {
-            val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
-
-            // Lewati Sabtu (7) dan Minggu (1)
-            if (dayOfWeek != Calendar.SATURDAY && dayOfWeek != Calendar.SUNDAY) {
-                val date = calendar.time
-                dateList.add(dateFormat.format(date))
-                addedDays++ // Hanya bertambah jika hari kerja
+    private fun selectDropDownCounselor(){
+        addCounselingBinding.apply {
+            etCounselor.setOnItemClickListener { parent, view, position, id ->
+                val selectName = parent.getItemAtPosition(position) as String
+                val selectId = counselorMap?.get(selectName)
+                selectId?.let { allViewModel.fetchAllScheduleCounselingPreview(it) }
+                parentDateCounseling.visibility = View.VISIBLE
+                parentDateCounseling.editText?.text?.takeIf { it.isNotEmpty() }?.clear()
             }
-
-            calendar.add(Calendar.DATE, 1) // Pindah ke hari berikutnya
+            etDateCounseling.setOnItemClickListener { parent, view, position, id ->
+                val selectedNameDate = parent.getItemAtPosition(position) as LocalResultScheduleCounseling
+                val color = if(selectedNameDate.status) Color.RED else Color.BLACK
+                etDateCounseling.apply {
+                    setText(selectedNameDate.date,false)
+                    setTextColor(color)
+                }
+            }
         }
-
-        return dateList
     }
 
     private fun formatDateToStandard(date: String): String {
@@ -129,9 +130,10 @@ class AddCounselingActivity: AppCompatActivity()
             addCounselingBinding.etCounselor.setAdapter(adapter)
             this@AddCounselingActivity.counselorMap = counselorMap
         }
-        val dateList = getUpWeekDates()
-        val adapter = ArrayAdapter(this@AddCounselingActivity, com.google.android.material.R.layout.support_simple_spinner_dropdown_item,dateList)
-        addCounselingBinding.etDateCounseling.setAdapter(adapter)
+        allViewModel.allScheduleCounselingPreview.observe(this@AddCounselingActivity){list ->
+            val adapter = ScheduleDropDownAdapter(this@AddCounselingActivity,list)
+            addCounselingBinding.etDateCounseling.setAdapter(adapter)
+        }
         allViewModel.textSuccess.observe(this@AddCounselingActivity){Help.showToast(this@AddCounselingActivity,it).also { finish() }}
         allViewModel.message.observe(this@AddCounselingActivity){Help.showToast(this@AddCounselingActivity,it)}
         allViewModel.loading.observe(this@AddCounselingActivity){showLoading(it)}

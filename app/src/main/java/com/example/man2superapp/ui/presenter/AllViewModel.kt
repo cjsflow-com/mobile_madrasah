@@ -12,6 +12,7 @@ import com.example.man2superapp.source.local.model.GetAllUserWbs
 import com.example.man2superapp.source.local.model.GetClassStudent
 import com.example.man2superapp.source.local.model.LocalCounselingSession
 import com.example.man2superapp.source.local.model.LocalCounselor
+import com.example.man2superapp.source.local.model.LocalResultScheduleCounseling
 import com.example.man2superapp.source.local.model.LocalSchedule
 import com.example.man2superapp.source.local.model.LocalSchoolViolationStudent
 import com.example.man2superapp.source.local.model.LocalStudent
@@ -31,6 +32,7 @@ import com.example.man2superapp.source.local.model.toGenerateListCounselingSessi
 import com.example.man2superapp.source.local.model.toGenerateListViolationMaster
 import com.example.man2superapp.source.local.model.toGenerateListViolationStudent
 import com.example.man2superapp.source.local.model.toGenerateSchedule
+import com.example.man2superapp.source.local.model.toGenerateScheduleCounselor
 import com.example.man2superapp.source.local.model.toNoteRejected
 import com.example.man2superapp.source.network.States
 import com.example.man2superapp.source.network.response.attendance_student.IndexAttendanceResponse
@@ -65,6 +67,7 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
     private val _allScheduleCounseling = MutableLiveData<List<LocalSchedule>>()
     private val _allSessionCounseling = MutableLiveData<List<LocalCounselingSession>>()
     private val _allCounselor = MutableLiveData<List<LocalCounselor>>()
+    private val _allScheduleCounselingPreview = MutableLiveData<List<LocalResultScheduleCounseling>>()
     private val _message = MutableLiveData<String>()
 
     val userList: LiveData<List<GetAllUserWbs>> get() = _userList
@@ -86,6 +89,7 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
     val listAttendance: LiveData<States<IndexAttendanceResponse>> = _allAttendanceMonth
     val messageViolation: LiveData<String> = _messageViolation
     val allCounselor:LiveData<List<LocalCounselor>> get() = _allCounselor
+    val allScheduleCounselingPreview: LiveData<List<LocalResultScheduleCounseling>> get() = _allScheduleCounselingPreview
     val allSessionCounseling: LiveData<List<LocalCounselingSession>> get() = _allSessionCounseling
     val allScheduleCounseling: LiveData<List<LocalSchedule>> get() =  _allScheduleCounseling
     val message: LiveData<String> get() = _message
@@ -241,6 +245,20 @@ class AllViewModel @Inject constructor(private val repository: Repository): View
                 }
                 is States.Failed -> {
                     _message.value = value.message
+                }
+            }
+        }
+    }
+
+    fun fetchAllScheduleCounselingPreview(counselorId: Int) = viewModelScope.launch {
+        repository.getScheduleCounselingPreview(counselorId).collect{ state ->
+            when(state){
+                is States.Loading -> {}
+                is States.Success -> {
+                    _allScheduleCounselingPreview.value = state.data.result.toGenerateScheduleCounselor()
+                }
+                is States.Failed -> {
+                    _message.value = state.message
                 }
             }
         }
