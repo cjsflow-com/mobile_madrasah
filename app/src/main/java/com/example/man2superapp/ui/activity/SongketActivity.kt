@@ -180,9 +180,7 @@ class SongketActivity : AppCompatActivity() {
                         when(state){
                             is States.Loading -> {}
                             is States.Success -> {
-                                Intent(this@SongketActivity,MainActivity::class.java).also {
-                                    startActivity(it)
-                                }.also { finish() }
+                                finish()
                                 Help.showToast(this@SongketActivity,state.data.message)
                                 dialog.dismiss()
                             }
@@ -226,7 +224,7 @@ class SongketActivity : AppCompatActivity() {
             putExtra(Constant.LETTER_TYPE,songketMother.letterStatement)
             putExtra(Constant.TYPE,songketMother.id)
             putExtra(Constant.LIST_SONGKET_MOTHER,songketMother)
-        }.also { startActivity(it) }
+        }.also { startActivity(it) }.also { finish() }
     }
 
     private fun onAdd(songketMother: ListSongketMother)
@@ -234,7 +232,7 @@ class SongketActivity : AppCompatActivity() {
         Intent(this@SongketActivity,AddServiceActivity::class.java).apply {
             putExtra(Constant.LETTER_TYPE,songketMother.letterStatement)
             putExtra(Constant.TYPE,songketMother.id)
-        }.also { startActivity(it) }
+        }.also { startActivity(it) }.also { finish() }
     }
 
     private fun onAddServiceGtk(songketMotherGtk: SongketMotherGTK)
@@ -242,7 +240,7 @@ class SongketActivity : AppCompatActivity() {
         Intent(this@SongketActivity,AddServiceActivity::class.java).apply {
             putExtra(Constant.LETTER_TYPE,songketMotherGtk.letterStatement)
             putExtra(Constant.TYPE,songketMotherGtk.id)
-        }.also { startActivity(it) }
+        }.also { startActivity(it) }.also { finish() }
     }
 
 
@@ -253,7 +251,7 @@ class SongketActivity : AppCompatActivity() {
             putExtra(Constant.LETTER_TYPE,songketMotherGtk.letterStatement)
             putExtra(Constant.TYPE,songketMotherGtk.id)
             putExtra(Constant.LIST_SONGKET_MOTHER,songketMotherGtk)
-        }.also { startActivity(it) }
+        }.also { startActivity(it) }.also { finish() }
     }
 
     private fun showBottomDialogShow(status: String,id: Int,role: String,token: String)
